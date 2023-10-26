@@ -10,11 +10,19 @@ package calcolatrice;
  */
 public class Calcolatrice {
 
+    private Operazione op = new Operazione();
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+       
+        Operazione op = new Operazione();
+        
+        op.insertExpression();
+        
+        
     }
+    
     
 }
