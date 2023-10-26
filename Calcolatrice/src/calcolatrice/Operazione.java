@@ -67,4 +67,46 @@ public class Operazione {
         
         
     }
+    
+    public void calculateExpression(){
+        
+        int x,y;
+        
+        int i = 0;
+        int j = 0;
+        
+        boolean exit = true;
+        while(true){    
+ 
+        x = number.get(i);
+        
+        System.out.print(expression.get(j));
+        
+        switch (expression.get(j)) {
+            case "+":
+                somma();
+                break;
+            case "-":
+                differenza();
+                break;
+            case "*":
+                prodotto();
+                break;
+            case "/":
+                divisione();
+                break;
+            case "=":
+                exit = false;
+                break;
+            default:
+                System.out.println("Parameter is unknown");
+            
+        };
+            
+            
+            i++;
+            j++;
+        }
+        
+    }
 }

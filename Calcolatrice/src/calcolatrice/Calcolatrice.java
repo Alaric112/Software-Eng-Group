@@ -18,10 +18,14 @@ public class Calcolatrice {
     public static void main(String[] args) {
        
         Operazione op = new Operazione();
+       
+    while(true){    
         
         op.insertExpression();
         
+        op.calculateExpression();
         
+        }
     }
     
     
