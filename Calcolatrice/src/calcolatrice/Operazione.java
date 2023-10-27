@@ -12,10 +12,11 @@ import java.util.Scanner;
  *
  * @author patap
  */
-public class Operazione {
+public class Operazione extends Exception {
     
-    private ArrayList<Integer> number;
+    private ArrayList<Double> number;
     private ArrayList<String> expression;
+    private double res;
     
     public Operazione() {
         
@@ -33,7 +34,7 @@ public class Operazione {
         while(exit){
             
             System.out.print("Inserisci numero: ");
-            number.add(scan.nextInt());
+            number.add(scan.nextDouble());
             
             System.out.print("Inserisci operazione: ");
             String temp = scan.next();
@@ -47,55 +48,69 @@ public class Operazione {
     
     }
     
-    public void somma(){
-        
-               
+    public double somma(double a, double b){
+            return a+b;
     }
-    
-    public void differenza(){
-        
-        
+
+    public double differenza(double a, double b){
+            return a-b;
+        }
+
+    public double prodotto(double a, double b){
+            return a*b;
     }
+
+    public double divisione(double a, double b){
+        if(b==0)
+           throw new ArithmeticException("non puoi dividere un numero per 0");
+         return a/b;
+        }
     
-    public void prodotto(){
-        
-        
-    }
-    
-    public void divisione(){
-        
-        
-        
+    public void sin(double a){
+        res = Math.sin(a);
+         }
+    public void cosin(double a){
+        res = Math.cos(a);
+         }
+    public void tang(double a){
+        res = Math.tan(a);
     }
     
     public void calculateExpression(){
         
-        int x,y;
+        double x,y, localRes;
+        x = 0;
+        y = 0;        
         
         int i = 0;
         int j = 0;
         
         boolean exit = true;
-        while(true){    
- 
-        x = number.get(i);
-        
-        System.out.print(expression.get(j));
-        
+        while(exit){    
+                
         switch (expression.get(j)) {
             case "+":
-                somma();
+                localRes = somma(number.get(i), number.get(i+1));
+                System.out.println(localRes);
+                res += localRes;
                 break;
             case "-":
-                differenza();
+                localRes = differenza(number.get(i), number.get(i+1));
+                System.out.println(localRes);
+                res += localRes;
                 break;
             case "*":
-                prodotto();
+                localRes = prodotto(number.get(i), number.get(i+1));
+                System.out.println(localRes);
+                res += localRes;
                 break;
             case "/":
-                divisione();
+                localRes = divisione(number.get(i), number.get(i+1));
+                System.out.println(localRes);
+                res += localRes;
                 break;
             case "=":
+                
                 exit = false;
                 break;
             default:
@@ -107,6 +122,9 @@ public class Operazione {
             i++;
             j++;
         }
+        
+        System.out.println("\nIl risultato e': ");
+        System.out.println(res);
         
     }
 }

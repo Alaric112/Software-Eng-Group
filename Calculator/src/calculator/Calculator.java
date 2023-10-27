@@ -18,6 +18,11 @@ import javafx.stage.Stage;
  */
 public class Calculator extends Application {
     
+    int x =5;
+    int y =7;
+    int z = 12;
+    int j = 34;
+        
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
@@ -35,7 +40,7 @@ public class Calculator extends Application {
         
         Scene scene = new Scene(root, 300, 250);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Hello World!!!!!");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
