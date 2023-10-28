@@ -10,6 +10,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -79,15 +80,24 @@ public class FXMLDocumentController implements Initializable {
         
         list = FXCollections.observableArrayList();
 
-        columnMemoryStack.setCellFactory(new PropertyValueFactory("value"));
+        columnMemoryStack.setCellValueFactory(new PropertyValueFactory("value"));
 
-        tableMemory.setItems(list);
-
+        tableMemory.setItems(list.sorted((o1, o2) -> -1));
+        
         // Disattiva i bottoni Lettura memoria e cancella memoria quando la memoria e' vuota
-        BooleanBinding xx = Bindings.isEmpty(tableMemory.getItems());
-        buttonMemRead.disableProperty().bind(xx);
-        buttonMemClear.disableProperty().bind(xx);
-
+        BooleanBinding isMemoryEmpty = Bindings.isEmpty(tableMemory.getItems());
+        buttonMemRead.disableProperty().bind(isMemoryEmpty);
+        buttonMemClear.disableProperty().bind(isMemoryEmpty);
+        
+        // Disattiva i bottoni quando il text field dispaly e' vuoto
+        BooleanBinding isTextFieldEmpty = Bindings.isEmpty(textDisplayCurrent.textProperty());
+        buttonMemSave.disableProperty().bind(isTextFieldEmpty);
+        
+        // controlla se il TextField contiene un punto
+        BooleanBinding isDotPresent = Bindings.createBooleanBinding(() ->
+                textDisplayCurrent.getText().contains("."), textDisplayCurrent.textProperty());
+        
+        buttonDecimalNumber.disableProperty().bind(isTextFieldEmpty.or(isDotPresent));
     }
 
 
@@ -226,9 +236,10 @@ public class FXMLDocumentController implements Initializable {
     private void handleButtonActionMemSave(ActionEvent event) {
 
         MemoryItem item = new MemoryItem();
-        item.setValue(Double.parseDouble(expression));
+        item.setValue(Double.parseDouble(textDisplayCurrent.getText()));
 
         list.add(item);
+        
     }
 
     @FXML
