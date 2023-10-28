@@ -9,7 +9,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -17,10 +19,42 @@ import javafx.scene.control.Label;
  */
 public class FXMLDocumentController implements Initializable {
     
-    @FXML
     private Label label;
-    
     @FXML
+    private Button buttonNumber7;
+    @FXML
+    private Button buttonNumber4;
+    @FXML
+    private Button buttonNumber1;
+    @FXML
+    private Button buttonNumber9;
+    @FXML
+    private Button buttonNumber8;
+    @FXML
+    private Button buttonNumber5;
+    @FXML
+    private Button buttonNumber2;
+    @FXML
+    private Button buttonNumber0;
+    @FXML
+    private Button buttonNumber6;
+    @FXML
+    private Button buttonNumber3;
+    @FXML
+    private Button buttonDecimalNumber;
+    @FXML
+    private Button buttonAdd;
+    @FXML
+    private Button buttonMulti;
+    @FXML
+    private Button buttonDiff;
+    @FXML
+    private Button buttonDiv;
+    @FXML
+    private Button buttonResult;
+    @FXML
+    private TextField TextDisplay;
+    
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
@@ -30,5 +64,33 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void handleButtonActionNumber(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleButtonActionNegativeNumber(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleButtonActionAdd(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleButtonActionMulti(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleButtonActionDiff(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleButtonActionDiv(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleButtonActionResult(ActionEvent event) {
+    }
     
 }
