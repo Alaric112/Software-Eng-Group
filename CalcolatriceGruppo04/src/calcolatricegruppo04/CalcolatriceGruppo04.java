@@ -16,11 +16,15 @@ import javafx.stage.Stage;
  */
 public class CalcolatriceGruppo04 extends Application {
     
+    int x = 5;
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
+        
+        
         
         stage.setScene(scene);
         stage.show();
