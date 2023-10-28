@@ -25,17 +25,17 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="buttonNumber7" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="7" GridPane.rowIndex="1" />
-            <Button fx:id="buttonNumber4" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="4" GridPane.rowIndex="2" />
-            <Button fx:id="buttonNumber1" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="1" GridPane.rowIndex="3" />
+            <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="7" GridPane.rowIndex="1" />
+            <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="4" GridPane.rowIndex="2" />
+            <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="1" GridPane.rowIndex="3" />
             <Button fx:id="buttonNumber9" mnemonicParsing="false" onAction="#handleButtonActionNegativeNumber" text="+/-" GridPane.rowIndex="4" />
-            <Button fx:id="buttonNumber8" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="8" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="buttonNumber5" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="5" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="buttonNumber2" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="buttonNumber0" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button fx:id="buttonNumber9" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="9" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="buttonNumber6" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="6" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button fx:id="buttonNumber3" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="3" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="8" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="5" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="9" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="6" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="3" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <Button fx:id="buttonDecimalNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="." GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <Button fx:id="buttonMemSave" mnemonicParsing="false" onAction="#handleButtonActionMemSave" text="MS" GridPane.columnIndex="2" />
             <Button fx:id="buttonMemRead" mnemonicParsing="false" onAction="#handleButtonActionMemRead" text="MR" GridPane.columnIndex="1" />

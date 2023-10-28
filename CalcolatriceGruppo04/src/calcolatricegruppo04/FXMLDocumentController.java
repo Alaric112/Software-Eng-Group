@@ -22,26 +22,6 @@ import javafx.scene.control.TextField;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Button buttonNumber7;
-    @FXML
-    private Button buttonNumber4;
-    @FXML
-    private Button buttonNumber1;
-    @FXML
-    private Button buttonNumber9;
-    @FXML
-    private Button buttonNumber8;
-    @FXML
-    private Button buttonNumber5;
-    @FXML
-    private Button buttonNumber2;
-    @FXML
-    private Button buttonNumber0;
-    @FXML
-    private Button buttonNumber6;
-    @FXML
-    private Button buttonNumber3;
-    @FXML
     private Button buttonDecimalNumber;
     @FXML
     private Button buttonAdd;
@@ -61,14 +41,16 @@ public class FXMLDocumentController implements Initializable {
     private Button buttonMemRead;
     @FXML
     private Button buttonMemClear;
-    
-    private Operazione op;
-    private double x, y, localRes, res;
-    private String expression;
     @FXML
     private TableView<?> tableMemory;
     @FXML
     private TableColumn<?, ?> columnMemoryStack;
+    @FXML
+    private Button buttonNumber;
+    
+    private Operazione op;
+    private double x, y, localRes, res;
+    private String expression;
       
     @Override
     public void initialize(URL url, ResourceBundle rb) {
