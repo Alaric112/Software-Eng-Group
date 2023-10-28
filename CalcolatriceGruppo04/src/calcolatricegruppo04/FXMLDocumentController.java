@@ -86,8 +86,8 @@ public class FXMLDocumentController implements Initializable {
     private void handleButtonActionNumber(ActionEvent event) {
 
         String num = ((Button)event.getSource()).getText();
-        expression = textDisplayCurrent.getText()+num;
-        textDisplayCurrent.setText(expression);
+        String value = textDisplayCurrent.getText()+num;
+        textDisplayCurrent.setText(value);
 
 
     }
@@ -102,14 +102,15 @@ public class FXMLDocumentController implements Initializable {
     private void handleButtonActionAdd(ActionEvent event) {
 
     operation = "+";
-
-    if(expression.isEmpty()){
+    toExpression();
+    re
+   /* if(expression.isEmpty()){
        localRes = op.somma(num1, num2);
        aggiornaRisultato();
     }else {
 
         toExpression();
-    }
+    }*/
 
     }
 
