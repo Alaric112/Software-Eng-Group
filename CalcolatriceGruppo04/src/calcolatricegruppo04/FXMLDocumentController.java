@@ -99,8 +99,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionAdd(ActionEvent event) {
     
-    if(!expression.isEmpty()){    
+    if(expression.isEmpty()){    
        localRes = op.somma(x, y);
+       System.out.print("prova");
        aggiornaRisultato();     
     }else {
             
@@ -112,7 +113,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionMulti(ActionEvent event) {
     
-    if(!expression.isEmpty()){    
+    if(expression.isEmpty()){    
        localRes = op.prodotto(x, y);
        aggiornaRisultato();
     } else {
@@ -125,7 +126,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionDiff(ActionEvent event) {
     
-    if(!expression.isEmpty()){     
+    if(expression.isEmpty()){     
        localRes = op.differenza(x, y);
        aggiornaRisultato();
     } else {
@@ -138,7 +139,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionDiv(ActionEvent event) {
     
-    if(!expression.isEmpty()){     
+    if(expression.isEmpty()){     
        localRes = op.divisione(x, y);
        aggiornaRisultato();
     } else {
