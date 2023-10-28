@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="826.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="calcolatricegruppo04.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="826.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calcolatricegruppo04.FXMLDocumentController">
    <children>
       <GridPane layoutX="388.0" layoutY="256.0" prefHeight="144.0" prefWidth="301.0">
         <columnConstraints>
@@ -58,6 +58,7 @@
             <Button fx:id="buttonDiff" mnemonicParsing="false" onAction="#handleButtonActionDiff" text="-" GridPane.columnIndex="1" />
             <Button fx:id="buttonDiv" mnemonicParsing="false" onAction="#handleButtonActionDiv" text="/" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button fx:id="buttonResult" mnemonicParsing="false" onAction="#handleButtonActionResult" text="=" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="buttonClear" mnemonicParsing="false" onAction="#handleButtonActionClear" text="CE" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <TextField fx:id="textDisplayCurrent" layoutX="91.0" layoutY="126.0" prefHeight="25.0" prefWidth="356.0" />

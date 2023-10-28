@@ -59,6 +59,10 @@ public class FXMLDocumentController implements Initializable {
     private Operazione op;
     private double num1, num2, localRes, res;
     private String expression,operation;
+    @FXML
+    private Button buttonNumber9;
+    @FXML
+    private Button buttonClear;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -190,8 +194,9 @@ public class FXMLDocumentController implements Initializable {
     private void aggiornaRisultato(){
 
        num1 = localRes;
-       expression = Double.toString(num1);
+       expression = Double.toString(localRes);
        res += localRes;
+       System.out.print("\n" + expression);
        textDisplayCurrent.setText(expression);
     }
 
@@ -199,6 +204,7 @@ public class FXMLDocumentController implements Initializable {
 
        expression = textDisplayCurrent.getText();
        num1 = Double.parseDouble(expression);
+       System.out.print("\n" + expression);
        textDisplayCurrent.clear();
     }
 
@@ -221,6 +227,15 @@ public class FXMLDocumentController implements Initializable {
     private void handleButtonActionMemClear(ActionEvent event) {
 
         list.clear();
+    }
+
+    @FXML
+    private void handleButtonActionClear(ActionEvent event) {
+        
+        expression = "";
+        textDisplayCurrent.clear();
+        num1 = 0.0;
+        num2 = 0.0;
     }
 
 }
