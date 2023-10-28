@@ -54,11 +54,16 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField textDisplayCurrent;
     @FXML
-    private TextField textDisplayExpression;
-    
+    private Button buttonMemSave;
+    @FXML
+    private Button buttonMemRead;
+    @FXML
+    private Button buttonMemClear;
     
     private Operazione op;
     private double x, y, localRes, res;
+    private String expression;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -67,6 +72,7 @@ public class FXMLDocumentController implements Initializable {
         op = new Operazione();
         x = 0.0;
         y = 0.0;
+        
         
         
     }    
@@ -81,38 +87,86 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonActionAdd(ActionEvent event) {
-        
+    
+    if(!expression.isEmpty()){    
        localRes = op.somma(x, y);
-       x = localRes;
-       res += localRes;
+       aggiornaRisultato();
+       
+    }else {
+            
+        toExpression();      
+    }
+    
     }
 
     @FXML
     private void handleButtonActionMulti(ActionEvent event) {
-        
+    
+    if(!expression.isEmpty()){    
        localRes = op.prodotto(x, y);
-       x = localRes;
-       res += localRes;
+       aggiornaRisultato();
+    } else {
+        
+        toExpression();
+    }  
+       
     }
 
     @FXML
     private void handleButtonActionDiff(ActionEvent event) {
-        
+    
+    if(!expression.isEmpty()){     
        localRes = op.differenza(x, y);
-       x = localRes;
-       res += localRes;
+       aggiornaRisultato();
+    } else {
+        
+        toExpression();
+    }
+    
     }
 
     @FXML
     private void handleButtonActionDiv(ActionEvent event) {
-        
+    
+    if(!expression.isEmpty()){     
        localRes = op.divisione(x, y);
+       aggiornaRisultato();
+    } else {
+        
+        toExpression();
+    }
+        
+    }
+    
+    @FXML
+    private void handleButtonActionResult(ActionEvent event) {
+    }
+    
+    private void aggiornaRisultato(){
+        
        x = localRes;
+       expression = Double.toString(x);
        res += localRes;
+       textDisplayCurrent.setText(expression);
+    }
+    
+    private void toExpression(){
+               
+       expression = textDisplayCurrent.getText();
+       x = Double.parseDouble(expression);
+       textDisplayCurrent.clear();
     }
 
     @FXML
-    private void handleButtonActionResult(ActionEvent event) {
+    private void handleButtonActionMemSave(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleButtonActionMemRead(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleButtonActionMemClear(ActionEvent event) {
     }
     
 }
