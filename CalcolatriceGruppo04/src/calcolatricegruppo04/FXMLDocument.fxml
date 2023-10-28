@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calcolatricegruppo04.FXMLDocumentController">
-    <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
-    </children>
+<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="720.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="calcolatricegruppo04.FXMLDocumentController">
+   <children>
+      <GridPane layoutX="388.0" layoutY="256.0" prefHeight="119.0" prefWidth="302.0">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="buttonNumber7" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="7" />
+            <Button fx:id="buttonNumber4" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="4" GridPane.rowIndex="1" />
+            <Button fx:id="buttonNumber1" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="1" GridPane.rowIndex="2" />
+            <Button fx:id="buttonNumber9" mnemonicParsing="false" onAction="#handleButtonActionNegativeNumber" text="+/-" GridPane.rowIndex="3" />
+            <Button fx:id="buttonNumber8" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="8" GridPane.columnIndex="1" />
+            <Button fx:id="buttonNumber5" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="buttonNumber2" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="buttonNumber0" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="buttonNumber9" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="9" GridPane.columnIndex="2" />
+            <Button fx:id="buttonNumber6" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="buttonNumber3" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="buttonDecimalNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="." GridPane.columnIndex="2" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="33.0" layoutY="256.0" prefHeight="119.0" prefWidth="327.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#handleButtonActionAdd" text="+" />
+            <Button fx:id="buttonMulti" mnemonicParsing="false" onAction="#handleButtonActionMulti" text="*" GridPane.rowIndex="1" />
+            <Button fx:id="buttonDiff" mnemonicParsing="false" onAction="#handleButtonActionDiff" text="-" GridPane.columnIndex="1" />
+            <Button fx:id="buttonDiv" mnemonicParsing="false" onAction="#handleButtonActionDiv" text="/" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="buttonResult" mnemonicParsing="false" onAction="#handleButtonActionResult" text="=" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <TextField fx:id="TextDisplay" layoutX="174.0" layoutY="139.0" prefHeight="25.0" prefWidth="356.0" />
+   </children>
 </AnchorPane>
