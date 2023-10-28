@@ -8,8 +8,8 @@ package calcolatricegruppo04;
  *
  * @author patap
  */
-public class Memory {
+public class MemoryItem {
     
-    
+    private double value;
     
 }
