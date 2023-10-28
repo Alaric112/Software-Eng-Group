@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="720.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="calcolatricegruppo04.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="826.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="calcolatricegruppo04.FXMLDocumentController">
    <children>
       <GridPane layoutX="388.0" layoutY="256.0" prefHeight="144.0" prefWidth="301.0">
         <columnConstraints>
@@ -58,6 +60,11 @@
             <Button fx:id="buttonResult" mnemonicParsing="false" onAction="#handleButtonActionResult" text="=" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <TextField fx:id="textDisplayCurrent" layoutX="174.0" layoutY="139.0" prefHeight="25.0" prefWidth="356.0" />
+      <TextField fx:id="textDisplayCurrent" layoutX="91.0" layoutY="126.0" prefHeight="25.0" prefWidth="356.0" />
+      <TableView fx:id="tableMemory" layoutX="489.0" layoutY="38.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="columnMemoryStack" prefWidth="199.0" sortable="false" text="Memory" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

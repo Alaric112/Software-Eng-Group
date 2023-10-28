@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 /**
@@ -63,8 +65,11 @@ public class FXMLDocumentController implements Initializable {
     private Operazione op;
     private double x, y, localRes, res;
     private String expression;
-    
-    
+    @FXML
+    private TableView<?> tableMemory;
+    @FXML
+    private TableColumn<?, ?> columnMemoryStack;
+      
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -72,9 +77,7 @@ public class FXMLDocumentController implements Initializable {
         op = new Operazione();
         x = 0.0;
         y = 0.0;
-        
-        
-        
+             
     }    
 
     @FXML
