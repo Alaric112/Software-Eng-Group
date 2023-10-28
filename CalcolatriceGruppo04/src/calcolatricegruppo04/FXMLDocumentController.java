@@ -67,13 +67,16 @@ public class FXMLDocumentController implements Initializable {
     private boolean operazioneEseguita;
     
     @FXML
-    private Button buttonNumber9;
-    @FXML
     private Button buttonClear;
+    @FXML
+    private Button buttonNumberNegate;
+    @FXML
+    private Button buttonPotenza;
+    @FXML
+    private Button buttonModulo;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
 
         op = new Operazione();
         
@@ -86,7 +89,7 @@ public class FXMLDocumentController implements Initializable {
 
         columnMemoryStack.setCellValueFactory(new PropertyValueFactory("value"));
 
-        tableMemory.setItems(list.sorted((o1, o2) -> -1));
+        tableMemory.setItems(list);
         
         //Crea un filtro per consentire solo caratteri numerici
         UnaryOperator<Change> numericFilter = change -> {
@@ -139,10 +142,11 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-
-
     @FXML
     private void handleButtonActionNegativeNumber(ActionEvent event) {
+        
+        num1 = Double.parseDouble(textDisplayCurrent.getText())*(-1);
+        textDisplayCurrent.setText(Double.toString(num1));
     }
 
     @FXML
@@ -293,5 +297,15 @@ public class FXMLDocumentController implements Initializable {
         num1 = Double.parseDouble(expression);
         num2 = Double.parseDouble(textDisplayCurrent.getText());
         }
+    }
+
+    @FXML
+    private void handleButtonActionPotenza(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleButtonActionModulo(ActionEvent event) {
+        
+        op.modulo(num1);
     }
 }

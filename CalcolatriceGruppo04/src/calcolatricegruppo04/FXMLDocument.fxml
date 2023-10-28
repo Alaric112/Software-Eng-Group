@@ -51,14 +51,17 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#handleButtonActionAdd" text="+" />
-            <Button fx:id="buttonMulti" mnemonicParsing="false" onAction="#handleButtonActionMulti" text="*" GridPane.rowIndex="1" />
-            <Button fx:id="buttonDiff" mnemonicParsing="false" onAction="#handleButtonActionDiff" text="-" GridPane.columnIndex="1" />
-            <Button fx:id="buttonDiv" mnemonicParsing="false" onAction="#handleButtonActionDiv" text="/" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="buttonResult" mnemonicParsing="false" onAction="#handleButtonActionResult" text="=" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="buttonClear" mnemonicParsing="false" onAction="#handleButtonActionClear" text="CE" GridPane.rowIndex="2" />
+            <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#handleButtonActionAdd" text="+" GridPane.rowIndex="1" />
+            <Button fx:id="buttonMulti" mnemonicParsing="false" onAction="#handleButtonActionMulti" text="*" GridPane.rowIndex="2" />
+            <Button fx:id="buttonDiff" mnemonicParsing="false" onAction="#handleButtonActionDiff" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="buttonDiv" mnemonicParsing="false" onAction="#handleButtonActionDiv" text="/" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="buttonResult" mnemonicParsing="false" onAction="#handleButtonActionResult" text="=" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="buttonClear" mnemonicParsing="false" onAction="#handleButtonActionClear" text="CE" GridPane.rowIndex="3" />
+            <Button fx:id="buttonPotenza" mnemonicParsing="false" onAction="#handleButtonActionPotenza" text="^" />
+            <Button fx:id="buttonModulo" mnemonicParsing="false" onAction="#handleButtonActionModulo" text="|x|" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <TextField fx:id="textDisplayCurrent" layoutX="91.0" layoutY="126.0" prefHeight="25.0" prefWidth="356.0" />

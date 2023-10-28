@@ -28,4 +28,14 @@ public class Operazione {
          return a/b;
         }
     
+    public double modulo(double numero){
+        
+       return Math.abs(numero);
+    }
+    
+    public double potenza(double numero, double esponente){
+        
+        return Math.pow(numero, esponente);
+    }
+    
 }
