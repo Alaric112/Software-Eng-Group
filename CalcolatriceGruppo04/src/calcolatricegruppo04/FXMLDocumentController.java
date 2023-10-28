@@ -245,7 +245,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonActionClear(ActionEvent event) {
-        
+
         expression = "";
         textDisplayCurrent.clear();
         num1 = 0.0;
