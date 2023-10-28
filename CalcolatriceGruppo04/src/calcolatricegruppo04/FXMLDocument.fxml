@@ -54,6 +54,7 @@
             <Button fx:id="buttonResult" mnemonicParsing="false" onAction="#handleButtonActionResult" text="=" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <TextField fx:id="TextDisplay" layoutX="174.0" layoutY="139.0" prefHeight="25.0" prefWidth="356.0" />
+      <TextField fx:id="textDisplayCurrent" layoutX="174.0" layoutY="139.0" prefHeight="25.0" prefWidth="356.0" />
+      <TextField fx:id="textDisplayExpression" layoutX="174.0" layoutY="107.0" prefHeight="25.0" prefWidth="356.0" />
    </children>
 </AnchorPane>

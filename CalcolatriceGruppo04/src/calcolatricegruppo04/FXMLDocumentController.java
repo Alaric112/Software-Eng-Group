@@ -19,7 +19,6 @@ import javafx.scene.control.TextField;
  */
 public class FXMLDocumentController implements Initializable {
     
-    private Label label;
     @FXML
     private Button buttonNumber7;
     @FXML
@@ -53,15 +52,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button buttonResult;
     @FXML
-    private TextField TextDisplay;
+    private TextField textDisplayCurrent;
+    @FXML
+    private TextField textDisplayExpression;
+    
     
     private Operazione op;
     private double x, y, localRes, res;
-    
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
