@@ -306,6 +306,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionModulo(ActionEvent event) {
         
-        op.modulo(num1);
+        num1 = op.modulo(Double.parseDouble(textDisplayCurrent.getText()));
+        textDisplayCurrent.setText(Double.toString(num1));
     }
 }
