@@ -28,7 +28,7 @@
             <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="7" GridPane.rowIndex="1" />
             <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="4" GridPane.rowIndex="2" />
             <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="1" GridPane.rowIndex="3" />
-            <Button fx:id="buttonNumber9" mnemonicParsing="false" onAction="#handleButtonActionNegativeNumber" text="+/-" GridPane.rowIndex="4" />
+            <Button fx:id="buttonNumberNegate" mnemonicParsing="false" onAction="#handleButtonActionNegativeNumber" text="+/-" GridPane.rowIndex="4" />
             <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="8" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="5" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button fx:id="buttonNumber" mnemonicParsing="false" onAction="#handleButtonActionNumber" text="2" GridPane.columnIndex="1" GridPane.rowIndex="3" />

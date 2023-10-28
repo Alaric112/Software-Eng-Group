@@ -6,6 +6,8 @@ package calcolatricegruppo04;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
@@ -19,6 +21,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
@@ -83,6 +87,26 @@ public class FXMLDocumentController implements Initializable {
         columnMemoryStack.setCellValueFactory(new PropertyValueFactory("value"));
 
         tableMemory.setItems(list.sorted((o1, o2) -> -1));
+        
+        //Crea un filtro per consentire solo caratteri numerici
+        UnaryOperator<Change> numericFilter = change -> {
+            String newText = change.getControlNewText();
+            if (Pattern.matches("[-+]?[0-9]*\\.?[0-9]*", newText)) {
+                return change;
+            }
+            return null;
+        };
+        
+        TextFormatter<String> formatter = new TextFormatter<>(numericFilter);
+        textDisplayCurrent.setTextFormatter(formatter);
+        
+        // INUTILE ?
+        // Ogni volta che viene liberato il display setta operazioneEseguita come false
+//        textDisplayCurrent.textProperty().addListener((observable, oldValue, newValue) -> {
+//        if (newValue.isEmpty()) {
+//            operazioneEseguita = false;
+//        }
+//        });
         
         // Disattiva i bottoni Lettura memoria e cancella memoria quando la memoria e' vuota
         BooleanBinding isMemoryEmpty = Bindings.isEmpty(tableMemory.getItems());
@@ -264,8 +288,10 @@ public class FXMLDocumentController implements Initializable {
     }
     
     private void caricaNumbers(){
-        
+    
+    if(!expression.isEmpty() && !textDisplayCurrent.getText().isEmpty()){    
         num1 = Double.parseDouble(expression);
         num2 = Double.parseDouble(textDisplayCurrent.getText());
+        }
     }
 }
