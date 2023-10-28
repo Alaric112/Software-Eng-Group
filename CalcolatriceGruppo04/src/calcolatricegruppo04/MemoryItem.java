@@ -4,15 +4,16 @@
  */
 package calcolatricegruppo04;
 
+import java.io.Serializable;
+
 /**
  *
  * @author patap
  */
-public class MemoryItem {
+public class MemoryItem implements Serializable {
     
-    private double value;
+    private Double value;
 
-    
     public MemoryItem() {
         this.value = 0.0;
     }
