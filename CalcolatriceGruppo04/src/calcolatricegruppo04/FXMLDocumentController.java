@@ -57,16 +57,16 @@ public class FXMLDocumentController implements Initializable {
     private ObservableList<MemoryItem> list;
     
     private Operazione op;
-    private double val,x, y, localRes, res;
-    private String expression;
+    private double num1, num2, localRes, res;
+    private String expression,operation;
       
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
         op = new Operazione();
-        x = 0.0;
-        y = 0.0;
+        num1 = 0.0;
+        num2 = 0.0;
         
         list = FXCollections.observableArrayList();
         
@@ -91,6 +91,8 @@ public class FXMLDocumentController implements Initializable {
         
         
     }
+    
+    
 
     @FXML
     private void handleButtonActionNegativeNumber(ActionEvent event) {
@@ -99,8 +101,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionAdd(ActionEvent event) {
     
-    if(!expression.isEmpty()){    
-       localRes = op.somma(x, y);
+    operation = "+";    
+        
+    if(expression.isEmpty()){    
+       localRes = op.somma(num1, num2);
        aggiornaRisultato();     
     }else {
             
@@ -113,7 +117,7 @@ public class FXMLDocumentController implements Initializable {
     private void handleButtonActionMulti(ActionEvent event) {
     
     if(!expression.isEmpty()){    
-       localRes = op.prodotto(x, y);
+       localRes = op.prodotto(num1, num2);
        aggiornaRisultato();
     } else {
         
@@ -126,7 +130,7 @@ public class FXMLDocumentController implements Initializable {
     private void handleButtonActionDiff(ActionEvent event) {
     
     if(!expression.isEmpty()){     
-       localRes = op.differenza(x, y);
+       localRes = op.differenza(num1, num2);
        aggiornaRisultato();
     } else {
         
@@ -139,7 +143,7 @@ public class FXMLDocumentController implements Initializable {
     private void handleButtonActionDiv(ActionEvent event) {
     
     if(!expression.isEmpty()){     
-       localRes = op.divisione(x, y);
+       localRes = op.divisione(num1, num2);
        aggiornaRisultato();
     } else {
         
@@ -150,12 +154,42 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void handleButtonActionResult(ActionEvent event) {
+        
+        num1 = Double.parseDouble(expression);       
+        num2 = Double.parseDouble(textDisplayCurrent.getText());
+        
+        
+        switch (operation) {
+            case "+":
+                localRes = op.somma(num1, num2);
+                break;
+            case "-":
+               
+                System.out.println(localRes);
+                res += localRes;
+                break;
+            case "*":
+                
+                System.out.println(localRes);
+                res += localRes;
+                break;
+            case "/":
+                
+                System.out.println(localRes);
+                res += localRes;
+                break;
+
+            default:
+                System.out.println("Parameter is unknown");
+
+        };
+        aggiornaRisultato();
     }
     
     private void aggiornaRisultato(){
         
-       x = localRes;
-       expression = Double.toString(x);
+       num1 = localRes;
+       expression = Double.toString(num1);
        res += localRes;
        textDisplayCurrent.setText(expression);
     }
@@ -163,7 +197,7 @@ public class FXMLDocumentController implements Initializable {
     private void toExpression(){
                
        expression = textDisplayCurrent.getText();
-       x = Double.parseDouble(expression);
+       num1 = Double.parseDouble(expression);
        textDisplayCurrent.clear();
     }
 
@@ -179,7 +213,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionMemRead(ActionEvent event) {
         
-        list.
+       
     }
 
     @FXML
