@@ -163,14 +163,23 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonActionMemSave(ActionEvent event) {
+        
+        MemoryItem item = new MemoryItem();
+        item.setValue(Double.parseDouble(expression));
+        
+        list.add(item);
     }
 
     @FXML
     private void handleButtonActionMemRead(ActionEvent event) {
+        
+        list.
     }
 
     @FXML
     private void handleButtonActionMemClear(ActionEvent event) {
+        
+        list.clear();
     }
     
 }
