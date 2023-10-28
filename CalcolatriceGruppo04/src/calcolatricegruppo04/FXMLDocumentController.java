@@ -145,7 +145,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionNegativeNumber(ActionEvent event) {
         
-        num1 = Double.parseDouble(textDisplayCurrent.getText())*(-1);
+        if (!textDisplayCurrent.getText().isEmpty()) {  
+            num1 = Double.parseDouble(textDisplayCurrent.getText())*(-1);
+        }
+        
         textDisplayCurrent.setText(Double.toString(num1));
     }
 
@@ -293,9 +296,9 @@ public class FXMLDocumentController implements Initializable {
     
     private void caricaNumbers(){
     
-    if(!expression.isEmpty() && !textDisplayCurrent.getText().isEmpty()){    
-        num1 = Double.parseDouble(expression);
-        num2 = Double.parseDouble(textDisplayCurrent.getText());
+        if(!expression.isEmpty() && !textDisplayCurrent.getText().isEmpty()){    
+            num1 = Double.parseDouble(expression);
+            num2 = Double.parseDouble(textDisplayCurrent.getText());
         }
     }
 
@@ -305,8 +308,11 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonActionModulo(ActionEvent event) {
-        
-        num1 = op.modulo(Double.parseDouble(textDisplayCurrent.getText()));
+    
+        if (!textDisplayCurrent.getText().isEmpty()) {  
+            num1 = op.modulo(Double.parseDouble(textDisplayCurrent.getText()));
+        }
+    
         textDisplayCurrent.setText(Double.toString(num1));
     }
 }
