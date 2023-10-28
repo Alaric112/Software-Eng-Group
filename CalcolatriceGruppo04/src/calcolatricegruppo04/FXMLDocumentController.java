@@ -55,6 +55,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField TextDisplay;
     
+    private Operazione op;
+    private double x, y, localRes, res;
+    
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
@@ -63,6 +66,12 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        op = new Operazione();
+        x = 0.0;
+        y = 0.0;
+        
+        
     }    
 
     @FXML
@@ -75,18 +84,34 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonActionAdd(ActionEvent event) {
+        
+       localRes = op.somma(x, y);
+       x = localRes;
+       res += localRes;
     }
 
     @FXML
     private void handleButtonActionMulti(ActionEvent event) {
+        
+       localRes = op.prodotto(x, y);
+       x = localRes;
+       res += localRes;
     }
 
     @FXML
     private void handleButtonActionDiff(ActionEvent event) {
+        
+       localRes = op.differenza(x, y);
+       x = localRes;
+       res += localRes;
     }
 
     @FXML
     private void handleButtonActionDiv(ActionEvent event) {
+        
+       localRes = op.divisione(x, y);
+       x = localRes;
+       res += localRes;
     }
 
     @FXML
