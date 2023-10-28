@@ -57,7 +57,7 @@ public class FXMLDocumentController implements Initializable {
     private ObservableList<MemoryItem> list;
     
     private Operazione op;
-    private double x, y, localRes, res;
+    private double val,x, y, localRes, res;
     private String expression;
       
     @Override
@@ -81,8 +81,15 @@ public class FXMLDocumentController implements Initializable {
         
     }    
 
+    
     @FXML
     private void handleButtonActionNumber(ActionEvent event) {
+        
+        String num = ((Button)event.getSource()).getText();
+        expression = textDisplayCurrent.getText()+num;
+        textDisplayCurrent.setText(expression);
+        
+        
     }
 
     @FXML
@@ -94,8 +101,7 @@ public class FXMLDocumentController implements Initializable {
     
     if(!expression.isEmpty()){    
        localRes = op.somma(x, y);
-       aggiornaRisultato();
-       
+       aggiornaRisultato();     
     }else {
             
         toExpression();      
