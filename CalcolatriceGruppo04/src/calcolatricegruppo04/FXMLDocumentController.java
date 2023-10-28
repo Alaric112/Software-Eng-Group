@@ -59,19 +59,23 @@ public class FXMLDocumentController implements Initializable {
     private Operazione op;
     private double num1, num2, localRes, res;
     private String expression,operation;
+    private boolean operazioneEseguita;
+    
     @FXML
     private Button buttonNumber9;
     @FXML
     private Button buttonClear;
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
         op = new Operazione();
+        
         num1 = 0.0;
         num2 = 0.0;
         expression = "";
+        operazioneEseguita = false;
         
         list = FXCollections.observableArrayList();
 
@@ -89,7 +93,13 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonActionNumber(ActionEvent event) {
-
+    
+    if(operazioneEseguita) {
+        
+        textDisplayCurrent.clear();
+        operazioneEseguita = false;
+    }
+    
         String num = ((Button)event.getSource()).getText();
         textDisplayCurrent.setText(textDisplayCurrent.getText()+num);
 
@@ -105,17 +115,14 @@ public class FXMLDocumentController implements Initializable {
     private void handleButtonActionAdd(ActionEvent event) {
 
     operation = "+";
-    System.out.print("\n" + expression);
     
-    if(!expression.isEmpty()){
+    if(!expression.isEmpty() && !operazioneEseguita){
         
-        num1 = Double.parseDouble(expression);
-        num2 = Double.parseDouble(textDisplayCurrent.getText());
-        System.out.print("\nNumero uno somma:" + num1);
-        System.out.print("\nNUmero due somma:" + num2);
-       localRes = op.somma(num1, num2);
-       aggiornaRisultato();
-    }else {
+            caricaNumbers();
+            localRes = op.somma(num1, num2);
+            aggiornaRisultato();
+            
+    } else {
 
         toExpression();
     }
@@ -125,9 +132,14 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionMulti(ActionEvent event) {
 
-    if(!expression.isEmpty()){
-       localRes = op.prodotto(num1, num2);
-       aggiornaRisultato();
+    operation = "*";    
+        
+    if(!expression.isEmpty() && !operazioneEseguita){
+        
+        caricaNumbers();
+        localRes = op.prodotto(num1, num2);
+        aggiornaRisultato();
+        
     } else {
 
         toExpression();
@@ -138,9 +150,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionDiff(ActionEvent event) {
 
-    if(!expression.isEmpty()){
-       localRes = op.differenza(num1, num2);
-       aggiornaRisultato();
+    operation = "-";    
+        
+    if(!expression.isEmpty() && !operazioneEseguita){
+        
+        caricaNumbers();
+        localRes = op.differenza(num1, num2);
+        aggiornaRisultato();
     } else {
 
         toExpression();
@@ -151,9 +167,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionDiv(ActionEvent event) {
 
-    if(!expression.isEmpty()){
-       localRes = op.divisione(num1, num2);
-       aggiornaRisultato();
+    operation = "/";    
+        
+    if(!expression.isEmpty() && !operazioneEseguita){
+         
+        caricaNumbers();
+        localRes = op.divisione(num1, num2);
+        aggiornaRisultato();
     } else {
 
         toExpression();
@@ -164,28 +184,20 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionResult(ActionEvent event) {
 
-        num1 = Double.parseDouble(expression);
-        num2 = Double.parseDouble(textDisplayCurrent.getText());
-
+        caricaNumbers();
 
         switch (operation) {
             case "+":
                 localRes = op.somma(num1, num2);
                 break;
             case "-":
-
-                System.out.println(localRes);
-                res += localRes;
+                localRes = op.differenza(num1, num2);
                 break;
             case "*":
-
-                System.out.println(localRes);
-                res += localRes;
+                localRes = op.prodotto(num1, num2);
                 break;
             case "/":
-
-                System.out.println(localRes);
-                res += localRes;
+                localRes = op.divisione(num1, num2);
                 break;
 
             default:
@@ -197,19 +209,17 @@ public class FXMLDocumentController implements Initializable {
 
     private void aggiornaRisultato(){
 
-       num1 = localRes;
        expression = Double.toString(localRes);
        res += localRes;
-       System.out.print("\n" + expression);
        textDisplayCurrent.setText(expression);
+       operazioneEseguita = true;
     }
 
     private void toExpression(){
 
        expression = textDisplayCurrent.getText();
-       num1 = Double.parseDouble(expression);
-       System.out.print("\n" + expression);
        textDisplayCurrent.clear();
+       operazioneEseguita = false;
     }
 
     @FXML
@@ -241,5 +251,10 @@ public class FXMLDocumentController implements Initializable {
         num1 = 0.0;
         num2 = 0.0;
     }
-
+    
+    private void caricaNumbers(){
+        
+        num1 = Double.parseDouble(expression);
+        num2 = Double.parseDouble(textDisplayCurrent.getText());
+    }
 }
