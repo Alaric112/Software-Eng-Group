@@ -33,8 +33,7 @@ public class Operazione {
        return Math.abs(numero);
     }
     
-    public double potenza(double numero, double esponente){
-        
+    public double potenza(double numero, double esponente){       
         return Math.pow(numero, esponente);
     }
     
@@ -46,6 +45,9 @@ public class Operazione {
          }
     public double tan(double a){        
         return Math.tan(a);
+    }
+    public double sqrt(double a){
+        return Math.sqrt(a);
     }
     
 }

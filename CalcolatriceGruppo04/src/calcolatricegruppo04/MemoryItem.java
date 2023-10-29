@@ -5,6 +5,8 @@
 package calcolatricegruppo04;
 
 import java.io.Serializable;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Objects;
 
 /**
@@ -13,10 +15,21 @@ import java.util.Objects;
  */
 public class MemoryItem implements Serializable {
     
+    
+    private Deque<Double> stack;
     private Double value;
 
     public MemoryItem() {
         this.value = 0.0;
+        stack = new ArrayDeque<>();
+    }
+    
+    public void saveData(double number){
+        stack.add(number);
+    }
+    
+    public double readData(){
+        return stack.pop();
     }
     
     public MemoryItem(double value) {

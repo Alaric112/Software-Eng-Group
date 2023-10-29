@@ -29,7 +29,7 @@ public class CalcolatriceGruppo04 extends Application {
         
         InputStream stream = new FileInputStream("Asset/calcolatriceIcona.png");
         Image icona = new Image(stream);
-        
+        stage.setResizable(false);
         stage.getIcons().add(icona);
         stage.setTitle("Calcolatrice gruppo04");
         stage.setScene(scene);

@@ -5,6 +5,9 @@
 package calcolatricegruppo04;
 
 import java.net.URL;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
@@ -54,15 +57,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TableColumn<MemoryItem, Double> columnMemoryStack;
     @FXML
-    private Button buttonNumber;
-
-    private ObservableList<MemoryItem> list;
-
-    private Operazione op;
-    private double num1, num2, localRes;
-    private String expression,operation;
-    private boolean operazioneEseguita;
-    
+    private Button buttonNumber;  
     @FXML
     private Button buttonClear;
     @FXML
@@ -77,12 +72,22 @@ public class FXMLDocumentController implements Initializable {
     private Button buttonCoseno;
     @FXML
     private Button buttonTangente;
+  
+    private ObservableList<MemoryItem> list;
+    private Operazione op;
+    private double num1, num2, localRes;
+    private String expression,operation;
+    private boolean operazioneEseguita;
+    private Deque<Double> data;
+    @FXML
+    private Button buttonPotenza1;
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         op = new Operazione();
-        
+        data = new LinkedList<>();
         num1 = 0.0;
         num2 = 0.0;
         expression = "";
@@ -177,7 +182,6 @@ public class FXMLDocumentController implements Initializable {
         aggiornaRisultato();
         
     } else {
-
         toExpression();
     }
 
@@ -235,7 +239,26 @@ public class FXMLDocumentController implements Initializable {
             case "/":
                 localRes = op.divisione(num1, num2);
                 break;
-
+            case "^":
+                localRes = op.potenza(num1, num2);
+                break;
+            case "tan":
+                localRes = op.tan(num1); 
+                break;
+            case "sin":
+                localRes = op.sin(num1);
+                break;
+            case "cos":
+                localRes = op.cos(num1);
+                break;
+            case "mod":
+                localRes = op.modulo(num1);
+                break;
+            case "sqrt":
+                localRes = op.sqrt(num1);
+                break;    
+                
+                
             default:
                 System.out.println("Parameter is unknown");
 
@@ -261,16 +284,16 @@ public class FXMLDocumentController implements Initializable {
     private void handleButtonActionMemSave(ActionEvent event) {
 
         MemoryItem item = new MemoryItem();
-        item.setValue(Double.parseDouble(textDisplayCurrent.getText()));
-
+        double value = Double.parseDouble(textDisplayCurrent.getText());
+        item.setValue(value);
         list.add(item);
         
     }
 
     @FXML
     private void handleButtonActionMemRead(ActionEvent event) {
-
-
+        num2=data.pop();    
+        
     }
 
     @FXML
@@ -299,11 +322,23 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonActionPotenza(ActionEvent event) {
+        operation = "^";
+        
+            if(!expression.isEmpty() && !operazioneEseguita){
+        
+        caricaNumbers();
+        localRes = op.potenza(num1, num2);
+        aggiornaRisultato();
+    } else {
+
+        toExpression();
+    }
+
     }
 
     @FXML
     private void handleButtonActionModulo(ActionEvent event) {
-    
+        operation = "mod";
         if (!textDisplayCurrent.getText().isEmpty()) {  
             num1 = op.modulo(Double.parseDouble(textDisplayCurrent.getText()));
         }
@@ -313,7 +348,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonActionSeno(ActionEvent event) {
-        
+      operation = "sin";  
       if (!textDisplayCurrent.getText().isEmpty()) {  
             num1 = op.sin(Double.parseDouble(textDisplayCurrent.getText()));
         }  
@@ -323,7 +358,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonActionCoseno(ActionEvent event) {
-        
+        operation = "cos";
         if (!textDisplayCurrent.getText().isEmpty()) {  
             num1 = op.cos(Double.parseDouble(textDisplayCurrent.getText()));
         }  
@@ -333,7 +368,17 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonActionTangente(ActionEvent event) {
-        
+        operation = "tan";
+        if (!textDisplayCurrent.getText().isEmpty()) {  
+            num1 = op.tan(Double.parseDouble(textDisplayCurrent.getText()));
+        }  
+        localRes = num1;
+        textDisplayCurrent.setText(Double.toString(localRes));
+    }
+
+    @FXML
+    private void handleButtonActionRadice(ActionEvent event) {
+        operation = "sqrt";
         if (!textDisplayCurrent.getText().isEmpty()) {  
             num1 = op.tan(Double.parseDouble(textDisplayCurrent.getText()));
         }  
