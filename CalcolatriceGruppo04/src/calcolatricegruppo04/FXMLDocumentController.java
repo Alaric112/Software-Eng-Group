@@ -59,7 +59,7 @@ public class FXMLDocumentController implements Initializable {
     private ObservableList<MemoryItem> list;
 
     private Operazione op;
-    private double num1, num2, localRes, res;
+    private double num1, num2, localRes;
     private String expression,operation;
     private boolean operazioneEseguita;
     
@@ -246,10 +246,9 @@ public class FXMLDocumentController implements Initializable {
     private void aggiornaRisultato(){
 
        expression = Double.toString(localRes);
-       res += localRes;
        textDisplayCurrent.setText(expression);
        operazioneEseguita = true;
-    }
+    } 
 
     private void toExpression(){
 
@@ -287,7 +286,7 @@ public class FXMLDocumentController implements Initializable {
         textDisplayCurrent.clear();
         num1 = 0.0;
         num2 = 0.0;
-        res = 0.0;
+        localRes = 0.0;
     }
     
     private void caricaNumbers(){
@@ -308,8 +307,8 @@ public class FXMLDocumentController implements Initializable {
         if (!textDisplayCurrent.getText().isEmpty()) {  
             num1 = op.modulo(Double.parseDouble(textDisplayCurrent.getText()));
         }
-        res = num1;
-        textDisplayCurrent.setText(Double.toString(res));
+        localRes = num1;
+        textDisplayCurrent.setText(Double.toString(localRes));
     }
 
     @FXML
@@ -318,8 +317,8 @@ public class FXMLDocumentController implements Initializable {
       if (!textDisplayCurrent.getText().isEmpty()) {  
             num1 = op.sin(Double.parseDouble(textDisplayCurrent.getText()));
         }  
-        res = num1;
-        textDisplayCurrent.setText(Double.toString(res));
+        localRes = num1;
+        textDisplayCurrent.setText(Double.toString(localRes));
     }
 
     @FXML
@@ -328,8 +327,8 @@ public class FXMLDocumentController implements Initializable {
         if (!textDisplayCurrent.getText().isEmpty()) {  
             num1 = op.cos(Double.parseDouble(textDisplayCurrent.getText()));
         }  
-        res = num1;
-        textDisplayCurrent.setText(Double.toString(res));
+        localRes = num1;
+        textDisplayCurrent.setText(Double.toString(localRes));
     }
 
     @FXML
@@ -338,7 +337,7 @@ public class FXMLDocumentController implements Initializable {
         if (!textDisplayCurrent.getText().isEmpty()) {  
             num1 = op.tan(Double.parseDouble(textDisplayCurrent.getText()));
         }  
-        res = num1;
-        textDisplayCurrent.setText(Double.toString(res));
+        localRes = num1;
+        textDisplayCurrent.setText(Double.toString(localRes));
     }
 }
