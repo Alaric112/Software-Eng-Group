@@ -57,7 +57,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TableColumn<MemoryItem, Double> columnMemoryStack;
     @FXML
-    private Button buttonNumber;  
+    private Button buttonNumber;
     @FXML
     private Button buttonClear;
     @FXML
@@ -72,17 +72,16 @@ public class FXMLDocumentController implements Initializable {
     private Button buttonCoseno;
     @FXML
     private Button buttonTangente;
-  
+
     private ObservableList<MemoryItem> list;
     private Operazione op;
     private double num1, num2, localRes;
-    private String expression,operation;
+    private String expression, operation;
     private boolean operazioneEseguita;
     private Deque<Double> data;
     @FXML
     private Button buttonPotenza1;
 
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -92,13 +91,13 @@ public class FXMLDocumentController implements Initializable {
         num2 = 0.0;
         expression = "";
         operazioneEseguita = false;
-        
+
         list = FXCollections.observableArrayList();
 
         columnMemoryStack.setCellValueFactory(new PropertyValueFactory("value"));
 
         tableMemory.setItems(list);
-        
+
         //Crea un filtro per consentire solo caratteri numerici
         UnaryOperator<Change> numericFilter = change -> {
             String newText = change.getControlNewText();
@@ -107,117 +106,116 @@ public class FXMLDocumentController implements Initializable {
             }
             return null;
         };
-        
+
         TextFormatter<String> formatter = new TextFormatter<>(numericFilter);
         textDisplayCurrent.setTextFormatter(formatter);
-        
+
         // Disattiva i bottoni Lettura memoria e cancella memoria quando la memoria e' vuota
         BooleanBinding isMemoryEmpty = Bindings.isEmpty(tableMemory.getItems());
         buttonMemRead.disableProperty().bind(isMemoryEmpty);
         buttonMemClear.disableProperty().bind(isMemoryEmpty);
-        
+
         // Disattiva i bottoni quando il text field dispaly e' vuoto
         BooleanBinding isTextFieldEmpty = Bindings.isEmpty(textDisplayCurrent.textProperty());
         buttonMemSave.disableProperty().bind(isTextFieldEmpty);
-        
+
         // controlla se il TextField contiene un punto
-        BooleanBinding isDotPresent = Bindings.createBooleanBinding(() ->
-                textDisplayCurrent.getText().contains("."), textDisplayCurrent.textProperty());
-        
+        BooleanBinding isDotPresent = Bindings.createBooleanBinding(()
+                -> textDisplayCurrent.getText().contains("."), textDisplayCurrent.textProperty());
+
         buttonDecimalNumber.disableProperty().bind(isTextFieldEmpty.or(isDotPresent));
     }
 
-
     @FXML
     private void handleButtonActionNumber(ActionEvent event) {
-    
-    if(operazioneEseguita) {
-        
-        textDisplayCurrent.clear();
-        operazioneEseguita = false;
-    }
-    
-        String num = ((Button)event.getSource()).getText();
-        textDisplayCurrent.setText(textDisplayCurrent.getText()+num);
+
+        if (operazioneEseguita) {
+
+            textDisplayCurrent.clear();
+            operazioneEseguita = false;
+        }
+
+        String num = ((Button) event.getSource()).getText();
+        textDisplayCurrent.setText(textDisplayCurrent.getText() + num);
 
     }
 
     @FXML
     private void handleButtonActionNegativeNumber(ActionEvent event) {
-        
-        if (!textDisplayCurrent.getText().isEmpty()) {  
-            num1 = Double.parseDouble(textDisplayCurrent.getText())*(-1);
+
+        if (!textDisplayCurrent.getText().isEmpty()) {
+            num1 = Double.parseDouble(textDisplayCurrent.getText()) * (-1);
         }
-        
+
         textDisplayCurrent.setText(Double.toString(num1));
     }
 
     @FXML
     private void handleButtonActionAdd(ActionEvent event) {
 
-    operation = "+";
-    
-    if(!expression.isEmpty() && !operazioneEseguita){
-        
+        operation = "+";
+
+        if (!expression.isEmpty() && !operazioneEseguita) {
+
             caricaNumbers();
             localRes = op.somma(num1, num2);
             aggiornaRisultato();
-            
-    } else {
 
-        toExpression();
-    }
+        } else {
+
+            toExpression();
+        }
 
     }
 
     @FXML
     private void handleButtonActionMulti(ActionEvent event) {
 
-    operation = "*";    
-        
-    if(!expression.isEmpty() && !operazioneEseguita){
-        
-        caricaNumbers();
-        localRes = op.prodotto(num1, num2);
-        aggiornaRisultato();
-        
-    } else {
-        toExpression();
-    }
+        operation = "*";
+
+        if (!expression.isEmpty() && !operazioneEseguita) {
+
+            caricaNumbers();
+            localRes = op.prodotto(num1, num2);
+            aggiornaRisultato();
+
+        } else {
+            toExpression();
+        }
 
     }
 
     @FXML
     private void handleButtonActionDiff(ActionEvent event) {
 
-    operation = "-";    
-        
-    if(!expression.isEmpty() && !operazioneEseguita){
-        
-        caricaNumbers();
-        localRes = op.differenza(num1, num2);
-        aggiornaRisultato();
-    } else {
+        operation = "-";
 
-        toExpression();
-    }
+        if (!expression.isEmpty() && !operazioneEseguita) {
+
+            caricaNumbers();
+            localRes = op.differenza(num1, num2);
+            aggiornaRisultato();
+        } else {
+
+            toExpression();
+        }
 
     }
 
     @FXML
     private void handleButtonActionDiv(ActionEvent event) {
 
-    operation = "/";    
-        
-    if(!expression.isEmpty() && !operazioneEseguita){
-         
-        caricaNumbers();
-        localRes = op.divisione(num1, num2);
-        aggiornaRisultato();
-    } else {
+        operation = "/";
 
-        toExpression();
-    }
+        if (!expression.isEmpty() && !operazioneEseguita) {
+
+            caricaNumbers();
+            localRes = op.divisione(num1, num2);
+            aggiornaRisultato();
+        } else {
+
+            toExpression();
+        }
 
     }
 
@@ -243,7 +241,7 @@ public class FXMLDocumentController implements Initializable {
                 localRes = op.potenza(num1, num2);
                 break;
             case "tan":
-                localRes = op.tan(num1); 
+                localRes = op.tan(num1);
                 break;
             case "sin":
                 localRes = op.sin(num1);
@@ -256,9 +254,8 @@ public class FXMLDocumentController implements Initializable {
                 break;
             case "sqrt":
                 localRes = op.sqrt(num1);
-                break;    
-                
-                
+                break;
+
             default:
                 System.out.println("Parameter is unknown");
 
@@ -266,18 +263,18 @@ public class FXMLDocumentController implements Initializable {
         aggiornaRisultato();
     }
 
-    private void aggiornaRisultato(){
+    private void aggiornaRisultato() {
 
-       expression = Double.toString(localRes);
-       textDisplayCurrent.setText(expression);
-       operazioneEseguita = true;
-    } 
+        expression = Double.toString(localRes);
+        textDisplayCurrent.setText(expression);
+        operazioneEseguita = true;
+    }
 
-    private void toExpression(){
+    private void toExpression() {
 
-       expression = textDisplayCurrent.getText();
-       textDisplayCurrent.clear();
-       operazioneEseguita = false;
+        expression = textDisplayCurrent.getText();
+        textDisplayCurrent.clear();
+        operazioneEseguita = false;
     }
 
     @FXML
@@ -287,13 +284,13 @@ public class FXMLDocumentController implements Initializable {
         double value = Double.parseDouble(textDisplayCurrent.getText());
         item.setValue(value);
         list.add(item);
-        
+
     }
 
     @FXML
     private void handleButtonActionMemRead(ActionEvent event) {
-        int s=list.size();
-        MemoryItem m = list.remove(s-1);
+        int s = list.size();
+        MemoryItem m = list.remove(s - 1);
         double num = m.getValue();
         num2 = num;
         textDisplayCurrent.setText(Double.toString(num));
@@ -301,7 +298,6 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonActionMemClear(ActionEvent event) {
-
         list.clear();
     }
 
@@ -314,10 +310,10 @@ public class FXMLDocumentController implements Initializable {
         num2 = 0.0;
         localRes = 0.0;
     }
-    
-    private void caricaNumbers(){
-    
-        if(!expression.isEmpty() && !textDisplayCurrent.getText().isEmpty()){    
+
+    private void caricaNumbers() {
+
+        if (!expression.isEmpty() && !textDisplayCurrent.getText().isEmpty()) {
             num1 = Double.parseDouble(expression);
             num2 = Double.parseDouble(textDisplayCurrent.getText());
         }
@@ -326,23 +322,23 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionPotenza(ActionEvent event) {
         operation = "^";
-        
-            if(!expression.isEmpty() && !operazioneEseguita){
-        
-        caricaNumbers();
-        localRes = op.potenza(num1, num2);
-        aggiornaRisultato();
-    } else {
 
-        toExpression();
-    }
+        if (!expression.isEmpty() && !operazioneEseguita) {
+
+            caricaNumbers();
+            localRes = op.potenza(num1, num2);
+            aggiornaRisultato();
+        } else {
+
+            toExpression();
+        }
 
     }
 
     @FXML
     private void handleButtonActionModulo(ActionEvent event) {
         operation = "mod";
-        if (!textDisplayCurrent.getText().isEmpty()) {  
+        if (!textDisplayCurrent.getText().isEmpty()) {
             num1 = op.modulo(Double.parseDouble(textDisplayCurrent.getText()));
         }
         localRes = num1;
@@ -351,10 +347,10 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonActionSeno(ActionEvent event) {
-      operation = "sin";  
-      if (!textDisplayCurrent.getText().isEmpty()) {  
+        operation = "sin";
+        if (!textDisplayCurrent.getText().isEmpty()) {
             num1 = op.sin(Double.parseDouble(textDisplayCurrent.getText()));
-        }  
+        }
         localRes = num1;
         textDisplayCurrent.setText(Double.toString(localRes));
     }
@@ -362,9 +358,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionCoseno(ActionEvent event) {
         operation = "cos";
-        if (!textDisplayCurrent.getText().isEmpty()) {  
+        if (!textDisplayCurrent.getText().isEmpty()) {
             num1 = op.cos(Double.parseDouble(textDisplayCurrent.getText()));
-        }  
+        }
         localRes = num1;
         textDisplayCurrent.setText(Double.toString(localRes));
     }
@@ -372,9 +368,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionTangente(ActionEvent event) {
         operation = "tan";
-        if (!textDisplayCurrent.getText().isEmpty()) {  
+        if (!textDisplayCurrent.getText().isEmpty()) {
             num1 = op.tan(Double.parseDouble(textDisplayCurrent.getText()));
-        }  
+        }
         localRes = num1;
         textDisplayCurrent.setText(Double.toString(localRes));
     }
@@ -382,9 +378,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonActionRadice(ActionEvent event) {
         operation = "sqrt";
-        if (!textDisplayCurrent.getText().isEmpty()) {  
+        if (!textDisplayCurrent.getText().isEmpty()) {
             num1 = op.sqrt(Double.parseDouble(textDisplayCurrent.getText()));
-        }  
+        }
         localRes = num1;
         textDisplayCurrent.setText(Double.toString(localRes));
     }

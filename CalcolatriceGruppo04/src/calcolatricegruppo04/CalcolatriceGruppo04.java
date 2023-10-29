@@ -18,15 +18,15 @@ import javafx.stage.Stage;
  * @author patap
  */
 public class CalcolatriceGruppo04 extends Application {
-    
+
     int x = 5;
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         InputStream stream = new FileInputStream("Asset/calcolatriceIcona.png");
         Image icona = new Image(stream);
         stage.setResizable(false);
@@ -42,5 +42,5 @@ public class CalcolatriceGruppo04 extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

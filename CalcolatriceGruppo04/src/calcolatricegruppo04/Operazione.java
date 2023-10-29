@@ -9,45 +9,49 @@ package calcolatricegruppo04;
  * @author patap
  */
 public class Operazione {
-    
-    public double somma(double a, double b){
-            return a+b;
+
+    public double somma(double a, double b) {
+        return a + b;
     }
 
-    public double differenza(double a, double b){
-            return a-b;
+    public double differenza(double a, double b) {
+        return a - b;
+    }
+
+    public double prodotto(double a, double b) {
+        return a * b;
+    }
+
+    public double divisione(double a, double b) {
+        if (b == 0) {
+            throw new ArithmeticException("non puoi dividere un numero per 0");
         }
-
-    public double prodotto(double a, double b){
-            return a*b;
+        return a / b;
     }
 
-    public double divisione(double a, double b){
-        if(b==0)
-           throw new ArithmeticException("non puoi dividere un numero per 0");
-         return a/b;
-        }
-    
-    public double modulo(double numero){
-        
-       return Math.abs(numero);
+    public double modulo(double numero) {
+
+        return Math.abs(numero);
     }
-    
-    public double potenza(double numero, double esponente){       
+
+    public double potenza(double numero, double esponente) {
         return Math.pow(numero, esponente);
     }
-    
-    public double sin(double a){
+
+    public double sin(double a) {
         return Math.sin(a);
-         }
-    public double cos(double a){
+    }
+
+    public double cos(double a) {
         return Math.cos(a);
-         }
-    public double tan(double a){        
+    }
+
+    public double tan(double a) {
         return Math.tan(a);
     }
-    public double sqrt(double a){
+
+    public double sqrt(double a) {
         return Math.sqrt(a);
     }
-    
+
 }

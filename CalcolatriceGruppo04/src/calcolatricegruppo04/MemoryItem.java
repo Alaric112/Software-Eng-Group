@@ -14,24 +14,13 @@ import java.util.Objects;
  * @author patap
  */
 public class MemoryItem implements Serializable {
-    
-    
-    private Deque<Double> stack;
+
     private Double value;
 
     public MemoryItem() {
         this.value = 0.0;
-        stack = new ArrayDeque<>();
     }
-    
-    public void saveData(double number){
-        stack.add(number);
-    }
-    
-    public double readData(){
-        return stack.pop();
-    }
-    
+
     public MemoryItem(double value) {
         this.value = value;
     }
@@ -67,11 +56,11 @@ public class MemoryItem implements Serializable {
             return false;
         }
         return true;
-    }   
-    
+    }
+
     @Override
     public String toString() {
         return "MemoryItem{" + "value=" + value + '}';
-    }   
-    
+    }
+
 }
