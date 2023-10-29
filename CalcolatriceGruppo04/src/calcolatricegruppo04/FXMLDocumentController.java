@@ -292,8 +292,11 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleButtonActionMemRead(ActionEvent event) {
-        num2=data.pop();    
-        
+        int s=list.size();
+        MemoryItem m = list.remove(s-1);
+        double num = m.getValue();
+        num2 = num;
+        textDisplayCurrent.setText(Double.toString(num));
     }
 
     @FXML
@@ -380,7 +383,7 @@ public class FXMLDocumentController implements Initializable {
     private void handleButtonActionRadice(ActionEvent event) {
         operation = "sqrt";
         if (!textDisplayCurrent.getText().isEmpty()) {  
-            num1 = op.tan(Double.parseDouble(textDisplayCurrent.getText()));
+            num1 = op.sqrt(Double.parseDouble(textDisplayCurrent.getText()));
         }  
         localRes = num1;
         textDisplayCurrent.setText(Double.toString(localRes));
