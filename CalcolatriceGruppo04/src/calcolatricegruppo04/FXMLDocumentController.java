@@ -284,6 +284,7 @@ public class FXMLDocumentController implements Initializable {
         double value = Double.parseDouble(textDisplayCurrent.getText());
         item.setValue(value);
         list.add(item);
+        textDisplayCurrent.clear();
 
     }
 
