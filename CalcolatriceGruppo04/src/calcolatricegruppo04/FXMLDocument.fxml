@@ -42,8 +42,9 @@
             <Button fx:id="buttonMemClear" mnemonicParsing="false" onAction="#handleButtonActionMemClear" text="MC" />
          </children>
       </GridPane>
-      <GridPane layoutX="33.0" layoutY="256.0" prefHeight="119.0" prefWidth="327.0">
+      <GridPane layoutX="40.0" layoutY="269.0" prefHeight="119.0" prefWidth="327.0">
          <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
@@ -54,14 +55,17 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#handleButtonActionAdd" text="+" GridPane.rowIndex="1" />
-            <Button fx:id="buttonMulti" mnemonicParsing="false" onAction="#handleButtonActionMulti" text="*" GridPane.rowIndex="2" />
-            <Button fx:id="buttonDiff" mnemonicParsing="false" onAction="#handleButtonActionDiff" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="buttonDiv" mnemonicParsing="false" onAction="#handleButtonActionDiv" text="/" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="buttonResult" mnemonicParsing="false" onAction="#handleButtonActionResult" text="=" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="buttonClear" mnemonicParsing="false" onAction="#handleButtonActionClear" text="CE" GridPane.rowIndex="3" />
-            <Button fx:id="buttonPotenza" mnemonicParsing="false" onAction="#handleButtonActionPotenza" text="^" />
-            <Button fx:id="buttonModulo" mnemonicParsing="false" onAction="#handleButtonActionModulo" text="|x|" GridPane.columnIndex="1" />
+            <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#handleButtonActionAdd" text="+" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="buttonMulti" mnemonicParsing="false" onAction="#handleButtonActionMulti" text="*" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="buttonDiff" mnemonicParsing="false" onAction="#handleButtonActionDiff" text="-" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="buttonDiv" mnemonicParsing="false" onAction="#handleButtonActionDiv" text="/" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="buttonResult" mnemonicParsing="false" onAction="#handleButtonActionResult" text="=" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="buttonClear" mnemonicParsing="false" onAction="#handleButtonActionClear" text="CE" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="buttonPotenza" mnemonicParsing="false" onAction="#handleButtonActionPotenza" text="^" GridPane.columnIndex="1" />
+            <Button fx:id="buttonModulo" mnemonicParsing="false" onAction="#handleButtonActionModulo" text="|x|" GridPane.columnIndex="2" />
+            <Button fx:id="buttonSeno" mnemonicParsing="false" onAction="#handleButtonActionSeno" text="sin(x)" GridPane.rowIndex="1" />
+            <Button fx:id="buttonCoseno" mnemonicParsing="false" onAction="#handleButtonActionCoseno" text="cos(x)" GridPane.rowIndex="2" />
+            <Button fx:id="buttonTangente" mnemonicParsing="false" onAction="#handleButtonActionTangente" text="tan(x)" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <TextField fx:id="textDisplayCurrent" layoutX="91.0" layoutY="126.0" prefHeight="25.0" prefWidth="356.0" />

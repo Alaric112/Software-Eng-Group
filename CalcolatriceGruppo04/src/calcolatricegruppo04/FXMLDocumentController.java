@@ -71,6 +71,12 @@ public class FXMLDocumentController implements Initializable {
     private Button buttonPotenza;
     @FXML
     private Button buttonModulo;
+    @FXML
+    private Button buttonSeno;
+    @FXML
+    private Button buttonCoseno;
+    @FXML
+    private Button buttonTangente;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -99,14 +105,6 @@ public class FXMLDocumentController implements Initializable {
         
         TextFormatter<String> formatter = new TextFormatter<>(numericFilter);
         textDisplayCurrent.setTextFormatter(formatter);
-        
-        // INUTILE ?
-        // Ogni volta che viene liberato il display setta operazioneEseguita come false
-//        textDisplayCurrent.textProperty().addListener((observable, oldValue, newValue) -> {
-//        if (newValue.isEmpty()) {
-//            operazioneEseguita = false;
-//        }
-//        });
         
         // Disattiva i bottoni Lettura memoria e cancella memoria quando la memoria e' vuota
         BooleanBinding isMemoryEmpty = Bindings.isEmpty(tableMemory.getItems());
@@ -289,6 +287,7 @@ public class FXMLDocumentController implements Initializable {
         textDisplayCurrent.clear();
         num1 = 0.0;
         num2 = 0.0;
+        res = 0.0;
     }
     
     private void caricaNumbers(){
@@ -309,7 +308,37 @@ public class FXMLDocumentController implements Initializable {
         if (!textDisplayCurrent.getText().isEmpty()) {  
             num1 = op.modulo(Double.parseDouble(textDisplayCurrent.getText()));
         }
-    
-        textDisplayCurrent.setText(Double.toString(num1));
+        res = num1;
+        textDisplayCurrent.setText(Double.toString(res));
+    }
+
+    @FXML
+    private void handleButtonActionSeno(ActionEvent event) {
+        
+      if (!textDisplayCurrent.getText().isEmpty()) {  
+            num1 = op.sin(Double.parseDouble(textDisplayCurrent.getText()));
+        }  
+        res = num1;
+        textDisplayCurrent.setText(Double.toString(res));
+    }
+
+    @FXML
+    private void handleButtonActionCoseno(ActionEvent event) {
+        
+        if (!textDisplayCurrent.getText().isEmpty()) {  
+            num1 = op.cos(Double.parseDouble(textDisplayCurrent.getText()));
+        }  
+        res = num1;
+        textDisplayCurrent.setText(Double.toString(res));
+    }
+
+    @FXML
+    private void handleButtonActionTangente(ActionEvent event) {
+        
+        if (!textDisplayCurrent.getText().isEmpty()) {  
+            num1 = op.tan(Double.parseDouble(textDisplayCurrent.getText()));
+        }  
+        res = num1;
+        textDisplayCurrent.setText(Double.toString(res));
     }
 }

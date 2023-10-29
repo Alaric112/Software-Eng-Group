@@ -38,4 +38,14 @@ public class Operazione {
         return Math.pow(numero, esponente);
     }
     
+    public double sin(double a){
+        return Math.sin(a);
+         }
+    public double cos(double a){
+        return Math.cos(a);
+         }
+    public double tan(double a){        
+        return Math.tan(a);
+    }
+    
 }
