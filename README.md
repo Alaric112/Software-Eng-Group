@@ -8,7 +8,7 @@ Dentro il folder LiteIFTTT è possibile trovare il progetto d'esame di Software 
 Il folder esercitazioni contiene il codice delle esercitazioni
 
 ## Authors
-Alessandro Accarino
-Fausto Celentano
-Sonia Bruno
-Lorenzo Borrelli
+- Alessandro Accarino
+- Fausto Celentano
+- Sonia Bruno
+- Lorenzo Borrelli
