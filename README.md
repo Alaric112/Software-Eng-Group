@@ -1,2 +1,2 @@
 # Software-Eng-Group
-Repo del progetto di gruppo di software engineering
+Repo del progetto del gruppo 02 di software engineering
