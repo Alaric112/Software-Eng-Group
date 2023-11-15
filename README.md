@@ -1,4 +1,4 @@
-# Software-Eng-Group
+# Software-Eng-Group02
 Repo del progetto del gruppo 02 di software engineering
 
 ## Lite IFTTT
