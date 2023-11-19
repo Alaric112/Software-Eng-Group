@@ -1,14 +1,14 @@
 # Software-Eng-Group02
-Repo del progetto del gruppo 02 di software engineering
+The repository for the software engineering project by Group 02, channel A-H.
 
 ## Lite IFTTT
-Dentro il folder LiteIFTTT è possibile trovare il progetto d'esame di Software Eng. del Gruppo 02 canale AH.
+Inside the LiteIFTTT folder, you can find the source code of the project.
 
 ### Documentation
 - Product backlog: 
 
 ## Esercitazioni Folder
-Il folder esercitazioni contiene il codice delle esercitazioni passate
+The "esercitazioni" folder contains the source code of the exercise preceding the project.
 
 ## Authors
 - Alessandro Accarino
