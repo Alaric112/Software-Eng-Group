@@ -4,6 +4,9 @@ Repo del progetto del gruppo 02 di software engineering
 ## Lite IFTTT
 Dentro il folder LiteIFTTT è possibile trovare il progetto d'esame di Software Eng. del Gruppo 02 canale AH.
 
+### Documentation
+- Product backlog: 
+
 ## Esercitazioni Folder
 Il folder esercitazioni contiene il codice delle esercitazioni passate
 
