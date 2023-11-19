@@ -5,7 +5,7 @@ The repository for the software engineering project by Group 02, channel A-H.
 Inside the LiteIFTTT folder, you can find the source code of the project.
 
 ### Documentation
-- Product backlog: 
+- First sprint documentation: https://drive.google.com/drive/folders/1ztFpDEDcegKjWW7tKsJLOVqgTZp2EOkz?usp=sharing
 
 ## Esercitazioni Folder
 The "esercitazioni" folder contains the source code of the exercise preceding the project.
