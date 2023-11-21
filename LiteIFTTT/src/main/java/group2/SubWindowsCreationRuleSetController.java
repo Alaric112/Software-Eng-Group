@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
  *
  * @author patap
  */
-public class SecondaryController implements Initializable {
+public class SubWindowsCreationRuleSetController implements Initializable {
 
     /**
      * Initializes the controller class.
