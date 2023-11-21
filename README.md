@@ -13,11 +13,8 @@ Inside the first sprint documentation folder there is also a copy of the product
 
 - Software Architecture Documentation: [Software architecture documentation](https://docs.google.com/document/d/1GM5WXZTz5QPpytWCMQGrRBXxXg_TDPNhZz9rGOVXo_k/edit?usp=sharing)
 
-- Pre Game Documentation: [Pre game documentation](https://docs.google.com/document/d/18oMaA2f1tlFb552T81erhSqJ2zoVw1Px6gU98_miHT0/edit?usp=sharing)
-
-## Esercitazioni Folder
-The "esercitazioni" folder contains the source code of the exercise preceding the project.
-
+- Pre Game Documentation: [Pre game documentation](https://docs.google.com/document/d/18oMaA2f1tlFb552T81erhSqJ2zoVw1Px6gU98_miHT0/edit?usp=sharing)\
+  
 ## Authors
 - Alessandro Accarino
 - Fausto Celentano
