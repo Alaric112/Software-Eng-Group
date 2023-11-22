@@ -1,5 +1,9 @@
+group2\Rule.class
+group2\Trigger.class
+group2\Ruleset.class
+group2\SubWindowsCreationRuleSetController.class
 group2\PrimaryController.class
 group2\SecondaryController.class
 module-info.class
+group2\Action.class
 group2\App.class
-group2\SubWindowsCreationRuleSetController.class

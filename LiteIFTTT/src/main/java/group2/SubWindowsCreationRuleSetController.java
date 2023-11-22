@@ -4,9 +4,17 @@
  */
 package group2;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -15,12 +23,47 @@ import javafx.fxml.Initializable;
  */
 public class SubWindowsCreationRuleSetController implements Initializable {
 
+    @FXML
+    private Button closeButton;
+    @FXML
+    private Button confirmButton;
+    @FXML
+    private Spinner<Integer> spinnerControlTime;
+    @FXML
+    private TextField ruleSetNameTextField;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+       SpinnerValueFactory<Integer> gradesValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(5, 60, 5);
+       this.spinnerControlTime.setValueFactory(gradesValueFactory);
     }    
+
+    @FXML
+    private void closeWindowAction(ActionEvent event) {
+        
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();       
+    }
+
+    @FXML
+    private void creationRuleSetConfirmationAction(ActionEvent event) {
+        
+        switchTo("secondary");
+        closeWindowAction(event);
+    }
+    
+        private void switchTo(String fxml){
+        
+        try {
+            App.setRoot("secondary");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }  
     
 }
