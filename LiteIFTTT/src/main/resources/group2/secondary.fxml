@@ -17,7 +17,7 @@
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="500.0" spacing="30.0">
                <children>
                   <Label text="Ruleset name" />
-                  <Button mnemonicParsing="false" text="Create Rule" />
+                  <Button fx:id="createRuleButton" mnemonicParsing="false" onAction="#createRuleAction" text="Create Rule" />
                   <Button mnemonicParsing="false" text="Exit" />
                </children>
             </HBox>

@@ -43,7 +43,7 @@ public class App extends Application {
      * @param fxml The filename of the FXML file to load into the sub-window.
      * @throws IOException If an error occurs while loading the FXML file.
      */
-    static void createSubWindow(String fxml){
+    static void createSubWindow(String fxml, String subWindowTitle){
         
         // Create a new Stage for the sub-window
         Stage subWindow = new Stage();
@@ -56,7 +56,7 @@ public class App extends Application {
         }
         // Set the modality of the sub-window to APPLICATION_MODAL , blocking interaction with other windows until it is closed.
         subWindow.initModality(Modality.APPLICATION_MODAL);
-        subWindow.setTitle("New Ruleset");
+        subWindow.setTitle(subWindowTitle);
         subWindow.getIcons().add(appIcon);
         subWindow.show();
     }

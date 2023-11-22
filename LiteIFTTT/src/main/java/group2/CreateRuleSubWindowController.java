@@ -4,25 +4,25 @@
  */
 package group2;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
  * @author patap
  */
-public class PrimaryController implements Initializable {
+public class CreateRuleSubWindowController implements Initializable {
 
     @FXML
-    private Button openRuleSetButton;
+    private Button closeButton;
     @FXML
-    private Button newRuleSetButton;
+    private Button confirmButton;
 
     /**
      * Initializes the controller class.
@@ -30,27 +30,19 @@ public class PrimaryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-     
     }    
 
     @FXML
-    private void createRuleSetAction(ActionEvent event) {
-     
+    private void confirmRuleCreationEvent(ActionEvent event) {
         
-     App.createSubWindow("SubWindowsCreationRuleSet", "New Ruleset");
+        closeWindowEvent(event);
     }
 
     @FXML
-    private void loadRuleSetAction(ActionEvent event) {
-    }
-    
-    private void switchTo(String fxml){
+    private void closeWindowEvent(ActionEvent event) {
         
-        try {
-            App.setRoot("secondary");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }            
-            
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+    }
+
 }
