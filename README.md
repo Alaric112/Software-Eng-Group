@@ -20,3 +20,7 @@ Inside the first sprint documentation folder there is also a copy of the product
 - Fausto Celentano
 - Sonia Bruno
 - Lorenzo Borrelli
+
+## Extra Credits:
+- [Smashicons](https://www.flaticon.com/authors/smashicons) for some image used in the application
+- - [freepik](https://www.flaticon.com/authors/freepik) for some image used in the application
