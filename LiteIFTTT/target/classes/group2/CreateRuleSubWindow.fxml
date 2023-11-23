@@ -3,6 +3,9 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToolBar?>
@@ -17,7 +20,8 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <Label text="Rule Name:" />
-            <TextField />
+            <TextField fx:id="ruleNameTF" />
+            <Button fx:id="printButton" mnemonicParsing="false" onAction="#printAction" text="Button" />
          </items>
       </ToolBar>
       <HBox layoutY="38.0" prefHeight="362.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
@@ -72,9 +76,6 @@
                   <Accordion prefHeight="360.0" prefWidth="400.0">
                     <panes>
                       <TitledPane animated="false" text="Trigger">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </content>
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -82,11 +83,24 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <content>
+                              <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab text="Elementary">
+                                       <content>
+                                          <ListView prefHeight="200.0" prefWidth="200.0" />
+                                       </content>
+                                  </Tab>
+                                  <Tab text="Custom">
+                                       <content>
+                                          <ListView prefHeight="200.0" prefWidth="200.0" />
+                                       </content>
+                                  </Tab>
+                                </tabs>
+                              </TabPane>
+                           </content>
                       </TitledPane>
                       <TitledPane animated="false" prefHeight="260.0" prefWidth="400.0" text="Action!">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </content>
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -94,6 +108,22 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <content>
+                              <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab text="Elementary">
+                                       <content>
+                                          <ListView prefHeight="200.0" prefWidth="200.0" />
+                                       </content>
+                                  </Tab>
+                                  <Tab text="Custom">
+                                       <content>
+                                          <ListView prefHeight="200.0" prefWidth="200.0" />
+                                       </content>
+                                  </Tab>
+                                </tabs>
+                              </TabPane>
+                           </content>
                       </TitledPane>
                     </panes>
                   </Accordion>
