@@ -66,6 +66,8 @@ public class CreateRuleSubWindowController implements Initializable {
     private Action action;
     
     private Map<String, TextField> parameterTextFieldMap = new HashMap<>();
+    @FXML
+    private VBox actionParametersBox;
 
     
     /**
@@ -133,6 +135,7 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void addActionEvent(ActionEvent event) {
     
+          actionParametersBox.getChildren().clear();
           TreeItem<String> item = new TreeItem<>(actionChoiceBox.getValue());
           actionTreeView.setRoot(item);
           action = ruleCreator.createAction(item.getValue());
@@ -160,36 +163,9 @@ public class CreateRuleSubWindowController implements Initializable {
             List<Control> parameterControls = ruleCreator.createTriggerControl(selectedType);
             triggerParametersBox.getChildren().addAll(parameterControls);
             
-             // Aggiungi i controlli dei parametri al triggerParametersBox e alla mappa
-            for (Control control : parameterControls) {
-                if (control instanceof TextField) {
-                    TextField textField = (TextField) control;
-                    String parameterName = getParameterNameFromControl(textField); // Implementa questa funzione
-                    parameterTextFieldMap.put(parameterName, textField);
-                }
-
-                triggerParametersBox.getChildren().add(control);
-            }
-            
         }
         
     }
-    
-    private String getParameterNameFromControl(TextField textField) {
-    // Implementa la logica per ottenere il nome del parametro associato al TextField
-    // Può essere il testo dell'etichetta accanto, un attributo associato al TextField, ecc.
-    return textField.getPromptText(); // Esempio: il testo dell'etichetta è considerato come il nome del parametro
-    }
-    
-    private void processTriggerParameters() {
-    for (Map.Entry<String, TextField> entry : parameterTextFieldMap.entrySet()) {
-        String parameterName = entry.getKey();
-        TextField textField = entry.getValue();
-        String parameterValue = textField.getText();
-        // Fai qualcosa con il nome e il valore del parametro
-        System.out.println(parameterName + ": " + parameterValue);
-    }
-}
     
 //    private void showTypeSelectionPopup(String title, List<String> types) {
 //        

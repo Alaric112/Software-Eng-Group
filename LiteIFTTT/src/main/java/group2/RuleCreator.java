@@ -43,6 +43,7 @@ public final class RuleCreator {
     private void initializeActionMap() {
         // Associa i tipi di azione alle rispettive implementazioni
         actionFactoryMap.put("Generic", new GenericActionCreator());
+        actionFactoryMap.put("cipolla", new GenericActionCreator());
 
     }
    

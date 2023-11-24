@@ -83,7 +83,7 @@
                                  <children>
                                     <ToolBar prefHeight="40.0" prefWidth="477.0">
                                       <items>
-                                        <Button fx:id="addTriggerButton" mnemonicParsing="false" onAction="#addTriggerEvent" text="ADD" />
+                                        <Button fx:id="addTriggerButton" mnemonicParsing="false" onAction="#addTriggerEvent" text="CREATE" />
                                           <ChoiceBox fx:id="triggerChoiceBox" prefWidth="150.0" />
                                       </items>
                                     </ToolBar>
@@ -110,7 +110,8 @@
                                           <ChoiceBox fx:id="actionChoiceBox" prefWidth="150.0" />
                                       </items>
                                     </ToolBar>
-                                    <TreeView fx:id="actionTreeView" layoutX="7.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                                    <TreeView fx:id="actionTreeView" layoutX="7.0" layoutY="40.0" prefHeight="291.0" prefWidth="221.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0" />
+                                    <VBox fx:id="actionParametersBox" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
                                  </children>
                               </AnchorPane>
                         </content>

@@ -59,8 +59,9 @@ public final class ControlRuleChecker {
                 }
 
                 // Sleep for x milliseconds after checking all rules
+                System.out.println("Finished scanning");
                 Thread.sleep(timer * 1000);
-                System.out.println("ciao");
+                
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
