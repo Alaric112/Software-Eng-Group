@@ -44,61 +44,72 @@ public final class ControlRuleChecker {
     }
     
    public void startPeriodicCheck() {
-    // Fetch the timer value from the rules using the getTimer() method
-    int timer = rules.getTimer();
-
-     periodicCheckThread = new Thread(() -> {
-        while (true) {
-            try {
-                // Iterate through the set of rules and check each rule
-                for (Rule rule : rules.getRules()) {
-                    rule.checkRule();
-                }
-
-                // Sleep for x milliseconds after checking all rules
-                System.out.println("Finished scanning");
-                Thread.sleep(timer * 1000);
-                
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                // Handle the interruption if needed
-            }
+        // Fetch the timer value from the rules using the getTimer() method
+        int timer = rules.getTimer();
+        
+        if (periodicCheckThread != null && periodicCheckThread.isAlive()) {
+            System.out.println("Il thread periodico è già in esecuzione.");
+            return; // Esce se il thread è già in esecuzione
         }
-    });
+        
+        periodicCheckThread = new Thread(() -> {
+           boolean active = true; 
+           while (active) {
+               try {
+                   // Iterate through the set of rules and check each rule
+                   for (Rule rule : rules.getRules()) {
+                       rule.checkRule();
+                   }
 
-    // Start the thread
-    periodicCheckThread.start();
-}
+                   // Sleep for x milliseconds after checking all rules
+                   System.out.println("Finished scanning");
+                   Thread.sleep(timer * 1000);                
+
+               } catch (InterruptedException e) {
+                  System.out.println("Thread has been interrupted");
+                  active = false;
+                   // Handle the interruption if needed
+               }
+           }
+       });
+
+        // Start the thread
+        periodicCheckThread.start();
+    }
 
     public void stopPeriodicCheck() {
-    if (periodicCheckThread == null) {
-        throw new IllegalStateException("Thread is not initialized.");
-    }
 
-    if (!periodicCheckThread.isAlive()) {
-        throw new IllegalStateException("Thread is not running.");
-    }
+        if (periodicCheckThread == null) {
+            throw new IllegalStateException("Thread is not initialized.");
+        }
 
-    // Interrupt the periodic check thread only if it's running
-    periodicCheckThread.interrupt();
-}
+        if (!periodicCheckThread.isAlive()) {
+            throw new IllegalStateException("Thread is not running.");
+        }
+
+        // Interrupt the periodic check thread only if it's running
+        periodicCheckThread.interrupt();
+    }
 
     public void setTimer(int newTimer) {
-       rules.setTimer(newTimer);
         
+        rules.setTimer(newTimer);
     }
+    
     public void changeRuleset(Ruleset ruleSet) {
+        
         this.rules= ruleSet; 
-       
+
     }
 
     public Ruleset getRules() {
+        
         return rules;
     }
-    
+
 
     private void checkRuleSet() {
+        
         // Implement the logic to check the ruleset periodically
         // This method will be called by the TimerTask
         // Add your code here

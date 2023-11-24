@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -24,10 +25,19 @@ public class SecondaryController implements Initializable {
     private Button createRuleButton;
     @FXML
     private Label ruleSetLabel;
-    private ControlRuleChecker checker =ControlRuleChecker.getInstance();
-    private Ruleset ruleSet;
     @FXML
     private ListView<?> ruleListView;
+    @FXML
+    private ImageView checkerImageView;
+    @FXML
+    private Button startCheckerBtn;
+    @FXML
+    private Button stopCheckerBtn;
+    
+    
+    private ControlRuleChecker checker =ControlRuleChecker.getInstance();
+    private Ruleset ruleSet;
+    
     /**
      * Initializes the controller class.
      */
@@ -36,6 +46,8 @@ public class SecondaryController implements Initializable {
         // TODO
         ruleSet= checker.getRules();
         ruleSetLabel.setText(ruleSet.getName());
+        checkerImageView.setVisible(false);
+       
     }    
 
     //private visualizeRules(){
@@ -45,8 +57,24 @@ public class SecondaryController implements Initializable {
     @FXML
     private void createRuleAction(ActionEvent event) {
         
+        stopCheckerEvent(event);
         App.createSubWindow("CreateRuleSubWindow", "Rule Creator");
         
+    }
+
+    @FXML
+    private void startCheckerEvent(ActionEvent event) {
+        
+        checker.startPeriodicCheck();
+        checkerImageView.setVisible(true);        
+        
+    }
+
+    @FXML
+    private void stopCheckerEvent(ActionEvent event) {
+        
+        checker.stopPeriodicCheck();
+        checkerImageView.setVisible(false);
     }
     
 }
