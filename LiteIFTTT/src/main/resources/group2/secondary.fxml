@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,13 +11,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.SecondaryController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.SecondaryController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <items>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="500.0" spacing="30.0">
                <children>
-                  <Label text="Ruleset name" />
+                  <Label fx:id="ruleSetLabel" text="Ruleset name" />
                   <Button fx:id="createRuleButton" mnemonicParsing="false" onAction="#createRuleAction" text="Create Rule" />
                   <Button mnemonicParsing="false" text="Exit" />
                </children>
@@ -35,7 +36,10 @@
          <children>
             <ScrollPane prefHeight="200.0" prefWidth="200.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="676.0" prefWidth="595.0">
+                     <children>
+                        <ListView fx:id="ruleListView" layoutX="34.0" layoutY="22.0" prefHeight="583.0" prefWidth="534.0" />
+                     </children></AnchorPane>
               </content>
             </ScrollPane>
          </children>

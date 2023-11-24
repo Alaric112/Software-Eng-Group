@@ -1,3 +1,4 @@
+
 package group2;
 
 import java.util.Timer;
@@ -11,6 +12,8 @@ public final class ControlRuleChecker {
     private Ruleset rules;
     private double timer;   
     private Thread periodicCheckThread;
+
+
 
     private ControlRuleChecker() {
     }
@@ -42,7 +45,7 @@ public final class ControlRuleChecker {
     
     }
     
-    
+
    public void startPeriodicCheck() {
     // Fetch the timer value from the rules using the getTimer() method
     int timer = rules.getTimer();
@@ -86,9 +89,7 @@ public final class ControlRuleChecker {
     public void setTimer(int newTimer) {
        rules.setTimer(newTimer);
         
-      
     }
-
     public void changeRuleset(Ruleset ruleSet) {
         this.rules= ruleSet; 
        
@@ -104,6 +105,4 @@ public final class ControlRuleChecker {
         // This method will be called by the TimerTask
         // Add your code here
     }
-    
-    
 }
