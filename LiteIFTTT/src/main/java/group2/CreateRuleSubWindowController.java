@@ -69,6 +69,8 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private VBox actionParametersBox;
     private ControlRuleChecker checker = ControlRuleChecker.getInstance();
+    @FXML
+    private Button buttParameters;
     
     /**
      * Initializes the controller class.
@@ -171,6 +173,12 @@ public class CreateRuleSubWindowController implements Initializable {
 //        App.createSubWindow("TypeSelectionPopup", title);
 //               
 //    }
+
+    @FXML
+    private void checkVboxEvent(ActionEvent event) {
+        
+        
+    }
 
     
 }

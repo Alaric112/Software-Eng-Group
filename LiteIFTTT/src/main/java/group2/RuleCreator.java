@@ -42,18 +42,14 @@ public final class RuleCreator {
 
     private void initializeActionMap() {
         // Associa i tipi di azione alle rispettive implementazioni
-        actionFactoryMap.put("Generic", new GenericActionCreator());
-        actionFactoryMap.put("cipolla", new GenericActionCreator());
+        actionFactoryMap.put("message", new GenericActionCreator());
+        actionFactoryMap.put("sound", new GenericActionCreator());
 
     }
    
     private void initializeTriggerMap() {
         // Associa i tipi di azione alle rispettive implementazioni
-        triggerFactoryMap.put("Generic", new GenericTriggerCreator());
-        triggerFactoryMap.put("Pizza", new GenericTriggerCreator());
-        triggerFactoryMap.put("Lorenzo", new GenericTriggerCreator());
-
-        
+        triggerFactoryMap.put("Time", new TimeTriggerFactory());
     }
     
     public Rule createRule(String ruleName, Trigger trigger, Action action){
@@ -76,26 +72,26 @@ public final class RuleCreator {
     
     public Trigger createTrigger(String triggerType){
         
-        // Ottieni il costruttore dell'azione associato al tipo
+        // Ottieni il costruttore del trigger associato al tipo
         TriggerCreator triggerFactory = triggerFactoryMap.get(triggerType);
         if (triggerFactory  != null) {
-            // Crea un'istanza dell'azione utilizzando il costruttore
+            // Crea un'istanza del trigger utilizzando il costruttore
             return triggerFactory.createTrigger();
         } else {
-            throw new IllegalArgumentException("Tipo di azione non supportato: " + triggerType);
+            throw new IllegalArgumentException("Tipo di trigger non supportato: " + triggerType);
         }
         
     }
     
     public List<Control> createTriggerControl(String triggerType){
         
-        // Ottieni il costruttore dell'azione associato al tipo
+        // Ottieni il costruttore del trigger associato al tipo
         TriggerCreator triggerFactory = triggerFactoryMap.get(triggerType);
         if (triggerFactory  != null) {
-            // Crea un'istanza dell'azione utilizzando il costruttore
+            // Crea un'istanza del trigger utilizzando il costruttore
             return triggerFactory.createParameterControls();
         } else {
-            throw new IllegalArgumentException("Tipo di azione non supportato: " + triggerType);
+            throw new IllegalArgumentException("Tipo di trigger non supportato: " + triggerType);
         }
         
     }
