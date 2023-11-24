@@ -10,9 +10,19 @@ package group2;
  */
 public class GenericTrigger implements Trigger {
 
+    private boolean active = true;
+    
     @Override
     public boolean evaluate() {
-        return true;
+        return active;
     }
-        
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+     
 }

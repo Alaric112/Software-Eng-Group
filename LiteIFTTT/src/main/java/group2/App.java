@@ -47,7 +47,7 @@ public class App extends Application {
         
         // Create a new Stage for the sub-window
         Stage subWindow = new Stage();
-
+        
         try {
             // Set the scene of the sub-window with the content loaded from the specified FXML file
             subWindow.setScene(new Scene(loadFXML(fxml)));
@@ -57,6 +57,7 @@ public class App extends Application {
         // Set the modality of the sub-window to APPLICATION_MODAL , blocking interaction with other windows until it is closed.
         subWindow.initModality(Modality.APPLICATION_MODAL);
         subWindow.setTitle(subWindowTitle);
+        subWindow.setResizable(false);
         subWindow.getIcons().add(appIcon);
         subWindow.show();
     }
@@ -69,5 +70,9 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-    
+
+    public static Image getAppIcon() {
+        return appIcon;
+    }
+        
 }

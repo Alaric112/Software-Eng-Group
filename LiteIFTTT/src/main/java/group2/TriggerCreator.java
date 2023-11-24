@@ -4,6 +4,9 @@
  */
 package group2;
 
+import java.util.List;
+import javafx.scene.control.Control;
+
 /**
  *
  * @author patap
@@ -11,5 +14,7 @@ package group2;
 public abstract class TriggerCreator {
     
     public abstract Trigger createTrigger();
+    
+    public abstract List<Control> createParameterControls();
     
 }

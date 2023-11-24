@@ -1,46 +1,33 @@
 package group2;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javafx.scene.control.Control;
+
 /**
  *
  * @author patap
  */
 public final class RuleCreator {
     
-    private GenericActionCreator genericActionCreator = new GenericActionCreator();
-    private GenericTriggerCreator genericTriggerCreator = new GenericTriggerCreator();
-    
-    public enum ActionType {
-        
-        GenericAction
-    }
-    
-    public enum TriggerType {
-        
-        GenericTrigger
-    }
-
-    private RuleCreator() {
-    }
-    
-    
-    
-    // The field must be declared volatile so that double check lock would work
-    // correctly.    
     private static volatile RuleCreator instance;
+    private Map<String, ActionCreator> actionFactoryMap;
+    private Map<String, TriggerCreator> triggerFactoryMap;
+    private String lastSelectedType;
+    
+   private RuleCreator() {
+        // Costruttore privato per il singleton
+        actionFactoryMap = new HashMap<>();
+        triggerFactoryMap = new HashMap<>();
+        
+        initializeActionMap();
+        initializeTriggerMap();
+    }
     
     public static RuleCreator getInstance() {
-        // The approach taken here is called double-checked locking (DCL). It
-        // exists to prevent race condition between multiple threads that may
-        // attempt to get singleton instance at the same time, creating separate
-        // instances as a result.
-        //
-        // It may seem that having the `result` variable here is completely
-        // pointless. There is, however, a very important caveat when
-        // implementing double-checked locking in Java, which is solved by
-        // introducing this local variable.
-        //
-        // You can read more info DCL issues in Java here:
-        // https://refactoring.guru/java-dcl-issue
+
         RuleCreator result = instance;
         if (result != null) {
             return result;
@@ -52,44 +39,81 @@ public final class RuleCreator {
             return instance;
         }
     }
-    
-    public void printHello(){
+
+    private void initializeActionMap() {
+        // Associa i tipi di azione alle rispettive implementazioni
+        actionFactoryMap.put("Generic", new GenericActionCreator());
+
+    }
+   
+    private void initializeTriggerMap() {
+        // Associa i tipi di azione alle rispettive implementazioni
+        triggerFactoryMap.put("Generic", new GenericTriggerCreator());
+        triggerFactoryMap.put("Pizza", new GenericTriggerCreator());
+        triggerFactoryMap.put("Lorenzo", new GenericTriggerCreator());
+
         
-        System.out.println("Hello world");
     }
     
-    public Rule createRule(String ruleName, TriggerType triggerType, ActionType actionType){
-    
-        Trigger trigger;
-        Action action;
-        
-        switch(triggerType){    
-            case GenericTrigger:
-                trigger = triggerCreation(genericTriggerCreator);
-                break;
-            default:
-                trigger = triggerCreation(genericTriggerCreator);
-          
-        }
-        switch(actionType){           
-            case GenericAction:
-                action = actionCreation(genericActionCreator);
-                break;
-            default:
-                action = actionCreation(genericActionCreator);
-                         
-        }
-                        
+    public Rule createRule(String ruleName, Trigger trigger, Action action){
+                                    
         return new BaseRule(ruleName, trigger, action);
     }
     
-    private Action actionCreation(ActionCreator actionCreator){
+    public Action createAction(String actionType){
         
-        return actionCreator.createAction();
+        // Ottieni il costruttore dell'azione associato al tipo
+        ActionCreator actionFactory = actionFactoryMap.get(actionType);
+        if (actionFactory  != null) {
+            // Crea un'istanza dell'azione utilizzando il costruttore
+            return actionFactory.createAction();
+        } else {
+            throw new IllegalArgumentException("Tipo di azione non supportato: " + actionType);
+        }
+        
     }
     
-    private Trigger triggerCreation(TriggerCreator triggerCreator){
+    public Trigger createTrigger(String triggerType){
         
-        return triggerCreator.createTrigger();
+        // Ottieni il costruttore dell'azione associato al tipo
+        TriggerCreator triggerFactory = triggerFactoryMap.get(triggerType);
+        if (triggerFactory  != null) {
+            // Crea un'istanza dell'azione utilizzando il costruttore
+            return triggerFactory.createTrigger();
+        } else {
+            throw new IllegalArgumentException("Tipo di azione non supportato: " + triggerType);
+        }
+        
     }
+    
+    public List<Control> createTriggerControl(String triggerType){
+        
+        // Ottieni il costruttore dell'azione associato al tipo
+        TriggerCreator triggerFactory = triggerFactoryMap.get(triggerType);
+        if (triggerFactory  != null) {
+            // Crea un'istanza dell'azione utilizzando il costruttore
+            return triggerFactory.createParameterControls();
+        } else {
+            throw new IllegalArgumentException("Tipo di azione non supportato: " + triggerType);
+        }
+        
+    }
+    
+    
+    public List<String> getAvailableActionTypes() {
+        return new ArrayList<>(actionFactoryMap.keySet());
+    }
+
+    public List<String> getAvailableTriggerTypes() {
+        return new ArrayList<>(triggerFactoryMap.keySet());
+    }
+
+    public String getLastSelectedType() {
+        return lastSelectedType;
+    }
+
+    public void setLastSelectedType(String lastSelectedType) {
+        this.lastSelectedType = lastSelectedType;
+    }   
+    
 }
