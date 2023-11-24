@@ -68,7 +68,7 @@ public class CreateRuleSubWindowController implements Initializable {
     private Map<String, TextField> parameterTextFieldMap = new HashMap<>();
     @FXML
     private VBox actionParametersBox;
-
+    private ControlRuleChecker checker = ControlRuleChecker.getInstance();
     
     /**
      * Initializes the controller class.
@@ -104,10 +104,9 @@ public class CreateRuleSubWindowController implements Initializable {
         
         Rule rule = ruleCreator.createRule(ruleName, trigger, action);
         
-        // TO DO 
-        //Prendere rule set da controlRuleChecker
-        // Fare add della rule creata nel ruleset preso
-        
+        Ruleset ruleSet = checker.getRules();
+        ruleSet.addRule(rule);
+        System.out.println(ruleSet);
         closeWindowEvent(event);
         
     }

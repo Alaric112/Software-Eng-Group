@@ -13,8 +13,6 @@ public final class ControlRuleChecker {
     private double timer;   
     private Thread periodicCheckThread;
 
-
-
     private ControlRuleChecker() {
     }
 
@@ -45,7 +43,6 @@ public final class ControlRuleChecker {
     
     }
     
-
    public void startPeriodicCheck() {
     // Fetch the timer value from the rules using the getTimer() method
     int timer = rules.getTimer();
