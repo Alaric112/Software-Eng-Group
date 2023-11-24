@@ -14,6 +14,16 @@ import java.util.List;
 public class Ruleset {
     
     private List rules = new ArrayList<Rule>();
+    private int timer;
+    
+    private String name;
+
+    public Ruleset(int timer) {
+        this.timer = timer;
+        this.name = "ciao";
+    }
+    
+    
     
     public void addRule(Rule rule){
         
@@ -39,5 +49,12 @@ public class Ruleset {
         
         rules.clear();
     }
-    
+
+    public int getTimer() {
+        return timer;
+    }
+
+    public void setTimer(int timer) {
+        this.timer = timer;
+    }
 }
