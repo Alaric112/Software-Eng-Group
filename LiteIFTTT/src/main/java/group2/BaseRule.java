@@ -68,6 +68,14 @@ public class BaseRule implements Rule {
         
         action.execute();
     }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
     
     
 }
