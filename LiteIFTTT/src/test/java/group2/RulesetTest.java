@@ -10,21 +10,29 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * JUnit test class for the {@link Ruleset} class.
+ */
 public class RulesetTest {
 
     private Ruleset ruleset;
-    // Classe di test per l'interfaccia Rule
     
+    /**
+     * Test implementation of the {@link Rule} interface.
+     */
     private static class TestRule implements Rule {
         private String name;
-
+        /**
+         * Constructs a TestRule instance with the specified name
+         * @param name The name of the test rule.
+         */
         public TestRule(String name) {
             this.name = name;
         }
 
         @Override
         public void checkRule() {
-            // Implementazione del test
+            
         }
 
         @Override
@@ -34,21 +42,27 @@ public class RulesetTest {
 
         @Override
         public Trigger getTrigger() {
-            return null; // Implementazione fittizia per il test
+            return null; 
         }
 
         @Override
         public Action getAction() {
-            return null; // Implementazione fittizia per il test
+            return null; 
         }
     }
     
+    /**
+     * Sets up a new Ruleset instance before each test.
+     */
     @Before
     public void setUp() {
         // Inizializza un nuovo Ruleset prima di ogni test
         ruleset = new Ruleset(10, "TestRuleset");
     }
-
+    
+    /**
+     * Tests the addition of a rule to the Ruleset.
+     */
     @Test
     public void testAddRule() {
         // Verifica che la regola sia aggiunta correttamente al Ruleset
@@ -59,6 +73,9 @@ public class RulesetTest {
         assertTrue(rules.contains(rule));
     }
 
+    /**
+     * Tests the removal of a rule from the Ruleset.
+     */
     @Test
     public void testRemoveRule() {
         // Verifica che la regola sia rimossa correttamente dal Ruleset
@@ -71,6 +88,9 @@ public class RulesetTest {
         assertFalse(rules.contains(rule));
     }
 
+    /**
+     * Tests the calculation of the Ruleset size.
+     */
     @Test
     public void testSizeRuleSet() {
         // Verifica che la dimensione del Ruleset sia calcolata correttamente
@@ -89,6 +109,9 @@ public class RulesetTest {
         assertEquals(1, ruleset.sizeRuleSet());
     }
 
+    /**
+     * Tests the clearing of the Ruleset.
+     */
     @Test
     public void testClearRuleSet() {
         // Verifica che il Ruleset venga cancellato correttamente
@@ -104,12 +127,18 @@ public class RulesetTest {
         assertTrue(rules.isEmpty());
     }
 
+    /**
+     * Tests the retrieval of the Ruleset name.
+     */
     @Test
     public void testGetName() {
         // Verifica che il nome del Ruleset sia restituito correttamente
         assertEquals("TestRuleset", ruleset.getName());
     }
 
+    /**
+     * Tests the setting of the Ruleset name.
+     */
     @Test
     public void testSetName() {
         // Verifica che il nome del Ruleset sia impostato correttamente
@@ -117,12 +146,18 @@ public class RulesetTest {
         assertEquals("NewTestRuleset", ruleset.getName());
     }
 
+    /**
+     * Tests the retrieval of the Ruleset timer.
+     */
     @Test
     public void testGetTimer() {
         // Verifica che il timer del Ruleset sia restituito correttamente
         assertEquals(10, ruleset.getTimer());
     }
 
+    /**
+     * Tests the setting of the Ruleset timer.
+     */
     @Test
     public void testSetTimer() {
         // Verifica che il timer del Ruleset sia impostato correttamente
