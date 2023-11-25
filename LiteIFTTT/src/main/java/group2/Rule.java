@@ -11,5 +11,11 @@ package group2;
 public interface Rule {
     
    void checkRule(); 
-    
+   
+   String getName();
+   
+   Trigger getTrigger();
+   
+   Action getAction();
+   
 }

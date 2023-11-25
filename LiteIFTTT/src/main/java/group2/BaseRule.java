@@ -35,6 +35,7 @@ public class BaseRule implements Rule {
             
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -43,6 +44,7 @@ public class BaseRule implements Rule {
         this.name = name;
     }    
 
+    @Override
     public Trigger getTrigger() {
         return trigger;
     }
@@ -51,6 +53,7 @@ public class BaseRule implements Rule {
         this.trigger = trigger;
     }
 
+    @Override
     public Action getAction() {
         return action;
     }
@@ -76,6 +79,5 @@ public class BaseRule implements Rule {
     public void setActive(boolean active) {
         this.active = active;
     }
-    
-    
+        
 }

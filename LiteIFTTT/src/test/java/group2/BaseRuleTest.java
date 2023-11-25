@@ -58,7 +58,6 @@ public class BaseRuleTest {
             }
         };
         baseRule = new BaseRule("TestRule", mockTrigger, mockAction);
-
         baseRule.checkRule();
         assertFalse(mockAction.isExecuted());
     }
@@ -71,6 +70,28 @@ public class BaseRuleTest {
         baseRule.checkRule();
         assertFalse(mockAction.isExecuted());
     }
+    
+    @Test
+    public void testSetName() {
+        // Modifica il nome della regola
+        baseRule.setName("NewRuleName");
 
-    // Aggiungi altri test secondo necessità 
+        // Verifica che il nome sia stato cambiato correttamente
+        assertEquals("NewRuleName", baseRule.getName());
+    }
+
+    @Test
+    public void testSetTrigger() {
+        Trigger newTrigger = new MockTrigger();
+        baseRule.setTrigger(newTrigger);
+        assertEquals(newTrigger, baseRule.getTrigger());
+    }
+
+    @Test
+    public void testSetAction() {
+        Action newAction = new MockAction();
+        baseRule.setAction(newAction);
+        assertEquals(newAction, baseRule.getAction());
+    }
+    
 }
