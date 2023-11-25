@@ -4,6 +4,8 @@
  */
 package group2;
 
+import javafx.beans.Observable;
+
 /**
  *
  * @author patap

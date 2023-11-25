@@ -4,6 +4,7 @@
  */
 package group2;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -42,6 +44,11 @@ public class PrimaryController implements Initializable {
 
     @FXML
     private void loadRuleSetAction(ActionEvent event) {
+        
+        FileChooser fc = new FileChooser();        
+        File f = fc.showOpenDialog(null);        
+        if(f==null) return;
+        return;
     }
     
     private void switchTo(String fxml){

@@ -32,7 +32,7 @@ public class BaseRule implements Rule {
             fireRule();
             
         }
-            
+        
     }
 
     @Override

@@ -50,7 +50,7 @@ public class SecondaryController implements Initializable {
     private TableColumn<Rule, Boolean> stateRule;
     @FXML
     private TableView<Rule> ruleTable;
-    private ObservableList<Rule> observableRuleList = FXCollections.observableArrayList();   
+    //private ObservableList<Rule> observableRuleList = FXCollections.observableArrayList();   
     
     /**
      * Initializes the controller class.
@@ -58,7 +58,6 @@ public class SecondaryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        observableRuleList.addAll(checker.getRules().getRules());
         startCheckerBtn.disableProperty().bind(isThreadRunning);
         stopCheckerBtn.disableProperty().bind(isThreadRunning.not());
         checkerImageView.visibleProperty().bind(isThreadRunning);
@@ -66,11 +65,12 @@ public class SecondaryController implements Initializable {
         nameRule.setCellValueFactory(new PropertyValueFactory("name"));
         stateRule.setCellValueFactory(new PropertyValueFactory("active"));
         
-        ruleTable.setItems(observableRuleList);
+        ruleTable.setItems(checker.getRules().getRules());
         
         // TODO
         ruleSet= checker.getRules();
         ruleSetLabel.setText(ruleSet.getName());
+                
     }    
 
     @FXML
@@ -82,7 +82,7 @@ public class SecondaryController implements Initializable {
         }
         
         App.createSubWindow("CreateRuleSubWindow", "Rule Creator");
-        observableRuleList.addAll(checker.getRules().getRules());
+        //observableRuleList.addAll(checker.getRules().getRules());
     }
 
     @FXML

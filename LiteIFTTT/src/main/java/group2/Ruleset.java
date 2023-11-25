@@ -7,6 +7,9 @@ package group2;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 /**
  *
  * @author patap
@@ -15,7 +18,7 @@ public class Ruleset {
     private int timer;
     private String name;
     
-    private List rules = new ArrayList<Rule>();
+    private ObservableList<Rule> rules = FXCollections.observableArrayList();
     public Ruleset(int timer, String name) {
         this.timer = timer;
         this.name = name;
@@ -31,7 +34,7 @@ public class Ruleset {
         rules.remove(index);
     }
     
-    public List<Rule> getRules(){
+    public ObservableList<Rule> getRules(){
         
         return rules;
     }
