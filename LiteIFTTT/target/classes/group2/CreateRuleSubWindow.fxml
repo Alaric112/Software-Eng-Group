@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.TreeView?>
@@ -85,11 +86,17 @@
                                       <items>
                                         <Button fx:id="addTriggerButton" mnemonicParsing="false" onAction="#addTriggerEvent" text="CREATE" />
                                           <ChoiceBox fx:id="triggerChoiceBox" prefWidth="150.0" />
-                                          <Button fx:id="buttParameters" mnemonicParsing="false" onAction="#checkVboxEvent" text="set parameters" />
                                       </items>
                                     </ToolBar>
                                     <TreeView fx:id="triggerTreeView" layoutY="40.0" onContextMenuRequested="#selectItem" onMouseClicked="#selectItem" prefHeight="291.0" prefWidth="477.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0" />
-                                    <VBox fx:id="triggerParametersBox" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                                    <VBox fx:id="triggerParametersBox" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <Label text="Hour" />
+                                          <TextField fx:id="hourTrigger" />
+                                          <Label text="Minutes" />
+                                          <TextField fx:id="minTrigger" />
+                                          <Button fx:id="buttParameters" mnemonicParsing="false" onAction="#setTimeEvent" text="set time" />
+                                       </children></VBox>
                                  </children>
                               </AnchorPane>
                         </content>
@@ -112,7 +119,19 @@
                                       </items>
                                     </ToolBar>
                                     <TreeView fx:id="actionTreeView" layoutX="7.0" layoutY="40.0" prefHeight="291.0" prefWidth="221.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0" />
-                                    <VBox fx:id="actionParametersBox" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                                    <VBox fx:id="actionParametersBox" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <Label text="Insert Message" />
+                                          <TextArea prefHeight="182.0" prefWidth="252.0" />
+                                          <Button mnemonicParsing="false" onAction="#insertMessageAction" text="insert message" />
+                                       </children></VBox>
+                                    <VBox layoutX="227.0" layoutY="40.0" prefHeight="292.0" prefWidth="249.0">
+                                       <children>
+                                          <Label prefHeight="18.0" prefWidth="134.0" text="Select the path of the file" />
+                                          <TextField fx:id="pathSound" />
+                                          <Button mnemonicParsing="false" onAction="#selectPathEvent" text="select path" />
+                                       </children>
+                                    </VBox>
                                  </children>
                               </AnchorPane>
                         </content>
