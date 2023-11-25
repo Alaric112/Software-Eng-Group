@@ -44,38 +44,41 @@ public final class ControlRuleChecker {
     }
     
    public void startPeriodicCheck() {
-        // Fetch the timer value from the rules using the getTimer() method
-        int timer = rules.getTimer();
-        
-        if (periodicCheckThread != null && periodicCheckThread.isAlive()) {
-            System.out.println("Il thread periodico è già in esecuzione.");
-            return; // Esce se il thread è già in esecuzione
-        }
-        
-        periodicCheckThread = new Thread(() -> {
-           boolean active = true; 
-           while (active) {
-               try {
-                   // Iterate through the set of rules and check each rule
-                   for (Rule rule : rules.getRules()) {
-                       rule.checkRule();
-                   }
+    // Fetch the timer value from the rules using the getTimer() method
+    int timer = rules.getTimer();
 
-                   // Sleep for x milliseconds after checking all rules
-                   System.out.println("Finished scanning");
-                   Thread.sleep(timer * 1000);                
-
-               } catch (InterruptedException e) {
-                  System.out.println("Thread has been interrupted");
-                  active = false;
-                   // Handle the interruption if needed
-               }
-           }
-       });
-
-        // Start the thread
-        periodicCheckThread.start();
+    if (periodicCheckThread != null && periodicCheckThread.isAlive()) {
+        System.out.println("Il thread periodico è già in esecuzione.");
+        return; // Esce se il thread è già in esecuzione
     }
+
+    periodicCheckThread = new Thread(() -> {
+        boolean active = true;
+        try {
+            while (active) {
+                // Iterate through the set of rules and check each rule
+                for (Rule rule : rules.getRules()) {
+                    rule.checkRule();
+                }
+
+                // Sleep for x milliseconds after checking all rules
+                System.out.println("Finished scanning");
+                Thread.sleep(timer * 1000);
+
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Thread has been interrupted");
+            active = false;
+            // Handle the interruption if needed
+        }
+    });
+
+    // Set the thread as a daemon
+    periodicCheckThread.setDaemon(true);
+
+    // Start the thread
+    periodicCheckThread.start();
+}
 
     public void stopPeriodicCheck() {
 
