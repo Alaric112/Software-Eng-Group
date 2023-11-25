@@ -4,6 +4,7 @@
  */
 package group2;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -24,7 +25,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Control;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -32,6 +35,7 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
@@ -83,6 +87,8 @@ public class CreateRuleSubWindowController implements Initializable {
     private VBox playAudioBox;
     @FXML
     private TextField pathSound;
+    @FXML
+    private TextArea textMessageArea;
     
     /**
      * Initializes the controller class.
@@ -152,19 +158,18 @@ public class CreateRuleSubWindowController implements Initializable {
 
     }
     
+    @FXML
     public void selectTriggerItem(){
         
         TreeItem<String> item = triggerTreeView.getSelectionModel().getSelectedItem();
         System.out.println(item.getValue());
     }
 
-    @FXML
     private void selectTriggerItem(ContextMenuEvent event) {
         
         selectTriggerItem();
     }
 
-    @FXML
     private void selectTriggerItem(MouseEvent event) {
         
         selectTriggerItem();
@@ -176,19 +181,18 @@ public class CreateRuleSubWindowController implements Initializable {
         
     }
     
+    @FXML
     private void selectActionItem(){     
         
         TreeItem<String> item = actionTreeView.getSelectionModel().getSelectedItem();
         System.out.println(item.getValue());
     }
     
-    @FXML
     private void selectActionItem(ContextMenuEvent event) {
         
         selectActionItem();
     }
 
-    @FXML
     private void selectActionItem(MouseEvent event) {
         
         selectActionItem();
@@ -196,10 +200,37 @@ public class CreateRuleSubWindowController implements Initializable {
 
     @FXML
     private void insertMessageAction(ActionEvent event) {
+        
+        MessageAction message = new MessageAction();
+        message.setMessageInfo(textMessageArea.getText());
+        textMessageArea.clear();
+                
     }
 
     @FXML
     private void selectPathEvent(ActionEvent event) {
+        
+        FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Upload File Path");
+    fileChooser.getExtensionFilters().addAll(
+            new FileChooser.ExtensionFilter("ALL FILES", "*.*"),
+            new FileChooser.ExtensionFilter("ZIP", "*.zip"),
+            new FileChooser.ExtensionFilter("PDF", "*.pdf"),
+            new FileChooser.ExtensionFilter("TEXT", "*.txt"),
+            new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
+    );
+
+
+    File file = fileChooser.showOpenDialog(DialogPane.getScene().getWindow());
+
+    if (file != null) {
+        // pickUpPathField it's your TextField fx:id
+       pathSound.setText(file.getPath());
+
+    } else  {
+        System.out.println("error"); // or something else
+    }
+
     }
 
     

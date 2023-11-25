@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS%20Style/RoundButtonStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.CreateRuleSubWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS%20Style/RoundButtonStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.CreateRuleSubWindowController">
    <children>
       <ToolBar prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -122,7 +122,7 @@
                                     <VBox fx:id="messageActionBox" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                        <children>
                                           <Label text="Insert Message" />
-                                          <TextArea prefHeight="182.0" prefWidth="252.0" />
+                                          <TextArea fx:id="textMessageArea" prefHeight="182.0" prefWidth="252.0" />
                                           <Button mnemonicParsing="false" onAction="#insertMessageAction" text="insert message" />
                                        </children></VBox>
                                     <VBox fx:id="playAudioBox" layoutX="227.0" layoutY="40.0" prefHeight="292.0" prefWidth="249.0" visible="false">
