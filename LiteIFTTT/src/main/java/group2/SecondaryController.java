@@ -6,8 +6,10 @@ package group2;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -45,9 +47,10 @@ public class SecondaryController implements Initializable {
     @FXML
     private TableColumn<Rule, String> nameRule;
     @FXML
-    private TableColumn<Rule, String> stateRule;
+    private TableColumn<Rule, Boolean> stateRule;
     @FXML
     private TableView<Rule> ruleTable;
+    private ObservableList<Rule> observableRuleList = FXCollections.observableArrayList();   
     
     /**
      * Initializes the controller class.
@@ -55,21 +58,21 @@ public class SecondaryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        ObservableList<String> observableList = FXCollections.observableArrayList();    
-
+        observableRuleList.addAll(checker.getRules().getRules());
         startCheckerBtn.disableProperty().bind(isThreadRunning);
         stopCheckerBtn.disableProperty().bind(isThreadRunning.not());
         checkerImageView.visibleProperty().bind(isThreadRunning);
+        
+        nameRule.setCellValueFactory(new PropertyValueFactory("name"));
+        stateRule.setCellValueFactory(new PropertyValueFactory("active"));
+        
+        ruleTable.setItems(observableRuleList);
         
         // TODO
         ruleSet= checker.getRules();
         ruleSetLabel.setText(ruleSet.getName());
     }    
 
-    //private visualizeRules(){
-    
-    //}
-    
     @FXML
     private void createRuleAction(ActionEvent event) {
         
@@ -79,7 +82,7 @@ public class SecondaryController implements Initializable {
         }
         
         App.createSubWindow("CreateRuleSubWindow", "Rule Creator");
-        
+        observableRuleList.addAll(checker.getRules().getRules());
     }
 
     @FXML
