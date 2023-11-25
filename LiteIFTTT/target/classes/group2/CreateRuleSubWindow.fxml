@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
@@ -15,7 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS%20Style/RoundButtonStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.CreateRuleSubWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS%20Style/RoundButtonStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.CreateRuleSubWindowController">
    <children>
       <ToolBar prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -88,15 +90,18 @@
                                           <ChoiceBox fx:id="triggerChoiceBox" prefWidth="150.0" />
                                       </items>
                                     </ToolBar>
-                                    <TreeView fx:id="triggerTreeView" layoutY="40.0" onContextMenuRequested="#selectItem" onMouseClicked="#selectItem" prefHeight="291.0" prefWidth="477.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0" />
-                                    <VBox fx:id="triggerParametersBox" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                    <TreeView fx:id="triggerTreeView" layoutY="40.0" onContextMenuRequested="#selectTriggerItem" onMouseClicked="#selectTriggerItem" prefHeight="291.0" prefWidth="477.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0" />
+                                    <VBox fx:id="timeTriggerBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                        <children>
-                                          <Label text="Hour" />
-                                          <TextField fx:id="hourTrigger" />
-                                          <Label text="Minutes" />
-                                          <TextField fx:id="minTrigger" />
-                                          <Button fx:id="buttParameters" mnemonicParsing="false" onAction="#setTimeEvent" text="set time" />
-                                       </children></VBox>
+                                          <Label text="Hour:" />
+                                          <Spinner fx:id="spinnerHourTimeTrigger" editable="true" />
+                                          <Label text="Minutes:" />
+                                          <Spinner fx:id="spinnerMinuteTimeTrigger" editable="true" />
+                                          <Button fx:id="btnSetTimeTrigger" mnemonicParsing="false" onAction="#setTimeEvent" text="set time" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding></VBox>
                                  </children>
                               </AnchorPane>
                         </content>
@@ -118,14 +123,14 @@
                                           <ChoiceBox fx:id="actionChoiceBox" prefWidth="150.0" />
                                       </items>
                                     </ToolBar>
-                                    <TreeView fx:id="actionTreeView" layoutX="7.0" layoutY="40.0" prefHeight="291.0" prefWidth="221.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0" />
-                                    <VBox fx:id="actionParametersBox" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                    <TreeView fx:id="actionTreeView" layoutX="7.0" layoutY="40.0" onContextMenuRequested="#selectActionItem" onMouseClicked="#selectActionItem" prefHeight="291.0" prefWidth="221.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0" />
+                                    <VBox fx:id="messageActionBox" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                        <children>
                                           <Label text="Insert Message" />
                                           <TextArea prefHeight="182.0" prefWidth="252.0" />
                                           <Button mnemonicParsing="false" onAction="#insertMessageAction" text="insert message" />
                                        </children></VBox>
-                                    <VBox layoutX="227.0" layoutY="40.0" prefHeight="292.0" prefWidth="249.0">
+                                    <VBox fx:id="playAudioBox" layoutX="227.0" layoutY="40.0" prefHeight="292.0" prefWidth="249.0" visible="false">
                                        <children>
                                           <Label prefHeight="18.0" prefWidth="134.0" text="Select the path of the file" />
                                           <TextField fx:id="pathSound" />

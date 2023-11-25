@@ -25,6 +25,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -70,19 +72,20 @@ public class CreateRuleSubWindowController implements Initializable {
     private VBox actionParametersBox;
     private ControlRuleChecker checker = ControlRuleChecker.getInstance();
     @FXML
-    private Button buttParameters;
-    @FXML
     private VBox timeTriggerBox;
-    @FXML
-    private TextField hourTrigger;
-    @FXML
-    private TextField minTrigger;
     @FXML
     private VBox messageActionBox;
     @FXML
     private VBox playAudioBox;
     @FXML
     private TextField pathSound;
+    private TextField hourTriggerTF;
+    @FXML
+    private Spinner<Integer> spinnerHourTimeTrigger;
+    @FXML
+    private Spinner<Integer> spinnerMinuteTimeTrigger;
+    @FXML
+    private Button btnSetTimeTrigger;
     
     /**
      * Initializes the controller class.
@@ -92,6 +95,16 @@ public class CreateRuleSubWindowController implements Initializable {
                 
         triggerChoiceBox.getItems().addAll(ruleCreator.getAvailableTriggerTypes());
         actionChoiceBox.getItems().addAll(ruleCreator.getAvailableActionTypes());
+        
+        timeTriggerBox.setVisible(false);
+        messageActionBox.setVisible(false);
+        playAudioBox.setVisible(false);
+        
+        // TO REFACTOR
+        SpinnerValueFactory<Integer> hourValues = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24, 0);
+        this.spinnerHourTimeTrigger.setValueFactory(hourValues);
+        SpinnerValueFactory<Integer> minuteValues = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 60, 0);
+        this.spinnerMinuteTimeTrigger.setValueFactory(minuteValues);
         
         // Disattiva bottone conferma quando il text field del nome della regola e' vuoto
         BooleanBinding isTextFieldEmpty = Bindings.isEmpty(ruleNameTF.textProperty());
@@ -135,11 +148,10 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void addTriggerEvent(ActionEvent event) {
     
-          triggerParametersBox.getChildren().clear();
           TreeItem<String> item = new TreeItem<>(triggerChoiceBox.getValue());
           triggerTreeView.setRoot(item);
           trigger = ruleCreator.createTrigger(item.getValue());
-   
+          
     }
 
     @FXML
@@ -152,19 +164,25 @@ public class CreateRuleSubWindowController implements Initializable {
 
     }
     
-    public void selectTriggerItem(){
+    @FXML
+    public void selectTriggerItem(){    
         
         TreeItem<String> item = triggerTreeView.getSelectionModel().getSelectedItem();
-        System.out.println(item.getValue());
+        
+        if(item != null){
+
+            if(item.getValue().equals("Time")){
+
+                timeTriggerBox.setVisible(true);
+            }
+        }
     }
 
-    @FXML
     private void selectTriggerItem(ContextMenuEvent event) {
         
         selectTriggerItem();
     }
 
-    @FXML
     private void selectTriggerItem(MouseEvent event) {
         
         selectTriggerItem();
@@ -174,21 +192,26 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void setTimeEvent(ActionEvent event) {
         
+        TimeTrigger t = (TimeTrigger) trigger;
+        
+        t.setTargetTime(spinnerHourTimeTrigger.getValue(), spinnerMinuteTimeTrigger.getValue());
+        
+        System.out.println(t.getTargetTime());
+        
     }
     
+    @FXML
     private void selectActionItem(){     
         
         TreeItem<String> item = actionTreeView.getSelectionModel().getSelectedItem();
         System.out.println(item.getValue());
     }
     
-    @FXML
     private void selectActionItem(ContextMenuEvent event) {
         
         selectActionItem();
     }
 
-    @FXML
     private void selectActionItem(MouseEvent event) {
         
         selectActionItem();

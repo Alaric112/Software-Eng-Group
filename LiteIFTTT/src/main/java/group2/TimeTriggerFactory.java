@@ -23,19 +23,5 @@ public class TimeTriggerFactory extends TriggerCreator{
     public Trigger createTrigger() {
         return new TimeTrigger(hour, min);
     }
-
-//    @Override
-//    public List<Control> createParameterControls() {
-//        List<Control> controls = new ArrayList<>();
-//        Label labelh = new Label("Insert Hour:");
-//        TextField textFieldh = new TextField();
-//        Label labelm = new Label("Insert min:");
-//        TextField textFieldm = new TextField();
-//        controls.add(labelh);
-//        controls.add(textFieldh);
-//        controls.add(labelm);
-//        controls.add(textFieldm);
-//        return controls;
-//    }
   
 }
