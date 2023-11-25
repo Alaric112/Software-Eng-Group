@@ -37,9 +37,5 @@ public class TimeTriggerFactory extends TriggerCreator{
         controls.add(textFieldm);
         return controls;
     }
-
-
-    
-    
-    
+  
 }

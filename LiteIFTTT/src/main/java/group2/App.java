@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
+import javafx.scene.control.Alert;
+
 
 /**
  * JavaFX App
@@ -60,6 +62,7 @@ public class App extends Application {
         subWindow.setResizable(false);
         subWindow.getIcons().add(appIcon);
         subWindow.show();
+ 
     }
     
     private static Parent loadFXML(String fxml) throws IOException {

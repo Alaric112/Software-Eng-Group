@@ -20,11 +20,17 @@ public class TimeTrigger implements Trigger{
     
     @Override
     public boolean evaluate() {
-        
-         LocalTime currentTime = LocalTime.of(LocalTime.now().getHour(), LocalTime.now().getMinute());
-            return currentTime.equals(targetTime);
+                
+        LocalTime currentTime = LocalTime.of(LocalTime.now().getHour(), LocalTime.now().getMinute());
+        return currentTime.equals(targetTime);
     }
-    
-   
-    
+
+    public LocalTime getTargetTime() {
+        return targetTime;
+    }
+
+    public void setTargetTime(int hour, int min) {
+        this.targetTime = LocalTime.of(hour, min);
+    }
+       
 }
