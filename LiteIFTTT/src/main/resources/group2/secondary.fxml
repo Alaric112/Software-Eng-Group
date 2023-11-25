@@ -41,7 +41,7 @@
                   </MenuBar>
                   <Label fx:id="ruleSetLabel" text="Ruleset name" />
                   <Button fx:id="createRuleButton" mnemonicParsing="false" onAction="#createRuleAction" text="Create Rule" />
-                  <Button mnemonicParsing="false" text="Exit" />
+                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitEvent" text="Exit" />
                </children>
             </HBox>
             <ImageView fx:id="checkerImageView" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">

@@ -83,19 +83,6 @@ public final class RuleCreator {
         
     }
     
-//    public List<Control> createTriggerControl(String triggerType){
-//        
-//        // Ottieni il costruttore del trigger associato al tipo
-//        TriggerCreator triggerFactory = triggerFactoryMap.get(triggerType);
-//        if (triggerFactory  != null) {
-//            // Crea un'istanza del trigger utilizzando il costruttore
-//            return triggerFactory.createParameterControls();
-//        } else {
-//            throw new IllegalArgumentException("Tipo di trigger non supportato: " + triggerType);
-//        }
-//        
-//    }    
-    
     public List<String> getAvailableActionTypes() {
         return new ArrayList<>(actionFactoryMap.keySet());
     }

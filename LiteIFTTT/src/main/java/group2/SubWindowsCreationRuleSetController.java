@@ -4,6 +4,7 @@
  */
 package group2;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -70,5 +72,16 @@ public class SubWindowsCreationRuleSetController implements Initializable {
             ex.printStackTrace();
         }
     }  
+
+    @FXML
+    private void openSavePathEvent(ActionEvent event) {
+        
+        FileChooser fc = new FileChooser();
+        
+        File f = fc.showSaveDialog(null);
+        
+        if(f==null) return;
+             
+    }
     
 }

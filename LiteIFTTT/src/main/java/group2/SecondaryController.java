@@ -6,6 +6,7 @@ package group2;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -40,10 +41,6 @@ public class SecondaryController implements Initializable {
     private Button startCheckerBtn;
     @FXML
     private Button stopCheckerBtn;   
-    
-    private ControlRuleChecker checker =ControlRuleChecker.getInstance();
-    private RuleSet ruleSet;
-    private BooleanProperty isThreadRunning = new SimpleBooleanProperty(false);
     @FXML
     private TableColumn<Rule, String> nameRule;
     @FXML
@@ -55,7 +52,13 @@ public class SecondaryController implements Initializable {
     @FXML
     private MenuItem switchStatusRule;
     
-    private ObservableList rules = checker.getRuleSet().getRules();
+    private BooleanProperty isThreadRunning = new SimpleBooleanProperty(false);
+    private ControlRuleChecker checker =ControlRuleChecker.getInstance();
+    
+    private RuleSet ruleSet = checker.getRuleSet();
+    private ObservableList rules = ruleSet.getRules();
+    @FXML
+    private Button exitBtn;
     
     /**
      * Initializes the controller class.
@@ -72,9 +75,13 @@ public class SecondaryController implements Initializable {
         nameRule.setCellValueFactory(new PropertyValueFactory("name"));
         stateRule.setCellValueFactory(new PropertyValueFactory("active"));
         
+        // Disable Delete and Switch status context menu if there is no selecte element in the table
+        deleteRuleItemMenu.disableProperty().bind(Bindings.isNull(ruleTable.getSelectionModel().selectedItemProperty()));
+        switchStatusRule.disableProperty().bind(Bindings.isNull(ruleTable.getSelectionModel().selectedItemProperty()));
+
+        
         ruleTable.setItems(rules);
         
-        // TODO
         ruleSet= checker.getRuleSet();
         ruleSetLabel.setText(ruleSet.getName());
                 
@@ -124,9 +131,15 @@ public class SecondaryController implements Initializable {
     private void switchStatusRuleEvent(ActionEvent event) {
         
         Rule rule = ruleTable.getSelectionModel().getSelectedItem();
-
-       // rules.switchRuleStatus(rule);
         
+        ruleSet.switchRuleStatus(rule);
+        
+    }
+
+    @FXML
+    private void exitEvent(ActionEvent event) {
+        
+        Platform.exit();
     }
     
 }
