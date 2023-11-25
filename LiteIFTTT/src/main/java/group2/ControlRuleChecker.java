@@ -107,6 +107,9 @@ public final class ControlRuleChecker {
         return rules;
     }
 
+    public Thread getPeriodicCheckThread() {
+        return periodicCheckThread;
+    }
 
     private void checkRuleSet() {
         

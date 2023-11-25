@@ -4,8 +4,11 @@
  */
 package group2;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
 
 /**
  * FXML Controller class
@@ -37,17 +41,21 @@ public class SecondaryController implements Initializable {
     
     private ControlRuleChecker checker =ControlRuleChecker.getInstance();
     private Ruleset ruleSet;
+    private BooleanProperty isThreadRunning = new SimpleBooleanProperty(false);
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        startCheckerBtn.disableProperty().bind(isThreadRunning);
+        stopCheckerBtn.disableProperty().bind(isThreadRunning.not());
+        checkerImageView.visibleProperty().bind(isThreadRunning);
+        
         // TODO
         ruleSet= checker.getRules();
         ruleSetLabel.setText(ruleSet.getName());
-        checkerImageView.setVisible(false);
-       
     }    
 
     //private visualizeRules(){
@@ -66,7 +74,7 @@ public class SecondaryController implements Initializable {
     private void startCheckerEvent(ActionEvent event) {
         
         checker.startPeriodicCheck();
-        checkerImageView.setVisible(true);        
+        isThreadRunning.set(true);        
         
     }
 
@@ -74,7 +82,7 @@ public class SecondaryController implements Initializable {
     private void stopCheckerEvent(ActionEvent event) {
         
         checker.stopPeriodicCheck();
-        checkerImageView.setVisible(false);
+        isThreadRunning.set(false);
     }
     
 }
