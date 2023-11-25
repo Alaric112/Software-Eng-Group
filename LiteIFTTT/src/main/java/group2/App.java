@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
-import javafx.scene.control.Alert;
-
 
 /**
  * JavaFX App
@@ -21,19 +19,6 @@ public class App extends Application {
     
     private static Scene scene;
     private static Image appIcon;
-    
-    private static App instance;
-    
-    private App() {
-        // Costruttore privato per evitare la creazione di nuove istanze
-    }
-    
-    public static synchronized App getInstance() {
-        if (instance == null) {
-            instance = new App();
-        }
-        return instance;
-    }
     
     @Override
     public void start(Stage stage) throws IOException {
@@ -83,12 +68,12 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
-
     public static Image getAppIcon() {
         return appIcon;
+    }
+    
+    public static void main(String[] args) {
+        launch();
     }
         
 }
