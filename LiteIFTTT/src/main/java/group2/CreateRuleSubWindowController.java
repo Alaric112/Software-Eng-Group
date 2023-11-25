@@ -246,15 +246,15 @@ public class CreateRuleSubWindowController implements Initializable {
     );
 
 
-    File file = fileChooser.showOpenDialog(DialogPane.getScene().getWindow());
+   // File file = fileChooser.showOpenDialog(DialogPane.getScene().getWindow());
 
-    if (file != null) {
-        // pickUpPathField it's your TextField fx:id
-       pathSound.setText(file.getPath());
-
-    } else  {
-        System.out.println("error"); // or something else
-    }
+//    if (file != null) {
+//        // pickUpPathField it's your TextField fx:id
+//       pathSound.setText(file.getPath());
+//
+//    } else  {
+//        System.out.println("error"); // or something else
+//    }
 
     }
 

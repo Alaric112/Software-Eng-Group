@@ -38,8 +38,7 @@ public class SecondaryController implements Initializable {
     @FXML
     private Button startCheckerBtn;
     @FXML
-    private Button stopCheckerBtn;
-    
+    private Button stopCheckerBtn;   
     
     private ControlRuleChecker checker =ControlRuleChecker.getInstance();
     private Ruleset ruleSet;
@@ -50,7 +49,6 @@ public class SecondaryController implements Initializable {
     private TableColumn<Rule, Boolean> stateRule;
     @FXML
     private TableView<Rule> ruleTable;
-    //private ObservableList<Rule> observableRuleList = FXCollections.observableArrayList();   
     
     /**
      * Initializes the controller class.
@@ -82,7 +80,6 @@ public class SecondaryController implements Initializable {
         }
         
         App.createSubWindow("CreateRuleSubWindow", "Rule Creator");
-        //observableRuleList.addAll(checker.getRules().getRules());
     }
 
     @FXML
@@ -98,6 +95,12 @@ public class SecondaryController implements Initializable {
         
         checker.stopPeriodicCheck();
         isThreadRunning.set(false);
+    }
+
+    @FXML
+    private void createNewRuleSetEvent(ActionEvent event) {
+        
+        App.createSubWindow("SubWindowsCreationRuleSet", "New Ruleset");
     }
     
 }

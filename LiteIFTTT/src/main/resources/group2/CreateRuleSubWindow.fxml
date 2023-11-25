@@ -97,7 +97,14 @@
                                           <Spinner fx:id="spinnerHourTimeTrigger" editable="true" />
                                           <Label text="Minutes:" />
                                           <Spinner fx:id="spinnerMinuteTimeTrigger" editable="true" />
-                                          <Button fx:id="btnSetTimeTrigger" mnemonicParsing="false" onAction="#setTimeEvent" text="set time" />
+                                          <Button fx:id="btnSetTimeTrigger" mnemonicParsing="false" onAction="#setTimeEvent" text="set time">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/24-hours-sign.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
                                        </children>
                                        <padding>
                                           <Insets top="10.0" />

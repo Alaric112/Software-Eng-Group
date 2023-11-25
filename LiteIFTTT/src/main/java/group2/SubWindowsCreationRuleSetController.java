@@ -31,7 +31,7 @@ public class SubWindowsCreationRuleSetController implements Initializable {
     private Spinner<Integer> spinnerControlTime;
     @FXML
     private TextField ruleSetNameTextField;
-    private ControlRuleChecker checker =ControlRuleChecker.getInstance();
+    private ControlRuleChecker checker = ControlRuleChecker.getInstance();
 
     /**
      * Initializes the controller class.
