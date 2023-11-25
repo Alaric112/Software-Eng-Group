@@ -4,7 +4,6 @@
  */
 package group2;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.BooleanProperty;
@@ -16,8 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
-
 /**
  * FXML Controller class
  *
@@ -65,7 +62,11 @@ public class SecondaryController implements Initializable {
     @FXML
     private void createRuleAction(ActionEvent event) {
         
-        stopCheckerEvent(event);
+        if(isThreadRunning.getValue()){
+            
+            stopCheckerEvent(event);   
+        }
+        
         App.createSubWindow("CreateRuleSubWindow", "Rule Creator");
         
     }
