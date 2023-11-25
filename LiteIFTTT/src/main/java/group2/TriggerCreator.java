@@ -14,7 +14,5 @@ import javafx.scene.control.Control;
 public abstract class TriggerCreator {
     
     public abstract Trigger createTrigger();
-    
-    public abstract List<Control> createParameterControls();
-    
+        
 }

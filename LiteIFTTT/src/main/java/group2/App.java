@@ -30,7 +30,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setTitle("Lite IFTTT group02");
         stage.show();
-
+        
     }
 
     static void setRoot(String fxml) throws IOException {

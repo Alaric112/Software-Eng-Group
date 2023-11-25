@@ -149,24 +149,24 @@ public class CreateRuleSubWindowController implements Initializable {
     public void selectItem(){
         
         TreeItem<String> item = triggerTreeView.getSelectionModel().getSelectedItem();
-        
-        updateTriggerParameters(item);
+        System.out.println(item.getValue());
+//        updateTriggerParameters(item);
     }
     
     
-    private void updateTriggerParameters(TreeItem<String> selectedItem) {
-        
-        triggerParametersBox.getChildren().clear(); // Rimuovi tutti i controlli precedenti
-
-        if (selectedItem != null) {
-            String selectedType = selectedItem.getValue();
-   
-            List<Control> parameterControls = ruleCreator.createTriggerControl(selectedType);
-            triggerParametersBox.getChildren().addAll(parameterControls);
-            
-        }
-        
-    }
+//    private void updateTriggerParameters(TreeItem<String> selectedItem) {
+//        
+//        triggerParametersBox.getChildren().clear(); // Rimuovi tutti i controlli precedenti
+//
+//        if (selectedItem != null) {
+//            String selectedType = selectedItem.getValue();
+//   
+//            List<Control> parameterControls = ruleCreator.createTriggerControl(selectedType);
+//            triggerParametersBox.getChildren().addAll(parameterControls);
+//            
+//        }
+//        
+//    }
     
 //    private void showTypeSelectionPopup(String title, List<String> types) {
 //        
