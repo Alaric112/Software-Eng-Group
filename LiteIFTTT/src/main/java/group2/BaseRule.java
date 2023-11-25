@@ -30,7 +30,6 @@ public class BaseRule implements Rule {
         if(active && checkTrigger()){
             
             fireRule();
-            
         }
         
     }
@@ -78,6 +77,12 @@ public class BaseRule implements Rule {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @Override
+    public void switchStatus() {
+
+        this.active = !this.active;
     }
         
 }

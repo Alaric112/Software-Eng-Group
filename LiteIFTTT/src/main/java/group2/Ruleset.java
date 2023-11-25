@@ -61,4 +61,15 @@ public class RuleSet {
     public void setTimer(int timer) {
         this.timer = timer;
     }
+    
+    public void switchRuleStatus(Rule rule){
+        
+       int i = rules.indexOf(rule);
+       
+       rule = rules.get(i);
+       
+       rule.switchStatus();
+        
+    }
+    
 }

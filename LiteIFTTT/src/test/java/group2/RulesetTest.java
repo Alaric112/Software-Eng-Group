@@ -22,6 +22,7 @@ public class RuleSetTest {
      */
     private static class TestRule implements Rule {
         private String name;
+        private boolean active;
         /**
          * Constructs a TestRule instance with the specified name
          * @param name The name of the test rule.
@@ -48,6 +49,12 @@ public class RuleSetTest {
         @Override
         public Action getAction() {
             return null; 
+        }
+        
+        @Override
+        public void switchStatus(){
+            
+            this.active = !this.active;
         }
     }
     

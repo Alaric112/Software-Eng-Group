@@ -20,4 +20,6 @@ public interface Rule {
    
    Action getAction();
    
+   void switchStatus();
+   
 }

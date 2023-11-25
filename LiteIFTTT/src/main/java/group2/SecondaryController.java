@@ -114,10 +114,19 @@ public class SecondaryController implements Initializable {
 
     @FXML
     private void deleteRuleEvent(ActionEvent event) {
+        
+        Rule rule = ruleTable.getSelectionModel().getSelectedItem();
+        
+        rules.remove(rule);
     }
 
     @FXML
     private void switchStatusRuleEvent(ActionEvent event) {
+        
+        Rule rule = ruleTable.getSelectionModel().getSelectedItem();
+
+       // rules.switchRuleStatus(rule);
+        
     }
     
 }
