@@ -54,7 +54,7 @@ public class SubWindowsCreationRuleSetController implements Initializable {
     @FXML
     private void creationRuleSetConfirmationAction(ActionEvent event) {
 
-        Ruleset rules=new Ruleset(spinnerControlTime.getValue(), ruleSetNameTextField.getText());
+        RuleSet rules=new RuleSet(spinnerControlTime.getValue(), ruleSetNameTextField.getText());
         checker.changeRuleset(rules);
 
         switchTo("secondary");

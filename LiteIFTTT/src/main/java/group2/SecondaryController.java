@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -41,7 +42,7 @@ public class SecondaryController implements Initializable {
     private Button stopCheckerBtn;   
     
     private ControlRuleChecker checker =ControlRuleChecker.getInstance();
-    private Ruleset ruleSet;
+    private RuleSet ruleSet;
     private BooleanProperty isThreadRunning = new SimpleBooleanProperty(false);
     @FXML
     private TableColumn<Rule, String> nameRule;
@@ -49,12 +50,20 @@ public class SecondaryController implements Initializable {
     private TableColumn<Rule, Boolean> stateRule;
     @FXML
     private TableView<Rule> ruleTable;
+    @FXML
+    private MenuItem deleteRuleItemMenu;
+    @FXML
+    private MenuItem switchStatusRule;
+    
+    private ObservableList rules = checker.getRuleSet().getRules();
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        ObservableList rules = checker.getRuleSet().getRules();
         
         startCheckerBtn.disableProperty().bind(isThreadRunning);
         stopCheckerBtn.disableProperty().bind(isThreadRunning.not());
@@ -63,10 +72,10 @@ public class SecondaryController implements Initializable {
         nameRule.setCellValueFactory(new PropertyValueFactory("name"));
         stateRule.setCellValueFactory(new PropertyValueFactory("active"));
         
-        ruleTable.setItems(checker.getRules().getRules());
+        ruleTable.setItems(rules);
         
         // TODO
-        ruleSet= checker.getRules();
+        ruleSet= checker.getRuleSet();
         ruleSetLabel.setText(ruleSet.getName());
                 
     }    
@@ -101,6 +110,14 @@ public class SecondaryController implements Initializable {
     private void createNewRuleSetEvent(ActionEvent event) {
         
         App.createSubWindow("SubWindowsCreationRuleSet", "New Ruleset");
+    }
+
+    @FXML
+    private void deleteRuleEvent(ActionEvent event) {
+    }
+
+    @FXML
+    private void switchStatusRuleEvent(ActionEvent event) {
     }
     
 }

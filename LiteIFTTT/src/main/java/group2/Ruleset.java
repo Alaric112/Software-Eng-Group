@@ -11,12 +11,12 @@ import javafx.collections.ObservableList;
  *
  * @author patap
  */
-public class Ruleset {
+public class RuleSet {
     private int timer;
     private String name;
     
     private ObservableList<Rule> rules = FXCollections.observableArrayList();
-    public Ruleset(int timer, String name) {
+    public RuleSet(int timer, String name) {
         this.timer = timer;
         this.name = name;
     }
@@ -26,9 +26,9 @@ public class Ruleset {
         rules.add(rule);
     }
     
-    public void removeRule(int index){
+    public void removeRule(Rule rule){
         
-        rules.remove(index);
+        rules.remove(rule);
     }
     
     public ObservableList<Rule> getRules(){

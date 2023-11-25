@@ -9,7 +9,7 @@ public final class ControlRuleChecker {
     // The field must be declared volatile so that double check lock would work
     // correctly.
     private static volatile ControlRuleChecker instance;
-    private Ruleset rules;
+    private RuleSet rules;
     private double timer;   
     private Thread periodicCheckThread;
 
@@ -99,13 +99,13 @@ public final class ControlRuleChecker {
         rules.setTimer(newTimer);
     }
     
-    public void changeRuleset(Ruleset ruleSet) {
+    public void changeRuleset(RuleSet ruleSet) {
         
         this.rules= ruleSet; 
 
     }
 
-    public Ruleset getRules() {
+    public RuleSet getRuleSet() {
         
         return rules;
     }

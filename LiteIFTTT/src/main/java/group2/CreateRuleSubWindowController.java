@@ -107,9 +107,9 @@ public class CreateRuleSubWindowController implements Initializable {
         playAudioBox.setVisible(false);
 
         // TO REFACTOR
-        SpinnerValueFactory<Integer> hourValues = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24, 0);
+        SpinnerValueFactory<Integer> hourValues = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0);
         this.spinnerHourTimeTrigger.setValueFactory(hourValues);
-        SpinnerValueFactory<Integer> minuteValues = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 60, 0);
+        SpinnerValueFactory<Integer> minuteValues = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0);
         this.spinnerMinuteTimeTrigger.setValueFactory(minuteValues);
 
         // Disattiva bottone conferma quando il text field del nome della regola e' vuoto
@@ -137,7 +137,7 @@ public class CreateRuleSubWindowController implements Initializable {
 
         Rule rule = ruleCreator.createRule(ruleName, trigger, action);
 
-        Ruleset ruleSet = checker.getRules();
+        RuleSet ruleSet = checker.getRuleSet();
         ruleSet.addRule(rule);
         System.out.println(ruleSet);
         closeWindowEvent(event);
@@ -246,15 +246,15 @@ public class CreateRuleSubWindowController implements Initializable {
     );
 
 
-   // File file = fileChooser.showOpenDialog(DialogPane.getScene().getWindow());
+    // File file = fileChooser.showOpenDialog(DialogPane.getScene().getWindow());
 
-//    if (file != null) {
-//        // pickUpPathField it's your TextField fx:id
-//       pathSound.setText(file.getPath());
-//
-//    } else  {
-//        System.out.println("error"); // or something else
-//    }
+    //    if (file != null) {
+    //        // pickUpPathField it's your TextField fx:id
+    //       pathSound.setText(file.getPath());
+    //
+    //    } else  {
+    //        System.out.println("error"); // or something else
+    //    }
 
     }
 
