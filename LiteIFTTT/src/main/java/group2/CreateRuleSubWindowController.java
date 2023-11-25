@@ -28,6 +28,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -58,19 +60,29 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private TreeView<String> triggerTreeView;
     @FXML
-    private TreeView actionTreeView;
-    @FXML
+    private TreeView<String> actionTreeView;
     private VBox triggerParametersBox;
     
     private Trigger trigger;
     private Action action;
     
     private Map<String, TextField> parameterTextFieldMap = new HashMap<>();
-    @FXML
     private VBox actionParametersBox;
     private ControlRuleChecker checker = ControlRuleChecker.getInstance();
     @FXML
     private Button buttParameters;
+    @FXML
+    private VBox timeTriggerBox;
+    @FXML
+    private TextField hourTrigger;
+    @FXML
+    private TextField minTrigger;
+    @FXML
+    private VBox messageActionBox;
+    @FXML
+    private VBox playAudioBox;
+    @FXML
+    private TextField pathSound;
     
     /**
      * Initializes the controller class.
@@ -127,9 +139,6 @@ public class CreateRuleSubWindowController implements Initializable {
           TreeItem<String> item = new TreeItem<>(triggerChoiceBox.getValue());
           triggerTreeView.setRoot(item);
           trigger = ruleCreator.createTrigger(item.getValue());
-//        ruleCreator.setLastSelectedType("trigger");
-//        showTypeSelectionPopup("Trigger Selection", ruleCreator.getAvailableTriggerTypes());
-//        System.out.println(ruleCreator.getAvailableTriggerTypes());
    
     }
 
@@ -140,44 +149,57 @@ public class CreateRuleSubWindowController implements Initializable {
           TreeItem<String> item = new TreeItem<>(actionChoiceBox.getValue());
           actionTreeView.setRoot(item);
           action = ruleCreator.createAction(item.getValue());
-//        ruleCreator.setLastSelectedType("action");
-//        showTypeSelectionPopup("Action Selection", ruleCreator.getAvailableActionTypes());
 
     }
     
-    @FXML
-    public void selectItem(){
+    public void selectTriggerItem(){
         
         TreeItem<String> item = triggerTreeView.getSelectionModel().getSelectedItem();
         System.out.println(item.getValue());
-//        updateTriggerParameters(item);
+    }
+
+    @FXML
+    private void selectTriggerItem(ContextMenuEvent event) {
+        
+        selectTriggerItem();
+    }
+
+    @FXML
+    private void selectTriggerItem(MouseEvent event) {
+        
+        selectTriggerItem();
     }
     
     
-//    private void updateTriggerParameters(TreeItem<String> selectedItem) {
-//        
-//        triggerParametersBox.getChildren().clear(); // Rimuovi tutti i controlli precedenti
-//
-//        if (selectedItem != null) {
-//            String selectedType = selectedItem.getValue();
-//   
-//            List<Control> parameterControls = ruleCreator.createTriggerControl(selectedType);
-//            triggerParametersBox.getChildren().addAll(parameterControls);
-//            
-//        }
-//        
-//    }
+    @FXML
+    private void setTimeEvent(ActionEvent event) {
+        
+    }
     
-//    private void showTypeSelectionPopup(String title, List<String> types) {
-//        
-//        App.createSubWindow("TypeSelectionPopup", title);
-//               
-//    }
+    private void selectActionItem(){     
+        
+        TreeItem<String> item = actionTreeView.getSelectionModel().getSelectedItem();
+        System.out.println(item.getValue());
+    }
+    
+    @FXML
+    private void selectActionItem(ContextMenuEvent event) {
+        
+        selectActionItem();
+    }
 
     @FXML
-    private void checkVboxEvent(ActionEvent event) {
+    private void selectActionItem(MouseEvent event) {
         
-        
+        selectActionItem();
+    }
+
+    @FXML
+    private void insertMessageAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void selectPathEvent(ActionEvent event) {
     }
 
     
