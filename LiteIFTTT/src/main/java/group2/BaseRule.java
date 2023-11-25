@@ -11,6 +11,7 @@ package group2;
 public class BaseRule implements Rule {
 
     //name of the rule
+    
     private String name;
     private Trigger trigger;
     private Action action;
@@ -67,5 +68,6 @@ public class BaseRule implements Rule {
         
         action.execute();
     }
+    
     
 }
