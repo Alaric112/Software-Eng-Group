@@ -18,7 +18,7 @@ Inside the first sprint documentation folder there is also a copy of the product
 
 - Pre Game Documentation: [Pre game documentation](https://docs.google.com/document/d/18oMaA2f1tlFb552T81erhSqJ2zoVw1Px6gU98_miHT0/edit?usp=sharing)
 
-- [TaskBoard Trello](https://trello.com/b/YmYFEr7O/ifttt): to have a better panoramics on the developemnt process
+- [TaskBoard Trello](https://trello.com/b/YmYFEr7O/ifttt): to have a better panoramics on the developemnt process; it also contains all the sprint backlogs
   
 ## Authors
 - Alessandro Accarino
