@@ -60,7 +60,7 @@ public class RuleCreatorTest {
 
     @Test
     public void testCreateAction() {
-        String actionType = "message";
+        String actionType = "Message";
         Action action = ruleCreator.createAction(actionType);
 
         assertNotNull(action);
@@ -93,8 +93,8 @@ public class RuleCreatorTest {
         List<String> actionTypes = ruleCreator.getAvailableActionTypes();
 
         assertNotNull(actionTypes);
-        assertTrue(actionTypes.contains("message"));
-        assertTrue(actionTypes.contains("sound"));
+        assertTrue(actionTypes.contains("Message"));
+        assertTrue(actionTypes.contains("Sound"));
     }
 
     @Test

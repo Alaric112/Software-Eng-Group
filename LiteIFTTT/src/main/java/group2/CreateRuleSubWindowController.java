@@ -217,7 +217,7 @@ public class CreateRuleSubWindowController implements Initializable {
 
         if (item != null) {
 
-            if (item.getValue().equals("message")) {
+            if (item.getValue().equals("Message")) {
 
                 messageActionBox.setVisible(true);
                 playAudioBox.setVisible(false);
