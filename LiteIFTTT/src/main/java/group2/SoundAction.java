@@ -15,22 +15,36 @@ import javafx.stage.Stage;
 /**
  *
  * @author Lore
+ *
+ * 
+ * Implementation of the Action interface for playing sound files.
+ * This class allows the execution of sound-related actions, such as playing audio files.
+ * It supports setting the path of the sound file and playing the specified media.
  */
-public class SoundAction implements Action{
+public class SoundAction implements Action {
+
+    /** The path to the sound file. */
     private String path;
-    
+
+    /**
+     * Default constructor for SoundAction.
+     * Initializes the path to an empty string.
+     */
     public SoundAction() {
-        
-        this.path= "";
-        
+        this.path = "Asset//AtDoom'sGate.mp3";
     }
-    
+
+    /**
+     * Executes the sound action by playing the specified audio file.
+     * It checks if the file exists, creates a media instance, and plays the media.
+     * If the file is not found or there is an issue with the media, exceptions are caught and printed.
+     */
     @Override
     public void execute() {
         try {
             File musicFile = new File(this.path);
 
-            // Check if the file 
+            // Check if the file exists
             if (!musicFile.exists()) {
                 throw new FileNotFoundException("File not found: " + this.path);
             }
@@ -38,38 +52,47 @@ public class SoundAction implements Action{
             // Media creation
             Media media = new Media(musicFile.toURI().toString());
             final MediaPlayer mediaPlayer = new MediaPlayer(media);
-            
+
             // Playing the media
             mediaPlayer.play();
-            
-            // File not found exception
+
         } catch (FileNotFoundException e) {
-            System.err.println("Exception: " + e.getMessage());
-            // File not supported
+            System.err.println("Exception: " + e.getMessage()); // File not found exception
         } catch (MediaException e) {
-            System.err.println("Exception: " + e.getMessage());
-            
+            System.err.println("Exception: " + e.getMessage()); // File not supported
         }
     }
 
+    /**
+     * Gets the current path to the sound file.
+     *
+     * @return The path to the sound file.
+     */
     public String getPath() {
         return path;
     }
 
+    /**
+     * Sets the path to the sound file.
+     *
+     * @param path The new path to the sound file.
+     */
     public void setPath(String path) {
         this.path = path;
     }
-     
-    public void setPath(){
-        
+
+    /**
+     * Sets the path to the sound file using a FileChooser dialog.
+     * Opens a file chooser dialog for the user to select a sound file.
+     * Sets the path to the selected file.
+     */
+    public void setPath() {
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Open File");
         File file = chooser.showOpenDialog(new Stage());
-        path = file.getPath();
-        
+        path = (file != null) ? file.getPath() : "";
     }
-}
-        
+}   
     
 
 
