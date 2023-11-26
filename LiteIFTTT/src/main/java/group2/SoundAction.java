@@ -6,25 +6,13 @@ package group2;
 
 /**
  *
- * @author Faust
+ * @author Lore
  */
 public class SoundAction implements Action{
 
-    String path = "";
-    
     @Override
     public void execute() {
-        
-        //    Desktop.getDesktop().browseFileDirectory(new File(path));
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    
-}
+}    

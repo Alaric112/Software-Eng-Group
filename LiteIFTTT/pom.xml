@@ -30,6 +30,7 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
             <version>21</version>
+            <type>jar</type>
         </dependency>      
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -51,7 +52,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.4</version>
+                <version>0.0.8</version>
                 <configuration>
                     <mainClass>group2.App</mainClass>
                 </configuration>
