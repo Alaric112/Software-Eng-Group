@@ -7,15 +7,18 @@ Inside the LiteIFTTT folder, you can find the source code of the project.
 ### Documentation
 
 - Product Backlog: [Product backlog](https://docs.google.com/spreadsheets/d/1Vq7-XlnHF-XD_1JTmWrMwWch_tCJsQ-t/edit?usp=sharing&ouid=104616255443413680542&rtpof=true&sd=true)
+(Updated for the second sprint, 26 november)
 
 - First sprint documentation: [First sprint documentation](https://drive.google.com/drive/folders/1ztFpDEDcegKjWW7tKsJLOVqgTZp2EOkz?usp=sharing)
 Inside the first sprint documentation folder there is also a copy of the product backlog, PreGame and software architecture documentation.
 
 - [Second sprint documentation](https://drive.google.com/drive/folders/1b49_4BHmBjJ2SpBYIXpmUp9WuZ1MKgEQ?usp=drive_link): it contains Project Burndown chart, Sprint review report and Sprint retrospective report
 
-- Software Architecture Documentation: [Software architecture documentation](https://docs.google.com/document/d/1GM5WXZTz5QPpytWCMQGrRBXxXg_TDPNhZz9rGOVXo_k/edit?usp=sharing)
+- Software Architecture Documentation: [Software architecture documentation](https://docs.google.com/document/d/1GM5WXZTz5QPpytWCMQGrRBXxXg_TDPNhZz9rGOVXo_k/edit?usp=sharing), there is also an image inside 'documentation' folder
 
 - Pre Game Documentation: [Pre game documentation](https://docs.google.com/document/d/18oMaA2f1tlFb552T81erhSqJ2zoVw1Px6gU98_miHT0/edit?usp=sharing)
+
+- [TaskBoard Trello](https://trello.com/b/YmYFEr7O/ifttt): to have a better panoramics on the developemnt process
   
 ## Authors
 - Alessandro Accarino
