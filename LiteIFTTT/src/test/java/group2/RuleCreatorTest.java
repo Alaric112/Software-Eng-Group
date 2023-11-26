@@ -64,7 +64,7 @@ public class RuleCreatorTest {
         Action action = ruleCreator.createAction(actionType);
 
         assertNotNull(action);
-        assertTrue(action instanceof GenericAction);
+        assertTrue(action instanceof MessageAction);
     }
 
     @Test

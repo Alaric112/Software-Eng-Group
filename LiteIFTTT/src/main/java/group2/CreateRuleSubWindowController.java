@@ -42,8 +42,18 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * FXML Controller class 
+ * 
+ * The {@code CreateRuleSubWindowController} class is the controller for the
+ * FXML document that defines the GUI for creating rules in the application.
+ * It handles user interactions and manages the creation of rules, triggers,
+ * and actions based on user inputs.
  *
+ * <p>This controller initializes the UI components, binds properties to control
+ * visibility and enable/disable states, and communicates with the {@code RuleCreator}
+ * and {@code ControlRuleChecker} to create and validate rules.</p>
+ * 
+ * 
  * @author patap
  */
 public class CreateRuleSubWindowController implements Initializable {
@@ -100,7 +110,11 @@ public class CreateRuleSubWindowController implements Initializable {
     RuleCreator ruleCreator = RuleCreator.getInstance();
 
     /**
-     * Initializes the controller class.
+     * Initializes the controller class. This method is automatically called
+     * after the FXML file has been loaded.
+     *
+     * @param url the location used to resolve relative paths for the root object, or null if the location is not known
+     * @param rb the resources used to localize the root object, or null if the root object was not localized
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -112,16 +126,16 @@ public class CreateRuleSubWindowController implements Initializable {
         messageActionBox.setVisible(false);
         playAudioBox.setVisible(false);
 
-        // TO REFACTOR
+        // Set values for Time trigger Spinner
         SpinnerValueFactory<Integer> hourValues = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0);
         this.spinnerHourTimeTrigger.setValueFactory(hourValues);
         SpinnerValueFactory<Integer> minuteValues = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0);
         this.spinnerMinuteTimeTrigger.setValueFactory(minuteValues);
 
-        // Disattiva bottone conferma quando il text field del nome della regola e' vuoto
+        // Disable the confirmation button when the rule name text field is empty
         BooleanBinding isTextFieldEmpty = Bindings.isEmpty(ruleNameTF.textProperty());
 
-        // Disattiva quando il TreeView e' vuoto, ovvero NON ha una radice
+        // Disable when the TreeView is empty, i.e., it does NOT have a root
         BooleanProperty triggerTreeViewHasRoot = new SimpleBooleanProperty();
 
         triggerTreeViewHasRoot.bind(Bindings.createBooleanBinding(()
@@ -136,6 +150,11 @@ public class CreateRuleSubWindowController implements Initializable {
 
     }
 
+    /**
+     * Handles the event when the user confirms the creation of a rule.
+     *
+     * @param event the ActionEvent triggered by the user
+     */
     @FXML
     private void confirmRuleCreationEvent(ActionEvent event) {
 
@@ -150,6 +169,11 @@ public class CreateRuleSubWindowController implements Initializable {
 
     }
 
+    /**
+     * Handles the event when the user closes the rule creation window.
+     *
+     * @param event the ActionEvent triggered by the user
+     */    
     @FXML
     private void closeWindowEvent(ActionEvent event) {
 
@@ -157,6 +181,11 @@ public class CreateRuleSubWindowController implements Initializable {
         stage.close();
     }
 
+    /**
+     * Handles the event when the user adds a trigger to the rule.
+     *
+     * @param event the ActionEvent triggered by the user
+     */    
     @FXML
     private void addTriggerEvent(ActionEvent event) {
 
@@ -166,6 +195,11 @@ public class CreateRuleSubWindowController implements Initializable {
 
     }
 
+    /**
+     * Handles the event when the user adds an action to the rule.
+     *
+     * @param event the ActionEvent triggered by the user
+     */    
     @FXML
     private void addActionEvent(ActionEvent event) {
 
@@ -175,6 +209,9 @@ public class CreateRuleSubWindowController implements Initializable {
 
     }
 
+    /**
+     * Selects a trigger item from the triggerTreeView and performs specific actions based on the selected item.
+     */    
     @FXML
     public void selectTriggerItem() {
 
@@ -199,6 +236,11 @@ public class CreateRuleSubWindowController implements Initializable {
         selectTriggerItem();
     }
 
+    /**
+     * Handles the event when the user sets the time for a time-trigger.
+     *
+     * @param event the ActionEvent triggered by the user
+     */   
     @FXML
     private void setTimeEvent(ActionEvent event) {
 
@@ -210,6 +252,9 @@ public class CreateRuleSubWindowController implements Initializable {
 
     }
 
+    /**
+     * Selects an action item from the actionTreeView and performs specific actions based on the selected item.
+     */    
     @FXML
     private void selectActionItem() {
 
@@ -239,7 +284,12 @@ public class CreateRuleSubWindowController implements Initializable {
 
         selectActionItem();
     }
-
+    
+    /**
+     * Handles the event when the user inserts a message for a message action.
+     *
+     * @param event the ActionEvent triggered by the user
+     */    
     @FXML
     private void insertMessageAction(ActionEvent event) {
 
@@ -250,7 +300,12 @@ public class CreateRuleSubWindowController implements Initializable {
         m.setMessageInfo(messageInfo);
 
     }
-
+    
+    /**
+     * Handles the event when the user selects a path for a sound action.
+     *
+     * @param event the ActionEvent triggered by the user
+     */    
     @FXML
     private void selectPathEvent(ActionEvent event) {
 

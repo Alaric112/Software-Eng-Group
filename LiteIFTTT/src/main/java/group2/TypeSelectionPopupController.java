@@ -49,42 +49,42 @@ public class TypeSelectionPopupController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        if(!ruleCreator.getLastSelectedType().isEmpty()){
-            if(ruleCreator.getLastSelectedType().equalsIgnoreCase("trigger")){
-                            
-                this.types = FXCollections.observableArrayList(ruleCreator.getAvailableTriggerTypes());
-              
-            } else if(ruleCreator.getLastSelectedType().equalsIgnoreCase("action")){
-                
-                this.types = FXCollections.observableArrayList(ruleCreator.getAvailableActionTypes());
-                           
-            }
-            baseTypeListView.setItems(this.types);
-        } 
-        
-        List<String> objtypes = new ArrayList<>();
-       
-        
-        addDoubleClickEventHandler();
-        
-        try {
-            initializeTypeImageMap();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        
+//        if(!ruleCreator.getLastSelectedType().isEmpty()){
+//            if(ruleCreator.getLastSelectedType().equalsIgnoreCase("trigger")){
+//                            
+//                this.types = FXCollections.observableArrayList(ruleCreator.getAvailableTriggerTypes());
+//              
+//            } else if(ruleCreator.getLastSelectedType().equalsIgnoreCase("action")){
+//                
+//                this.types = FXCollections.observableArrayList(ruleCreator.getAvailableActionTypes());
+//                           
+//            }
+//            baseTypeListView.setItems(this.types);
+//        } 
+//        
+//        List<String> objtypes = new ArrayList<>();
+//       
+//        
+//        addDoubleClickEventHandler();
+//        
+//        try {
+//            initializeTypeImageMap();
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//        
     }    
     
     private void initializeTypeImageMap() throws IOException{
-        
-       InputStream stream = new FileInputStream("src/main/resources/group2/Image/fixes.png");
-       typeImageMap.put("Generic", new Image(stream));
-     
+//        
+//       InputStream stream = new FileInputStream("src/main/resources/group2/Image/fixes.png");
+//       typeImageMap.put("Generic", new Image(stream));
+//     
     }
     
     public void setTypes(List<String> types) {
-        this.types = FXCollections.observableArrayList(types);
-        baseTypeListView.setItems(this.types);
+//        this.types = FXCollections.observableArrayList(types);
+//        baseTypeListView.setItems(this.types);
         
 //        // Add The Image to the listView
 //        baseTypeListView.setCellFactory(listView -> new ListCell<String>() {
@@ -110,20 +110,7 @@ public class TypeSelectionPopupController implements Initializable {
         
     }
         
-    public String getSelectedType() {
-        return baseTypeListView.getSelectionModel().getSelectedItem();
-    }
-    
-    private void addDoubleClickEventHandler() {
-        baseTypeListView.setOnMouseClicked(event -> {
-            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
-                // Ottieni il tipo selezionato al doppio clic
-                selectedType = baseTypeListView.getSelectionModel().getSelectedItem();
 
-                // Chiudi la finestra pop-up
-                baseTypeListView.getScene().getWindow().hide();
-            }
-        });
-    }
+
     
 }

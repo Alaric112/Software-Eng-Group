@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 
 /**
  *
+ * 
  * @author patap
  */
 public class RuleSet {
