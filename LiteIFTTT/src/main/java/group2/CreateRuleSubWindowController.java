@@ -40,6 +40,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 /**
  * FXML Controller class
  *
@@ -53,8 +54,6 @@ public class CreateRuleSubWindowController implements Initializable {
     private Button confirmButton;
     @FXML
     private TextField ruleNameTF;
-
-    RuleCreator ruleCreator = RuleCreator.getInstance();
     @FXML
     private Button addTriggerButton;
     @FXML
@@ -67,14 +66,10 @@ public class CreateRuleSubWindowController implements Initializable {
     private TreeView<String> triggerTreeView;
     @FXML
     private TreeView<String> actionTreeView;
+    @FXML
     private VBox triggerParametersBox;
-
-    private Trigger trigger;
-    private Action action;
-
-    private Map<String, TextField> parameterTextFieldMap = new HashMap<>();
+    @FXML
     private VBox actionParametersBox;
-    private ControlRuleChecker checker = ControlRuleChecker.getInstance();
     @FXML
     private VBox timeTriggerBox;
     @FXML
@@ -83,6 +78,7 @@ public class CreateRuleSubWindowController implements Initializable {
     private VBox playAudioBox;
     @FXML
     private TextField pathSound;
+    @FXML
     private TextField hourTriggerTF;
     @FXML
     private Spinner<Integer> spinnerHourTimeTrigger;
@@ -92,6 +88,16 @@ public class CreateRuleSubWindowController implements Initializable {
     private Button btnSetTimeTrigger;
     @FXML
     private TextArea textMessageArea;
+
+    private Trigger trigger;
+
+    private Action action;
+
+    private Map<String, TextField> parameterTextFieldMap = new HashMap<>();
+
+    private ControlRuleChecker checker = ControlRuleChecker.getInstance();
+
+    RuleCreator ruleCreator = RuleCreator.getInstance();
 
     /**
      * Initializes the controller class.
@@ -118,13 +124,13 @@ public class CreateRuleSubWindowController implements Initializable {
         // Disattiva quando il TreeView e' vuoto, ovvero NON ha una radice
         BooleanProperty triggerTreeViewHasRoot = new SimpleBooleanProperty();
 
-        triggerTreeViewHasRoot.bind(Bindings.createBooleanBinding(() ->
-                triggerTreeView.getRoot() != null, triggerTreeView.rootProperty()));
+        triggerTreeViewHasRoot.bind(Bindings.createBooleanBinding(()
+                -> triggerTreeView.getRoot() != null, triggerTreeView.rootProperty()));
 
         BooleanProperty actionTreeViewHasRoot = new SimpleBooleanProperty();
 
-        actionTreeViewHasRoot.bind(Bindings.createBooleanBinding(() ->
-                actionTreeView.getRoot() != null, actionTreeView.rootProperty()));
+        actionTreeViewHasRoot.bind(Bindings.createBooleanBinding(()
+                -> actionTreeView.getRoot() != null, actionTreeView.rootProperty()));
 
         confirmButton.disableProperty().bind(isTextFieldEmpty.or(triggerTreeViewHasRoot.not()).or(actionTreeViewHasRoot.not()));
 
@@ -154,30 +160,29 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void addTriggerEvent(ActionEvent event) {
 
-          TreeItem<String> item = new TreeItem<>(triggerChoiceBox.getValue());
-          triggerTreeView.setRoot(item);
-          trigger = ruleCreator.createTrigger(item.getValue());
+        TreeItem<String> item = new TreeItem<>(triggerChoiceBox.getValue());
+        triggerTreeView.setRoot(item);
+        trigger = ruleCreator.createTrigger(item.getValue());
 
     }
 
     @FXML
     private void addActionEvent(ActionEvent event) {
 
-          actionParametersBox.getChildren().clear();
-          TreeItem<String> item = new TreeItem<>(actionChoiceBox.getValue());
-          actionTreeView.setRoot(item);
-          action = ruleCreator.createAction(item.getValue());
+        TreeItem<String> item = new TreeItem<>(actionChoiceBox.getValue());
+        actionTreeView.setRoot(item);
+        action = ruleCreator.createAction(item.getValue());
 
     }
 
     @FXML
-    public void selectTriggerItem(){
+    public void selectTriggerItem() {
 
         TreeItem<String> item = triggerTreeView.getSelectionModel().getSelectedItem();
 
-        if(item != null){
+        if (item != null) {
 
-            if(item.getValue().equals("Time")){
+            if (item.getValue().equals("Time")) {
 
                 timeTriggerBox.setVisible(true);
             }
@@ -194,7 +199,6 @@ public class CreateRuleSubWindowController implements Initializable {
         selectTriggerItem();
     }
 
-
     @FXML
     private void setTimeEvent(ActionEvent event) {
 
@@ -207,10 +211,23 @@ public class CreateRuleSubWindowController implements Initializable {
     }
 
     @FXML
-    private void selectActionItem(){
+    private void selectActionItem() {
 
         TreeItem<String> item = actionTreeView.getSelectionModel().getSelectedItem();
-        System.out.println(item.getValue());
+
+        if (item != null) {
+
+            if (item.getValue().equals("message")) {
+
+                messageActionBox.setVisible(true);
+                playAudioBox.setVisible(false);
+            } else {
+
+                playAudioBox.setVisible(true);
+                messageActionBox.setVisible(false);
+            }
+
+        }
     }
 
     private void selectActionItem(ContextMenuEvent event) {
@@ -226,37 +243,25 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void insertMessageAction(ActionEvent event) {
 
-        MessageAction message = new MessageAction();
-        message.setMessageInfo(textMessageArea.getText());
+        String messageInfo = textMessageArea.getText();
         textMessageArea.clear();
+
+        MessageAction m = (MessageAction) action;
+        m.setMessageInfo(messageInfo);
 
     }
 
     @FXML
     private void selectPathEvent(ActionEvent event) {
 
-        FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Upload File Path");
-    fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("ALL FILES", "*.*"),
-            new FileChooser.ExtensionFilter("ZIP", "*.zip"),
-            new FileChooser.ExtensionFilter("PDF", "*.pdf"),
-            new FileChooser.ExtensionFilter("TEXT", "*.txt"),
-            new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif")
-    );
-
-
-    // File file = fileChooser.showOpenDialog(DialogPane.getScene().getWindow());
-
-    //    if (file != null) {
-    //        // pickUpPathField it's your TextField fx:id
-    //       pathSound.setText(file.getPath());
-    //
-    //    } else  {
-    //        System.out.println("error"); // or something else
-    //    }
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Open File");
+        File file = chooser.showOpenDialog(new Stage());
+        String path = file.getPath();
+        pathSound.setText(path);
+        SoundAction s = (SoundAction) action;
+        s.setPath(path);
 
     }
-
 
 }
