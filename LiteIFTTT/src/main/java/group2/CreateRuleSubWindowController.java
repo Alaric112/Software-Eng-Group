@@ -304,7 +304,7 @@ public class CreateRuleSubWindowController implements Initializable {
         String path = file.getPath();
         pathSound.setText(path);
         SoundAction s = (SoundAction) action;
-        s.setPath(path);
+        //s.setPath(path);
 
     }
 
