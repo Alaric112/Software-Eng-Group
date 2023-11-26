@@ -1,0 +1,4 @@
+.circlular-javafx-button{
+    -fx-background-radius: 50em; 
+	-fx-border-radius: 30;	
+}
