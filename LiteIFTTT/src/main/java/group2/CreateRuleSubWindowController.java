@@ -298,13 +298,9 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void selectPathEvent(ActionEvent event) {
 
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Open File");
-        File file = chooser.showOpenDialog(new Stage());
-        String path = file.getPath();
-        pathSound.setText(path);
-        SoundAction s = (SoundAction) action;
-        //s.setPath(path);
+        SoundAction soundAction = (SoundAction) action;
+        
+        soundAction.setPath();
 
     }
 
