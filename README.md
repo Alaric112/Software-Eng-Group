@@ -12,7 +12,7 @@ Inside the LiteIFTTT folder, you can find the source code of the project.
 - First sprint documentation: [First sprint documentation](https://drive.google.com/drive/folders/1ztFpDEDcegKjWW7tKsJLOVqgTZp2EOkz?usp=sharing)
 Inside the first sprint documentation folder there is also a copy of the product backlog, PreGame and software architecture documentation.
 
-- [Second sprint documentation](https://drive.google.com/drive/folders/1b49_4BHmBjJ2SpBYIXpmUp9WuZ1MKgEQ?usp=drive_link): it contains Project Burndown chart, Sprint review report and Sprint retrospective report
+- [Second sprint documentation](https://drive.google.com/drive/folders/1b49_4BHmBjJ2SpBYIXpmUp9WuZ1MKgEQ?usp=sharing): it contains Project Burndown chart (There is an image in documentation folder), Sprint review report and Sprint retrospective report
 
 - Software Architecture Documentation: [Software architecture documentation](https://docs.google.com/document/d/1GM5WXZTz5QPpytWCMQGrRBXxXg_TDPNhZz9rGOVXo_k/edit?usp=sharing), there is also an image inside 'documentation' folder
 
