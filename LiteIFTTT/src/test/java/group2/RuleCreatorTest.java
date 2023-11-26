@@ -15,28 +15,6 @@ import static org.junit.Assert.*;
  */
 public class RuleCreatorTest {
     
-    //mock di Trigger
-    class MockTrigger implements Trigger {
-        @Override
-        public boolean evaluate() {
-            return true; 
-        }
-    }
-
-    // mock di Action
-    class MockAction implements Action {
-        private boolean executed;
-
-        @Override
-        public void execute() {
-            executed = true;
-        }
-
-        public boolean isExecuted() {
-            return executed;
-        }
-    }
-    
     private RuleCreator ruleCreator;
 
     @Before
