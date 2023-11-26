@@ -29,4 +29,3 @@ Inside the first sprint documentation folder there is also a copy of the product
 ## Extra Credits:
 - [Smashicons](https://www.flaticon.com/authors/smashicons) for some image used in the application
 - [freepik](https://www.flaticon.com/authors/freepik) for some image used in the application
-- [Geralt](https://pixabay.com/users/geralt-9301/) clockwork gif
