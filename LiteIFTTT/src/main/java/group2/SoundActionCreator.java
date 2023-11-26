@@ -14,6 +14,5 @@ public class SoundActionCreator extends ActionCreator {
     public Action createAction() {
         return new SoundAction();
     }
-    
-    
+      
 }
