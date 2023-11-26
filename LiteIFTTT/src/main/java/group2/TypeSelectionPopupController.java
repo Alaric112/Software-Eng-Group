@@ -4,25 +4,14 @@
  */
 package group2;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 
+
+// THIS CLASS FOR NOW IS USELESS
 /**
  * FXML Controller class
  *
@@ -54,7 +43,7 @@ public class TypeSelectionPopupController implements Initializable {
 //    private int listViewImageHeight = 16;
 //    private int listViewImageWidth = 16;
     
-    RuleCreator ruleCreator =  RuleCreator.getInstance();
+//    RuleCreator ruleCreator =  RuleCreator.getInstance();
     
     /**
      * Initializes the controller class.

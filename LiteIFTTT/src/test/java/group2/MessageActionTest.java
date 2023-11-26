@@ -18,7 +18,7 @@ public class MessageActionTest {
     
     @Test
     public void testExecute() {
-        // Set up
+       
         MessageAction messageAction = new MessageAction();
         String expectedMessage = "Hello world!";
 

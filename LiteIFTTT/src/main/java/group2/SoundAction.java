@@ -4,8 +4,6 @@
  */
 package group2;
 
-import java.io.File;
-
 /**
  *
  * @author Faust

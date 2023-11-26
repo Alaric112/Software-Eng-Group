@@ -4,8 +4,6 @@
  */
 package group2;
 
-import javafx.beans.Observable;
-
 /**
  * The <code>Rule</code> interface represents a rule that can be checked,
  * and when a specified condition is met, an associated action is triggered.

@@ -1,10 +1,6 @@
 
 package group2;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-
 public final class ControlRuleChecker {
     // The field must be declared volatile so that double check lock would work
     // correctly.

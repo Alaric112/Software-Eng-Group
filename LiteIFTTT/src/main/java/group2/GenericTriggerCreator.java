@@ -4,12 +4,6 @@
  */
 package group2;
 
-import java.util.ArrayList;
-import java.util.List;
-import javafx.scene.control.Control;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-
 /**
  *
  * @author patap
