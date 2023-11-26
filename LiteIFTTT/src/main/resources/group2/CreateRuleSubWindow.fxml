@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS%20Style/RoundButtonStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.CreateRuleSubWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS%20Style/RoundButtonStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.CreateRuleSubWindowController">
    <children>
       <ToolBar prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -31,7 +31,7 @@
                <children>
                   <VBox prefHeight="360.0" prefWidth="124.0">
                      <children>
-                        <AnchorPane prefHeight="360.0" prefWidth="172.0">
+                        <AnchorPane prefHeight="360.0" prefWidth="172.0" style="-fx-background-color: #292831;">
                            <children>
                               <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="29.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="14.0">
                                  <image>
@@ -50,7 +50,7 @@
                               </ImageView>
                            </children>
                         </AnchorPane>
-                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="122.0" spacing="20.0">
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="122.0" spacing="20.0" style="-fx-background-color: #292831;" stylesheets="@CSS%20Style/DarkButton.css">
                            <children>
                               <Button fx:id="confirmButton" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" onAction="#confirmRuleCreationEvent" styleClass="circlular-javafx-button">
                                  <graphic>
@@ -78,11 +78,11 @@
             </AnchorPane>
             <VBox prefHeight="360.0" prefWidth="477.0">
                <children>
-                  <TabPane prefHeight="360.0" prefWidth="477.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane prefHeight="360.0" prefWidth="477.0" stylesheets="@CSS%20Style/DarkButton.css" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab text="Trigger">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: 1;">
                                  <children>
                                     <ToolBar prefHeight="40.0" prefWidth="477.0">
                                       <items>
@@ -126,7 +126,7 @@
                                  <children>
                                     <ToolBar prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                       <items>
-                                        <Button fx:id="addActionButton" mnemonicParsing="false" onAction="#addActionEvent" text="ADD" />
+                                        <Button fx:id="addActionButton" mnemonicParsing="false" onAction="#addActionEvent" text="CREATE" />
                                           <ChoiceBox fx:id="actionChoiceBox" prefWidth="150.0" />
                                       </items>
                                     </ToolBar>

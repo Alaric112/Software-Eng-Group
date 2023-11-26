@@ -1,0 +1,29 @@
+/* styles-dark.css */
+
+/* Stile per i pulsanti in Dark Mode */
+
+.tab {
+    -fx-background-color: #2a2a2a; /* Colore di sfondo del tab */
+    -fx-text-fill: white; /* Colore del testo del tab */
+}
+
+.tab:selected {
+    -fx-background-color: #404040; /* Colore di sfondo del tab selezionato */
+}
+
+.tab:hover {
+    -fx-background-color: #505050; /* Colore di sfondo del tab quando il mouse passa sopra */
+}
+
+.tab-label {
+    -fx-graphic-text-gap: 5;
+}
+
+.tab-content-area {
+    -fx-background-color: #2a2a2a; /* Colore di sfondo dell'area di contenuto del tab pane */
+}
+
+.tab-header-area {
+    -fx-background-color: #1f1f1f; /* Colore di sfondo dell'area degli header dei tab */
+}
+
