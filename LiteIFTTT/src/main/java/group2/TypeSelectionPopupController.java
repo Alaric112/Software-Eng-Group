@@ -26,20 +26,33 @@ import javafx.scene.input.MouseButton;
 /**
  * FXML Controller class
  *
+ * 
+ * TO DO
+ * TO DO
+ * TO DO
+ * TO DO
+ * TO DO
+ * TO DO
+ * TO DO
+ * TO DO
+ * TO DO
+ * TO DO
+ * TO DO
+ * 
  * @author patap
  */
 public class TypeSelectionPopupController implements Initializable {
 
-    @FXML
-    private ListView<String> baseTypeListView;
-    
-    private ObservableList<String> types;
-    
-    private Map<String, Image> typeImageMap = new HashMap<>();
-    
-    private static String selectedType;
-    private int listViewImageHeight = 16;
-    private int listViewImageWidth = 16;
+//    @FXML
+//    private ListView<String> baseTypeListView;
+//    
+//    private ObservableList<String> types;
+//    
+//    private Map<String, Image> typeImageMap = new HashMap<>();
+//    
+//    private static String selectedType;
+//    private int listViewImageHeight = 16;
+//    private int listViewImageWidth = 16;
     
     RuleCreator ruleCreator =  RuleCreator.getInstance();
     

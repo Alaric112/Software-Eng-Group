@@ -5,11 +5,19 @@
 package group2;
 
 /**
+ * The <code>Action</code> interface represents an action that can be executed.
+ * Classes implementing this interface should provide specific behavior for the
+ * {@link #execute()} method.
  *
  * @author patap
+ * @see group2.GenericAction
  */
 public interface Action {
-    
+
+    /**
+     * Executes the action. Implementing classes should provide specific behavior
+     * for this method.
+     */    
     void execute();
     
 }

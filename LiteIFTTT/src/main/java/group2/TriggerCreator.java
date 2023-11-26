@@ -4,15 +4,21 @@
  */
 package group2;
 
-import java.util.List;
-import javafx.scene.control.Control;
-
 /**
+ * The <code>TriggerCreator</code> abstract class serves as a base class for creating
+ * instances of the {@link Trigger} interface. Subclasses must implement the
+ * {@link #createTrigger()} method to provide specific logic for creating triggers.
  *
  * @author patap
+ * @see group2.Trigger
  */
 public abstract class TriggerCreator {
-    
+
+    /**
+     * Creates and returns an instance of the {@link Trigger} interface.
+     *
+     * @return An instance of the {@link Trigger} interface.
+     */    
     public abstract Trigger createTrigger();
         
 }

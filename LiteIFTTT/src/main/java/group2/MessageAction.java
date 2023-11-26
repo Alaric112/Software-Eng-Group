@@ -10,17 +10,28 @@ import javafx.stage.Stage;
 
 
 /**
+ * The <code>MessageAction</code> class implements the {@link Action} interface
+ * and represents an action that displays a message in a JavaFX alert dialog.
  *
- * @author patap
+ * @author Faust
+ * @see group2.Action
  */
 public class MessageAction implements Action {
     
     private String messageInfo;
 
+    /**
+     * Constructs a new instance of the <code>MessageAction</code> class with
+     * the default message "Hello world!".
+     */    
     public MessageAction() {
         this.messageInfo = "Hello world!";
     }
-    
+
+    /**
+     * Executes the action by displaying an alert with the specified message.
+     * The execution is done on the JavaFX Application Thread.
+     */    
     @Override
     public void execute() {
                  
@@ -35,11 +46,21 @@ public class MessageAction implements Action {
         });
 
     }
-
+    
+    /**
+     * Gets the message information associated with the action.
+     *
+     * @return The message information.
+     */    
     public String getMessageInfo() {
         return messageInfo;
     }
 
+    /**
+     * Sets the message information for the action.
+     *
+     * @param messageInfo The new message information.
+     */    
     public void setMessageInfo(String messageInfo) {
         this.messageInfo = messageInfo;
     }
