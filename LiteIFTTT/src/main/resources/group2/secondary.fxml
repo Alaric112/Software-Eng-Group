@@ -18,9 +18,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.SecondaryController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #333f58;" stylesheets="@CSS%20Style/DarkButton.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.SecondaryController">
    <top>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #292831;" BorderPane.alignment="CENTER">
          <items>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="500.0" spacing="30.0">
                <children>
@@ -39,7 +39,7 @@
                       </Menu>
                     </menus>
                   </MenuBar>
-                  <Label fx:id="ruleSetLabel" text="Ruleset name" />
+                  <Label fx:id="ruleSetLabel" text="Ruleset name" textFill="#f2d3ab" />
                   <Button fx:id="createRuleButton" mnemonicParsing="false" onAction="#createRuleAction" text="Create Rule" />
                   <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitEvent" text="Exit" />
                </children>

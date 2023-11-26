@@ -2,14 +2,14 @@
 
 /* Stile per i pulsanti in Dark Mode */
 .button {
-    -fx-background-color: #333333; /* Colore di sfondo in modalità dark */
+    -fx-background-color: #494d7e; /* Colore di sfondo in modalità dark */
     -fx-text-fill: #FFFFFF;
 	-fx-border-color: transparent;	
 	-fx-border-width: 2;
 }
 
 .button:hover {
-	-fx-background-color: #555555; 
+	-fx-background-color: #4C4C4C; 
 }
 
 .button:focused {
@@ -19,7 +19,7 @@
 
 .button:armed{
 
-	-fx-background-color: #555555;
+	-fx-background-color: #464646;
 	-fx-border-color: #007ACC; /* Cambia colore al passaggio del mouse in modalità dark */
 	-fx-border-width: 2;
 	
