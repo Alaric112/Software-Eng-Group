@@ -133,7 +133,7 @@ public class SecondaryController implements Initializable {
         Rule rule = ruleTable.getSelectionModel().getSelectedItem();
         
         ruleSet.switchRuleStatus(rule);
-        
+        ruleTable.refresh();
     }
 
     @FXML

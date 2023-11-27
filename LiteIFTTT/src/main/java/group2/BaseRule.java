@@ -32,6 +32,8 @@ public class BaseRule implements Rule {
             fireRule();
         }
         
+        
+        
     }
 
     @Override
@@ -83,6 +85,7 @@ public class BaseRule implements Rule {
     public void switchStatus() {
 
         this.active = !this.active;
+        System.out.println(active);
     }
         
 }

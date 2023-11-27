@@ -20,6 +20,8 @@ public class RuleSet {
     public RuleSet(int timer, String name) {
         this.timer = timer;
         this.name = name;
+        
+     
     }
     
     public void addRule(Rule rule){
