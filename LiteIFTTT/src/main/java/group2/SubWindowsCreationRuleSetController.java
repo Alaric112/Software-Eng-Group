@@ -59,19 +59,10 @@ public class SubWindowsCreationRuleSetController implements Initializable {
         RuleSet rules=new RuleSet(spinnerControlTime.getValue(), ruleSetNameTextField.getText());
         checker.changeRuleset(rules);
 
-        switchTo("secondary");
+        App.switchTo("secondary");
         closeWindowAction(event);
         
-    }
-    
-    private void switchTo(String fxml){
-        
-        try {
-            App.setRoot("secondary");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }  
+    } 
 
     @FXML
     private void openSavePathEvent(ActionEvent event) {

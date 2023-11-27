@@ -62,6 +62,10 @@ public class SecondaryController implements Initializable {
     private Button exitBtn;
     @FXML
     private Button deleteBtn;
+    @FXML
+    private MenuItem deleteEditMenuBar;
+    @FXML
+    private Button homeBtn;
     
     /**
      * Initializes the controller class.
@@ -88,6 +92,7 @@ public class SecondaryController implements Initializable {
         deleteRuleItemMenu.disableProperty().bind(isItemSelected);
         deleteBtn.disableProperty().bind(isItemSelected);
         switchStatusRule.disableProperty().bind(isItemSelected);
+        deleteEditMenuBar.disableProperty().bind(isItemSelected);
         
         ruleTable.setItems(rules);
         
@@ -167,6 +172,24 @@ public class SecondaryController implements Initializable {
     private void exitEvent(ActionEvent event) {
         
         Platform.exit();
+    }
+
+    @FXML
+    private void SaveRuleSetEvent(ActionEvent event) {
+        
+        System.out.println("Save button pressed");
+    }
+
+    @FXML
+    private void loadRuleSetEvent(ActionEvent event) {
+        
+        System.out.println("open button pressed");
+    }
+
+    @FXML
+    private void returnToHomeEvent(ActionEvent event) {
+        
+        App.switchTo("primary");
     }
     
 }

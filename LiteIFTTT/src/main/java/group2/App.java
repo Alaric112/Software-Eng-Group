@@ -75,5 +75,14 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+    
+    static public void switchTo(String fxml){
+        
+        try {
+            App.setRoot(fxml);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    } 
         
 }

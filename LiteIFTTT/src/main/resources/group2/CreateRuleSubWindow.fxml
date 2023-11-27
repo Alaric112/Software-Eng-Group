@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS%20Style/RoundButtonStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.CreateRuleSubWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS%20Style/RoundButtonStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.CreateRuleSubWindowController">
    <children>
       <ToolBar prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -131,17 +131,31 @@
                                       </items>
                                     </ToolBar>
                                     <TreeView fx:id="actionTreeView" layoutX="7.0" layoutY="40.0" onContextMenuRequested="#selectActionItem" onMouseClicked="#selectActionItem" prefHeight="291.0" prefWidth="221.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0" />
-                                    <VBox fx:id="messageActionBox" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                    <VBox fx:id="messageActionBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                        <children>
                                           <Label text="Insert Message" />
                                           <TextArea fx:id="textMessageArea" prefHeight="182.0" prefWidth="252.0" />
-                                          <Button mnemonicParsing="false" onAction="#insertMessageAction" text="insert message" />
+                                          <Button mnemonicParsing="false" onAction="#insertMessageAction" text="insert message">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/writing.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
                                        </children></VBox>
-                                    <VBox fx:id="playAudioBox" layoutX="227.0" layoutY="40.0" prefHeight="292.0" prefWidth="249.0" visible="false">
+                                    <VBox fx:id="playAudioBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="292.0" prefWidth="249.0" spacing="10.0" visible="false">
                                        <children>
                                           <Label prefHeight="18.0" prefWidth="134.0" text="Select the path of the file" />
                                           <TextField fx:id="pathSound" />
-                                          <Button mnemonicParsing="false" onAction="#selectPathEvent" text="select path" />
+                                          <Button mnemonicParsing="false" onAction="#selectPathEvent" text="select path">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/music-folder.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
                                        </children>
                                     </VBox>
                                  </children>

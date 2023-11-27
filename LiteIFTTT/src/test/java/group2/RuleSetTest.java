@@ -16,47 +16,12 @@ import static org.junit.Assert.*;
 public class RuleSetTest {
 
     private RuleSet ruleset;
+    private MockAction mockAction;
+    private MockTrigger mockTrigger;
     
     /**
      * Test implementation of the {@link Rule} interface.
      */
-    private static class TestRule implements Rule {
-        private String name;
-        private boolean active;
-        /**
-         * Constructs a TestRule instance with the specified name
-         * @param name The name of the test rule.
-         */
-        public TestRule(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public void checkRule() {
-            
-        }
-
-        @Override
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public Trigger getTrigger() {
-            return null; 
-        }
-
-        @Override
-        public Action getAction() {
-            return null; 
-        }
-        
-        @Override
-        public void switchStatus(){
-            
-            this.active = !this.active;
-        }
-    }
     
     /**
      * Sets up a new RuleSet instance before each test.
@@ -65,6 +30,8 @@ public class RuleSetTest {
     public void setUp() {
         // Inizializza un nuovo RuleSet prima di ogni test
         ruleset = new RuleSet(10, "TestRuleset");
+        mockAction = new MockAction();
+        mockTrigger = new MockTrigger();
     }
     
     /**
@@ -73,7 +40,7 @@ public class RuleSetTest {
     @Test
     public void testAddRule() {
         // Verifica che la regola sia aggiunta correttamente al RuleSet
-        Rule rule = new TestRule("TestRule");
+        MockRule rule = new MockRule("TestRule", mockTrigger, mockAction);
         ruleset.addRule(rule);
 
         ObservableList<Rule> rules = ruleset.getRules();
@@ -86,7 +53,7 @@ public class RuleSetTest {
     @Test
     public void testRemoveRule() {
         // Verifica che la regola sia rimossa correttamente dal RuleSet
-        Rule rule = new TestRule("TestRule");
+        MockRule rule = new MockRule("TestRule", mockTrigger, mockAction);
         ruleset.addRule(rule);
 
         ruleset.removeRule(rule);
@@ -103,8 +70,8 @@ public class RuleSetTest {
         // Verifica che la dimensione del RuleSet sia calcolata correttamente
         assertEquals(0, ruleset.sizeRuleSet());
 
-        Rule rule1 = new TestRule("TestRule1");
-        Rule rule2 = new TestRule("TestRule2");
+        MockRule rule1 = new MockRule("TestRule1", mockTrigger, mockAction);
+        MockRule rule2 = new MockRule("TestRule2", mockTrigger, mockAction);
 
         ruleset.addRule(rule1);
         assertEquals(1, ruleset.sizeRuleSet());
@@ -122,8 +89,9 @@ public class RuleSetTest {
     @Test
     public void testClearRuleSet() {
         // Verifica che il RuleSet venga cancellato correttamente
-        Rule rule1 = new TestRule("TestRule1");
-        Rule rule2 = new TestRule("TestRule2");
+        MockRule rule1 = new MockRule("TestRule1", mockTrigger, mockAction);
+        MockRule rule2 = new MockRule("TestRule2", mockTrigger, mockAction);
+
 
         ruleset.addRule(rule1);
         ruleset.addRule(rule2);

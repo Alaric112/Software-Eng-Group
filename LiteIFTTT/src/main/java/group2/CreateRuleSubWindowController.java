@@ -4,7 +4,6 @@
  */
 package group2;
 
-import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,10 +65,6 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private TreeView<String> actionTreeView;
     @FXML
-    private VBox triggerParametersBox;
-    @FXML
-    private VBox actionParametersBox;
-    @FXML
     private VBox timeTriggerBox;
     @FXML
     private VBox messageActionBox;
@@ -77,8 +72,6 @@ public class CreateRuleSubWindowController implements Initializable {
     private VBox playAudioBox;
     @FXML
     private TextField pathSound;
-    @FXML
-    private TextField hourTriggerTF;
     @FXML
     private Spinner<Integer> spinnerHourTimeTrigger;
     @FXML
@@ -308,7 +301,7 @@ public class CreateRuleSubWindowController implements Initializable {
      * @param event the ActionEvent triggered by the user
      */    
     @FXML
-    private void selectPathEvent(ActionEvent event) {
+    private void selectPathEvent(ActionEvent event) { 
 
         SoundAction soundAction = (SoundAction) lastAction;
         

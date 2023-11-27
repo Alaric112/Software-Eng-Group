@@ -24,17 +24,28 @@
          <items>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="500.0" spacing="30.0">
                <children>
+                  <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#returnToHomeEvent">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Image/home.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                   <MenuBar>
                     <menus>
                       <Menu mnemonicParsing="false" text="File">
                         <items>
                           <MenuItem mnemonicParsing="false" text="Close" />
                               <MenuItem mnemonicParsing="false" onAction="#createNewRuleSetEvent" text="New Ruleset" />
+                              <MenuItem mnemonicParsing="false" onAction="#SaveRuleSetEvent" text="Save Ruleset" />
+                              <MenuItem mnemonicParsing="false" onAction="#loadRuleSetEvent" text="Open Ruleset" />
                         </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="Edit">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Delete" />
+                          <MenuItem fx:id="deleteEditMenuBar" mnemonicParsing="false" onAction="#deleteRuleEvent" text="Delete" />
                         </items>
                       </Menu>
                     </menus>
@@ -51,7 +62,14 @@
             </ImageView>
             <Button fx:id="startCheckerBtn" mnemonicParsing="false" onAction="#startCheckerEvent" text="Start checking" />
             <Button fx:id="stopCheckerBtn" mnemonicParsing="false" onAction="#stopCheckerEvent" text="Stop checking" />
-            <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteRuleEvent" text="Delete" />
+            <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteRuleEvent" text="Delete Rule">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Image/delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </items>
          <padding>
             <Insets left="10.0" />

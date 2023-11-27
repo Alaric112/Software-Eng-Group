@@ -58,4 +58,10 @@ public class MockRule implements Rule {
         return checked;
     }
     
+    @Override
+    public boolean isActive(){
+        
+        return checked;
+    }
+    
 }
