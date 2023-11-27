@@ -16,23 +16,24 @@ public class BaseRule implements Rule {
     private Trigger trigger;
     private Action action;
     private boolean active;
-
+    private boolean fired;
+    
     public BaseRule(String name, Trigger trigger, Action action) {
         this.name = name;
         this.trigger = trigger;
         this.action = action;
         this.active = true;
+        this.fired = true; 
     }
             
     @Override
     public void checkRule() {
         
-        if(active && checkTrigger()){
+        if(active && checkTrigger() && fired){
             
             fireRule();
+            fired = false;
         }
-        
-        
         
     }
 
@@ -85,7 +86,7 @@ public class BaseRule implements Rule {
     public void switchStatus() {
 
         this.active = !this.active;
-        System.out.println(active);
+        this.fired = true;
     }
         
 }
