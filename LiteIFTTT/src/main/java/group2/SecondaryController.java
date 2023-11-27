@@ -56,6 +56,8 @@ public class SecondaryController implements Initializable {
     private ObservableList rules = ruleSet.getRules();
     @FXML
     private Button exitBtn;
+    @FXML
+    private Button deleteBtn;
     
     /**
      * Initializes the controller class.
@@ -72,10 +74,14 @@ public class SecondaryController implements Initializable {
         nameRule.setCellValueFactory(new PropertyValueFactory("name"));
         stateRule.setCellValueFactory(new PropertyValueFactory("active"));
         
-        // Disable Delete and Switch status context menu if there is no selecte element in the table
-        deleteRuleItemMenu.disableProperty().bind(Bindings.isNull(ruleTable.getSelectionModel().selectedItemProperty()));
-        switchStatusRule.disableProperty().bind(Bindings.isNull(ruleTable.getSelectionModel().selectedItemProperty()));
 
+        
+        // Disable Delete and Switch status context menu if there is no selecte element in the table
+        BooleanProperty isItemSelected = new SimpleBooleanProperty();
+        isItemSelected.bind(Bindings.isNull(ruleTable.getSelectionModel().selectedItemProperty()));
+        deleteRuleItemMenu.disableProperty().bind(isItemSelected);
+        deleteBtn.disableProperty().bind(isItemSelected);
+        switchStatusRule.disableProperty().bind(isItemSelected);
         
         ruleTable.setItems(rules);
         
