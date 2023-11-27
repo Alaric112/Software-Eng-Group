@@ -88,9 +88,9 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private TextArea textMessageArea;
 
-    private Trigger trigger;
+    private Trigger lastTrigger;
 
-    private Action action;
+    private Action lastAction;
 
     private Map<String, TextField> parameterTextFieldMap = new HashMap<>();
 
@@ -149,7 +149,7 @@ public class CreateRuleSubWindowController implements Initializable {
 
         String ruleName = ruleNameTF.getText();
 
-        Rule rule = ruleCreator.createRule(ruleName, trigger, action);
+        Rule rule = ruleCreator.createRule(ruleName, lastTrigger, lastAction);
 
         RuleSet ruleSet = checker.getRuleSet();
         ruleSet.addRule(rule);
@@ -180,7 +180,9 @@ public class CreateRuleSubWindowController implements Initializable {
 
         TreeItem<String> item = new TreeItem<>(triggerChoiceBox.getValue());
         triggerTreeView.setRoot(item);
-        trigger = ruleCreator.createTrigger(item.getValue());
+        lastTrigger = ruleCreator.createTrigger(item.getValue());
+        
+        timeTriggerBox.setVisible(true);
 
     }
 
@@ -194,8 +196,18 @@ public class CreateRuleSubWindowController implements Initializable {
 
         TreeItem<String> item = new TreeItem<>(actionChoiceBox.getValue());
         actionTreeView.setRoot(item);
-        action = ruleCreator.createAction(item.getValue());
+        lastAction = ruleCreator.createAction(item.getValue());
+        
+            if (item.getValue().equals("Message")) {
 
+                messageActionBox.setVisible(true);
+                playAudioBox.setVisible(false);
+            } else {
+
+                playAudioBox.setVisible(true);
+                messageActionBox.setVisible(false);
+            }
+        
     }
 
     /**
@@ -233,7 +245,7 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void setTimeEvent(ActionEvent event) {
 
-        TimeTrigger t = (TimeTrigger) trigger;
+        TimeTrigger t = (TimeTrigger) lastTrigger;
 
         t.setTargetTime(spinnerHourTimeTrigger.getValue(), spinnerMinuteTimeTrigger.getValue());
 
@@ -285,7 +297,7 @@ public class CreateRuleSubWindowController implements Initializable {
         String messageInfo = textMessageArea.getText();
         textMessageArea.clear();
 
-        MessageAction m = (MessageAction) action;
+        MessageAction m = (MessageAction) lastAction;
         m.setMessageInfo(messageInfo);
 
     }
@@ -298,7 +310,7 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void selectPathEvent(ActionEvent event) {
 
-        SoundAction soundAction = (SoundAction) action;
+        SoundAction soundAction = (SoundAction) lastAction;
         
         soundAction.setPath();
 
