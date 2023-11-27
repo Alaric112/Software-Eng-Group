@@ -48,5 +48,7 @@ public interface Rule {
      * changing the status of the rule.
      */
     void switchStatus();
+    
+    boolean isActive();
    
 }

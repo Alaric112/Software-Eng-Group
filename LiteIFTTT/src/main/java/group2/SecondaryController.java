@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 /**
@@ -43,7 +45,7 @@ public class SecondaryController implements Initializable {
     @FXML
     private TableColumn<Rule, String> nameRule;
     @FXML
-    private TableColumn<Rule, Boolean> stateRule;
+    private TableColumn<Rule, String> stateRule;
     @FXML
     private TableView<Rule> ruleTable;
     @FXML
@@ -74,9 +76,11 @@ public class SecondaryController implements Initializable {
         checkerImageView.visibleProperty().bind(isThreadRunning);
         
         nameRule.setCellValueFactory(new PropertyValueFactory("name"));
-        stateRule.setCellValueFactory(new PropertyValueFactory("active"));
-        
-
+        stateRule.setCellValueFactory(cellData -> {
+            Rule rule = cellData.getValue();
+            String status = rule.isActive() ? "active" : "disabled";
+            return new SimpleStringProperty(status);
+        });
         
         // Disable Delete and Switch status context menu if there is no selecte element in the table
         BooleanProperty isItemSelected = new SimpleBooleanProperty();

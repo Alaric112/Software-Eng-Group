@@ -91,6 +91,7 @@ public class BaseRule implements Rule {
         action.execute();
     }
 
+    @Override
     public boolean isActive() {
         return active;
     }
