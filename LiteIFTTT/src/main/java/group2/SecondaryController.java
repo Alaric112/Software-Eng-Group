@@ -127,6 +127,7 @@ public class SecondaryController implements Initializable {
     @FXML
     private void deleteRuleEvent(ActionEvent event) {
         
+        // TO REFACTOR        
         Rule rule = ruleTable.getSelectionModel().getSelectedItem();
 
         // Mostra una finestra di dialogo di conferma
@@ -143,10 +144,8 @@ public class SecondaryController implements Initializable {
         // Attendi la risposta dell'utente
         alert.showAndWait().ifPresent(buttonType -> {
             if (buttonType == buttonTypeYes) {
-                // L'utente ha cliccato su "Si", procedi con la cancellazione
+                // L'utente ha cliccato su "Yes", procedi con la cancellazione
                 rules.remove(rule);
-            } else {
-                // L'utente ha cliccato su "No", non fare nulla
             }
         });
     }
