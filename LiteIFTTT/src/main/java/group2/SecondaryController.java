@@ -14,7 +14,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -126,8 +128,27 @@ public class SecondaryController implements Initializable {
     private void deleteRuleEvent(ActionEvent event) {
         
         Rule rule = ruleTable.getSelectionModel().getSelectedItem();
-        
-        rules.remove(rule);
+
+        // Mostra una finestra di dialogo di conferma
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Confirm cancellation");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to cancel this rule?");
+
+        // Configura i pulsanti della finestra di dialogo
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("No");
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+        // Attendi la risposta dell'utente
+        alert.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == buttonTypeYes) {
+                // L'utente ha cliccato su "Si", procedi con la cancellazione
+                rules.remove(rule);
+            } else {
+                // L'utente ha cliccato su "No", non fare nulla
+            }
+        });
     }
 
     @FXML
