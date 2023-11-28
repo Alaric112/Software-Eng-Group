@@ -4,6 +4,8 @@
  */
 package group2;
 
+import java.io.Serializable;
+
 /**
  * The <code>Trigger</code> interface represents a condition that can be evaluated
  * to determine whether a specific action or event should be triggered.
@@ -12,7 +14,7 @@ package group2;
  * @author patap
  * @see group2.GenericTrigger
  */
-public interface Trigger {
+public interface Trigger extends Serializable {
 
     /**
      * Evaluates the condition represented by this trigger.

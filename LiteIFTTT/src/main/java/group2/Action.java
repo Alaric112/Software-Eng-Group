@@ -4,6 +4,8 @@
  */
 package group2;
 
+import java.io.Serializable;
+
 /**
  * The <code>Action</code> interface represents an action that can be executed.
  * Classes implementing this interface should provide specific behavior for the
@@ -12,7 +14,7 @@ package group2;
  * @author patap
  * @see group2.GenericAction
  */
-public interface Action {
+public interface Action extends Serializable {
 
     /**
      * Executes the action. Implementing classes should provide specific behavior

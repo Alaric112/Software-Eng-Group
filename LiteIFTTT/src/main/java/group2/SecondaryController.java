@@ -9,8 +9,12 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +26,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 /**
@@ -51,13 +54,7 @@ public class SecondaryController implements Initializable {
     @FXML
     private MenuItem deleteRuleItemMenu;
     @FXML
-    private MenuItem switchStatusRule;
-    
-    private BooleanProperty isThreadRunning = new SimpleBooleanProperty(false);
-    private ControlRuleChecker checker =ControlRuleChecker.getInstance();
-    
-    private RuleSet ruleSet = checker.getRuleSet();
-    private ObservableList rules = ruleSet.getRules();
+    private MenuItem switchStatusRule;      
     @FXML
     private Button exitBtn;
     @FXML
@@ -66,6 +63,12 @@ public class SecondaryController implements Initializable {
     private MenuItem deleteEditMenuBar;
     @FXML
     private Button homeBtn;
+    
+    private BooleanProperty isThreadRunning = new SimpleBooleanProperty(false);
+    private ControlRuleChecker checker =ControlRuleChecker.getInstance();
+    
+    private ObjectProperty<RuleSet> ruleSetProperty = checker.getRuleSetProperty();    
+    private RuleSet ruleSet = checker.getRuleSet();
     
     /**
      * Initializes the controller class.
@@ -93,11 +96,22 @@ public class SecondaryController implements Initializable {
         deleteBtn.disableProperty().bind(isItemSelected);
         switchStatusRule.disableProperty().bind(isItemSelected);
         deleteEditMenuBar.disableProperty().bind(isItemSelected);
-        
-        ruleTable.setItems(rules);
-        
+
+        ruleTable.setItems(ruleSetProperty.get().getRules());
+
+        // When it change the Ruleset it must execute this code
+        ruleSetProperty.addListener((observable, oldRuleSet, newRuleSet) -> {
+            // Aggiorna la tabella con la nuova lista di regole
+            ruleSet = newRuleSet;
+            ruleTable.setItems(ruleSet.getRules());
+        });
+
+        // Dynamic bindig 
+        ruleSetLabel.textProperty().bind(Bindings.createStringBinding(() ->
+                ruleSetProperty.get().getName(), ruleSetProperty));
+                
         ruleSet= checker.getRuleSet();
-        ruleSetLabel.setText(ruleSet.getName());
+        //ruleSetLabel.setText(ruleSet.getName());
                 
     }    
 
@@ -154,7 +168,7 @@ public class SecondaryController implements Initializable {
         alert.showAndWait().ifPresent(buttonType -> {
             if (buttonType == buttonTypeYes) {
                 // L'utente ha cliccato su "Yes", procedi con la cancellazione
-                rules.remove(rule);
+                ruleSet.getRules().remove(rule);
             }
         });
     }
@@ -176,14 +190,20 @@ public class SecondaryController implements Initializable {
 
     @FXML
     private void SaveRuleSetEvent(ActionEvent event) {
-        
+          
+        Command saveCommand = new SaveCommand(ruleSet);
+        saveCommand.execute();
         System.out.println("Save button pressed");
     }
 
     @FXML
     private void loadRuleSetEvent(ActionEvent event) {
         
-        System.out.println("open button pressed");
+        
+        Command loadCommand = new LoadCommand();
+        loadCommand.execute();
+        System.out.println("load button pressed");
+        
     }
 
     @FXML

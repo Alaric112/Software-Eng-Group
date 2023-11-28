@@ -4,6 +4,7 @@
  */
 package group2;
 
+import java.io.Serializable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,15 +13,17 @@ import javafx.collections.ObservableList;
  * 
  * @author patap
  */
-public class RuleSet {
-    private int timer;
-    private String name;
+public class RuleSet implements Serializable {
     
-    private ObservableList<Rule> rules = FXCollections.observableArrayList();
+    private int timer;
+    private String name;    
+    
+    // Transint is needed because Observable list is NOT serializable
+    transient private ObservableList<Rule> rules = FXCollections.observableArrayList();
+    
     public RuleSet(int timer, String name) {
         this.timer = timer;
-        this.name = name;
-        
+        this.name = name;     
      
     }
     
@@ -74,5 +77,9 @@ public class RuleSet {
        rule.switchStatus();
         
     }
+
+    public void setRules(ObservableList<Rule> rules) {
+        this.rules = rules;
+    }    
     
 }

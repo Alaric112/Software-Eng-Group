@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
 
 
 // THIS CLASS FOR NOW IS USELESS
@@ -31,6 +33,9 @@ import javafx.fxml.Initializable;
  * @author patap
  */
 public class TypeSelectionPopupController implements Initializable {
+
+    @FXML
+    private ListView<?> baseTypeListView;
 
 //    @FXML
 //    private ListView<String> baseTypeListView;

@@ -1,15 +1,19 @@
 
 package group2;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+
 public final class ControlRuleChecker {
     // The field must be declared volatile so that double check lock would work
     // correctly.
     private static volatile ControlRuleChecker instance;
-    private RuleSet rules;
-    private double timer;   
+    //private RuleSet rules;
+    private ObjectProperty<RuleSet> ruleSetProperty = new SimpleObjectProperty<>();
     private Thread periodicCheckThread;
 
     private ControlRuleChecker() {
+        
     }
 
     public static ControlRuleChecker getInstance() {
@@ -20,17 +24,20 @@ public final class ControlRuleChecker {
         }
         synchronized(ControlRuleChecker.class) {
             if (instance == null) {
-                instance = new ControlRuleChecker();
+                instance = new ControlRuleChecker();                
             }
             return instance;
-        }
-        
+        }        
     
+    }
+
+    public ObjectProperty<RuleSet> getRuleSetProperty() {
+        return ruleSetProperty;
     }
     
    public void startPeriodicCheck() {
     // Fetch the timer value from the rules using the getTimer() method
-    int timer = rules.getTimer();
+    int timer = ruleSetProperty.get().getTimer();
 
     if (periodicCheckThread != null && periodicCheckThread.isAlive()) {
         System.out.println("Il thread periodico è già in esecuzione.");
@@ -78,18 +85,18 @@ public final class ControlRuleChecker {
 
     public void setTimer(int newTimer) {
         
-        rules.setTimer(newTimer);
+        ruleSetProperty.get().setTimer(newTimer);
     }
     
     public void changeRuleset(RuleSet ruleSet) {
         
-        this.rules= ruleSet; 
+        ruleSetProperty.set(ruleSet); 
 
     }
 
     public RuleSet getRuleSet() {
         
-        return rules;
+        return ruleSetProperty.get();
     }
 
     public Thread getPeriodicCheckThread() {
@@ -99,7 +106,7 @@ public final class ControlRuleChecker {
     private void checkRuleSet() {
         
         // Iterate through the set of rules and check each rule
-        for (Rule rule : rules.getRules()) {
+        for (Rule rule : ruleSetProperty.get().getRules()) {
             rule.checkRule();
         }
     }

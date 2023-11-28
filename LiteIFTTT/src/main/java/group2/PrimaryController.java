@@ -45,19 +45,10 @@ public class PrimaryController implements Initializable {
     @FXML
     private void loadRuleSetAction(ActionEvent event) {
         
-        FileChooser fc = new FileChooser();        
-        File f = fc.showOpenDialog(null);        
-        if(f==null) return;
-        return;
-    }
-    
-    private void switchTo(String fxml){
         
-        try {
-            App.setRoot("secondary");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }            
+        Command loadCommand = new LoadCommand();
+        loadCommand.execute();                
+        App.switchTo("secondary");        
+    }           
             
 }

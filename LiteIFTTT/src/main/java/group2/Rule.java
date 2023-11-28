@@ -4,6 +4,8 @@
  */
 package group2;
 
+import java.io.Serializable;
+
 /**
  * The <code>Rule</code> interface represents a rule that can be checked,
  * and when a specified condition is met, an associated action is triggered.
@@ -15,7 +17,7 @@ package group2;
  * @see group2.Trigger
  * @see group2.Action
  */
-public interface Rule {
+public interface Rule extends Serializable {
     
     /**
      * Checks the rule's condition and triggers the associated action if the condition is met.
