@@ -49,7 +49,6 @@ public class AppConfig {
         }
         return null;
     }
-
     
     public static void savePathOfLastFile( String value){
         

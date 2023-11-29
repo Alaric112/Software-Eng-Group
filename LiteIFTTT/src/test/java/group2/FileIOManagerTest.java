@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -30,6 +31,18 @@ public class FileIOManagerTest {
         
     }
 
+    @After
+    public void cleaner(){
+        
+        // Clean up resources if needed
+        testRuleSet = null;
+
+        // Delete the temporary file
+        if (testFile != null && testFile.exists()) {
+            testFile.delete();
+        }
+    }
+    
     @Test
     public void testSaveAndLoad() throws IOException  {
         // Crea un oggetto RuleSet di test

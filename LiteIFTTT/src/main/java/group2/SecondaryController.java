@@ -4,6 +4,8 @@
  */
 package group2;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -11,11 +13,8 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -75,9 +74,7 @@ public class SecondaryController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        ObservableList rules = checker.getRuleSet().getRules();
-        
+                
         startCheckerBtn.disableProperty().bind(isThreadRunning);
         stopCheckerBtn.disableProperty().bind(isThreadRunning.not());
         checkerImageView.visibleProperty().bind(isThreadRunning);
@@ -88,15 +85,9 @@ public class SecondaryController implements Initializable {
             String status = rule.isActive() ? "active" : "disabled";
             return new SimpleStringProperty(status);
         });
-        
-        // Disable Delete and Switch status context menu if there is no selecte element in the table
-        BooleanProperty isItemSelected = new SimpleBooleanProperty();
-        isItemSelected.bind(Bindings.isNull(ruleTable.getSelectionModel().selectedItemProperty()));
-        deleteRuleItemMenu.disableProperty().bind(isItemSelected);
-        deleteBtn.disableProperty().bind(isItemSelected);
-        switchStatusRule.disableProperty().bind(isItemSelected);
-        deleteEditMenuBar.disableProperty().bind(isItemSelected);
 
+        initItemSelecteBinding();
+        
         ruleTable.setItems(ruleSetProperty.get().getRules());
 
         // When it change the Ruleset it must execute this code
@@ -104,17 +95,51 @@ public class SecondaryController implements Initializable {
             // Aggiorna la tabella con la nuova lista di regole
             ruleSet = newRuleSet;
             ruleTable.setItems(ruleSet.getRules());
+            AutoSave();
         });
 
+        AutoSave();
+        
         // Dynamic bindig 
         ruleSetLabel.textProperty().bind(Bindings.createStringBinding(() ->
                 ruleSetProperty.get().getName(), ruleSetProperty));
-                
+
+
+           
         ruleSet= checker.getRuleSet();
-        //ruleSetLabel.setText(ruleSet.getName());
                 
     }    
 
+    private void initItemSelecteBinding(){
+           
+        // Disable Delete and Switch status context menu if there is no selecte element in the table
+        BooleanProperty isItemSelected = new SimpleBooleanProperty();
+        isItemSelected.bind(Bindings.isNull(ruleTable.getSelectionModel().selectedItemProperty()));
+        deleteRuleItemMenu.disableProperty().bind(isItemSelected);
+        deleteBtn.disableProperty().bind(isItemSelected);
+        switchStatusRule.disableProperty().bind(isItemSelected);
+        deleteEditMenuBar.disableProperty().bind(isItemSelected);
+        
+    } 
+    
+    private void AutoSave(){
+        
+        ruleSet.getRules().addListener((ListChangeListener<Rule>) change -> {
+            while (change.next()) {
+                if (change.wasAdded() || change.wasRemoved() || change.wasUpdated()) {
+                    // Se ci sono state modifiche nella lista di regole, esegui il salvataggio automatico
+                    File file = new File("backup.dat");
+                    try {
+                        FileIOManager.saveToFile(file, ruleSet);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+        
+    }
+    
     @FXML
     private void createRuleAction(ActionEvent event) {
         
