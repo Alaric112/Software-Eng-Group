@@ -1,7 +1,8 @@
 /LiteIFTTT/nbproject/
 /LiteIFTTT/target/
 LiteIFTTT/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+LiteIFTTT/backup.dat
 *.class
 *.properties
 *.bak
-LiteIFTTT/*.dat
+*.dat
