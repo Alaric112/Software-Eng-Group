@@ -34,7 +34,7 @@ public class FileCopyActionTest {
     }
     
     @After
-        public void cleaner() throws IOException{
+    public void cleaner() throws IOException{
         // Delete the temporary file
         if (Files.exists(sourceFile)) {
             Files.delete(sourceFile);

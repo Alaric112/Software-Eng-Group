@@ -21,7 +21,6 @@ import static org.junit.Assert.assertEquals;
  *
  * @author soniabruno
  */
-
 public class TextAppendActionTest {
 
     private TextAppendAction textAppendAction;
@@ -30,7 +29,7 @@ public class TextAppendActionTest {
     @Before
     public void setUp() throws IOException {
         textAppendAction = new TextAppendAction();
-        testFile = File.createTempFile("testAppendAction", ".dat");
+        testFile = File.createTempFile("testAppendAction", ".txt");
     }
     
     @After
@@ -54,7 +53,7 @@ public class TextAppendActionTest {
 
         // Check if the text has been appended
         String finalContent = readFromFile(testFile);
-        assertEquals( "Appended Text", finalContent);
+        assertEquals("Appended Text", finalContent);
     }
 
     private void writeToFile(File file, String content) {
