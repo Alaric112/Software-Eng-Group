@@ -1,69 +1,58 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package group2;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
+ * The {@code SaveCommand} class represents a command to save a {@link RuleSet} to a file.
+ * It implements the {@link Command} interface, allowing it to be used in a command pattern.
+ *
+ * <p>This class provides functionality to display a file save dialog using JavaFX's {@link FileChooser},
+ * allowing the user to specify a location to save the RuleSet. The saved file is in a binary format with
+ * the extension ".dat".
+ *
  *
  * @author patap
  */
 public class SaveCommand implements Command {
 
     private RuleSet ruleSet;
-    private List<Rule> rules;
-    
+
+    /**
+     * Constructs a new SaveCommand with the specified RuleSet.
+     *
+     * @param ruleSet The RuleSet to be saved.
+     */    
     public SaveCommand(RuleSet ruleSet) {
         this.ruleSet = ruleSet;
-        this.rules = new ArrayList<>();
-        rules.addAll(ruleSet.getRules());
+
     }    
-    
+
+    /**
+     * Executes the SaveCommand by displaying a file save dialog and saving the RuleSet to the selected file.
+     * If an IOException occurs during the save operation, it is printed to the standard error stream.
+     */    
     @Override
     public void execute() {
         
+        // Create a file chooser for selecting the save location        
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Save RuleSet");
 
-        // Imposta il filtro per permettere solo i file .dat
+        // Set a filter to allow only .dat files
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Data Files (*.dat)", "*.dat");
         chooser.getExtensionFilters().add(extFilter);
 
-        // Mostra la finestra di dialogo per salvare il file
+        // Show the save file dialog and get the selected file
         File file = chooser.showSaveDialog(new Stage());
 
-        if (file != null) {
-            // Aggiunge l'estensione .dat se l'utente non l'ha inserita
-            String path = file.getPath();
-            if (!path.toLowerCase().endsWith(".dat")) {
-                file = new File(path + ".dat");
-            }
-
-            try (ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {                
-                out.writeObject(ruleSet);
-                out.writeObject(rules);
-            } catch (IOException e) {
-            // Gestisci l'eccezione in modo appropriato
-            System.err.println("Errore durante il salvataggio del file: " + e.getMessage());
-
-                // Mostra un messaggio di errore all'utente
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Errore");
-                alert.setHeaderText(null);
-                alert.setContentText("Si è verificato un errore durante il salvataggio del file.");
-                alert.showAndWait();
-            }
+        try {
+            // Save the RuleSet to the selected file using FileIOManager            
+            FileIOManager.saveToFile(file, ruleSet);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
      
     }

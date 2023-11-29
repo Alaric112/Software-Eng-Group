@@ -4,15 +4,12 @@
  */
 package group2;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -31,8 +28,7 @@ public class PrimaryController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-     
+        
     }    
 
     @FXML
@@ -43,8 +39,7 @@ public class PrimaryController implements Initializable {
     }
 
     @FXML
-    private void loadRuleSetAction(ActionEvent event) {
-        
+    private void loadRuleSetAction(ActionEvent event) {        
         
         Command loadCommand = new LoadCommand();
         loadCommand.execute();                

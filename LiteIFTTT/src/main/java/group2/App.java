@@ -1,5 +1,6 @@
 package group2;
 
+import java.io.File;
 import java.io.FileInputStream;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +23,19 @@ public class App extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"));
+        
+        File lastModifiedFile = AppConfig.getLastRuleSet();
+        if(lastModifiedFile != null && lastModifiedFile.exists()){
+
+            try {
+                FileIOManager.loadFromFile(lastModifiedFile);
+                scene = new Scene(loadFXML("secondary"));
+            } catch (IOException ex) {
+                scene = new Scene(loadFXML("primary"));
+            }           
+            
+        }else{ scene = new Scene(loadFXML("primary")); }
+        
         InputStream stream = new FileInputStream("Asset/auction.png");
         appIcon = new Image(stream);
         stage.setResizable(false);
@@ -59,8 +72,7 @@ public class App extends Application {
         subWindow.setTitle(subWindowTitle);
         subWindow.setResizable(false);
         subWindow.getIcons().add(appIcon);
-        subWindow.show();
- 
+        subWindow.showAndWait();
     }
     
     private static Parent loadFXML(String fxml) throws IOException {
@@ -71,11 +83,7 @@ public class App extends Application {
     public static Image getAppIcon() {
         return appIcon;
     }
-    
-    public static void main(String[] args) {
-        launch();
-    }
-    
+       
     static public void switchTo(String fxml){
         
         try {
@@ -84,5 +92,9 @@ public class App extends Application {
             ex.printStackTrace();
         }
     } 
-        
+    
+    public static void main(String[] args) {
+        launch();
+    }
+    
 }

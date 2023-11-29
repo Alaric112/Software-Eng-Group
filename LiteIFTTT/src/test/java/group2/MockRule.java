@@ -16,10 +16,10 @@ public class MockRule implements Rule {
     private boolean active;
     private boolean checked;
     
-    public MockRule(String ruleName, Trigger mockTrigger, Action mockAction) {
+    public MockRule(String ruleName) {
         this.ruleName = ruleName;
-        this.mockTrigger = mockTrigger;
-        this.mockAction = mockAction;
+        this.mockTrigger = new MockTrigger();
+        this.mockAction = new MockAction();
     }  
     
     @Override

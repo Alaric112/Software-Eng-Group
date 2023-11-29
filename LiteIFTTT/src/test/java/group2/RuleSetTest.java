@@ -30,8 +30,8 @@ public class RuleSetTest {
     public void setUp() {
         // Inizializza un nuovo RuleSet prima di ogni test
         ruleset = new RuleSet(10, "TestRuleset");
-        mockAction = new MockAction();
-        mockTrigger = new MockTrigger();
+//        mockAction = new MockAction();
+//        mockTrigger = new MockTrigger();
     }
     
     /**
@@ -40,7 +40,7 @@ public class RuleSetTest {
     @Test
     public void testAddRule() {
         // Verifica che la regola sia aggiunta correttamente al RuleSet
-        MockRule rule = new MockRule("TestRule", mockTrigger, mockAction);
+        MockRule rule = new MockRule("TestRule");
         ruleset.addRule(rule);
 
         ObservableList<Rule> rules = ruleset.getRules();
@@ -53,7 +53,7 @@ public class RuleSetTest {
     @Test
     public void testRemoveRule() {
         // Verifica che la regola sia rimossa correttamente dal RuleSet
-        MockRule rule = new MockRule("TestRule", mockTrigger, mockAction);
+        MockRule rule = new MockRule("TestRule");
         ruleset.addRule(rule);
 
         ruleset.removeRule(rule);
@@ -70,8 +70,8 @@ public class RuleSetTest {
         // Verifica che la dimensione del RuleSet sia calcolata correttamente
         assertEquals(0, ruleset.sizeRuleSet());
 
-        MockRule rule1 = new MockRule("TestRule1", mockTrigger, mockAction);
-        MockRule rule2 = new MockRule("TestRule2", mockTrigger, mockAction);
+        MockRule rule1 = new MockRule("TestRule1");
+        MockRule rule2 = new MockRule("TestRule2");
 
         ruleset.addRule(rule1);
         assertEquals(1, ruleset.sizeRuleSet());
@@ -89,8 +89,8 @@ public class RuleSetTest {
     @Test
     public void testClearRuleSet() {
         // Verifica che il RuleSet venga cancellato correttamente
-        MockRule rule1 = new MockRule("TestRule1", mockTrigger, mockAction);
-        MockRule rule2 = new MockRule("TestRule2", mockTrigger, mockAction);
+        MockRule rule1 = new MockRule("TestRule1");
+        MockRule rule2 = new MockRule("TestRule2");
 
 
         ruleset.addRule(rule1);

@@ -14,16 +14,5 @@ public class GenericTriggerCreator extends TriggerCreator {
     public Trigger createTrigger() {
         return new GenericTrigger();
     }
-    
-    
-//    @Override
-//    public List<Control> createParameterControls() {
-//        List<Control> controls = new ArrayList<>();
-//        Label label = new Label("Generic Parameter:");
-//        TextField textField = new TextField();
-//        controls.add(label);
-//        controls.add(textField);
-//        return controls;
-//    }
 
 }
