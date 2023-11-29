@@ -29,8 +29,8 @@ public class FileCopyActionTest {
     @Before
     public void setUp() {
         fileCopyAction = new FileCopyAction();
-        sourceFile = Paths.get("source.txt"); // Change this to the path of your source file
-        destinationFile = Paths.get("destination.txt"); // Change this to the desired path for the destination file
+        sourceFile = Paths.get("source.txt"); 
+        destinationFile = Paths.get("destination.txt"); 
     }
     
     @After
@@ -48,20 +48,16 @@ public class FileCopyActionTest {
     
     @Test
     public void testExecute() {
-        // Create a sample file with content
+        
         createSampleFile(sourceFile, "Hello, this is a test file.");
 
-        // Set the source and destination paths
         fileCopyAction.setSourcePath(sourceFile);
         fileCopyAction.setDestinationPath(destinationFile);
 
-        // Execute the action
         fileCopyAction.execute();
 
-        // Check if the destination file exists
         assertTrue(Files.exists(destinationFile));
 
-        // Check if the content of the destination file is the same as the source file
         try {
             String sourceContent = new String(Files.readAllBytes(sourceFile));
             String destinationContent = new String(Files.readAllBytes(destinationFile));
