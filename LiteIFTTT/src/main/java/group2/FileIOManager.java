@@ -19,6 +19,7 @@ import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.concurrent.Task;
 
 /**
  * The `FileIOManager` class manages the saving and loading of the RuleSet.
@@ -102,6 +103,44 @@ public class FileIOManager {
                 
     }
 
+    /**
+     * Asynchronously loads the RuleSet from a specified file.
+     * 
+     * @param file The file from which to load the RuleSet.
+     */    
+    public static void loadFromFileAsync(File file) {
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                loadFromFile(file);
+                return null;
+            }
+        };
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+    }
+
+    /**
+     * Asynchronously saves the RuleSet to a specified file.
+     * 
+     * @param file     The file in which to save the RuleSet.
+     * @param ruleSet  The RuleSet to save.
+     */    
+    public static void saveToFileAsync(File file, RuleSet ruleSet) {
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                saveToFile(file, ruleSet);
+                return null;
+            }
+        };
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+    }   
     
     /**
      * Displays an error message to the user using a dialog window.

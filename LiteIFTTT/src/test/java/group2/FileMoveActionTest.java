@@ -28,8 +28,8 @@ public class FileMoveActionTest {
         fileMoveAction = new FileMoveAction();
     }
 
-// @Test
-//public void testExecuteSuccessfulFileMove() throws IOException {
+//    @Test
+//    public void testExecuteSuccessfulFileMove() throws IOException {
 //    // Create temporary source and destination paths
 //    Path sourcePath = Files.createTempFile("source", ".txt");
 //    Path destinationPath = Files.createTempFile("prova\\destination", ".txt");
@@ -40,7 +40,7 @@ public class FileMoveActionTest {
 //    System.out.println(sourcePath);
 //    // Execute the action
 //    fileMoveAction.execute();
-//System.out.println(sourcePath);
+//    System.out.println(sourcePath);
 //    // Assert that the source file no longer exists if it originally existed
 //    if (Files.exists(sourcePath)) {
 //        assertFalse("Source file still exists", Files.exists(sourcePath));
@@ -51,7 +51,7 @@ public class FileMoveActionTest {
 //
 //    // Clean up temporary files
 //    Files.deleteIfExists(destinationPath);
-//}
+//    }
 
 
     @Test

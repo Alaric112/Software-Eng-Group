@@ -37,11 +37,7 @@ public class LoadCommand implements Command {
         // Mostra la finestra di dialogo per selezionare il file da caricare
         File file = chooser.showOpenDialog(new Stage());
 
-        try {
-            FileIOManager.loadFromFile(file);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        FileIOManager.loadFromFileAsync(file);
 
     }                
     

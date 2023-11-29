@@ -48,12 +48,8 @@ public class SaveCommand implements Command {
         // Show the save file dialog and get the selected file
         File file = chooser.showSaveDialog(new Stage());
 
-        try {
-            // Save the RuleSet to the selected file using FileIOManager            
-            FileIOManager.saveToFile(file, ruleSet);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        // Save the RuleSet to the selected file using FileIOManager
+        FileIOManager.saveToFileAsync(file, ruleSet);
      
     }
     

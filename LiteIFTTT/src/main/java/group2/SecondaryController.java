@@ -129,11 +129,7 @@ public class SecondaryController implements Initializable {
                 if (change.wasAdded() || change.wasRemoved() || change.wasUpdated()) {
                     // Se ci sono state modifiche nella lista di regole, esegui il salvataggio automatico
                     File file = new File("backup.dat");
-                    try {
-                        FileIOManager.saveToFile(file, ruleSet);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
+                    FileIOManager.saveToFileAsync(file, ruleSet);
                 }
             }
         });
