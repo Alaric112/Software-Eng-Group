@@ -19,6 +19,7 @@ import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 
 /**
@@ -108,14 +109,29 @@ public class FileIOManager {
      * 
      * @param file The file from which to load the RuleSet.
      */    
-    public static void loadFromFileAsync(File file) {
+    public static void loadFromFileAsync(File file) {   
         Task<Void> task = new Task<>() {
-            @Override
-            protected Void call() throws Exception {
-                loadFromFile(file);
-                return null;
-            }
-        };
+                @Override
+                protected Void call() throws Exception {           
+                    // Genera un evento di caricamento completato
+                    Platform.runLater(() -> {
+                        try {
+                           loadFromFile(file);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                            }
+                        });
+                    return null;
+                }
+            };
+
+        task.setOnFailed(event -> {
+            Throwable exception = task.getException();
+                if (exception != null) {
+                    // Se si verifica un errore, notifica l'utente attraverso un messaggio di errore
+                        showErrorMessage("An error occurred during file loading: " + exception.getMessage());
+                }
+            });
 
         Thread thread = new Thread(task);
         thread.setDaemon(true);
