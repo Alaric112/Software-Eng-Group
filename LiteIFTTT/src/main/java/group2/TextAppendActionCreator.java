@@ -8,11 +8,11 @@ package group2;
  *
  * @author soniabruno
  */
-public class FileCopyCreator extends ActionCreator {
-        
+public class TextAppendActionCreator extends ActionCreator {
+    
     @Override
     public Action createAction() {
-        return new FileCopyAction(); 
+        return new TextAppendAction(); 
     }
     
 }

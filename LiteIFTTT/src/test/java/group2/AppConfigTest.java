@@ -19,12 +19,6 @@ public class AppConfigTest {
     // Temporary configuration file for testing
     private static final String TEST_CONFIG_FILE = "test_config.properties";
 
-//    @Before
-//    public void setUp() {
-//        // Change the config file to the test config file
-//        AppConfig.setConfigFile(TEST_CONFIG_FILE);
-//    }
-
     @After
     public void tearDown() {
         // Delete the test config file after each test
