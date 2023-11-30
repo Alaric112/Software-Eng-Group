@@ -35,22 +35,23 @@ public class SaveCommand implements Command {
      * If an IOException occurs during the save operation, it is printed to the standard error stream.
      */    
     @Override
-    public void execute() {
-        
-        // Create a file chooser for selecting the save location        
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Save RuleSet");
+public void execute() {
+    // Create a file chooser for selecting the save location        
+    FileChooser chooser = new FileChooser();
+    chooser.setTitle("Save RuleSet");
 
-        // Set a filter to allow only .dat files
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Data Files (*.dat)", "*.dat");
-        chooser.getExtensionFilters().add(extFilter);
+    // Set a filter to allow only .dat files
+    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Data Files (*.dat)", "*.dat");
+    chooser.getExtensionFilters().add(extFilter);
 
-        // Show the save file dialog and get the selected file
-        File file = chooser.showSaveDialog(new Stage());
+    // Set the initial file name (Automatically sets the file name to the ruleSet's name)
+    chooser.setInitialFileName(ruleSet.getName());
+    
+    // Show the save file dialog and get the selected file
+    File file = chooser.showSaveDialog(new Stage());
 
-        // Save the RuleSet to the selected file using FileIOManager
-        FileIOManager.saveToFileAsync(file, ruleSet);
-     
-    }
+    // Save the RuleSet to the selected file using FileIOManager
+    FileIOManager.saveToFileAsync(file, ruleSet);
+}
     
 }
