@@ -7,6 +7,7 @@ package group2;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -20,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -28,6 +30,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
@@ -171,29 +174,34 @@ public class SecondaryController implements Initializable {
 
     @FXML
     private void deleteRuleEvent(ActionEvent event) {
-        
-        // TO REFACTOR        
+        // Ottieni la regola selezionata dalla tabella
         Rule rule = ruleTable.getSelectionModel().getSelectedItem();
 
-        // Mostra una finestra di dialogo di conferma
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Confirm cancellation");
-        alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to cancel this rule?");
+        if (rule != null) {
+            String title = "Confirm Deletion";
+            String contentText = "Are you sure you want to delete this rule?";
+            // Mostra una finestra di dialogo di conferma
+            Alert alert = App.createPopUP(Alert.AlertType.WARNING, title, contentText);
+            
+            // Configura i pulsanti della finestra di dialogo
+            ButtonType buttonTypeYes = new ButtonType("Yes", ButtonData.YES);
+            ButtonType buttonTypeNo = new ButtonType("No", ButtonData.NO);
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
-        // Configura i pulsanti della finestra di dialogo
-        ButtonType buttonTypeYes = new ButtonType("Yes");
-        ButtonType buttonTypeNo = new ButtonType("No");
-        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+            // Mostra la finestra di dialogo e attendi la risposta dell'utente
+            Optional<ButtonType> result = alert.showAndWait();
 
-        // Attendi la risposta dell'utente
-        alert.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == buttonTypeYes) {
-                // L'utente ha cliccato su "Yes", procedi con la cancellazione
+            // Se l'utente ha premuto "Yes", procedi con la cancellazione
+            if (result.isPresent() && result.get() == buttonTypeYes) {
+                // Esegui l'operazione di cancellazione
                 ruleSet.getRules().remove(rule);
+
+                // Aggiorna la visualizzazione della tabella
+                ruleTable.getItems().remove(rule);
             }
-        });
+        }
     }
+
 
     @FXML
     private void switchStatusRuleEvent(ActionEvent event) {

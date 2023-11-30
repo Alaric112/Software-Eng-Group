@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.InputStream;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 
@@ -96,6 +98,18 @@ public class App extends Application {
         });
 
     } 
+
+    static public Alert createPopUP(AlertType alertType, String title, String contentText){
+        
+        var alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(contentText);
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(getAppIcon());
+        
+        return alert;
+    }
     
     public static void main(String[] args) {
         launch();
