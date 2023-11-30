@@ -6,6 +6,7 @@ package group2;
 
 import java.io.File;
 import java.io.IOException;
+import javafx.concurrent.Service;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -14,13 +15,15 @@ import javafx.stage.Stage;
  *
  * @author patap
  */
-public class LoadCommand implements Command {
+public class LoadCommand implements Command  {
     
     private ControlRuleChecker checker;
+    private Runnable onLoadCompletion; 
     
     public LoadCommand() {
 
        checker = ControlRuleChecker.getInstance();
+       onLoadCompletion = null;
        
     }
     
@@ -36,9 +39,23 @@ public class LoadCommand implements Command {
 
         // Mostra la finestra di dialogo per selezionare il file da caricare
         File file = chooser.showOpenDialog(new Stage());
-
-        FileIOManager.loadFromFileAsync(file);
-
+        
+        Service serv = FileIOManager.loadFromFileAsync(file);
+        
+        if (onLoadCompletion != null){
+            serv.setOnSucceeded(event -> {
+                onLoadCompletion.run();
+            });
+        }
+        
     }                
+
+    public Runnable getOnLoadCompletion() {
+        return onLoadCompletion;
+    }
+
+    public void setOnLoadCompletion(Runnable onLoadCompletion) {
+        this.onLoadCompletion = onLoadCompletion;
+    } 
     
 }

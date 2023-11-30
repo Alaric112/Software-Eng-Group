@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 
@@ -86,11 +87,14 @@ public class App extends Application {
        
     static public void switchTo(String fxml){
         
-        try {
-            App.setRoot(fxml);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        Platform.runLater(() -> {
+            try {
+                App.setRoot(fxml);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+
     } 
     
     public static void main(String[] args) {

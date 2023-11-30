@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -68,6 +69,8 @@ public class SecondaryController implements Initializable {
     
     private ObjectProperty<RuleSet> ruleSetProperty = checker.getRuleSetProperty();    
     private RuleSet ruleSet = checker.getRuleSet();
+    @FXML
+    private ProgressBar progressBar;
     
     /**
      * Initializes the controller class.
@@ -103,9 +106,7 @@ public class SecondaryController implements Initializable {
         // Dynamic bindig 
         ruleSetLabel.textProperty().bind(Bindings.createStringBinding(() ->
                 ruleSetProperty.get().getName(), ruleSetProperty));
-
-
-           
+         
         ruleSet= checker.getRuleSet();
                 
     }    
@@ -219,8 +220,7 @@ public class SecondaryController implements Initializable {
 
     @FXML
     private void loadRuleSetEvent(ActionEvent event) {
-        
-        
+                
         Command loadCommand = new LoadCommand();
         loadCommand.execute();
         System.out.println("load button pressed");

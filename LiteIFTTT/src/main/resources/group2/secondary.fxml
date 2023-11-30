@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -70,6 +71,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
+            <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" />
          </items>
          <padding>
             <Insets left="10.0" />

@@ -16,10 +16,10 @@ import java.io.ObjectOutputStream;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
-
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
+import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
 /**
@@ -41,31 +41,27 @@ public class FileIOManager {
      * @throws java.io.IOException
      */    
     public static void loadFromFile(File file) throws IOException {
-        if (file != null) {
-            try (ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
-
-                RuleSet ruleSet = new RuleSet(5, "");
-                ObservableList<Rule> rules = FXCollections.observableArrayList();
-
-                ruleSet = (RuleSet) in.readObject();
-                List<Rule> loadedRules = (ArrayList<Rule>) in.readObject();
-
-                rules.setAll(loadedRules);
-                ruleSet.setRules(rules);
-
-                checker.changeRuleset(ruleSet);
-                in.close();
-
-            } catch (FileNotFoundException e) {
-                // Gestisci l'eccezione in modo appropriato
-                throw new IOException("File not found", e);
-            } catch (IOException | ClassNotFoundException ex) {
-                
-                showErrorMessage("An error occurred during file loading.");
-                throw new IOException("Error during file loading", ex);
-
-            }
-        }
+        if (file == null)
+          throw new IOException("File not found");  
+          
+        RuleSet ruleSet = loadRuleSet(file);
+        
+        if(ruleSet == null)
+            throw new IOException("Rule not loaded");
+        
+        checker.changeRuleset(ruleSet);            
+        
+//        if (file != null) {
+//           RuleSet ruleSet = loadRuleSet(file);
+//           if (ruleSet != null){
+//           checker.changeRuleset(ruleSet);
+//           } else {
+//           throw new IOException("Rule not loaded");
+//           }
+//        } else {
+//        throw new IOException("File not found");
+//        }
+        
     }
 
     /**
@@ -108,34 +104,53 @@ public class FileIOManager {
      * Asynchronously loads the RuleSet from a specified file.
      * 
      * @param file The file from which to load the RuleSet.
+     * @return 
      */    
-    public static void loadFromFileAsync(File file) {   
-        Task<Void> task = new Task<>() {
-                @Override
-                protected Void call() throws Exception {           
-                    // Genera un evento di caricamento completato
-                    Platform.runLater(() -> {
-                        try {
-                           loadFromFile(file);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            }
-                        });
-                    return null;
-                }
-            };
+    public static Service<RuleSet> loadFromFileAsync(File file) {
+        
+    LoadRuleSetService loadService = new LoadRuleSetService(file);
+        loadService.setOnSucceeded(event -> {
+            
 
-        task.setOnFailed(event -> {
-            Throwable exception = task.getException();
-                if (exception != null) {
-                    // Se si verifica un errore, notifica l'utente attraverso un messaggio di errore
-                        showErrorMessage("An error occurred during file loading: " + exception.getMessage());
-                }
-            });
+        });
 
-        Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
+        loadService.setOnFailed(event -> {
+            Throwable exception = loadService.getException();
+            if (exception != null) {
+                // Gestisci l'errore in modo appropriato
+                showErrorMessage("An error occurred during file loading: " + exception.getMessage());
+            }
+        });
+
+        loadService.start(); 
+        return loadService;
+        
+//        Task<Void> task = new Task<>() {
+//                @Override
+//                protected Void call() throws Exception {           
+//                    // Genera un evento di caricamento completato
+//                    Platform.runLater(() -> {
+//                        try {
+//                           loadFromFile(file);
+//                        } catch (IOException ex) {
+//                            ex.printStackTrace();
+//                            }
+//                        });
+//                    return null;
+//                }
+//            };
+//
+//        task.setOnFailed(event -> {
+//            Throwable exception = task.getException();
+//                if (exception != null) {
+//                    // Se si verifica un errore, notifica l'utente attraverso un messaggio di errore
+//                        showErrorMessage("An error occurred during file loading: " + exception.getMessage());
+//                }
+//            });
+//
+//        Thread thread = new Thread(task);
+//        thread.setDaemon(true);
+//        thread.start();
     }
 
     /**
@@ -170,6 +185,29 @@ public class FileIOManager {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.show();
+    }
+    
+    protected static RuleSet loadRuleSet(File file) throws IOException{
+        
+        RuleSet ruleSet = null;
+        List<Rule> rules = null;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                        
+            ruleSet = (RuleSet) ois.readObject();
+            rules = (ArrayList<Rule>) ois.readObject();
+            ObservableList<Rule> Obsrules = FXCollections.observableArrayList();
+            Obsrules.setAll(rules);
+            ruleSet.setRules(Obsrules);
+            
+        } catch (FileNotFoundException e) {
+                throw new FileNotFoundException("File not found");
+        } catch (IOException | ClassNotFoundException ex) {
+            showErrorMessage("An error occurred during file loading.");
+            throw new IOException("Error during file loading", ex);
+        }
+        
+        return ruleSet;
+          
     }
     
 }

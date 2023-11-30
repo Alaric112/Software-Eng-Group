@@ -33,17 +33,17 @@ public class PrimaryController implements Initializable {
 
     @FXML
     private void createRuleSetAction(ActionEvent event) {
-     
-        
-     App.createSubWindow("SubWindowsCreationRuleSet", "New Ruleset");
+             
+        App.createSubWindow("SubWindowsCreationRuleSet", "New Ruleset");
     }
 
     @FXML
     private void loadRuleSetAction(ActionEvent event) {        
         
-        Command loadCommand = new LoadCommand();
+        LoadCommand loadCommand = new LoadCommand();
+        loadCommand.setOnLoadCompletion(() -> App.switchTo("secondary"));        
         loadCommand.execute();                
-        App.switchTo("secondary");        
-    }           
+                
+    }        
             
 }
