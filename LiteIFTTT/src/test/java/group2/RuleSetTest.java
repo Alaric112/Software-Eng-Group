@@ -4,8 +4,7 @@
  */
 package group2;
 
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -43,7 +42,7 @@ public class RuleSetTest {
         MockRule rule = new MockRule("TestRule");
         ruleset.addRule(rule);
 
-        ObservableList<Rule> rules = ruleset.getRules();
+        List<Rule> rules = ruleset.getRules();
         assertTrue(rules.contains(rule));
     }
 
@@ -58,7 +57,7 @@ public class RuleSetTest {
 
         ruleset.removeRule(rule);
 
-        ObservableList<Rule> rules = ruleset.getRules();
+        List<Rule> rules = ruleset.getRules();
         assertFalse(rules.contains(rule));
     }
 
@@ -98,7 +97,7 @@ public class RuleSetTest {
 
         ruleset.clearRuleSet();
 
-        ObservableList<Rule> rules = ruleset.getRules();
+        List<Rule> rules = ruleset.getRules();
         assertTrue(rules.isEmpty());
     }
 

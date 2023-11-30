@@ -146,6 +146,7 @@ public class CreateRuleSubWindowController implements Initializable {
         RuleSet ruleSet = checker.getRuleSet();
         ruleSet.addRule(rule);
         System.out.println(ruleSet);
+        System.out.println(rule);
         closeWindowEvent(event);
 
     }
@@ -190,16 +191,30 @@ public class CreateRuleSubWindowController implements Initializable {
         actionTreeView.setRoot(item);
         lastAction = ruleCreator.createAction(item.getValue());
         
-            if (item.getValue().equals("Message")) {
-
+        switch(item.getValue()){
+            case "message":
                 messageActionBox.setVisible(true);
                 playAudioBox.setVisible(false);
-            } else {
-
-                playAudioBox.setVisible(true);
-                messageActionBox.setVisible(false);
-            }
+            case "sound":
+                //
+                //
+            case "File copy":
+                //
+                //
+            // etc
+           
+        }
         
+//            if (item.getValue().equals("Message")) {
+//
+//                messageActionBox.setVisible(true);
+//                playAudioBox.setVisible(false);
+//            } else {
+//
+//                playAudioBox.setVisible(true);
+//                messageActionBox.setVisible(false);
+//            }
+//        
     }
 
     /**

@@ -5,21 +5,21 @@
 package group2;
 
 import java.io.Serializable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * 
  * @author patap
  */
-public class RuleSet implements Serializable {
+public class RuleSet extends Observable implements Serializable {
     
     private int timer;
     private String name;    
-    
-    // Transint is needed because Observable list is NOT serializable
-    transient private ObservableList<Rule> rules = FXCollections.observableArrayList();
+    private List<Rule> rules = new ArrayList<>();
     
     public RuleSet(int timer, String name) {
         this.timer = timer;
@@ -30,14 +30,18 @@ public class RuleSet implements Serializable {
     public void addRule(Rule rule){
         
         rules.add(rule);
+        setChanged();
+        notifyObservers();        
     }
     
     public void removeRule(Rule rule){
         
         rules.remove(rule);
+        setChanged();
+        notifyObservers();        
     }
     
-    public ObservableList<Rule> getRules(){
+    public List<Rule> getRules(){
         
         return rules;
     }
@@ -69,17 +73,35 @@ public class RuleSet implements Serializable {
     }
     
     public void switchRuleStatus(Rule rule){
-        
-       int i = rules.indexOf(rule);
+                
+        int i = rules.indexOf(rule);
        
-       rule = rules.get(i);
+        rule = rules.get(i);
        
-       rule.switchStatus();
-        
+        rule.switchStatus();
+       
+        setChanged();
+        notifyObservers();        
     }
 
-    public void setRules(ObservableList<Rule> rules) {
+    public void setRules(List<Rule> rules) {
         this.rules = rules;
+    }    
+    
+    // Quando il timer cambia, chiamare questo metodo per notificare gli osservatori
+    public void updateTimer() {
+        setChanged();
+        notifyObservers();
+    }    
+    
+    @Override
+    public void addObserver(Observer o) {
+        super.addObserver(o);
+    }
+
+    @Override
+    public void deleteObserver(Observer o) {
+        super.deleteObserver(o);
     }    
     
 }

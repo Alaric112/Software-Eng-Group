@@ -5,8 +5,9 @@
 package group2;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -15,7 +16,9 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,13 +33,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
  * @author patap
  */
-public class SecondaryController implements Initializable {
+public class SecondaryController implements Initializable, Observer {
 
     @FXML
     private Button createRuleButton;
@@ -71,16 +73,23 @@ public class SecondaryController implements Initializable {
     private ControlRuleChecker checker =ControlRuleChecker.getInstance();
     
     private ObjectProperty<RuleSet> ruleSetProperty = checker.getRuleSetProperty();    
-    private RuleSet ruleSet = checker.getRuleSet();
+    private RuleSet ruleSet;
     @FXML
     private ProgressBar progressBar;
+    
+    private ObservableList<Rule> observableRules;    
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-                
+
+        ruleSet = checker.getRuleSet();        
+        observableRules = FXCollections.observableArrayList();
+        observableRules.setAll(ruleSet.getRules());
+        ruleSet.addObserver(this);
+        
         startCheckerBtn.disableProperty().bind(isThreadRunning);
         stopCheckerBtn.disableProperty().bind(isThreadRunning.not());
         checkerImageView.visibleProperty().bind(isThreadRunning);
@@ -94,13 +103,15 @@ public class SecondaryController implements Initializable {
 
         initItemSelecteBinding();
         
-        ruleTable.setItems(ruleSetProperty.get().getRules());
-
+        ruleTable.setItems(observableRules);
+        
         // When it change the Ruleset it must execute this code
         ruleSetProperty.addListener((observable, oldRuleSet, newRuleSet) -> {
             // Aggiorna la tabella con la nuova lista di regole
             ruleSet = newRuleSet;
-            ruleTable.setItems(ruleSet.getRules());
+            observableRules.setAll(ruleSet.getRules());
+            ruleTable.refresh();
+            //ruleTable.setItems(FXCollections.observableList(observableRules));
             AutoSave();
         });
 
@@ -127,8 +138,8 @@ public class SecondaryController implements Initializable {
     } 
     
     private void AutoSave(){
-        
-        ruleSet.getRules().addListener((ListChangeListener<Rule>) change -> {
+                
+        observableRules.addListener((ListChangeListener<Rule>) change -> {
             while (change.next()) {
                 if (change.wasAdded() || change.wasRemoved() || change.wasUpdated()) {
                     // Se ci sono state modifiche nella lista di regole, esegui il salvataggio automatico
@@ -202,7 +213,6 @@ public class SecondaryController implements Initializable {
         }
     }
 
-
     @FXML
     private void switchStatusRuleEvent(ActionEvent event) {
         
@@ -239,6 +249,25 @@ public class SecondaryController implements Initializable {
     private void returnToHomeEvent(ActionEvent event) {
         
         App.switchTo("primary");
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (o instanceof RuleSet) {
+            RuleSet updatedRuleSet = (RuleSet) o;
+            System.out.println(updatedRuleSet);
+            System.out.println("viva la cipolla");
+            observableRules.setAll(updatedRuleSet.getRules());
+            // Aggiorna la tabella con la nuova lista di regole
+            //ruleTable.setItems(observableRules);
+            ruleTable.refresh();
+            AutoSave();
+        }
+    }
+
+    public void cleanup() {
+        // Rimuovi il controller come osservatore quando non è più necessario
+        ruleSet.deleteObserver(this);
     }
     
 }

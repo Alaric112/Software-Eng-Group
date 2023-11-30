@@ -5,7 +5,6 @@
 package group2;
 
 import java.io.File;
-import java.io.IOException;
 import javafx.concurrent.Service;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;

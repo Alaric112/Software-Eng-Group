@@ -4,7 +4,6 @@
  */
 package group2;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,12 +12,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
-import java.util.ArrayList;
 import java.util.List;
-import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
@@ -82,7 +77,7 @@ public class FileIOManager {
 
             try (ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
                 out.writeObject(ruleSet);
-                out.writeObject(new ArrayList<>(ruleSet.getRules()));
+                //out.writeObject(new ArrayList<>(ruleSet.getRules()));
                 out.close();
 
                 AppConfig.savePathOfLastFile(file.getPath());
@@ -194,10 +189,10 @@ public class FileIOManager {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
                         
             ruleSet = (RuleSet) ois.readObject();
-            rules = (ArrayList<Rule>) ois.readObject();
-            ObservableList<Rule> Obsrules = FXCollections.observableArrayList();
-            Obsrules.setAll(rules);
-            ruleSet.setRules(Obsrules);
+            //rules = (ArrayList<Rule>) ois.readObject();
+            //ObservableList<Rule> Obsrules = FXCollections.observableArrayList();
+            //Obsrules.setAll(rules);
+            //ruleSet.setRules(Obsrules);
             
         } catch (FileNotFoundException e) {
                 throw new FileNotFoundException("File not found");
