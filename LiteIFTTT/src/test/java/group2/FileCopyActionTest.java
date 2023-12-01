@@ -23,25 +23,25 @@ import static org.junit.Assert.assertTrue;
 public class FileCopyActionTest {
 
     private FileCopyAction fileCopyAction;
-    private Path sourceFile;
-    private Path destinationFile;
+    private Path sourcePath;
+    private Path destinationPath;
 
     @Before
     public void setUp() {
         fileCopyAction = new FileCopyAction();
-        sourceFile = Paths.get("source.txt"); 
-        destinationFile = Paths.get("destination.txt"); 
+        sourcePath = Paths.get("source.txt"); 
+        destinationPath = Paths.get("destination.txt"); 
     }
     
     @After
     public void cleaner() throws IOException{
         // Delete the temporary file
-        if (Files.exists(sourceFile)) {
-            Files.delete(sourceFile);
+        if (Files.exists(sourcePath)) {
+            Files.delete(sourcePath);
         }
         
-        if (Files.exists(destinationFile)) {
-            Files.delete(destinationFile);
+        if (Files.exists(destinationPath)) {
+            Files.delete(destinationPath);
         }
     }
     
@@ -49,18 +49,18 @@ public class FileCopyActionTest {
     @Test
     public void testExecute() {
         
-        createSampleFile(sourceFile, "Hello, this is a test file.");
+        createSampleFile(sourcePath, "this is a test file.");
 
-        fileCopyAction.setSourcePath(sourceFile);
-        fileCopyAction.setDestinationPath(destinationFile);
+        fileCopyAction.setSourcePath(sourcePath);
+        fileCopyAction.setDestinationPath(destinationPath);
 
         fileCopyAction.execute();
 
-        assertTrue(Files.exists(destinationFile));
+        assertTrue(Files.exists(destinationPath));
 
         try {
-            String sourceContent = new String(Files.readAllBytes(sourceFile));
-            String destinationContent = new String(Files.readAllBytes(destinationFile));
+            String sourceContent = new String(Files.readAllBytes(sourcePath));
+            String destinationContent = new String(Files.readAllBytes(destinationPath));
             assertEquals(sourceContent, destinationContent);
         } catch (IOException e) {
             e.printStackTrace();
