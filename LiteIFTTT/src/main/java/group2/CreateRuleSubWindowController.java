@@ -317,6 +317,7 @@ public class CreateRuleSubWindowController implements Initializable {
 
                 actionVisibilityMap.put("File Copy", () -> {
                     hideAllActionBoxes();
+                    moveActionBox.setVisible(true);
                 });
                 
                 actionVisibilityMap.put("File Delete", () -> {
@@ -326,6 +327,7 @@ public class CreateRuleSubWindowController implements Initializable {
 
                 actionVisibilityMap.put("File Move", () -> {
                     hideAllActionBoxes();
+                    moveActionBox.setVisible(true);
                 });
                 
                 actionVisibilityMap.put("Text Append", () -> {
@@ -355,6 +357,7 @@ public class CreateRuleSubWindowController implements Initializable {
         playAudioBox.setVisible(false);
         fileDeleteBox.setVisible(false);
         appendTextBox.setVisible(false);
+        moveActionBox.setVisible(false);
     }
      
     private void hideAllTriggerBoxes() {
@@ -432,10 +435,34 @@ public class CreateRuleSubWindowController implements Initializable {
 
     @FXML
     private void selectSourcePathEvent(ActionEvent event) {
+       
+        String path = getFilePath(sourcePathTF);
+        
+        if (lastAction instanceof FileMoveAction){
+            FileMoveAction moveAction = (FileMoveAction) lastAction;                   
+            moveAction.setSourcePath(path);
+            
+        } else{
+            FileCopyAction copyAction = (FileCopyAction) lastAction;
+            copyAction.setSourcePath(path); 
+        }
+          
     }
 
     @FXML
     private void selectDestinationPathEvent(ActionEvent event) {
+        
+        String path = getFilePath(destinationPathTF);
+        
+        if (lastAction instanceof FileMoveAction){
+            
+            FileMoveAction moveAction = (FileMoveAction) lastAction;
+            moveAction.setDestinationPath(path);
+        } else{
+            FileCopyAction copyAction = (FileCopyAction) lastAction;
+            copyAction.setDestinationPath(path); 
+        }
+        
     }
     
 }

@@ -195,14 +195,21 @@
                                        <children>
                                           <Label prefHeight="18.0" prefWidth="230.0" text="Set source file" />
                                           <TextField fx:id="sourcePathTF" />
-                                          <Button mnemonicParsing="false" onAction="#selectSourcePathEvent" text="select source path" />
+                                          <Button mnemonicParsing="false" onAction="#selectSourcePathEvent" text="select source path">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/folder.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
                                           <Label text="Set destination path" />
                                           <TextField fx:id="destinationPathTF" prefHeight="26.0" prefWidth="229.0" />
                                           <Button mnemonicParsing="false" onAction="#selectDestinationPathEvent" text="select destination path">
                                              <graphic>
                                                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
-                                                      <Image url="@Image/writingOnFile.png" />
+                                                      <Image url="@Image/folder.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic>
