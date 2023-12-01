@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package group2;
 
 /**
@@ -20,7 +16,6 @@ public class BaseRule implements Rule {
     private Trigger trigger;
     private Action action;
     private boolean active;
-    private boolean fired;
 
     /**
      * Constructs a new instance of the {@code BaseRule} class with the specified
@@ -35,7 +30,6 @@ public class BaseRule implements Rule {
         this.trigger = trigger;
         this.action = action;
         this.active = true;
-        this.fired = true; 
     }
 
     /**
@@ -46,10 +40,9 @@ public class BaseRule implements Rule {
     @Override
     public void checkRule() {
         
-        if(active && checkTrigger() && fired){
+        if(active && checkTrigger()){
             
             fireRule();
-            fired = false;
         }
         
     }
@@ -104,7 +97,6 @@ public class BaseRule implements Rule {
     public void switchStatus() {
 
         this.active = !this.active;
-        this.fired = true;
     }
         
 }
