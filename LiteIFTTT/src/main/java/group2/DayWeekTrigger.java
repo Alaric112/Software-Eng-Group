@@ -10,12 +10,11 @@ import java.time.LocalDateTime;
 public class DayWeekTrigger implements Trigger {
 
     private DayOfWeek targetDay;
-   
 
-    public DayWeekTrigger(DayOfWeek targetDay) {
-        this.targetDay = targetDay;
+    public DayWeekTrigger() {
+        this.targetDay = DayOfWeek.MONDAY;
     }
-
+     
     @Override
     public boolean evaluate() {
         LocalDateTime currentDateTime = LocalDateTime.now();

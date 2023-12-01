@@ -6,9 +6,6 @@ package group2;
 
 import java.io.File;
 import javafx.concurrent.Service;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Stage;
 
 /**
  *
@@ -16,28 +13,18 @@ import javafx.stage.Stage;
  */
 public class LoadCommand implements Command  {
     
-    private ControlRuleChecker checker;
-    private Runnable onLoadCompletion; 
+    private Thread onLoadCompletion; 
+    private File file;
     
-    public LoadCommand() {
+    public LoadCommand(Thread onLoadCompletion, File file) {
 
-       checker = ControlRuleChecker.getInstance();
-       onLoadCompletion = null;
+       this.onLoadCompletion = onLoadCompletion;
+       this.file = file;
        
     }
     
     @Override
     public void execute() {
-        
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Load RuleSet");
-
-        // Imposta il filtro per permettere solo i file .dat
-        ExtensionFilter extFilter = new ExtensionFilter("Data Files (*.dat)", "*.dat");
-        chooser.getExtensionFilters().add(extFilter);
-
-        // Mostra la finestra di dialogo per selezionare il file da caricare
-        File file = chooser.showOpenDialog(new Stage());
         
         Service serv = FileIOManager.loadFromFileAsync(file);
         
@@ -53,8 +40,16 @@ public class LoadCommand implements Command  {
         return onLoadCompletion;
     }
 
-    public void setOnLoadCompletion(Runnable onLoadCompletion) {
+    public void setOnLoadCompletion(Thread onLoadCompletion) {
         this.onLoadCompletion = onLoadCompletion;
     } 
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }   
     
 }

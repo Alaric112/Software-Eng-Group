@@ -19,22 +19,32 @@ import static org.junit.Assert.assertFalse;
 
 public class FileMoveActionTest {
 
-    private Path sourceFile;
-    private Path destinationFolder;
-    private Path destinationFile;
-
+    private String sourceFile;
+    private String destinationFolder;
+    private String destinationFile;
+    private Path srcPath;
+    private Path dstPath;
+    private Path dstFolderPath;
+    
+    
     @Before
     public void setUp() throws IOException {
-        sourceFile = Files.createTempFile("sourceFile", ".txt");
+                
+        srcPath = Files.createTempFile("sourceFile", ".txt");
         
-        destinationFolder = Files.createTempDirectory("destinationFolder");
+        dstFolderPath = Files.createTempDirectory("destinationFolder");
         
-        destinationFile = destinationFolder.resolve("destinationFile.txt");
+        dstPath = dstFolderPath.resolve("destinationFile.txt");
+        
+        sourceFile = srcPath.toString();
+        destinationFile = dstPath.toString();
+        destinationFolder = dstFolderPath.toString();
+        
     }
 
     @Test
     public void testFileMoveAction() throws IOException {
-        assertTrue(Files.exists(sourceFile));
+        assertTrue(Files.exists(srcPath));
 
         FileMoveAction fileMoveAction = new FileMoveAction();
 
@@ -43,7 +53,7 @@ public class FileMoveActionTest {
 
         fileMoveAction.execute();
 
-        assertFalse(Files.exists(sourceFile));  
-        assertTrue(Files.exists(destinationFile));
+        assertFalse(Files.exists(srcPath));  
+        assertTrue(Files.exists(dstPath));
     }
 }

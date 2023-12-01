@@ -23,25 +23,31 @@ import static org.junit.Assert.assertTrue;
 public class FileCopyActionTest {
 
     private FileCopyAction fileCopyAction;
-    private Path sourcePath;
-    private Path destinationPath;
-
+    private String sourcePath;
+    private String destinationPath;
+    private Path srcPath;
+    private Path dstPath;
+    
     @Before
     public void setUp() {
         fileCopyAction = new FileCopyAction();
-        sourcePath = Paths.get("source.txt"); 
-        destinationPath = Paths.get("destination.txt"); 
+        sourcePath = "source.txt"; 
+        destinationPath = "destination.txt";
+        srcPath = Paths.get(sourcePath);
+        dstPath = Paths.get(destinationPath);
     }
     
     @After
     public void cleaner() throws IOException{
         // Delete the temporary file
-        if (Files.exists(sourcePath)) {
-            Files.delete(sourcePath);
+        
+        
+        if (Files.exists(srcPath)) {
+            Files.delete(srcPath);
         }
         
-        if (Files.exists(destinationPath)) {
-            Files.delete(destinationPath);
+        if (Files.exists(dstPath)) {
+            Files.delete(dstPath);
         }
     }
     
@@ -49,18 +55,18 @@ public class FileCopyActionTest {
     @Test
     public void testExecute() {
         
-        createSampleFile(sourcePath, "this is a test file.");
+        createSampleFile(srcPath, "this is a test file.");
 
         fileCopyAction.setSourcePath(sourcePath);
         fileCopyAction.setDestinationPath(destinationPath);
 
         fileCopyAction.execute();
 
-        assertTrue(Files.exists(destinationPath));
+        assertTrue(Files.exists(dstPath));
 
         try {
-            String sourceContent = new String(Files.readAllBytes(sourcePath));
-            String destinationContent = new String(Files.readAllBytes(destinationPath));
+            String sourceContent = new String(Files.readAllBytes(srcPath));
+            String destinationContent = new String(Files.readAllBytes(dstPath));
             assertEquals(sourceContent, destinationContent);
         } catch (IOException e) {
             e.printStackTrace();

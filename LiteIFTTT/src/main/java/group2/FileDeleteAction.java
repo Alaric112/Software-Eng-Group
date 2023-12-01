@@ -4,7 +4,6 @@
  */
 package group2;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,18 +16,20 @@ import java.nio.file.Paths;
 
 public class FileDeleteAction implements Action {
 
-    private Path filePath;
+    private String path;
 
     public FileDeleteAction() {
-        this.filePath = Paths.get("not existing");
+        this.path = "";
     }
 
-    public void setPath(Path filePath) {
-        this.filePath = filePath;
+    public void setPath(String filePath) {
+        this.path = filePath;
     }
 
     @Override
     public void execute() {
+        
+        Path filePath = Paths.get(path);
         try {
             if (Files.exists(filePath)) {
                 if (!Files.deleteIfExists(filePath)) {

@@ -31,8 +31,7 @@ public class FileDeleteActionTest {
     @Test
     public void testDeleteExistingFile() {
         FileDeleteAction fileDeleteAction = new FileDeleteAction();
-        fileDeleteAction.setPath(existingFile);
-
+        fileDeleteAction.setPath(existingFile.toString());        
         assertTrue(Files.exists(existingFile));  
         fileDeleteAction.execute();
         assertFalse(Files.exists(existingFile));  
@@ -41,7 +40,7 @@ public class FileDeleteActionTest {
     @Test
     public void testDeleteNonExistingFile() {
         FileDeleteAction fileDeleteAction = new FileDeleteAction();
-        fileDeleteAction.setPath(nonExistingFile);
+        fileDeleteAction.setPath(nonExistingFile.toString());
 
         assertFalse(Files.exists(nonExistingFile));  
         fileDeleteAction.execute();

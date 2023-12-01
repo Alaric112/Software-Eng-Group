@@ -70,16 +70,18 @@ public final class RuleCreator {
         // Associate action types with their respective implementations
         actionFactoryMap.put("Message", new MessageActionCreator());
         actionFactoryMap.put("Sound", new SoundActionCreator());
-        actionFactoryMap.put("Text Append", new SoundActionCreator());
-        actionFactoryMap.put("File Copy", new SoundActionCreator());
-        actionFactoryMap.put("File Move", new SoundActionCreator());
-        actionFactoryMap.put("File Delete", new SoundActionCreator());
+        actionFactoryMap.put("Text Append", new TextAppendActionCreator());
+        actionFactoryMap.put("File Copy", new FileCopyActionCreator());
+        actionFactoryMap.put("File Move", new FileMoveActionCreator());
+        actionFactoryMap.put("File Delete", new FileDeleteActionCreator());
         
     }
    
     private void initializeTriggerMap() {
         // Associate trigger types with their respective implementations
         triggerFactoryMap.put("Time", new TimeTriggerFactory());
+        triggerFactoryMap.put("Day of Week", new DayOfWeekTriggerCreator());
+        
     }
 
     /**

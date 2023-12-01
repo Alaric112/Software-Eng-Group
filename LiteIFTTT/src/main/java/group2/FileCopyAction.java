@@ -17,26 +17,28 @@ import java.nio.file.StandardCopyOption;
 
 public class FileCopyAction implements Action {
     
-    private Path sourcePath; 
-    private Path destinationPath;
+    private String sourcePath; 
+    private String destinationPath;
     
     public FileCopyAction() {
-        this.sourcePath= Paths.get("not existing");
-        this.destinationPath= Paths.get("not existing");
+        this.sourcePath= "";
+        this.destinationPath= "";
     }
 
-    public void setSourcePath(Path sourcePath) {
+    public void setSourcePath(String sourcePath) {
         this.sourcePath = sourcePath;
     }
 
-    public void setDestinationPath(Path destinationPath) {
+    public void setDestinationPath(String destinationPath) {
         this.destinationPath = destinationPath;
     }
     
     @Override
     public void execute() {
         try {
-            Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+            Path srcPath = Paths.get(sourcePath);
+            Path dstPath = Paths.get(destinationPath);
+            Files.copy(srcPath, dstPath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             System.err.println("Error copying the file: " + e.getMessage());
         }

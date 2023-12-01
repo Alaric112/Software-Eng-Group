@@ -4,6 +4,7 @@
  */
 package group2;
 
+import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +27,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -88,8 +90,28 @@ public class CreateRuleSubWindowController implements Initializable {
 
     private ControlRuleChecker checker = ControlRuleChecker.getInstance();
 
-    RuleCreator ruleCreator = RuleCreator.getInstance();
+    private RuleCreator ruleCreator = RuleCreator.getInstance();
+    
+    private static Map<String, Runnable> actionVisibilityMap;
+    private static Map<String, Runnable> triggerVisibilityMap;
 
+    @FXML
+    private TextField pathDelete;
+    @FXML
+    private VBox fileDeleteBox;
+    @FXML
+    private TextField pathFileToAppend;
+    @FXML
+    private VBox appendTextBox;
+    @FXML
+    private TextArea appendTextArea;
+    @FXML
+    private VBox moveActionBox;
+    @FXML
+    private TextField sourcePathTF;
+    @FXML
+    private TextField destinationPathTF;
+    
     /**
      * Initializes the controller class. This method is automatically called
      * after the FXML file has been loaded.
@@ -103,9 +125,11 @@ public class CreateRuleSubWindowController implements Initializable {
         triggerChoiceBox.getItems().addAll(ruleCreator.getAvailableTriggerTypes());
         actionChoiceBox.getItems().addAll(ruleCreator.getAvailableActionTypes());
 
-        timeTriggerBox.setVisible(false);
-        messageActionBox.setVisible(false);
-        playAudioBox.setVisible(false);
+        initActionVisibilityMap();
+        initTriggerVisibilityMap();
+        
+        hideAllTriggerBoxes();
+        hideAllActionBoxes();
 
         // Set values for Time trigger Spinner
         SpinnerValueFactory<Integer> hourValues = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0);
@@ -175,7 +199,7 @@ public class CreateRuleSubWindowController implements Initializable {
         triggerTreeView.setRoot(item);
         lastTrigger = ruleCreator.createTrigger(item.getValue());
         
-        timeTriggerBox.setVisible(true);
+        visibilityTrigger(item.getValue());
 
     }
 
@@ -190,31 +214,9 @@ public class CreateRuleSubWindowController implements Initializable {
         TreeItem<String> item = new TreeItem<>(actionChoiceBox.getValue());
         actionTreeView.setRoot(item);
         lastAction = ruleCreator.createAction(item.getValue());
-        
-        switch(item.getValue()){
-            case "message":
-                messageActionBox.setVisible(true);
-                playAudioBox.setVisible(false);
-            case "sound":
-                //
-                //
-            case "File copy":
-                //
-                //
-            // etc
-           
-        }
-        
-//            if (item.getValue().equals("Message")) {
-//
-//                messageActionBox.setVisible(true);
-//                playAudioBox.setVisible(false);
-//            } else {
-//
-//                playAudioBox.setVisible(true);
-//                messageActionBox.setVisible(false);
-//            }
-//        
+
+        visibilityAction(item.getValue());
+                
     }
 
     /**
@@ -225,13 +227,7 @@ public class CreateRuleSubWindowController implements Initializable {
 
         TreeItem<String> item = triggerTreeView.getSelectionModel().getSelectedItem();
 
-        if (item != null) {
-
-            if (item.getValue().equals("Time")) {
-
-                timeTriggerBox.setVisible(true);
-            }
-        }
+        visibilityTrigger(item.getValue());
     }
 
     private void selectTriggerItem(ContextMenuEvent event) {
@@ -268,19 +264,7 @@ public class CreateRuleSubWindowController implements Initializable {
 
         TreeItem<String> item = actionTreeView.getSelectionModel().getSelectedItem();
 
-        if (item != null) {
-
-            if (item.getValue().equals("Message")) {
-
-                messageActionBox.setVisible(true);
-                playAudioBox.setVisible(false);
-            } else {
-
-                playAudioBox.setVisible(true);
-                messageActionBox.setVisible(false);
-            }
-
-        }
+        visibilityAction(item.getValue());
     }
 
     private void selectActionItem(ContextMenuEvent event) {
@@ -314,13 +298,144 @@ public class CreateRuleSubWindowController implements Initializable {
      *
      * @param event the ActionEvent triggered by the user
      */    
-    @FXML
     private void selectPathEvent(ActionEvent event) { 
 
-        SoundAction soundAction = (SoundAction) lastAction;
-        
-        soundAction.setPath();
+    }
+    
+    private void initActionVisibilityMap() {
+        actionVisibilityMap = new HashMap<>();
+        actionVisibilityMap.put("Message", () -> {
+                    hideAllActionBoxes();
+                    messageActionBox.setVisible(true);
+                    // Altre azioni specifiche per "message"
+                });
 
+                actionVisibilityMap.put("Sound", () -> {
+                    hideAllActionBoxes();
+                    playAudioBox.setVisible(true);
+                });
+
+                actionVisibilityMap.put("File Copy", () -> {
+                    hideAllActionBoxes();
+                });
+                
+                actionVisibilityMap.put("File Delete", () -> {
+                    hideAllActionBoxes();
+                    fileDeleteBox.setVisible(true);
+                });                
+
+                actionVisibilityMap.put("File Move", () -> {
+                    hideAllActionBoxes();
+                });
+                
+                actionVisibilityMap.put("Text Append", () -> {
+                    hideAllActionBoxes();
+                    appendTextBox.setVisible(true);
+                });                
+                
     }
 
+        private void initTriggerVisibilityMap() {
+        triggerVisibilityMap = new HashMap<>();
+        triggerVisibilityMap.put("Time", () -> {
+                    hideAllTriggerBoxes();
+                    timeTriggerBox.setVisible(true);
+                    // Altre azioni specifiche per "message"
+                });
+
+                triggerVisibilityMap.put("Day of week", () -> {
+                    hideAllTriggerBoxes();
+                });                
+                
+    }
+    
+     private void hideAllActionBoxes() {
+         
+        messageActionBox.setVisible(false);
+        playAudioBox.setVisible(false);
+        fileDeleteBox.setVisible(false);
+        appendTextBox.setVisible(false);
+    }
+     
+    private void hideAllTriggerBoxes() {
+        
+        timeTriggerBox.setVisible(false);
+    } 
+
+    private void visibilityAction(String value){
+        
+        Runnable visibilityAction = actionVisibilityMap.get(value);
+        if (visibilityAction != null) {
+            visibilityAction.run();
+        }
+        
+    }
+
+    private void visibilityTrigger(String value){
+        
+        Runnable visibilityTrigger = triggerVisibilityMap.get(value);
+        if (visibilityTrigger != null) {
+            visibilityTrigger.run();
+        }
+        
+    }
+    
+    @FXML
+    private void selectFilePathDelete(ActionEvent event) {
+        FileDeleteAction deleteAction = (FileDeleteAction) lastAction;
+        String path = getFilePath(pathDelete);       
+        deleteAction.setPath(path);
+    }
+
+    @FXML
+    private void selectSoundPathEvent(ActionEvent event) {
+        
+        SoundAction soundAction = (SoundAction) lastAction;
+        String path = getFilePath(pathSound);       
+        soundAction.setPath(path);
+        
+    }
+    
+    private String getFilePath(TextField txtField){
+        
+        if(txtField.getText().isEmpty()){
+           
+            FileChooser chooser = App.createFC("Open File");
+            File file = chooser.showOpenDialog(new Stage());
+            return (file != null) ? file.getPath() : "";
+            
+        } else{
+            
+            String path = txtField.getText();
+            txtField.clear();
+            return path;
+            
+        }
+    }
+
+    @FXML
+    private void selectFileToAppendEvent(ActionEvent event) {
+        
+        TextAppendAction appendAction = (TextAppendAction) lastAction;
+        String path = getFilePath(pathFileToAppend);       
+        appendAction.setFile(new File(path));
+        
+    }
+
+    @FXML
+    private void confirmAppendTextEvent(ActionEvent event) {
+        
+        TextAppendAction appendAction = (TextAppendAction) lastAction;
+        appendAction.setTextAppend(appendTextArea.getText());
+        
+    }
+
+    @FXML
+    private void selectSourcePathEvent(ActionEvent event) {
+    }
+
+    @FXML
+    private void selectDestinationPathEvent(ActionEvent event) {
+    }
+    
 }

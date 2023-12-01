@@ -86,12 +86,7 @@ public class SoundAction implements Action {
      * Opens a file chooser dialog for the user to select a sound file.
      * Sets the path to the selected file.
      */
-    public void setPath() {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Open File");
-        File file = chooser.showOpenDialog(new Stage());
-        path = (file != null) ? file.getPath() : "";
-    }
+
 }   
     
 

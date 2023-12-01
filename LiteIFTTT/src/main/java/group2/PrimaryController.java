@@ -4,6 +4,7 @@
  */
 package group2;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -40,9 +41,19 @@ public class PrimaryController implements Initializable {
     @FXML
     private void loadRuleSetAction(ActionEvent event) {        
         
-        LoadCommand loadCommand = new LoadCommand();
-        loadCommand.setOnLoadCompletion(() -> App.switchTo("secondary"));        
+        Thread myThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                App.switchTo("secondary");
+            }
+        });
+
+        File file = App.createFCLoad();
+        
+        LoadCommand loadCommand = new LoadCommand(myThread, file);
+       
         loadCommand.execute();                
+        
                 
     }        
             

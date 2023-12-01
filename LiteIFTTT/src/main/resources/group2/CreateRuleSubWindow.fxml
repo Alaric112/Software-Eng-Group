@@ -148,7 +148,7 @@
                                        <children>
                                           <Label prefHeight="18.0" prefWidth="134.0" text="Select the path of the file" />
                                           <TextField fx:id="pathSound" />
-                                          <Button mnemonicParsing="false" onAction="#selectPathEvent" text="select path">
+                                          <Button mnemonicParsing="false" onAction="#selectSoundPathEvent" text="select path">
                                              <graphic>
                                                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -156,6 +156,57 @@
                                                    </image>
                                                 </ImageView>
                                              </graphic></Button>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="fileDeleteBox" alignment="TOP_CENTER" layoutX="226.0" layoutY="38.0" prefHeight="293.0" prefWidth="260.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <Label prefHeight="18.0" prefWidth="230.0" text="Select the file you want to delete" />
+                                          <TextField fx:id="pathDelete" />
+                                          <Button mnemonicParsing="false" onAction="#selectFilePathDelete" text="select path">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/deleteFolder.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="appendTextBox" alignment="TOP_CENTER" layoutX="224.0" layoutY="39.0" prefHeight="292.0" prefWidth="252.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <Label prefHeight="18.0" prefWidth="230.0" text="Insert the text" />
+                                          <TextArea fx:id="appendTextArea" prefHeight="94.0" prefWidth="260.0" />
+                                          <Label text="Select the file" />
+                                          <TextField fx:id="pathFileToAppend" prefHeight="26.0" prefWidth="229.0" />
+                                          <Button mnemonicParsing="false" onAction="#selectFileToAppendEvent" text="select path">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/writingOnFile.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onAction="#confirmAppendTextEvent" text="Confirm" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="moveActionBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="292.0" prefWidth="252.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <Label prefHeight="18.0" prefWidth="230.0" text="Set source file" />
+                                          <TextField fx:id="sourcePathTF" />
+                                          <Button mnemonicParsing="false" onAction="#selectSourcePathEvent" text="select source path" />
+                                          <Label text="Set destination path" />
+                                          <TextField fx:id="destinationPathTF" prefHeight="26.0" prefWidth="229.0" />
+                                          <Button mnemonicParsing="false" onAction="#selectDestinationPathEvent" text="select destination path">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/writingOnFile.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
                                        </children>
                                     </VBox>
                                  </children>

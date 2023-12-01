@@ -230,18 +230,19 @@ public class SecondaryController implements Initializable, Observer {
 
     @FXML
     private void SaveRuleSetEvent(ActionEvent event) {
-          
-        Command saveCommand = new SaveCommand(ruleSet);
+       
+        File file = App.createFCSave(ruleSet.getName());
+        Command saveCommand = new SaveCommand(ruleSet, file);
         saveCommand.execute();
         System.out.println("Save button pressed");
     }
 
     @FXML
     private void loadRuleSetEvent(ActionEvent event) {
-                
-        Command loadCommand = new LoadCommand();
+        
+        File file = App.createFCLoad();
+        Command loadCommand = new LoadCommand(null, file);
         loadCommand.execute();
-        System.out.println("load button pressed");
         
     }
 
@@ -255,11 +256,7 @@ public class SecondaryController implements Initializable, Observer {
     public void update(Observable o, Object arg) {
         if (o instanceof RuleSet) {
             RuleSet updatedRuleSet = (RuleSet) o;
-            System.out.println(updatedRuleSet);
-            System.out.println("viva la cipolla");
             observableRules.setAll(updatedRuleSet.getRules());
-            // Aggiorna la tabella con la nuova lista di regole
-            //ruleTable.setItems(observableRules);
             ruleTable.refresh();
             AutoSave();
         }

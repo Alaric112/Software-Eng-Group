@@ -19,14 +19,16 @@ import javafx.stage.Stage;
 public class SaveCommand implements Command {
 
     private RuleSet ruleSet;
-
+    private File file;
     /**
      * Constructs a new SaveCommand with the specified RuleSet.
      *
      * @param ruleSet The RuleSet to be saved.
+     * @param file
      */    
-    public SaveCommand(RuleSet ruleSet) {
+    public SaveCommand(RuleSet ruleSet, File file) {
         this.ruleSet = ruleSet;
+        this.file = file;
 
     }    
 
@@ -35,23 +37,26 @@ public class SaveCommand implements Command {
      * If an IOException occurs during the save operation, it is printed to the standard error stream.
      */    
     @Override
-public void execute() {
-    // Create a file chooser for selecting the save location        
-    FileChooser chooser = new FileChooser();
-    chooser.setTitle("Save RuleSet");
+    public void execute() {
 
-    // Set a filter to allow only .dat files
-    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Data Files (*.dat)", "*.dat");
-    chooser.getExtensionFilters().add(extFilter);
+        // Save the RuleSet to the selected file using FileIOManager
+        FileIOManager.saveToFileAsync(file, ruleSet);
+    }
 
-    // Set the initial file name (Automatically sets the file name to the ruleSet's name)
-    chooser.setInitialFileName(ruleSet.getName());
-    
-    // Show the save file dialog and get the selected file
-    File file = chooser.showSaveDialog(new Stage());
+    public RuleSet getRuleSet() {
+        return ruleSet;
+    }
 
-    // Save the RuleSet to the selected file using FileIOManager
-    FileIOManager.saveToFileAsync(file, ruleSet);
-}
-    
+    public void setRuleSet(RuleSet ruleSet) {
+        this.ruleSet = ruleSet;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
+            
 }

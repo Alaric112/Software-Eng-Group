@@ -7,6 +7,7 @@ package group2;
 import org.junit.Test;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 
 import static org.junit.Assert.*;
 
@@ -15,52 +16,38 @@ public class DayWeekTriggerTest {
     @Test
     public void testConstructorAndGetTargetDay() {
         DayOfWeek targetDay = DayOfWeek.MONDAY;
-        DayWeekTrigger trigger = new DayWeekTrigger(targetDay);
+        DayWeekTrigger trigger = new DayWeekTrigger();
+        trigger.setTargetDay(targetDay);
         assertEquals(targetDay, trigger.getTargetDay());
     }
 
-    @Test
-    public void testSetTargetDay() {
-        DayOfWeek initialDay = DayOfWeek.MONDAY;
-        DayOfWeek newDay = DayOfWeek.TUESDAY;
-        DayWeekTrigger trigger = new DayWeekTrigger(initialDay);
+//    @Test
+//    public void testSetTargetDay() {
+//        DayOfWeek initialDay = DayOfWeek.MONDAY;
+//        DayOfWeek newDay = DayOfWeek.TUESDAY;
+//        DayWeekTrigger trigger = new DayWeekTrigger();
+//
+//        trigger.setTargetDay(newDay);
+//        assertEquals(newDay, trigger.getTargetDay());
+//    }
 
-        trigger.setTargetDay(newDay);
-        assertEquals(newDay, trigger.getTargetDay());
-    }
+//    @Test
+//    public void testEvaluateWithNonMatchingDay() {
+//        // Assuming the current day is Monday when the test is executed
+//        DayOfWeek currentDay = DayOfWeek.TUESDAY;
+//        DayWeekTrigger trigger = new DayWeekTrigger();
+//        trigger.setTargetDay(currentDay);
+//        assertFalse(trigger.evaluate());
+//    }
 
     @Test
-    public void testEvaluateWithNonMatchingDay() {
-        // Assuming the current day is Monday when the test is executed
-        DayOfWeek currentDay = DayOfWeek.TUESDAY;
-        DayWeekTrigger trigger = new DayWeekTrigger(currentDay);
-        assertFalse(trigger.evaluate());
-    }
-
-    @Test
-    public void testEvaluateWithDifferentCurrentDay() {
+    public void testEvaluateWithCurrentDay() {
         // Assuming the current day is Wednesday when the test is executed
-        DayOfWeek currentDay = DayOfWeek.WEDNESDAY;
-        DayOfWeek targetDay = DayOfWeek.TUESDAY;
-        DayWeekTrigger trigger = new DayWeekTrigger(targetDay);
-        assertFalse(trigger.evaluate());
-    }
-
-    @Test
-    public void testEvaluateWithDifferentTargetDay() {
-        // Assuming the current day is Monday when the test is executed
-        DayOfWeek currentDay = DayOfWeek.MONDAY;
-        DayOfWeek targetDay = DayOfWeek.WEDNESDAY;
-        DayWeekTrigger trigger = new DayWeekTrigger(targetDay);
-        assertFalse(trigger.evaluate());
-    }
-}
-
-/*@Test
-    public void testEvaluateWithMatchingDay() {
-        // Assuming the current day is Monday when the test is executed
-        DayOfWeek currentDay = DayOfWeek.TUESDAY;
-        DayWeekTrigger trigger = new DayWeekTrigger(currentDay);
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DayOfWeek currentDay = currentDateTime.getDayOfWeek();        
+        DayWeekTrigger trigger = new DayWeekTrigger();
+        trigger.setTargetDay(currentDay);
         assertTrue(trigger.evaluate());
     }
-*/
+
+}

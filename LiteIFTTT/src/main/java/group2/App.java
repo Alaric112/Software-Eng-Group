@@ -14,6 +14,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 
 /**
@@ -115,4 +116,44 @@ public class App extends Application {
         launch();
     }
     
+    public static FileChooser createFC(String title){        
+                
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle(title);
+
+
+
+        // Mostra la finestra di dialogo per selezionare il file da caricare
+        return chooser;
+        
+    }
+    
+    public static File createFCLoad(){
+        
+        FileChooser chooser = createFC("Load RuleSet");
+        
+        // Imposta il filtro per permettere solo i file .dat
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Data Files (*.dat)", "*.dat");
+        chooser.getExtensionFilters().add(extFilter);
+        
+        File file = chooser.showOpenDialog(new Stage());
+        return file;
+        
+    }
+    
+    public static File createFCSave(String name){ 
+        // Create a file chooser for selecting the save location
+        FileChooser chooser = createFC("Save RuleSet");
+        
+        // Set a filter to allow only .dat files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Data Files (*.dat)", "*.dat");
+        chooser.getExtensionFilters().add(extFilter);
+
+        // Set the initial file name (Automatically sets the file name to the ruleSet's name)
+        chooser.setInitialFileName(name);
+
+        // Show the save file dialog and get the selected file
+        File file = chooser.showSaveDialog(new Stage());
+        return file;
+    }    
 }
