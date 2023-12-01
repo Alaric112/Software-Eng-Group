@@ -7,83 +7,40 @@ package group2;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 /**
  *
  * @author soniabruno
  */
 
-
 public class FileMoveActionTest {
 
-    private FileMoveAction fileMoveAction;
+    private Path sourceFile;
+    private Path destinationFolder;
+    private Path destinationFile;
 
     @Before
-    public void setUp() {
-        fileMoveAction = new FileMoveAction();
+    public void setUp() throws IOException {
+        sourceFile = Files.createTempFile("sourceFile", ".txt");
+        destinationFolder = Files.createTempDirectory("destinationFolder");
+        destinationFile = destinationFolder.resolve("destinationFile.txt");
     }
 
-//    @Test
-//    public void testExecuteSuccessfulFileMove() throws IOException {
-//    // Create temporary source and destination paths
-//    Path sourcePath = Files.createTempFile("source", ".txt");
-//    Path destinationPath = Files.createTempFile("prova\\destination", ".txt");
-//
-//    // Set paths in the FileMoveAction instance
-//    fileMoveAction.setSourcePath(sourcePath);
-//    fileMoveAction.setDestinationPath(destinationPath);
-//    System.out.println(sourcePath);
-//    // Execute the action
-//    fileMoveAction.execute();
-//    System.out.println(sourcePath);
-//    // Assert that the source file no longer exists if it originally existed
-//    if (Files.exists(sourcePath)) {
-//        assertFalse("Source file still exists", Files.exists(sourcePath));
-//    }
-//
-//    // Assert that the destination file now exists
-//    assertTrue("Destination file does not exist", Files.exists(destinationPath));
-//
-//    // Clean up temporary files
-//    Files.deleteIfExists(destinationPath);
-//    }
-
-
     @Test
-    public void testExecuteWithError() {
-        // Set non-existing source and destination paths
-        Path sourcePath = Paths.get("not_existing_source.txt");
-        Path destinationPath = Paths.get("not_existing_destination.txt");
+    public void testFileMoveAction() throws IOException {
+        FileMoveActionCreator creator = new FileMoveActionCreator();
 
-        fileMoveAction.setSourcePath(sourcePath);
-        fileMoveAction.setDestinationPath(destinationPath);
+        creator.setSourcePath(sourceFile);
+        creator.setDestinationPath(destinationFile);
 
-        // Execute the action and expect an error, but no exception to be thrown
+        Action fileMoveAction = creator.createAction();
+
         fileMoveAction.execute();
-    }
 
-    @Test
-    public void testSetSourcePath() {
-        // Set a new source path
-        Path sourcePath = Paths.get("new_source.txt");
-        fileMoveAction.setSourcePath(sourcePath);
-
-        // Assert that the source path has been set correctly
-        assertTrue(sourcePath.equals(fileMoveAction.setSourcePath(sourcePath)));
-    }
-
-    @Test
-    public void testSetDestinationPath() {
-        // Set a new destination path
-        Path destinationPath = Paths.get("new_destination.txt");
-        fileMoveAction.setDestinationPath(destinationPath);
-
-        // Assert that the destination path has been set correctly
-        assertTrue(destinationPath.equals(fileMoveAction.setDestinationPath(destinationPath)));
+        assertTrue(Files.exists(destinationFile));
+        assertTrue(Files.notExists(sourceFile));
     }
 }
