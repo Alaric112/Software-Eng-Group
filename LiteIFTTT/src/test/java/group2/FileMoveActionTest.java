@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 /**
  *
@@ -25,22 +26,24 @@ public class FileMoveActionTest {
     @Before
     public void setUp() throws IOException {
         sourceFile = Files.createTempFile("sourceFile", ".txt");
+        
         destinationFolder = Files.createTempDirectory("destinationFolder");
+        
         destinationFile = destinationFolder.resolve("destinationFile.txt");
     }
 
     @Test
     public void testFileMoveAction() throws IOException {
-        FileMoveActionCreator creator = new FileMoveActionCreator();
+        assertTrue(Files.exists(sourceFile));
 
-        creator.setSourcePath(sourceFile);
-        creator.setDestinationPath(destinationFile);
+        FileMoveAction fileMoveAction = new FileMoveAction();
 
-        Action fileMoveAction = creator.createAction();
+        fileMoveAction.setSourcePath(sourceFile);
+        fileMoveAction.setDestinationPath(destinationFile);
 
         fileMoveAction.execute();
 
+        assertFalse(Files.exists(sourceFile));  
         assertTrue(Files.exists(destinationFile));
-        assertTrue(Files.notExists(sourceFile));
     }
 }
