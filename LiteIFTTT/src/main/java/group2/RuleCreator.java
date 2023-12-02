@@ -82,8 +82,8 @@ public final class RuleCreator {
         triggerFactoryMap.put("Time", new TimeTriggerFactory());
         triggerFactoryMap.put("Day of Week", new DayOfWeekTriggerCreator());
         triggerFactoryMap.put("File Exist", new FileTriggerCreator());
-
-        
+        triggerFactoryMap.put("Date", new FileTriggerCreator());
+                
     }
 
     /**

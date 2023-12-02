@@ -31,6 +31,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.time.DayOfWeek;
+import javafx.scene.control.DatePicker;
 import javafx.stage.DirectoryChooser;
 
 /**
@@ -138,6 +139,12 @@ public class CreateRuleSubWindowController implements Initializable {
     private VBox sleepRuleBox;
     @FXML
     private CheckBox fireOnceCheckBox;
+    @FXML
+    private VBox dateTriggerBox;
+    @FXML
+    private DatePicker datePickTrigger;
+    @FXML
+    private Button btnSetDateTrigger;
     /**
      * Initializes the controller class. This method is automatically called
      * after the FXML file has been loaded.
@@ -198,9 +205,8 @@ public class CreateRuleSubWindowController implements Initializable {
         btnSetDayWeek.disableProperty().bind(choiceBoxDayWeek.getSelectionModel().selectedItemProperty().isNull());
         
         btnFileExist.disableProperty().bind(Bindings.isEmpty(FileExistNameTF.textProperty()));
-        
-        
-        
+        btnSetDateTrigger.disableProperty().bind(datePickTrigger.valueProperty().isNull());
+  
     }
 
     /**
@@ -390,8 +396,12 @@ public class CreateRuleSubWindowController implements Initializable {
                 triggerVisibilityMap.put("File Exist", () -> {
                     hideAllTriggerBoxes();
                     FileExistBox.setVisible(true);
-                });                 
-                
+                });
+
+                triggerVisibilityMap.put("Date", () -> {
+                    hideAllTriggerBoxes();
+                dateTriggerBox.setVisible(true);
+                });                
                 
     }
     
@@ -409,6 +419,7 @@ public class CreateRuleSubWindowController implements Initializable {
         timeTriggerBox.setVisible(false);
         dayWeekBox.setVisible(false);
         FileExistBox.setVisible(false);
+        dateTriggerBox.setVisible(false);
     } 
 
     private void visibilityAction(String value){
@@ -537,6 +548,10 @@ public class CreateRuleSubWindowController implements Initializable {
         FileTrigger fileTrigger = (FileTrigger) lastTrigger;
         fileTrigger.setTargetFile(folderPath.getAbsolutePath(), FileExistNameTF.getText());
         
+    }
+
+    @FXML
+    private void setDateTriggerEvent(ActionEvent event) {
     }
     
 }
