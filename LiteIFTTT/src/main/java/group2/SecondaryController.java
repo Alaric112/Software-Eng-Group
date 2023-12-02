@@ -157,12 +157,17 @@ public class SecondaryController implements Initializable, Observer {
     @FXML
     private void createRuleAction(ActionEvent event) {
         
-        if(isThreadRunning.getValue()){
-            
-            stopCheckerEvent(event);   
-        }
+        boolean wasCheckerRunning = isThreadRunning.get();
         
+        // Se il checker è in esecuzione, fermalo prima di aprire la finestra di creazione delle regole
+        if (wasCheckerRunning)
+            stopCheckerEvent(event);
+              
         App.createSubWindow("CreateRuleSubWindow", "Rule Creator");
+        
+        if (wasCheckerRunning)
+            startCheckerEvent(event);
+    
     }
 
     @FXML
