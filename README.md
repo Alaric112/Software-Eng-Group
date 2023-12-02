@@ -1,5 +1,5 @@
 # Software-Eng-Group02
-The repository for the software engineering project by Group 02, channel A-H.
+This repository is for the software engineering project by Group 02, channel A-H.
 
 ## Lite IFTTT
 Inside the LiteIFTTT folder, you can find the source code of the project.
