@@ -6,7 +6,6 @@ package group2;
 
 import org.junit.Test;
 
-import java.time.LocalDateTime;
 import java.time.MonthDay;
 
 import static org.junit.Assert.*;
