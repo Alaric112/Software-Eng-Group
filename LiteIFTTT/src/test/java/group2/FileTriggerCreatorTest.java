@@ -12,22 +12,16 @@ import static org.junit.Assert.*;
  *
  * @author patap
  */
-public class FileDeleteActionCreatorTest {
+public class FileTriggerCreatorTest {
     
-    public FileDeleteActionCreatorTest() {
-    }
-    
-    /**
-     * Test of createAction method, of class FileDeleteActionCreator.
-     */
     @Test
     public void testCreateAction() {
 
-        FileDeleteActionCreator fileDeleteFactory = new FileDeleteActionCreator();
+        FileTriggerCreator fileTriggerFactory = new FileTriggerCreator();
 
-        Action actionTest = fileDeleteFactory.createAction();
+        Trigger triggerTest = fileTriggerFactory.createTrigger();
 
-        assertTrue(actionTest instanceof FileDeleteAction);        
+        assertTrue(triggerTest instanceof FileTrigger);        
         
     }
     

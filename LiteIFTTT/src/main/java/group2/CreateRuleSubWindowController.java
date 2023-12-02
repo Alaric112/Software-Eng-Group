@@ -365,7 +365,12 @@ public class CreateRuleSubWindowController implements Initializable {
                 triggerVisibilityMap.put("Day of Week", () -> {
                     hideAllTriggerBoxes();
                     dayWeekBox.setVisible(true);
-                });                
+                }); 
+                
+                triggerVisibilityMap.put("File Exist", () -> {
+                    hideAllTriggerBoxes();
+                });                 
+                
                 
     }
     
