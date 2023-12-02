@@ -10,4 +10,8 @@ package group2;
  */
 public class OneShotRuleDecorator extends RuleDecorator{
     
+    public OneShotRuleDecorator(Rule rule) {
+        super(rule);
+    }
+    
 }

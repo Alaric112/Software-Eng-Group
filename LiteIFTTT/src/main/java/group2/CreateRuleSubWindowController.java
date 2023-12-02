@@ -95,7 +95,7 @@ public class CreateRuleSubWindowController implements Initializable {
 
     private static Map<String, Runnable> actionVisibilityMap;
     private static Map<String, Runnable> triggerVisibilityMap;
-    RuleCreator ruleCreator = RuleCreator.getInstance();
+    
     @FXML
     private CheckBox fireOnlyOnceCheckBox;
     @FXML
