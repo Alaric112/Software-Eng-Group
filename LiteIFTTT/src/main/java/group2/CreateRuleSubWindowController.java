@@ -176,7 +176,7 @@ public class CreateRuleSubWindowController implements Initializable {
 
         confirmButton.disableProperty().bind(isTextFieldEmpty.or(triggerTreeViewHasRoot.not()).or(actionTreeViewHasRoot.not()));        
         choiceBoxDayWeek.getItems().addAll(DayOfWeek.values());
-        btnSetDayWeek.disableProperty().bind(isTextFieldEmpty);
+        btnSetDayWeek.disableProperty().bind(choiceBoxDayWeek.getSelectionModel().selectedItemProperty().isNull());
         
     }
 
@@ -491,6 +491,10 @@ public class CreateRuleSubWindowController implements Initializable {
 
     @FXML
     private void setDayWeekEvent(ActionEvent event) {
+        
+        DayWeekTrigger weekTrigger = (DayWeekTrigger) lastTrigger;
+        weekTrigger.setTargetDay(choiceBoxDayWeek.getValue());
+         
     }
     
 }
