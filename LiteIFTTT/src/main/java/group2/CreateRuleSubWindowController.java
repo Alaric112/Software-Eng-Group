@@ -89,17 +89,12 @@ public class CreateRuleSubWindowController implements Initializable {
 
     private Action lastAction;
 
-    private Map<String, TextField> parameterTextFieldMap = new HashMap<>();
-
     private ControlRuleChecker checker = ControlRuleChecker.getInstance();
 
     private RuleCreator ruleCreator = RuleCreator.getInstance();
 
     private static Map<String, Runnable> actionVisibilityMap;
     private static Map<String, Runnable> triggerVisibilityMap;
-    
-    @FXML
-    private CheckBox fireOnlyOnceCheckBox;
     @FXML
     private Spinner<Integer> spinnerDaySleepingPeriod;
     @FXML
@@ -137,6 +132,12 @@ public class CreateRuleSubWindowController implements Initializable {
     private Button btnFileExist;
     
     private File folderPath;
+    @FXML
+    private CheckBox sleepRuleCheckBox;
+    @FXML
+    private VBox sleepRuleBox;
+    @FXML
+    private CheckBox fireOnceCheckBox;
     /**
      * Initializes the controller class. This method is automatically called
      * after the FXML file has been loaded.
@@ -168,6 +169,16 @@ public class CreateRuleSubWindowController implements Initializable {
         SpinnerValueFactory<Integer> minuteValues1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0);
         this.spinnerMinuteSleepingPeriod.setValueFactory(minuteValues1);
 
+        // Imposta la selezione predefinita (puoi scegliere quale impostare come predefinita)
+        fireOnceCheckBox.setSelected(true);
+
+        // Disabilita checkBox2 quando checkBox1 è selezionata e viceversa
+        fireOnceCheckBox.disableProperty().bind(sleepRuleCheckBox.selectedProperty());
+        sleepRuleCheckBox.disableProperty().bind(fireOnceCheckBox.selectedProperty());        
+        
+        // Lega la visibilità della VBox allo stato selezionato della checkBox2
+        sleepRuleBox.visibleProperty().bind(sleepRuleCheckBox.selectedProperty());        
+        
         // Disable the confirmation button when the rule name text field is empty
         BooleanBinding isTextFieldEmpty = Bindings.isEmpty(ruleNameTF.textProperty());
 
@@ -188,6 +199,8 @@ public class CreateRuleSubWindowController implements Initializable {
         
         btnFileExist.disableProperty().bind(Bindings.isEmpty(FileExistNameTF.textProperty()));
         
+        
+        
     }
 
     /**
@@ -199,8 +212,6 @@ public class CreateRuleSubWindowController implements Initializable {
     private void confirmRuleCreationEvent(ActionEvent event) {
 
         String ruleName = ruleNameTF.getText();
-        if(fireOnlyOnceCheckBox.isSelected())
-            System.out.println("");
         Rule rule = ruleCreator.createRule(ruleName, lastTrigger, lastAction);
 
         RuleSet ruleSet = checker.getRuleSet();
@@ -208,7 +219,6 @@ public class CreateRuleSubWindowController implements Initializable {
         System.out.println(ruleSet);
         System.out.println(rule);
         closeWindowEvent(event);
-
 
     }
        

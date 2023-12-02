@@ -271,8 +271,13 @@
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="331.2" prefWidth="476.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <CheckBox fx:id="fireOnlyOnceCheckBox" mnemonicParsing="false" text="FireOnlyOnce" />
-                                          <VBox alignment="CENTER" prefHeight="331.0" prefWidth="191.0">
+                                          <VBox alignment="CENTER" prefHeight="331.0" prefWidth="164.0" spacing="30.0">
+                                             <children>
+                                                <CheckBox fx:id="fireOnceCheckBox" mnemonicParsing="false" text="One-Shot Rule" />
+                                                <CheckBox fx:id="sleepRuleCheckBox" mnemonicParsing="false" text="Sleeping Rule" />
+                                             </children>
+                                          </VBox>
+                                          <VBox fx:id="sleepRuleBox" alignment="CENTER" prefHeight="331.0" prefWidth="191.0">
                                              <children>
                                                 <Label text="Insert days of sleeping period" />
                                                 <Spinner fx:id="spinnerDaySleepingPeriod" editable="true" />
