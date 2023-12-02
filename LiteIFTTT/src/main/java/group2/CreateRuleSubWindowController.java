@@ -29,6 +29,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import java.time.DayOfWeek;
 
 /**
  * FXML Controller class 
@@ -111,6 +112,12 @@ public class CreateRuleSubWindowController implements Initializable {
     private TextField sourcePathTF;
     @FXML
     private TextField destinationPathTF;
+    @FXML
+    private VBox dayWeekBox;
+    @FXML
+    private ChoiceBox<DayOfWeek> choiceBoxDayWeek;
+    @FXML
+    private Button btnSetDayWeek;
     
     /**
      * Initializes the controller class. This method is automatically called
@@ -151,8 +158,10 @@ public class CreateRuleSubWindowController implements Initializable {
         actionTreeViewHasRoot.bind(Bindings.createBooleanBinding(()
                 -> actionTreeView.getRoot() != null, actionTreeView.rootProperty()));
 
-        confirmButton.disableProperty().bind(isTextFieldEmpty.or(triggerTreeViewHasRoot.not()).or(actionTreeViewHasRoot.not()));
-
+        confirmButton.disableProperty().bind(isTextFieldEmpty.or(triggerTreeViewHasRoot.not()).or(actionTreeViewHasRoot.not()));        
+        choiceBoxDayWeek.getItems().addAll(DayOfWeek.values());
+        btnSetDayWeek.disableProperty().bind(isTextFieldEmpty);
+        
     }
 
     /**
@@ -174,7 +183,7 @@ public class CreateRuleSubWindowController implements Initializable {
         closeWindowEvent(event);
 
     }
-
+       
     /**
      * Handles the event when the user closes the rule creation window.
      *
@@ -201,8 +210,8 @@ public class CreateRuleSubWindowController implements Initializable {
         
         visibilityTrigger(item.getValue());
 
-    }
-
+    }        
+    
     /**
      * Handles the event when the user adds an action to the rule.
      *
@@ -291,16 +300,7 @@ public class CreateRuleSubWindowController implements Initializable {
         MessageAction m = (MessageAction) lastAction;
         m.setMessageInfo(messageInfo);
 
-    }
-    
-    /**
-     * Handles the event when the user selects a path for a sound action.
-     *
-     * @param event the ActionEvent triggered by the user
-     */    
-    private void selectPathEvent(ActionEvent event) { 
-
-    }
+    }   
     
     private void initActionVisibilityMap() {
         actionVisibilityMap = new HashMap<>();
@@ -337,21 +337,21 @@ public class CreateRuleSubWindowController implements Initializable {
                 
     }
 
-        private void initTriggerVisibilityMap() {
+    private void initTriggerVisibilityMap() {
         triggerVisibilityMap = new HashMap<>();
         triggerVisibilityMap.put("Time", () -> {
                     hideAllTriggerBoxes();
                     timeTriggerBox.setVisible(true);
-                    // Altre azioni specifiche per "message"
                 });
 
-                triggerVisibilityMap.put("Day of week", () -> {
+                triggerVisibilityMap.put("Day of Week", () -> {
                     hideAllTriggerBoxes();
+                    dayWeekBox.setVisible(true);
                 });                
                 
     }
     
-     private void hideAllActionBoxes() {
+    private void hideAllActionBoxes() {
          
         messageActionBox.setVisible(false);
         playAudioBox.setVisible(false);
@@ -363,6 +363,7 @@ public class CreateRuleSubWindowController implements Initializable {
     private void hideAllTriggerBoxes() {
         
         timeTriggerBox.setVisible(false);
+        dayWeekBox.setVisible(false);
     } 
 
     private void visibilityAction(String value){
@@ -463,6 +464,10 @@ public class CreateRuleSubWindowController implements Initializable {
             copyAction.setDestinationPath(path); 
         }
         
+    }
+
+    @FXML
+    private void setDayWeekEvent(ActionEvent event) {
     }
     
 }
