@@ -4,11 +4,11 @@
  */
 package group2;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.Before;
 import org.junit.After;
-import org.junit.rules.TemporaryFolder;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,74 +18,72 @@ import static org.junit.Assert.*;
  * @author patap
  */
 public class FileTriggerTest {
-//    
-//    private FileTrigger fileTrigger;
-//    private TemporaryFolder temporaryFolder;
-//    private File testFile;
-//    
-//    @Before
-//    public void setUp() throws IOException {
-//        temporaryFolder = new TemporaryFolder();
-//        // Create a temporary directory and file for testing
-//        File testDirectory = temporaryFolder.newFolder("testDirectory");
-//        File testFile = temporaryFolder.newFile("testDirectory/testFile.txt");
-//
-//        // Initialize FileTrigger with the temporary directory and file name
-//        fileTrigger = new FileTrigger();
-//        fileTrigger.setTargetFile(testDirectory.getAbsolutePath(), "testFile.txt");
-//    }
-//    
-//    @Test
-//    public void testEvaluateFileExists() {
-//        fileTrigger.setTargetFile("testDirectory", "testFile.txt");
-//
-//        // Now the file should exist
-//        assertTrue(fileTrigger.evaluate());
-//
-//        // Cleanup: Deleting the file
-//    }
-//
-//    @Test
-//    public void testEvaluateFileDoesNotExist() {
-//        fileTrigger.setTargetFile("nonexistentDirectory", "nonexistentFile.txt");
-//
-//        // The file should not exist
-//        assertFalse(fileTrigger.evaluate());
-//    }
-//
-//    @Test(expected = IllegalArgumentException.class)
-//    public void testEvaluateNullDirectory() {
-//        fileTrigger.setTargetFile(null, "testFile.txt");
-//
-//        // This should throw an IllegalStateException
-//        fileTrigger.evaluate();
-//    }
-//
-//    @Test(expected = IllegalArgumentException.class)
-//    public void testEvaluateNullFileName() {
-//        fileTrigger.setTargetFile("testDirectory", null);
-//
-//        // This should throw an IllegalStateException
-//        fileTrigger.evaluate();
-//    }
-//
-//    @Test
-//    public void testGetTargetFile() {
-//        fileTrigger.setTargetFile("testDirectory", "testFile.txt");
-//
-//        assertEquals(new File("testDirectory", "testFile.txt"), fileTrigger.getTargetFile());
-//    }
-//
-//    @Test
-//    public void testSetTargetFile() {
-//        fileTrigger.setTargetFile("initialDirectory", "initialFile.txt");
-//
-//        assertEquals(new File("initialDirectory", "initialFile.txt"), fileTrigger.getTargetFile());
-//
-//        // Change the target file
-//        fileTrigger.setTargetFile("newDirectory", "newFile.txt");
-//
-//        assertEquals(new File("newDirectory", "newFile.txt"), fileTrigger.getTargetFile());
-//    }
+    
+    private FileTrigger fileTrigger;
+    private Path tempDirectory;
+    private Path tempFile;
+    
+    @Before
+    public void setUp() throws IOException {
+        fileTrigger = new FileTrigger();
+        tempDirectory = Files.createTempDirectory("testDirectory");
+        tempFile = Files.createTempFile(tempDirectory, "testFile", ".txt");
+        
+    }
+
+    @After
+    public void tearDown() throws IOException {
+        // Elimina la cartella e il file temporanei
+        Files.deleteIfExists(tempFile);
+        Files.deleteIfExists(tempDirectory);
+    }    
+    
+    @Test
+    public void testEvaluateFileExists() {
+        // Setting up the target file
+        fileTrigger.setTargetFile(tempDirectory.toString(), tempFile.getFileName().toString());
+    
+        // Evaluating the trigger
+        assertTrue(fileTrigger.evaluate());
+    }
+
+    @Test
+    public void testEvaluateFileDoesNotExist() {
+        // Setting up the target file
+        fileTrigger.setTargetFile("nonexistent/directory", "nonexistentfile.txt");
+
+        // Evaluating the trigger
+        assertFalse(fileTrigger.evaluate());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testEvaluateNullDirectory() {
+        // Setting up the target file with null directory
+        fileTrigger.setTargetFile(null, "example.txt");
+
+        // This should throw IllegalStateException
+        fileTrigger.evaluate();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testEvaluateNullFileName() {
+        // Setting up the target file with null file name
+        fileTrigger.setTargetFile("path/to/directory", null);
+
+        // This should throw IllegalStateException
+        fileTrigger.evaluate();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetTargetFileNullDirectory() {
+        // Setting up the target file with null directory
+        fileTrigger.setTargetFile(null, "example.txt");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetTargetFileNullFileName() {
+        // Setting up the target file with null file name
+        fileTrigger.setTargetFile("path/to/directory", null);
+    }
 
 }
