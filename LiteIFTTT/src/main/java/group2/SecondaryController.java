@@ -28,7 +28,6 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -74,8 +73,6 @@ public class SecondaryController implements Initializable, Observer {
     
     private ObjectProperty<RuleSet> ruleSetProperty = checker.getRuleSetProperty();    
     private RuleSet ruleSet;
-    @FXML
-    private ProgressBar progressBar;
     
     private ObservableList<Rule> observableRules;    
     @FXML

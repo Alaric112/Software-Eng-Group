@@ -1,6 +1,7 @@
 
 package group2;
 
+import java.util.concurrent.ForkJoinPool;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -106,8 +107,11 @@ public final class ControlRuleChecker {
     private void checkRuleSet() {
         
         // Iterate through the set of rules and check each rule
-        for (Rule rule : ruleSetProperty.get().getRules()) {
-            rule.checkRule();
-        }
+        ForkJoinPool.commonPool().execute(() -> {
+            for (Rule rule : ruleSetProperty.get().getRules()) {
+                // Esegui la chiamata a rule.checkRule() su un thread separato
+                rule.checkRule();
+            }
+        });
     }
 }

@@ -552,6 +552,10 @@ public class CreateRuleSubWindowController implements Initializable {
 
     @FXML
     private void setDateTriggerEvent(ActionEvent event) {
+        
+        DateTrigger dateTrigger = (DateTrigger) lastTrigger;
+        dateTrigger.setTargetDate(datePickTrigger.getValue());
+        
     }
     
 }
