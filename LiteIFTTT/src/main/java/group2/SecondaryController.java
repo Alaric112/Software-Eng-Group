@@ -78,6 +78,8 @@ public class SecondaryController implements Initializable, Observer {
     private ProgressBar progressBar;
     
     private ObservableList<Rule> observableRules;    
+    @FXML
+    private MenuItem editRule;
     
     /**
      * Initializes the controller class.
@@ -131,6 +133,7 @@ public class SecondaryController implements Initializable, Observer {
         BooleanProperty isItemSelected = new SimpleBooleanProperty();
         isItemSelected.bind(Bindings.isNull(ruleTable.getSelectionModel().selectedItemProperty()));
         deleteRuleItemMenu.disableProperty().bind(isItemSelected);
+        editRule.disableProperty().bind(isItemSelected);
         deleteBtn.disableProperty().bind(isItemSelected);
         switchStatusRule.disableProperty().bind(isItemSelected);
         deleteEditMenuBar.disableProperty().bind(isItemSelected);
@@ -265,6 +268,16 @@ public class SecondaryController implements Initializable, Observer {
     public void cleanup() {
         // Rimuovi il controller come osservatore quando non è più necessario
         ruleSet.deleteObserver(this);
+    }
+
+    @FXML
+    private void editRuleEvent(ActionEvent event) {
+        
+        if(isThreadRunning.getValue()){           
+            stopCheckerEvent(event);   
+        }
+        Rule rule = ruleTable.getSelectionModel().getSelectedItem();       
+        App.createSubWindow("CreateRuleSubWindow", "Rule Creator");             
     }
     
 }

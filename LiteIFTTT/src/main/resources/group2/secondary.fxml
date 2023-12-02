@@ -99,6 +99,7 @@
                                   <MenuItem mnemonicParsing="false" onAction="#createRuleAction" text="Add Rule" />
                                     <MenuItem fx:id="deleteRuleItemMenu" mnemonicParsing="false" onAction="#deleteRuleEvent" text="Delete Rule" />
                                     <MenuItem fx:id="switchStatusRule" mnemonicParsing="false" onAction="#switchStatusRuleEvent" text="Active/Deactive" />
+                                    <MenuItem fx:id="editRule" mnemonicParsing="false" onAction="#editRuleEvent" text="Edit Rule" />
                                 </items>
                               </ContextMenu>
                            </contextMenu>
