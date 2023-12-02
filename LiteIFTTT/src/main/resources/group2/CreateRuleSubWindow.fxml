@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
@@ -247,7 +248,24 @@
                       </Tab>
                         <Tab text="Rule settings">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="331.2" prefWidth="476.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <CheckBox fx:id="fireOnlyOnceCheckBox" mnemonicParsing="false" text="FireOnlyOnce" />
+                                          <VBox alignment="CENTER" prefHeight="331.0" prefWidth="191.0">
+                                             <children>
+                                                <Label text="Insert days of sleeping period" />
+                                                <Spinner fx:id="spinnerDaySleepingPeriod" editable="true" />
+                                                <Label text="hours" />
+                                                <Spinner fx:id="spinnerHourSleepingPeriod" editable="true" />
+                                                <Label text="minutes" />
+                                                <Spinner fx:id="spinnerMinuteSleepingPeriod" editable="true" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children></AnchorPane>
                           </content>
                            <graphic>
                               <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">

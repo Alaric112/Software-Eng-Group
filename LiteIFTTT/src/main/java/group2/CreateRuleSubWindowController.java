@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
@@ -32,8 +33,8 @@ import javafx.stage.Stage;
 import java.time.DayOfWeek;
 
 /**
- * FXML Controller class 
- * 
+ * FXML Controller class
+ *
  * The {@code CreateRuleSubWindowController} class is the controller for the
  * FXML document that defines the GUI for creating rules in the application.
  * It handles user interactions and manages the creation of rules, triggers,
@@ -42,8 +43,8 @@ import java.time.DayOfWeek;
  * <p>This controller initializes the UI components, binds properties to control
  * visibility and enable/disable states, and communicates with the {@code RuleCreator}
  * and {@code ControlRuleChecker} to create and validate rules.</p>
- * 
- * 
+ *
+ *
  * @author patap
  */
 public class CreateRuleSubWindowController implements Initializable {
@@ -92,9 +93,18 @@ public class CreateRuleSubWindowController implements Initializable {
     private ControlRuleChecker checker = ControlRuleChecker.getInstance();
 
     private RuleCreator ruleCreator = RuleCreator.getInstance();
-    
+
     private static Map<String, Runnable> actionVisibilityMap;
     private static Map<String, Runnable> triggerVisibilityMap;
+    
+    @FXML
+    private CheckBox fireOnlyOnceCheckBox;
+    @FXML
+    private Spinner<Integer> spinnerDaySleepingPeriod;
+    @FXML
+    private Spinner<Integer> spinnerHourSleepingPeriod;
+    @FXML
+    private Spinner<Integer> spinnerMinuteSleepingPeriod;
 
     @FXML
     private TextField pathDelete;
@@ -134,7 +144,7 @@ public class CreateRuleSubWindowController implements Initializable {
 
         initActionVisibilityMap();
         initTriggerVisibilityMap();
-        
+
         hideAllTriggerBoxes();
         hideAllActionBoxes();
 
@@ -143,6 +153,12 @@ public class CreateRuleSubWindowController implements Initializable {
         this.spinnerHourTimeTrigger.setValueFactory(hourValues);
         SpinnerValueFactory<Integer> minuteValues = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0);
         this.spinnerMinuteTimeTrigger.setValueFactory(minuteValues);
+        SpinnerValueFactory<Integer> dayValues  = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0);
+        this.spinnerDaySleepingPeriod.setValueFactory(dayValues);
+        SpinnerValueFactory<Integer> hourValues1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0);
+        this.spinnerHourSleepingPeriod.setValueFactory(hourValues1);
+        SpinnerValueFactory<Integer> minuteValues1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0);
+        this.spinnerMinuteSleepingPeriod.setValueFactory(minuteValues1);
 
         // Disable the confirmation button when the rule name text field is empty
         BooleanBinding isTextFieldEmpty = Bindings.isEmpty(ruleNameTF.textProperty());
@@ -173,7 +189,8 @@ public class CreateRuleSubWindowController implements Initializable {
     private void confirmRuleCreationEvent(ActionEvent event) {
 
         String ruleName = ruleNameTF.getText();
-
+        if(fireOnlyOnceCheckBox.isSelected())
+            System.out.println("");
         Rule rule = ruleCreator.createRule(ruleName, lastTrigger, lastAction);
 
         RuleSet ruleSet = checker.getRuleSet();
@@ -182,13 +199,14 @@ public class CreateRuleSubWindowController implements Initializable {
         System.out.println(rule);
         closeWindowEvent(event);
 
+
     }
        
     /**
      * Handles the event when the user closes the rule creation window.
      *
      * @param event the ActionEvent triggered by the user
-     */    
+     */
     @FXML
     private void closeWindowEvent(ActionEvent event) {
 
@@ -200,14 +218,14 @@ public class CreateRuleSubWindowController implements Initializable {
      * Handles the event when the user adds a trigger to the rule.
      *
      * @param event the ActionEvent triggered by the user
-     */    
+     */
     @FXML
     private void addTriggerEvent(ActionEvent event) {
 
         TreeItem<String> item = new TreeItem<>(triggerChoiceBox.getValue());
         triggerTreeView.setRoot(item);
         lastTrigger = ruleCreator.createTrigger(item.getValue());
-        
+
         visibilityTrigger(item.getValue());
 
     }        
@@ -216,7 +234,7 @@ public class CreateRuleSubWindowController implements Initializable {
      * Handles the event when the user adds an action to the rule.
      *
      * @param event the ActionEvent triggered by the user
-     */    
+     */
     @FXML
     private void addActionEvent(ActionEvent event) {
 
@@ -225,12 +243,12 @@ public class CreateRuleSubWindowController implements Initializable {
         lastAction = ruleCreator.createAction(item.getValue());
 
         visibilityAction(item.getValue());
-                
+
     }
 
     /**
      * Selects a trigger item from the triggerTreeView and performs specific actions based on the selected item.
-     */    
+     */
     @FXML
     public void selectTriggerItem() {
 
@@ -253,7 +271,7 @@ public class CreateRuleSubWindowController implements Initializable {
      * Handles the event when the user sets the time for a time-trigger.
      *
      * @param event the ActionEvent triggered by the user
-     */   
+     */
     @FXML
     private void setTimeEvent(ActionEvent event) {
 
@@ -267,7 +285,7 @@ public class CreateRuleSubWindowController implements Initializable {
 
     /**
      * Selects an action item from the actionTreeView and performs specific actions based on the selected item.
-     */    
+     */
     @FXML
     private void selectActionItem() {
 
@@ -285,12 +303,12 @@ public class CreateRuleSubWindowController implements Initializable {
 
         selectActionItem();
     }
-    
+
     /**
      * Handles the event when the user inserts a message for a message action.
      *
      * @param event the ActionEvent triggered by the user
-     */    
+     */
     @FXML
     private void insertMessageAction(ActionEvent event) {
 
@@ -319,22 +337,22 @@ public class CreateRuleSubWindowController implements Initializable {
                     hideAllActionBoxes();
                     moveActionBox.setVisible(true);
                 });
-                
+
                 actionVisibilityMap.put("File Delete", () -> {
                     hideAllActionBoxes();
                     fileDeleteBox.setVisible(true);
-                });                
+                });
 
                 actionVisibilityMap.put("File Move", () -> {
                     hideAllActionBoxes();
                     moveActionBox.setVisible(true);
                 });
-                
+
                 actionVisibilityMap.put("Text Append", () -> {
                     hideAllActionBoxes();
                     appendTextBox.setVisible(true);
-                });                
-                
+                });
+
     }
 
     private void initTriggerVisibilityMap() {
@@ -359,111 +377,111 @@ public class CreateRuleSubWindowController implements Initializable {
         appendTextBox.setVisible(false);
         moveActionBox.setVisible(false);
     }
-     
+
     private void hideAllTriggerBoxes() {
-        
+
         timeTriggerBox.setVisible(false);
         dayWeekBox.setVisible(false);
     } 
 
     private void visibilityAction(String value){
-        
+
         Runnable visibilityAction = actionVisibilityMap.get(value);
         if (visibilityAction != null) {
             visibilityAction.run();
         }
-        
+
     }
 
     private void visibilityTrigger(String value){
-        
+
         Runnable visibilityTrigger = triggerVisibilityMap.get(value);
         if (visibilityTrigger != null) {
             visibilityTrigger.run();
         }
-        
+
     }
-    
+
     @FXML
     private void selectFilePathDelete(ActionEvent event) {
         FileDeleteAction deleteAction = (FileDeleteAction) lastAction;
-        String path = getFilePath(pathDelete);       
+        String path = getFilePath(pathDelete);
         deleteAction.setPath(path);
     }
 
     @FXML
     private void selectSoundPathEvent(ActionEvent event) {
-        
+
         SoundAction soundAction = (SoundAction) lastAction;
-        String path = getFilePath(pathSound);       
+        String path = getFilePath(pathSound);
         soundAction.setPath(path);
-        
+
     }
-    
+
     private String getFilePath(TextField txtField){
-        
+
         if(txtField.getText().isEmpty()){
-           
+
             FileChooser chooser = App.createFC("Open File");
             File file = chooser.showOpenDialog(new Stage());
             return (file != null) ? file.getPath() : "";
-            
+
         } else{
-            
+
             String path = txtField.getText();
             txtField.clear();
             return path;
-            
+
         }
     }
 
     @FXML
     private void selectFileToAppendEvent(ActionEvent event) {
-        
+
         TextAppendAction appendAction = (TextAppendAction) lastAction;
-        String path = getFilePath(pathFileToAppend);       
+        String path = getFilePath(pathFileToAppend);
         appendAction.setFile(new File(path));
-        
+
     }
 
     @FXML
     private void confirmAppendTextEvent(ActionEvent event) {
-        
+
         TextAppendAction appendAction = (TextAppendAction) lastAction;
         appendAction.setTextAppend(appendTextArea.getText());
-        
+
     }
 
     @FXML
     private void selectSourcePathEvent(ActionEvent event) {
-       
+
         String path = getFilePath(sourcePathTF);
-        
+
         if (lastAction instanceof FileMoveAction){
-            FileMoveAction moveAction = (FileMoveAction) lastAction;                   
+            FileMoveAction moveAction = (FileMoveAction) lastAction;
             moveAction.setSourcePath(path);
-            
+
         } else{
             FileCopyAction copyAction = (FileCopyAction) lastAction;
-            copyAction.setSourcePath(path); 
+            copyAction.setSourcePath(path);
         }
-          
+
     }
 
     @FXML
     private void selectDestinationPathEvent(ActionEvent event) {
-        
+
         String path = getFilePath(destinationPathTF);
-        
+
         if (lastAction instanceof FileMoveAction){
-            
+
             FileMoveAction moveAction = (FileMoveAction) lastAction;
             moveAction.setDestinationPath(path);
         } else{
             FileCopyAction copyAction = (FileCopyAction) lastAction;
-            copyAction.setDestinationPath(path); 
+            copyAction.setDestinationPath(path);
         }
-        
+
     }
 
     @FXML
