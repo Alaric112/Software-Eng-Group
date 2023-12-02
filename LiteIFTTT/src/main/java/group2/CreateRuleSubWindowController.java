@@ -31,6 +31,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.time.DayOfWeek;
+import javafx.stage.DirectoryChooser;
 
 /**
  * FXML Controller class
@@ -128,7 +129,14 @@ public class CreateRuleSubWindowController implements Initializable {
     private ChoiceBox<DayOfWeek> choiceBoxDayWeek;
     @FXML
     private Button btnSetDayWeek;
+    @FXML
+    private VBox FileExistBox;
+    @FXML
+    private TextField FileExistNameTF;
+    @FXML
+    private Button btnFileExist;
     
+    private File folderPath;
     /**
      * Initializes the controller class. This method is automatically called
      * after the FXML file has been loaded.
@@ -177,6 +185,8 @@ public class CreateRuleSubWindowController implements Initializable {
         confirmButton.disableProperty().bind(isTextFieldEmpty.or(triggerTreeViewHasRoot.not()).or(actionTreeViewHasRoot.not()));        
         choiceBoxDayWeek.getItems().addAll(DayOfWeek.values());
         btnSetDayWeek.disableProperty().bind(choiceBoxDayWeek.getSelectionModel().selectedItemProperty().isNull());
+        
+        btnFileExist.disableProperty().bind(Bindings.isEmpty(FileExistNameTF.textProperty()));
         
     }
 
@@ -369,6 +379,7 @@ public class CreateRuleSubWindowController implements Initializable {
                 
                 triggerVisibilityMap.put("File Exist", () -> {
                     hideAllTriggerBoxes();
+                    FileExistBox.setVisible(true);
                 });                 
                 
                 
@@ -387,6 +398,7 @@ public class CreateRuleSubWindowController implements Initializable {
 
         timeTriggerBox.setVisible(false);
         dayWeekBox.setVisible(false);
+        FileExistBox.setVisible(false);
     } 
 
     private void visibilityAction(String value){
@@ -495,6 +507,26 @@ public class CreateRuleSubWindowController implements Initializable {
         DayWeekTrigger weekTrigger = (DayWeekTrigger) lastTrigger;
         weekTrigger.setTargetDay(choiceBoxDayWeek.getValue());
          
+    }
+
+    @FXML
+    private void selectFolderPathEvent(ActionEvent event) {
+        
+        // Creare un oggetto DirectoryChooser
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+
+        // Impostare il titolo del selettore di directory
+        directoryChooser.setTitle("Select a directory");
+
+        folderPath = directoryChooser.showDialog(new Stage());
+    }
+
+    @FXML
+    private void confirmFileExistEvent(ActionEvent event) {
+        
+        FileTrigger fileTrigger = (FileTrigger) lastTrigger;
+        fileTrigger.setTargetFile(folderPath.getAbsolutePath(), FileExistNameTF.getText());
+        
     }
     
 }

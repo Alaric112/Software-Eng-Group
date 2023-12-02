@@ -110,7 +110,7 @@
                                        <padding>
                                           <Insets top="10.0" />
                                        </padding></VBox>
-                                    <VBox fx:id="dayWeekBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                    <VBox fx:id="dayWeekBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                        <children>
                                           <Label text="Select a day!" />
                                           <ChoiceBox fx:id="choiceBoxDayWeek" prefWidth="150.0" />
@@ -123,6 +123,25 @@
                                                 </ImageView>
                                              </graphic>
                                           </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox fx:id="FileExistBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#selectFolderPathEvent" text="Select a folder!">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/folder.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Label text="Inseet the name of the file!" />
+                                          <TextField fx:id="FileExistNameTF" />
+                                          <Button fx:id="btnFileExist" mnemonicParsing="false" onAction="#confirmFileExistEvent" text="Confirm creation" />
                                        </children>
                                        <padding>
                                           <Insets top="10.0" />
