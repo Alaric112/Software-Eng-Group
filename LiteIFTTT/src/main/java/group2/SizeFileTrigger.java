@@ -24,7 +24,7 @@ public class SizeFileTrigger extends FileTrigger{
         return getTargetFile().length()>sizeTarget;
     }
 
-    public double getSizeFile() {
+    public long getSizeFile() {
         return sizeTarget;
     }
 
