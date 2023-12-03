@@ -5,7 +5,7 @@
 package group2;
 
 /**
- *
+ * Interface used to apply the command pattern
  * @author patap
  */
 public interface Command {

@@ -7,6 +7,12 @@ package group2;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 
+/**
+ * The `DayWeekTrigger` class represents an implementation of the `Trigger` interface
+ * for triggering events based on a specific day of the week.
+ *
+ * @author Lore
+ */
 public class DayWeekTrigger implements Trigger {
 
     private DayOfWeek targetDay;
@@ -14,7 +20,12 @@ public class DayWeekTrigger implements Trigger {
     public DayWeekTrigger() {
         this.targetDay = DayOfWeek.MONDAY;
     }
-     
+
+    /**
+     * Evaluates whether the current day matches the target day for triggering an event.
+     *
+     * @return `true` if the current day matches the target day; otherwise, `false`.
+     */    
     @Override
     public boolean evaluate() {
         LocalDateTime currentDateTime = LocalDateTime.now();

@@ -1,16 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package group2;
 
 import java.io.IOException;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
 
 /**
+ * The `ExcProgrammAction` class represents an implementation of the `Action` interface
+ * for executing external programs with specified command-line arguments.
  *
  * @author patap
+ * @version 1.0
  */
 public class ExcProgrammAction implements Action {
 
@@ -21,7 +19,11 @@ public class ExcProgrammAction implements Action {
         this.programPath = "";
         this.commandLineArg = "";
     }    
-    
+
+    /**
+     * Executes the external program with the specified command-line argument.
+     * Uses `ProcessBuilder` to start the external process.
+     */    
     @Override
     public void execute() {
         

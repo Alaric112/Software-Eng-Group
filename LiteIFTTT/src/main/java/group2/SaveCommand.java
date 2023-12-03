@@ -1,9 +1,6 @@
 package group2;
 
 import java.io.File;
-import java.io.IOException;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 /**
  * The {@code SaveCommand} class represents a command to save a {@link RuleSet} to a file.
