@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package group2;
 
 import java.io.File;
@@ -93,16 +89,12 @@ public class CreateRuleSubWindowController implements Initializable {
     private ControlRuleChecker checker = ControlRuleChecker.getInstance();
 
     private RuleCreator ruleCreator = RuleCreator.getInstance();
-
-    private static Map<String, Runnable> actionVisibilityMap;
-    private static Map<String, Runnable> triggerVisibilityMap;
     @FXML
     private Spinner<Integer> spinnerDaySleepingPeriod;
     @FXML
     private Spinner<Integer> spinnerHourSleepingPeriod;
     @FXML
     private Spinner<Integer> spinnerMinuteSleepingPeriod;
-
     @FXML
     private TextField pathDelete;
     @FXML
@@ -145,6 +137,18 @@ public class CreateRuleSubWindowController implements Initializable {
     private DatePicker datePickTrigger;
     @FXML
     private Button btnSetDateTrigger;
+    @FXML
+    private VBox excProgrammActionBox;
+    @FXML
+    private TextField programmPathTF;
+    @FXML
+    private TextField excArgumentsTF;
+    @FXML
+    private Button setExcArgsBtn;
+        
+    private static Map<String, Runnable> actionVisibilityMap;
+    private static Map<String, Runnable> triggerVisibilityMap;
+    
     /**
      * Initializes the controller class. This method is automatically called
      * after the FXML file has been loaded.
@@ -207,6 +211,7 @@ public class CreateRuleSubWindowController implements Initializable {
         btnFileExist.disableProperty().bind(Bindings.isEmpty(FileExistNameTF.textProperty()));
         btnSetDateTrigger.disableProperty().bind(datePickTrigger.valueProperty().isNull());
   
+        setExcArgsBtn.disableProperty().bind(Bindings.isEmpty(excArgumentsTF.textProperty()));
     }
 
     /**
@@ -378,6 +383,11 @@ public class CreateRuleSubWindowController implements Initializable {
                     hideAllActionBoxes();
                     appendTextBox.setVisible(true);
                 });
+                
+                actionVisibilityMap.put("Execute Programm", () -> {
+                    hideAllActionBoxes();
+                    excProgrammActionBox.setVisible(true);
+                });                
 
     }
 
@@ -412,6 +422,8 @@ public class CreateRuleSubWindowController implements Initializable {
         fileDeleteBox.setVisible(false);
         appendTextBox.setVisible(false);
         moveActionBox.setVisible(false);
+        excProgrammActionBox.setVisible(false);
+        
     }
 
     private void hideAllTriggerBoxes() {
@@ -533,10 +545,8 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void selectFolderPathEvent(ActionEvent event) {
         
-        // Creare un oggetto DirectoryChooser
         DirectoryChooser directoryChooser = new DirectoryChooser();
 
-        // Impostare il titolo del selettore di directory
         directoryChooser.setTitle("Select a directory");
 
         folderPath = directoryChooser.showDialog(new Stage());
@@ -555,6 +565,23 @@ public class CreateRuleSubWindowController implements Initializable {
         
         DateTrigger dateTrigger = (DateTrigger) lastTrigger;
         dateTrigger.setTargetDate(datePickTrigger.getValue());
+        
+    }
+
+    @FXML
+    private void selectExcPathEvent(ActionEvent event) {
+    
+        ExcProgrammAction excProgrammAction = (ExcProgrammAction) lastAction;
+        String path = getFilePath(programmPathTF);
+        excProgrammAction.setProgramPath(path);        
+        
+    }
+
+    @FXML
+    private void setExcArgsEvent(ActionEvent event) {
+        
+        ExcProgrammAction excProgrammAction = (ExcProgrammAction) lastAction;
+        excProgrammAction.setCommandLineArg(excArgumentsTF.getText());
         
     }
     

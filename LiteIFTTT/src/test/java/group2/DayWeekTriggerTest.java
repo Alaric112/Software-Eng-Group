@@ -21,25 +21,6 @@ public class DayWeekTriggerTest {
         assertEquals(targetDay, trigger.getTargetDay());
     }
 
-//    @Test
-//    public void testSetTargetDay() {
-//        DayOfWeek initialDay = DayOfWeek.MONDAY;
-//        DayOfWeek newDay = DayOfWeek.TUESDAY;
-//        DayWeekTrigger trigger = new DayWeekTrigger();
-//
-//        trigger.setTargetDay(newDay);
-//        assertEquals(newDay, trigger.getTargetDay());
-//    }
-
-//    @Test
-//    public void testEvaluateWithNonMatchingDay() {
-//        // Assuming the current day is Monday when the test is executed
-//        DayOfWeek currentDay = DayOfWeek.TUESDAY;
-//        DayWeekTrigger trigger = new DayWeekTrigger();
-//        trigger.setTargetDay(currentDay);
-//        assertFalse(trigger.evaluate());
-//    }
-
     @Test
     public void testEvaluateWithCurrentDay() {
         // Assuming the current day is Wednesday when the test is executed

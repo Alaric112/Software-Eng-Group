@@ -74,6 +74,7 @@ public final class RuleCreator {
         actionFactoryMap.put("File Copy", new FileCopyActionCreator());
         actionFactoryMap.put("File Move", new FileMoveActionCreator());
         actionFactoryMap.put("File Delete", new FileDeleteActionCreator());
+        actionFactoryMap.put("Execute Programm", new ExcProgrammActionCreator());       
         
     }
    
