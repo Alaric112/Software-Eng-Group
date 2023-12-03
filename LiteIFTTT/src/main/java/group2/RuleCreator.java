@@ -33,7 +33,8 @@ public final class RuleCreator {
     private static volatile RuleCreator instance;
     private Map<String, ActionCreator> actionFactoryMap;
     private Map<String, TriggerCreator> triggerFactoryMap;
-
+    private ControlRuleChecker checker = ControlRuleChecker.getInstance();
+    
     /**
      * Private constructor for the singleton pattern.
      * Initializes the action and trigger factory maps.
@@ -95,11 +96,13 @@ public final class RuleCreator {
      * @param ruleName the name of the rule
      * @param trigger the trigger for the rule
      * @param action the action associated with the rule
-     * @return a new rule instance
      */    
-    public Rule createRule(String ruleName, Trigger trigger, Action action){
+    public void createRule(String ruleName, Trigger trigger, Action action){
                                     
-        return new BaseRule(ruleName, trigger, action);
+        Rule rule = new BaseRule(ruleName, trigger, action);
+        RuleSet ruleSet = checker.getRuleSet();
+        ruleSet.addRule(rule);        
+        
     }
 
     /**

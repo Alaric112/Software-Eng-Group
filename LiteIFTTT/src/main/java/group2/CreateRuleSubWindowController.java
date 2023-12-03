@@ -239,12 +239,9 @@ public class CreateRuleSubWindowController implements Initializable {
     private void confirmRuleCreationEvent(ActionEvent event) {
 
         String ruleName = ruleNameTF.getText();
-        Rule rule = ruleCreator.createRule(ruleName, lastTrigger, lastAction);
+        ruleCreator.createRule(ruleName, lastTrigger, lastAction);
 
-        RuleSet ruleSet = checker.getRuleSet();
-        ruleSet.addRule(rule);
-        System.out.println(ruleSet);
-        System.out.println(rule);
+
         closeWindowEvent(event);
 
     }
