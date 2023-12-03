@@ -8,13 +8,13 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
- * @author 39334
+ * @author Lore
  */
 public class SleepingRuleDecorator extends RuleDecorator{
 
     private long minSleepTimeMillis;
     private long lastCheckTimestamp;
-    
+
     public SleepingRuleDecorator(Rule rule, long minSleepTime, TimeUnit timeUnit) {
         super(rule);
         this.minSleepTimeMillis = timeUnit.toMillis(minSleepTime);
@@ -23,14 +23,14 @@ public class SleepingRuleDecorator extends RuleDecorator{
 
     @Override
     public void checkRule() {
-        
+
         long currentTime = System.currentTimeMillis();
 
         // Verifica se è trascorso il tempo minimo di "sleep"
         if (currentTime - lastCheckTimestamp >= minSleepTimeMillis) {
             // Esegui il controllo della regola decorata
           super.checkRule();
-          
+ 
             // Aggiorna il timestamp dell'ultimo controllo
             lastCheckTimestamp = currentTime;
         } 

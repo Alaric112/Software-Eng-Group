@@ -6,9 +6,9 @@ package group2;
 
 /**
  *
- * @author 39334
+ * @author Lore
  */
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.MonthDay;
 
 public class DayMonthTrigger implements Trigger {
@@ -18,15 +18,14 @@ public class DayMonthTrigger implements Trigger {
     public DayMonthTrigger() {
         this.targetMonthDay = MonthDay.of(1, 1);
     }
-
+    
     @Override
     public boolean evaluate() {
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        MonthDay currentMonthDay = MonthDay.from(currentDateTime);
-
+        LocalDate currentDate = LocalDate.now();
+        MonthDay currentMonthDay = MonthDay.of(currentDate.getMonthValue(), currentDate.getDayOfMonth());
         return currentMonthDay.equals(targetMonthDay);
     }
-
+    
     public MonthDay getTargetMonthDay() {
         return targetMonthDay;
     }
@@ -35,4 +34,3 @@ public class DayMonthTrigger implements Trigger {
         this.targetMonthDay = MonthDay.of(month, dayOfMonth);
     }
 }
-
