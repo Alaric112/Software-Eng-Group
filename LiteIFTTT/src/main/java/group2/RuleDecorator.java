@@ -6,7 +6,7 @@ package group2;
 
 /**
  *
- * @author 39334
+ * @author Lore
  */
 public abstract class RuleDecorator implements Rule{
 
