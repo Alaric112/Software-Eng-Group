@@ -8,6 +8,11 @@ package group2;
  *
  * @author Faust
  */
-public class SizeTrigger {
+public class SizeFileTriggerFactory extends TriggerCreator{
+
+    @Override
+    public Trigger createTrigger() {
+        return new SizeFileTrigger();
+    }
     
 }
