@@ -18,49 +18,49 @@ import static org.junit.Assert.*;
  */
 public class SleepingRuleDecoratorTest {
     
-    public SleepingRuleDecoratorTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of checkRule method, of class SleepingRuleDecorator.
-     */
-    @Test
-    public void testCheckRule() {
-        System.out.println("checkRule");
-        SleepingRuleDecorator instance = null;
-        instance.checkRule();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setMinSleepTime method, of class SleepingRuleDecorator.
-     */
-    @Test
-    public void testSetMinSleepTime() {
-        System.out.println("setMinSleepTime");
-        long minSleepTime = 0L;
-        TimeUnit timeUnit = null;
-        SleepingRuleDecorator instance = null;
-        instance.setMinSleepTime(minSleepTime, timeUnit);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
+//    public SleepingRuleDecoratorTest() {
+//    }
+//    
+//    @BeforeClass
+//    public static void setUpClass() {
+//    }
+//    
+//    @AfterClass
+//    public static void tearDownClass() {
+//    }
+//    
+//    @Before
+//    public void setUp() {
+//    }
+//    
+//    @After
+//    public void tearDown() {
+//    }
+//
+//    /**
+//     * Test of checkRule method, of class SleepingRuleDecorator.
+//     */
+//    @Test
+//    public void testCheckRule() {
+//        System.out.println("checkRule");
+//        SleepingRuleDecorator instance = null;
+//        instance.checkRule();
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of setMinSleepTime method, of class SleepingRuleDecorator.
+//     */
+//    @Test
+//    public void testSetMinSleepTime() {
+//        System.out.println("setMinSleepTime");
+//        long minSleepTime = 0L;
+//        TimeUnit timeUnit = null;
+//        SleepingRuleDecorator instance = null;
+//        instance.setMinSleepTime(minSleepTime, timeUnit);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//    
 }
