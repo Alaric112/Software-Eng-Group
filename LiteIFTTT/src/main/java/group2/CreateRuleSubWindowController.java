@@ -608,7 +608,7 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void setDayMonthTriggerEvent(ActionEvent event) {
         
-        DayMonthTrigger dayMonthTrigger = (DayMonthTrigger) lastAction;
+        DayMonthTrigger dayMonthTrigger = (DayMonthTrigger) lastTrigger;
         dayMonthTrigger.setTargetMonthDay(choiceBoxMonths.getValue().getValue(), dayMonthSpinner.getValue());
         
     }
