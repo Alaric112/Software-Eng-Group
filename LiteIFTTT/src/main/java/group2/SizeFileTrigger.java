@@ -13,10 +13,15 @@ import java.io.File;
 public class SizeFileTrigger extends FileTrigger{
 
     private long sizeTarget;
-    
+
+    public SizeFileTrigger() {
+        super();
+        this.sizeTarget = 0;
+    }    
+       
     @Override
-    public boolean evaluate() {       
-        return super.getTargetFile().length()>sizeTarget;
+    public boolean evaluate() {
+        return getTargetFile().length()>sizeTarget;
     }
 
     public double getSizeFile() {

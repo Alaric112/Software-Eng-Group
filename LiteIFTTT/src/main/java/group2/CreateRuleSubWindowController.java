@@ -27,6 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.time.DayOfWeek;
+import java.time.Month;
 import javafx.scene.control.DatePicker;
 import javafx.stage.DirectoryChooser;
 
@@ -148,6 +149,14 @@ public class CreateRuleSubWindowController implements Initializable {
         
     private static Map<String, Runnable> actionVisibilityMap;
     private static Map<String, Runnable> triggerVisibilityMap;
+    @FXML
+    private VBox dayMonthBox;
+    @FXML
+    private ChoiceBox<Month> choiceBoxMonths;
+    @FXML
+    private Spinner<Integer> dayMonthSpinner;
+    @FXML
+    private Button btnSetDayMonthTrigger;
     
     /**
      * Initializes the controller class. This method is automatically called
@@ -180,6 +189,9 @@ public class CreateRuleSubWindowController implements Initializable {
         SpinnerValueFactory<Integer> minuteValues1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0);
         this.spinnerMinuteSleepingPeriod.setValueFactory(minuteValues1);
 
+        SpinnerValueFactory<Integer> monthDay = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 31, 1);
+        this.dayMonthSpinner.setValueFactory(monthDay);
+        
         // Imposta la selezione predefinita (puoi scegliere quale impostare come predefinita)
         fireOnceCheckBox.setSelected(true);
 
@@ -212,6 +224,10 @@ public class CreateRuleSubWindowController implements Initializable {
         btnSetDateTrigger.disableProperty().bind(datePickTrigger.valueProperty().isNull());
   
         setExcArgsBtn.disableProperty().bind(Bindings.isEmpty(excArgumentsTF.textProperty()));
+
+        choiceBoxMonths.getItems().addAll(Month.values());
+        btnSetDayMonthTrigger.disableProperty().bind(choiceBoxMonths.getSelectionModel().selectedItemProperty().isNull());
+        
     }
 
     /**
@@ -410,8 +426,14 @@ public class CreateRuleSubWindowController implements Initializable {
 
                 triggerVisibilityMap.put("Date", () -> {
                     hideAllTriggerBoxes();
-                dateTriggerBox.setVisible(true);
+                    dateTriggerBox.setVisible(true);
                 });                
+
+                triggerVisibilityMap.put("Day of Month", () -> {
+                    hideAllTriggerBoxes();
+                    dayMonthBox.setVisible(true);
+                });                
+
                 
     }
     
@@ -432,6 +454,7 @@ public class CreateRuleSubWindowController implements Initializable {
         dayWeekBox.setVisible(false);
         FileExistBox.setVisible(false);
         dateTriggerBox.setVisible(false);
+        dayMonthBox.setVisible(false);
     } 
 
     private void visibilityAction(String value){
@@ -582,6 +605,14 @@ public class CreateRuleSubWindowController implements Initializable {
         
         ExcProgrammAction excProgrammAction = (ExcProgrammAction) lastAction;
         excProgrammAction.setCommandLineArg(excArgumentsTF.getText());
+        
+    }
+
+    @FXML
+    private void setDayMonthTriggerEvent(ActionEvent event) {
+        
+        DayMonthTrigger dayMonthTrigger = (DayMonthTrigger) lastAction;
+        dayMonthTrigger.setTargetMonthDay(choiceBoxMonths.getValue().getValue(), dayMonthSpinner.getValue());
         
     }
     

@@ -82,8 +82,10 @@ public final class RuleCreator {
         // Associate trigger types with their respective implementations
         triggerFactoryMap.put("Time", new TimeTriggerFactory());
         triggerFactoryMap.put("Day of Week", new DayOfWeekTriggerCreator());
+        triggerFactoryMap.put("Day of Month", new DayOfMonthTriggerCreator());
         triggerFactoryMap.put("File Exist", new FileTriggerCreator());
-        triggerFactoryMap.put("Date", new DateTriggerFactory());
+        triggerFactoryMap.put("File Size", new SizeFileTriggerFactory());        
+        triggerFactoryMap.put("Date", new DateTriggerFactory());                
                 
     }
 

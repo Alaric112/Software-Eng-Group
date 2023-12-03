@@ -148,11 +148,31 @@
                                           <Insets top="10.0" />
                                        </padding>
                                     </VBox>
-                                    <VBox fx:id="dateTriggerBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                    <VBox fx:id="dateTriggerBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                        <children>
                                           <Label text="Pick a date!" />
                                           <DatePicker fx:id="datePickTrigger" />
                                           <Button fx:id="btnSetDateTrigger" mnemonicParsing="false" onAction="#setDateTriggerEvent" text="Set Date!">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/calendar.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox fx:id="dayMonthBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <Label text="Select a month!" />
+                                          <ChoiceBox fx:id="choiceBoxMonths" prefWidth="150.0" />
+                                          <Label text="Pick your day!" />
+                                          <Spinner fx:id="dayMonthSpinner" />
+                                          <Button fx:id="btnSetDayMonthTrigger" mnemonicParsing="false" onAction="#setDayMonthTriggerEvent" text="set it!">
                                              <graphic>
                                                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>

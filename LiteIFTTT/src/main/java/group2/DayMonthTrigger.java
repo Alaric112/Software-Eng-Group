@@ -15,8 +15,8 @@ public class DayMonthTrigger implements Trigger {
 
     private MonthDay targetMonthDay;
 
-    public DayMonthTrigger(int month, int dayOfMonth) {
-        this.targetMonthDay = MonthDay.of(month, dayOfMonth);
+    public DayMonthTrigger() {
+        this.targetMonthDay = MonthDay.of(1, 1);
     }
 
     @Override
