@@ -97,11 +97,12 @@ public final class RuleCreator {
      * @param trigger the trigger for the rule
      * @param action the action associated with the rule
      */    
-    public void createRule(String ruleName, Trigger trigger, Action action){
+    public Rule createRule(String ruleName, Trigger trigger, Action action){
                                     
         Rule rule = new BaseRule(ruleName, trigger, action);
         RuleSet ruleSet = checker.getRuleSet();
         ruleSet.addRule(rule);        
+        return rule;
         
     }
 

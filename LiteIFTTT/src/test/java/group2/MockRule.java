@@ -20,15 +20,15 @@ public class MockRule implements Rule {
         this.ruleName = ruleName;
         this.mockTrigger = new MockTrigger();
         this.mockAction = new MockAction();
+        active = true;
     }  
     
     @Override
     public void checkRule() {
 
-        if(mockTrigger.evaluate() && active){
-            
+        if(mockTrigger.evaluate() && active){            
             mockAction.execute();
-            checked = true;
+            checked = true;           
         }
         
     }
@@ -62,6 +62,14 @@ public class MockRule implements Rule {
     public boolean isActive(){
         
         return checked;
+    }
+    
+    public void setActive(boolean active){
+        this.active = active;
+    }
+    
+    public boolean isOn(){
+        return active;
     }
     
 }
