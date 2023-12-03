@@ -7,7 +7,7 @@ Inside the LiteIFTTT folder, you can find the source code of the project.
 ### Documentation
 
 - Product Backlog: [Product backlog](https://docs.google.com/spreadsheets/d/1Vq7-XlnHF-XD_1JTmWrMwWch_tCJsQ-t/edit?usp=sharing&ouid=104616255443413680542&rtpof=true&sd=true)
-(Updated for the second sprint, 26 november)
+(Updated for the third sprint, 4 december)
 
 - First sprint documentation: [First sprint documentation](https://drive.google.com/drive/folders/1ztFpDEDcegKjWW7tKsJLOVqgTZp2EOkz?usp=sharing)
 Inside the first sprint documentation folder there is also a copy of the product backlog, PreGame and software architecture documentation.
