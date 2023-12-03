@@ -14,7 +14,7 @@ Inside the first sprint documentation folder there is also a copy of the product
 
 - [Second sprint documentation](https://drive.google.com/drive/folders/1b49_4BHmBjJ2SpBYIXpmUp9WuZ1MKgEQ?usp=sharing): it contains Project Burndown chart (There is an image in documentation folder), Sprint review report and Sprint retrospective report
 
-- [Third sprint documentation](https://drive.google.com/drive/folders/1b49_4BHmBjJ2SpBYIXpmUp9WuZ1MKgEQ?usp=sharing): it contains Project Burndown chart (There is an image in documentation folder), Sprint review report and Sprint retrospective report
+- [Third sprint documentation](https://drive.google.com/drive/folders/18ehxKnx-rlUNxC7Ug2pG5XFynTu65PDa?usp=sharing): it contains Project Burndown chart (There is an image in documentation folder), Sprint review report and Sprint retrospective report
 
 - Software Architecture Documentation: [Software architecture documentation](https://docs.google.com/document/d/1GM5WXZTz5QPpytWCMQGrRBXxXg_TDPNhZz9rGOVXo_k/edit?usp=sharing), there is also an image inside 'documentation' folder
 
