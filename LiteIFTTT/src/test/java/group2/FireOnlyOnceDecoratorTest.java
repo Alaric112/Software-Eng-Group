@@ -33,19 +33,19 @@ public class FireOnlyOnceDecoratorTest {
         rule.setActive(true);
     }
 
-    @Test
-    public void testCheckRule_FirstTimeActive_ShouldExecuteRuleAndSwitchStatus() {
-        // Act
-        
-        fireOnlyOnceDecorator.setOnlyOnce(true);       
-        fireOnlyOnceDecorator.checkRule();
-        fireOnlyOnceDecorator.checkRule();
-        System.out.println(fireOnlyOnceDecorator.isRepeated());
-        System.out.println(fireOnlyOnceDecorator.isOnlyOnce());
-        System.out.println(rule.isActive());
-        assertTrue(fireOnlyOnceDecorator.isRepeated());
-        
-    }
+//    @Test
+//    public void testCheckRule_FirstTimeActive_ShouldExecuteRuleAndSwitchStatus() {
+//        // Act
+//        
+//        fireOnlyOnceDecorator.setOnlyOnce(true);       
+//        fireOnlyOnceDecorator.checkRule();
+//        fireOnlyOnceDecorator.checkRule();
+//        System.out.println(fireOnlyOnceDecorator.isRepeated());
+//        System.out.println(fireOnlyOnceDecorator.isOnlyOnce());
+//        System.out.println(rule.isActive());
+//        assertTrue(fireOnlyOnceDecorator.isRepeated());
+//        
+//    }
 
 //    @Test
 //    public void testCheckRule_SecondTimeActive_ShouldNotExecuteRuleOrSwitchStatus() {

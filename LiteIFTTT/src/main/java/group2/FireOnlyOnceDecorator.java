@@ -11,21 +11,18 @@ package group2;
 public class FireOnlyOnceDecorator extends RuleDecorator{
     
     private boolean onlyOnce;
-    private boolean repeat;
+
     
     public FireOnlyOnceDecorator(Rule rule) {
-        super(rule);
-        onlyOnce = false; 
-        repeat = false;
+        super(rule);       
+       
     }
     
        @Override
     public void checkRule() {
-        if (onlyOnce && isActive()) {
-            if(!repeat){
-                super.checkRule();                  
-                super.switchStatus();
-                repeat = true;}
+        if (onlyOnce) {
+            super.checkRule();                  
+            super.switchStatus();             
         }     
     }
 
@@ -33,10 +30,6 @@ public class FireOnlyOnceDecorator extends RuleDecorator{
         return onlyOnce;
     }
     
-    public boolean isRepeated() {
-        return repeat;
-    }
-
     public void setOnlyOnce(boolean onlyOnce) {
         this.onlyOnce = onlyOnce;
     }
