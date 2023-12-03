@@ -14,15 +14,16 @@ public class FireOnlyOnceDecorator extends RuleDecorator{
 
     
     public FireOnlyOnceDecorator(Rule rule) {
-        super(rule);       
-       
+        super(rule);     
+        onlyOnce = false;
     }
     
        @Override
     public void checkRule() {
         if (onlyOnce) {
             super.checkRule();                  
-            super.switchStatus();             
+            super.switchStatus(); 
+            onlyOnce = false;
         }     
     }
 
@@ -33,7 +34,4 @@ public class FireOnlyOnceDecorator extends RuleDecorator{
     public void setOnlyOnce(boolean onlyOnce) {
         this.onlyOnce = onlyOnce;
     }
-
-
-   
 }
