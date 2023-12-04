@@ -38,7 +38,7 @@ public class FileCopyAction implements Action {
         try {
             Path srcPath = Paths.get(sourcePath);
             Path dstPath = Paths.get(destinationPath);
-            Files.copy(srcPath, dstPath, StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(srcPath, dstPath.resolve(srcPath.getFileName()), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             System.err.println("Error copying the file: " + e.getMessage());
         }

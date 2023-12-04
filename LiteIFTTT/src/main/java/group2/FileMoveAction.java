@@ -40,7 +40,7 @@ public class FileMoveAction implements Action {
         
         try {
             if (Files.exists(srcPath)) {
-                Files.move(srcPath, dstPath, StandardCopyOption.REPLACE_EXISTING);
+                Files.move(srcPath, dstPath.resolve(srcPath.getFileName()), StandardCopyOption.REPLACE_EXISTING);
             }
         } catch (IOException e) {
             System.err.println("Error : " + e.getMessage());

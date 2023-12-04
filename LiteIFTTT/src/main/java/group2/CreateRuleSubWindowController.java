@@ -491,7 +491,7 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void selectFilePathDelete(ActionEvent event) {
         FileDeleteAction deleteAction = (FileDeleteAction) lastAction;
-        String path = getFilePath(pathDelete);
+        String path = getFilePath(pathDelete, false);
         deleteAction.setPath(path);
     }
 
@@ -499,17 +499,25 @@ public class CreateRuleSubWindowController implements Initializable {
     private void selectSoundPathEvent(ActionEvent event) {
 
         SoundAction soundAction = (SoundAction) lastAction;
-        String path = getFilePath(pathSound);
+        String path = getFilePath(pathSound, false);
         soundAction.setPath(path);
 
     }
 
-    private String getFilePath(TextField txtField){
-
+    private String getFilePath(TextField txtField, boolean isFolder){
+        File file;
         if(txtField.getText().isEmpty()){
+            if(isFolder){
+                
+                DirectoryChooser directoryChooser = new DirectoryChooser();
+                directoryChooser.setTitle("Select a directory");
+                file = directoryChooser.showDialog(new Stage());
+                
+            } else{
+                FileChooser chooser = App.createFC("Open File");
+                file = chooser.showOpenDialog(new Stage());
 
-            FileChooser chooser = App.createFC("Open File");
-            File file = chooser.showOpenDialog(new Stage());
+            }
             return (file != null) ? file.getPath() : "";
 
         } else{
@@ -519,13 +527,14 @@ public class CreateRuleSubWindowController implements Initializable {
             return path;
 
         }
-    }
 
+    }
+    
     @FXML
     private void selectFileToAppendEvent(ActionEvent event) {
 
         TextAppendAction appendAction = (TextAppendAction) lastAction;
-        String path = getFilePath(pathFileToAppend);
+        String path = getFilePath(pathFileToAppend, false);
         appendAction.setFile(new File(path));
 
     }
@@ -541,7 +550,7 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void selectSourcePathEvent(ActionEvent event) {
 
-        String path = getFilePath(sourcePathTF);
+        String path = getFilePath(sourcePathTF, false);
 
         if (lastAction instanceof FileMoveAction){
             FileMoveAction moveAction = (FileMoveAction) lastAction;
@@ -557,7 +566,7 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void selectDestinationPathEvent(ActionEvent event) {
 
-        String path = getFilePath(destinationPathTF);
+        String path = getFilePath(destinationPathTF, true);
 
         if (lastAction instanceof FileMoveAction){
 
@@ -608,7 +617,7 @@ public class CreateRuleSubWindowController implements Initializable {
     private void selectExcPathEvent(ActionEvent event) {
     
         ExcProgrammAction excProgrammAction = (ExcProgrammAction) lastAction;
-        String path = getFilePath(programmPathTF);
+        String path = getFilePath(programmPathTF, false);
         excProgrammAction.setProgramPath(path);        
         
     }
@@ -636,9 +645,6 @@ public class CreateRuleSubWindowController implements Initializable {
         sizeField.clear();
         sizef.setSizeFile(l);
         sizef.setTargetFile(folderPath);
-        System.out.println(folderPath.getPath());
-        System.out.println(folderPath.getName());
-        System.out.println(folderPath.length());
         sizef.setTargetFile(folderPath.getPath(), folderPath.getName());
     }
 
