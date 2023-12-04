@@ -633,6 +633,7 @@ public class CreateRuleSubWindowController implements Initializable {
     private void checkSizeAction(ActionEvent event) {
         SizeFileTrigger sizef = (SizeFileTrigger) lastTrigger;
         long l = Long.parseLong(sizeField.getText()) ;
+        sizeField.clear();
         sizef.setSizeFile(l);
         sizef.setTargetFile(folderPath);
         System.out.println(folderPath.getPath());

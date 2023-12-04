@@ -105,7 +105,7 @@
                                                 </ImageView>
                                              </graphic>
                                           </Button>
-                                          <Label text="Insert size file to check" />
+                                          <Label text="Insert size file to check in byte" />
                                           <TextField fx:id="sizeField" />
                                           <Button fx:id="insertSizeButton" mnemonicParsing="false" onAction="#checkSizeAction" text="insert " />
                                        </children>
