@@ -13,6 +13,9 @@ import java.io.File;
 public class SizeFileTrigger extends FileTrigger{
 
     private long sizeTarget;
+    private File fileTarget;
+    private String filename;
+    private String directory;
 
     public SizeFileTrigger() {
         super();
@@ -21,7 +24,10 @@ public class SizeFileTrigger extends FileTrigger{
        
     @Override
     public boolean evaluate() {
-        return getTargetFile().length()>sizeTarget;
+        
+        System.out.println(getTargetFile().length());
+        return fileTarget.length()>sizeTarget;
+        
     }
 
     public long getSizeFile() {
@@ -31,5 +37,8 @@ public class SizeFileTrigger extends FileTrigger{
     public void setSizeFile(long sizeFile) {
         this.sizeTarget = sizeFile;
     }
-  
+    
+    public void setTargetFile(File file) {
+         fileTarget = file;   
+    }    
 }

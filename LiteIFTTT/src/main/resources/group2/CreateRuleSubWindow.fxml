@@ -93,6 +93,23 @@
                                       </items>
                                     </ToolBar>
                                     <TreeView fx:id="triggerTreeView" layoutY="40.0" onContextMenuRequested="#selectTriggerItem" onMouseClicked="#selectTriggerItem" prefHeight="291.0" prefWidth="477.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0" />
+                                    <VBox fx:id="sizeFileBox" layoutX="226.0" layoutY="40.0" prefHeight="291.0" prefWidth="247.0">
+                                       <children>
+                                          <Label text="select the file to check" />
+                                          <Button mnemonicParsing="false" onAction="#selectFileEvent" text="select file">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/folder.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Label text="Insert size file to check" />
+                                          <TextField fx:id="sizeField" />
+                                          <Button fx:id="insertSizeButton" mnemonicParsing="false" onAction="#checkSizeAction" text="insert " />
+                                       </children>
+                                    </VBox>
                                     <VBox fx:id="timeTriggerBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                        <children>
                                           <Label text="Hour:" />
@@ -166,7 +183,7 @@
                                           <Insets top="10.0" />
                                        </padding>
                                     </VBox>
-                                    <VBox fx:id="dayMonthBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                    <VBox fx:id="dayMonthBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                        <children>
                                           <Label text="Select a month!" />
                                           <ChoiceBox fx:id="choiceBoxMonths" prefWidth="150.0" />
