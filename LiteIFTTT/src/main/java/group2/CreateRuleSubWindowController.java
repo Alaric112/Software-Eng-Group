@@ -157,6 +157,12 @@ public class CreateRuleSubWindowController implements Initializable {
     private Spinner<Integer> dayMonthSpinner;
     @FXML
     private Button btnSetDayMonthTrigger;
+    @FXML
+    private VBox sizeFileBox;
+    @FXML
+    private TextField sizeField;
+    @FXML
+    private Button insertSizeButton;
     
     /**
      * Initializes the controller class. This method is automatically called
@@ -192,9 +198,13 @@ public class CreateRuleSubWindowController implements Initializable {
         SpinnerValueFactory<Integer> monthDay = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 31, 1);
         this.dayMonthSpinner.setValueFactory(monthDay);
         
+        BooleanBinding isfile = Bindings.isEmpty(sizeField.textProperty());
+        insertSizeButton.disableProperty().bind(isfile);
+                
+                
         // Imposta la selezione predefinita (puoi scegliere quale impostare come predefinita)
         fireOnceCheckBox.setSelected(true);
-
+        
         // Disabilita checkBox2 quando checkBox1 è selezionata e viceversa
         fireOnceCheckBox.disableProperty().bind(sleepRuleCheckBox.selectedProperty());
         sleepRuleCheckBox.disableProperty().bind(fireOnceCheckBox.selectedProperty());        
@@ -429,7 +439,12 @@ public class CreateRuleSubWindowController implements Initializable {
                 triggerVisibilityMap.put("Day of Month", () -> {
                     hideAllTriggerBoxes();
                     dayMonthBox.setVisible(true);
-                });                
+                });   
+                
+                triggerVisibilityMap.put("File Size", () -> {
+                    hideAllTriggerBoxes();
+                    sizeFileBox.setVisible(true);
+                });
 
                 
     }
@@ -452,6 +467,7 @@ public class CreateRuleSubWindowController implements Initializable {
         FileExistBox.setVisible(false);
         dateTriggerBox.setVisible(false);
         dayMonthBox.setVisible(false);
+        sizeFileBox.setVisible(false);
     } 
 
     private void visibilityAction(String value){
@@ -612,5 +628,26 @@ public class CreateRuleSubWindowController implements Initializable {
         dayMonthTrigger.setTargetMonthDay(choiceBoxMonths.getValue().getValue(), dayMonthSpinner.getValue());
         
     }
+
+    @FXML
+    private void checkSizeAction(ActionEvent event) {
+        SizeFileTrigger sizef = (SizeFileTrigger) lastTrigger;
+        long l = Long.parseLong(sizeField.getText()) ;
+        sizeField.clear();
+        sizef.setSizeFile(l);
+        sizef.setTargetFile(folderPath);
+        System.out.println(folderPath.getPath());
+        System.out.println(folderPath.getName());
+        System.out.println(folderPath.length());
+        sizef.setTargetFile(folderPath.getPath(), folderPath.getName());
+    }
+
+    @FXML
+    private void selectFileEvent(ActionEvent event) {
+        
+         FileChooser chooser = App.createFC("Open File");
+         File file = chooser.showOpenDialog(new Stage());
+         folderPath = file;
+}
     
 }
