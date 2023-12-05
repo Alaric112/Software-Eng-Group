@@ -37,6 +37,7 @@ public class RuleSet extends Observable implements Serializable {
     public void removeRule(Rule rule){
         
         rules.remove(rule);
+        System.out.println("OHI");
         setChanged();
         notifyObservers();        
     }

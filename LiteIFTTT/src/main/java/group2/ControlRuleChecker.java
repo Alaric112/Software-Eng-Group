@@ -110,11 +110,11 @@ public final class ControlRuleChecker extends Observable {
     private void checkRuleSet() {
         
         // Iterate through the set of rules and check each rule
-        ForkJoinPool.commonPool().execute(() -> {
+        //ForkJoinPool.commonPool().execute(() -> {
             for (Rule rule : ruleSet.getRules()) {
                 // Esegui la chiamata a rule.checkRule() su un thread separato
                 rule.checkRule();
             }
-        });
+        //});
     }
 }

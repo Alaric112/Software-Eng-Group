@@ -189,7 +189,7 @@ public class SecondaryController implements Initializable, Observer {
             // Se l'utente ha premuto "Yes", procedi con la cancellazione
             if (result.isPresent() && result.get() == buttonTypeYes) {
                 // Esegui l'operazione di cancellazione
-                ruleSet.getRules().remove(rule);
+                ruleSet.removeRule(rule);
 
                 // Aggiorna la visualizzazione della tabella
                 ruleTable.getItems().remove(rule);
@@ -238,18 +238,15 @@ public class SecondaryController implements Initializable, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("cipolla");
+        
         if (o instanceof ControlRuleChecker){
-                // When it change the Ruleset it must execute this code
-            // Aggiorna la tabella con la nuova lista di regole
+            
+            // When it change the Ruleset it must execute this code
             ruleSet = checker.getRuleSet();
             observableRules.setAll(ruleSet.getRules());
             ruleSetLabel.setText(ruleSet.getName());
             ruleTable.refresh();
-//            AutoSave();
-        }
-        
-        if (o instanceof RuleSet) {
+        } else if (o instanceof RuleSet) {
             RuleSet updatedRuleSet = (RuleSet) o;
             observableRules.setAll(updatedRuleSet.getRules());
             ruleTable.refresh();

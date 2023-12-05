@@ -12,7 +12,10 @@ public class SoundActionCreator extends ActionCreator {
 
     @Override
     public Action createAction() {
-        return new SoundAction();
+        
+        SoundAction soundAction = new SoundAction();
+        soundAction.addObserver(new SoundActionController());
+        return soundAction;
     }
       
 }
