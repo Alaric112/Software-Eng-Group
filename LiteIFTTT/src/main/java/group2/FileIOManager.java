@@ -90,7 +90,7 @@ public class FileIOManager {
      */    
     public static Service<RuleSet> loadFromFileAsync(File file) {
         
-    LoadRuleSetService loadService = new LoadRuleSetService(file);
+        LoadRuleSetService loadService = new LoadRuleSetService(file);
         loadService.setOnSucceeded(event -> {            
 
         });
@@ -123,9 +123,10 @@ public class FileIOManager {
     /**
      * Displays an error message to the user using a dialog window.
      * 
-     * @param message The error message to show.
-     */    
-    
+     * @param file
+     * @return 
+     * @throws java.io.IOException
+     */     
     protected static RuleSet loadRuleSet(File file) throws IOException{
         
         RuleSet ruleSet = null;

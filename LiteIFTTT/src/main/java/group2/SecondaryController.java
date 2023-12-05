@@ -70,8 +70,7 @@ public class SecondaryController implements Initializable, Observer {
     private BooleanProperty isThreadRunning = new SimpleBooleanProperty(false);
     private ControlRuleChecker checker =ControlRuleChecker.getInstance();
     
-    private ObjectProperty<RuleSet> ruleSetProperty = checker.getRuleSetProperty();    
-    private RuleSet ruleSet;
+    private RuleSet ruleSet = checker.getRuleSet();    
     
     private ObservableList<Rule> observableRules;    
     @FXML
@@ -87,7 +86,7 @@ public class SecondaryController implements Initializable, Observer {
         observableRules = FXCollections.observableArrayList();
         observableRules.setAll(ruleSet.getRules());
         ruleSet.addObserver(this);
-        
+        checker.addObserver(this);
         startCheckerBtn.disableProperty().bind(isThreadRunning);
         stopCheckerBtn.disableProperty().bind(isThreadRunning.not());
         checkerImageView.visibleProperty().bind(isThreadRunning);
@@ -103,18 +102,11 @@ public class SecondaryController implements Initializable, Observer {
         
         ruleTable.setItems(observableRules);
         
-        // When it change the Ruleset it must execute this code
-        ruleSetProperty.addListener((observable, oldRuleSet, newRuleSet) -> {
-            // Aggiorna la tabella con la nuova lista di regole
-            ruleSet = newRuleSet;
-            observableRules.setAll(ruleSet.getRules());
-            ruleTable.refresh();
-            AutoSave();
-        });
+        ruleSetLabel.setText(ruleSet.getName());
         
         // Dynamic bindig 
-        ruleSetLabel.textProperty().bind(Bindings.createStringBinding(() ->
-                ruleSetProperty.get().getName(), ruleSetProperty));
+//        ruleSetLabel.textProperty().bind(Bindings.createStringBinding(() ->
+//                ruleSet.getName(), ruleSetProperty));
          
         ruleSet= checker.getRuleSet();
                 
@@ -246,6 +238,17 @@ public class SecondaryController implements Initializable, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println("cipolla");
+        if (o instanceof ControlRuleChecker){
+                // When it change the Ruleset it must execute this code
+            // Aggiorna la tabella con la nuova lista di regole
+            ruleSet = checker.getRuleSet();
+            observableRules.setAll(ruleSet.getRules());
+            ruleSetLabel.setText(ruleSet.getName());
+            ruleTable.refresh();
+//            AutoSave();
+        }
+        
         if (o instanceof RuleSet) {
             RuleSet updatedRuleSet = (RuleSet) o;
             observableRules.setAll(updatedRuleSet.getRules());

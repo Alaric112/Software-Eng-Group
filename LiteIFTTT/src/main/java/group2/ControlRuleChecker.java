@@ -1,16 +1,17 @@
 
 package group2;
 
+import java.util.Observable;
 import java.util.concurrent.ForkJoinPool;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+//import javafx.beans.property.ObjectProperty;
+//import javafx.beans.property.SimpleObjectProperty;
 
-public final class ControlRuleChecker {
+public final class ControlRuleChecker extends Observable {
     // The field must be declared volatile so that double check lock would work
     // correctly.
     private static volatile ControlRuleChecker instance;
     //private RuleSet rules;
-    private ObjectProperty<RuleSet> ruleSetProperty = new SimpleObjectProperty<>();
+    private RuleSet ruleSet;
     private Thread periodicCheckThread;
 
     private ControlRuleChecker() {
@@ -32,13 +33,13 @@ public final class ControlRuleChecker {
     
     }
 
-    public ObjectProperty<RuleSet> getRuleSetProperty() {
-        return ruleSetProperty;
-    }
+//    public ObjectProperty<RuleSet> getRuleSetProperty() {
+//        return ruleSetProperty;
+//    }
     
    public void startPeriodicCheck() {
     // Fetch the timer value from the rules using the getTimer() method
-    int timer = ruleSetProperty.get().getTimer();
+    int timer = ruleSet.getTimer();
 
     if (periodicCheckThread != null && periodicCheckThread.isAlive()) {
         System.out.println("Il thread periodico è già in esecuzione.");
@@ -86,18 +87,20 @@ public final class ControlRuleChecker {
 
     public void setTimer(int newTimer) {
         
-        ruleSetProperty.get().setTimer(newTimer);
+        ruleSet.setTimer(newTimer);
     }
     
     public void changeRuleset(RuleSet ruleSet) {
         
-        ruleSetProperty.set(ruleSet); 
+        this.ruleSet = ruleSet;
+        setChanged();
+        notifyObservers();
 
     }
 
     public RuleSet getRuleSet() {
         
-        return ruleSetProperty.get();
+        return ruleSet;
     }
 
     public Thread getPeriodicCheckThread() {
@@ -108,7 +111,7 @@ public final class ControlRuleChecker {
         
         // Iterate through the set of rules and check each rule
         ForkJoinPool.commonPool().execute(() -> {
-            for (Rule rule : ruleSetProperty.get().getRules()) {
+            for (Rule rule : ruleSet.getRules()) {
                 // Esegui la chiamata a rule.checkRule() su un thread separato
                 rule.checkRule();
             }
