@@ -17,7 +17,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -110,11 +109,8 @@ public class SecondaryController implements Initializable, Observer {
             ruleSet = newRuleSet;
             observableRules.setAll(ruleSet.getRules());
             ruleTable.refresh();
-            //ruleTable.setItems(FXCollections.observableList(observableRules));
             AutoSave();
         });
-
-        AutoSave();
         
         // Dynamic bindig 
         ruleSetLabel.textProperty().bind(Bindings.createStringBinding(() ->
@@ -137,9 +133,9 @@ public class SecondaryController implements Initializable, Observer {
         
     } 
     
-    private void AutoSave(){               
-                    File file = new File("backup.dat");
-                    FileIOManager.saveToFileAsync(file, ruleSet);        
+    private void AutoSave(){
+        File file = new File("backup.dat");
+        FileIOManager.saveToFileAsync(file, ruleSet);        
     }
     
     @FXML
