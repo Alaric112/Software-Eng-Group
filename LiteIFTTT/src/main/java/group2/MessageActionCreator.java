@@ -12,8 +12,11 @@ public class MessageActionCreator extends ActionCreator {
 
     @Override
     public Action createAction() {
-        
-       return new MessageAction(); 
+                       
+        MessageAction messageAction = new MessageAction();
+       
+        messageAction.addObserver(new MessageActionController());
+        return messageAction;
     }
     
 }

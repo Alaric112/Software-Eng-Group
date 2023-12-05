@@ -137,18 +137,9 @@ public class SecondaryController implements Initializable, Observer {
         
     } 
     
-    private void AutoSave(){
-                
-        observableRules.addListener((ListChangeListener<Rule>) change -> {
-            while (change.next()) {
-                if (change.wasAdded() || change.wasRemoved() || change.wasUpdated()) {
-                    // Se ci sono state modifiche nella lista di regole, esegui il salvataggio automatico
+    private void AutoSave(){               
                     File file = new File("backup.dat");
-                    FileIOManager.saveToFileAsync(file, ruleSet);
-                }
-            }
-        });
-        
+                    FileIOManager.saveToFileAsync(file, ruleSet);        
     }
     
     @FXML

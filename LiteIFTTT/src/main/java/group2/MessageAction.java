@@ -4,10 +4,7 @@
  */
 package group2;
 
-import javafx.scene.control.Alert;
-import javafx.application.Platform;
-import javafx.stage.Stage;
-
+import java.util.Observable;
 
 /**
  * The <code>MessageAction</code> class implements the {@link Action} interface
@@ -16,13 +13,14 @@ import javafx.stage.Stage;
  * @author Faust
  * @see group2.Action
  */
-public class MessageAction implements Action {
+public class MessageAction extends Observable implements Action {
     
     private String messageInfo;
 
     /**
      * Constructs a new instance of the <code>MessageAction</code> class with
      * the default message "Hello world!".
+     * @see MessageActionController
      */    
     public MessageAction() {
         this.messageInfo = "Hello world!";
@@ -34,17 +32,8 @@ public class MessageAction implements Action {
      */    
     @Override
     public void execute() {
-                 
-        Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Message Action");
-            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-            stage.getIcons().add(App.getAppIcon());
-            alert.setHeaderText(null);
-            alert.setContentText(messageInfo);
-            alert.showAndWait();
-        });
-
+        setChanged(); 
+        notifyObservers(messageInfo);         
     }
     
     /**
