@@ -4,6 +4,8 @@
  */
 package group2;
 
+import group2.Model.Trigger.Trigger;
+
 /**
  *
  * @author patap

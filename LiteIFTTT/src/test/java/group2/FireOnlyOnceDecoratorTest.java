@@ -11,6 +11,7 @@ package group2;
 
 
 
+import group2.Model.Rule.FireOnlyOnceDecorator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

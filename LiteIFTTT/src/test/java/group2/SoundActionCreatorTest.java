@@ -4,6 +4,9 @@
  */
 package group2;
 
+import group2.Model.Action.Action;
+import group2.Model.Action.SoundAction;
+import group2.Model.Action.SoundActionCreator;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

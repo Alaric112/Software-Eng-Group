@@ -4,6 +4,7 @@
  */
 package group2;
 
+import group2.Model.Action.TextAppendAction;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;

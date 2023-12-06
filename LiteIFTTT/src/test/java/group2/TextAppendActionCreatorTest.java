@@ -4,6 +4,9 @@
  */
 package group2;
 
+import group2.Model.Action.TextAppendActionCreator;
+import group2.Model.Action.TextAppendAction;
+import group2.Model.Action.Action;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

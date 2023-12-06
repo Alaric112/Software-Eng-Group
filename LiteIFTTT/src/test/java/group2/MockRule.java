@@ -4,6 +4,10 @@
  */
 package group2;
 
+import group2.Model.Action.Action;
+import group2.Model.Trigger.Trigger;
+import group2.Model.Rule.Rule;
+
 /**
  *
  * @author patap

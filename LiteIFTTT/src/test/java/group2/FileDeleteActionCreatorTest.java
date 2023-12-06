@@ -4,6 +4,7 @@
  */
 package group2;
 
+import group2.Model.Action.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

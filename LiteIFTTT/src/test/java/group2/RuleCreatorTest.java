@@ -4,6 +4,9 @@
  */
 package group2;
 
+import group2.Model.Action.*;
+import group2.Model.Trigger.*;
+import group2.Model.Rule.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;

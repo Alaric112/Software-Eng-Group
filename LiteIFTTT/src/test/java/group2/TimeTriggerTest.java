@@ -4,6 +4,7 @@
  */
 package group2;
 
+import group2.Model.Trigger.TimeTrigger;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import java.time.LocalTime;

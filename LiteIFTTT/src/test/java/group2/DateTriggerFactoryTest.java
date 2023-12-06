@@ -10,6 +10,7 @@ package group2;
  *
  * @author Faust
  */
+import group2.Model.Trigger.*;
 import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

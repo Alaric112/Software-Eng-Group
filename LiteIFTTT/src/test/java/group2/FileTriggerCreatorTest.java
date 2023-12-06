@@ -4,6 +4,9 @@
  */
 package group2;
 
+import group2.Model.Trigger.FileTrigger;
+import group2.Model.Trigger.FileTriggerCreator;
+import group2.Model.Trigger.Trigger;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

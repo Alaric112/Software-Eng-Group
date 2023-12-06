@@ -4,6 +4,7 @@
  */
 package group2;
 
+import group2.Model.Trigger.*;
 import java.time.LocalDate;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;

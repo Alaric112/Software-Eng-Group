@@ -4,6 +4,7 @@
  */
 package group2;
 
+import group2.Model.Action.MessageAction;
 import javafx.scene.control.Alert;
 import javafx.application.Platform;
 import org.junit.Before;

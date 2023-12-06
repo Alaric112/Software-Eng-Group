@@ -4,10 +4,10 @@
  */
 package group2;
 
+import group2.Model.Action.*;
 import java.io.PrintStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

@@ -4,6 +4,7 @@
  */
 package group2;
 
+import group2.Model.Trigger.FileTrigger;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

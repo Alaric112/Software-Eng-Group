@@ -1,5 +1,7 @@
 package group2;
 
+import group2.Model.Rule.FileManager.FileIOManager;
+import group2.Controller.*;
 import java.io.File;
 import java.io.FileInputStream;
 import javafx.application.Application;
@@ -58,9 +60,9 @@ public class App extends Application {
      * Creates a new sub-window with the specified FXML file content.
      * 
      * @param fxml The filename of the FXML file to load into the sub-window.
-     * @throws IOException If an error occurs while loading the FXML file.
+     * @param subWindowTitle
      */
-    static void createSubWindow(String fxml, String subWindowTitle){
+    public static void createSubWindow(String fxml, String subWindowTitle){
         
         // Create a new Stage for the sub-window
         Stage subWindow = new Stage();
@@ -81,6 +83,7 @@ public class App extends Application {
     
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        System.out.println("Il file mag" + App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
@@ -88,7 +91,7 @@ public class App extends Application {
         return appIcon;
     }
        
-    static public void switchTo(String fxml){
+    public static void switchTo(String fxml){
         
         Platform.runLater(() -> {
             try {
@@ -100,7 +103,7 @@ public class App extends Application {
 
     } 
 
-    static public Alert createPopUP(AlertType alertType, String title, String contentText){
+    public static Alert createPopUP(AlertType alertType, String title, String contentText){
         
         var alert = new Alert(alertType);
         alert.setTitle(title);
