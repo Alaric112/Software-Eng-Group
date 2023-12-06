@@ -5,6 +5,7 @@
 package group2.Controller;
 
 import group2.App;
+import group2.App;
 import group2.Model.Rule.FileManager.LoadCommand;
 import java.io.File;
 import java.net.URL;

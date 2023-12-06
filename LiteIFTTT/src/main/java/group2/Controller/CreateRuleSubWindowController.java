@@ -1,6 +1,7 @@
 package group2.Controller;
 
 import group2.App;
+import group2.App;
 import group2.Model.Action.*;
 import group2.Model.Trigger.*;
 import group2.Model.Rule.*;

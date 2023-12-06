@@ -5,6 +5,7 @@
 package group2.Controller;
 
 import group2.App;
+import group2.App;
 import group2.Model.Rule.ControlRuleChecker;
 import group2.Model.Rule.RuleSet;
 import java.io.File;

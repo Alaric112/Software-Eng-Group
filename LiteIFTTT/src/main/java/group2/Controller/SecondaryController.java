@@ -5,13 +5,10 @@
 package group2.Controller;
 
 import group2.App;
-import group2.Model.Rule.FileManager.Command;
-import group2.Model.Rule.ControlRuleChecker;
-import group2.Model.Rule.FileManager.FileIOManager;
-import group2.Model.Rule.FileManager.LoadCommand;
-import group2.Model.Rule.Rule;
-import group2.Model.Rule.RuleSet;
-import group2.Model.Rule.FileManager.SaveCommand;
+import group2.Model.Rule.*;
+import group2.Model.Rule.FileManager.*;
+import group2.Model.Action.*;
+import group2.Model.Trigger.*;
 import java.io.File;
 import java.net.URL;
 import java.util.Observable;
@@ -110,10 +107,6 @@ public class SecondaryController implements Initializable, Observer {
         ruleTable.setItems(observableRules);
         
         ruleSetLabel.setText(ruleSet.getName());
-        
-        // Dynamic bindig 
-//        ruleSetLabel.textProperty().bind(Bindings.createStringBinding(() ->
-//                ruleSet.getName(), ruleSetProperty));
          
         ruleSet= checker.getRuleSet();
                 

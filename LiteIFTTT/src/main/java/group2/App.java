@@ -1,7 +1,7 @@
 package group2;
 
-import group2.Model.Rule.FileManager.FileIOManager;
-import group2.Controller.*;
+import group2.Model.Rule.FileManager.*;
+import group2.Model.Rule.*;
 import java.io.File;
 import java.io.FileInputStream;
 import javafx.application.Application;
@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.io.InputStream;
 import javafx.application.Platform;
