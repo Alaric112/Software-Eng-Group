@@ -22,7 +22,8 @@ public class SoundAction extends Observable implements Action {
 
     /** The path to the sound file. */
     private String path;
-
+    private boolean hasObserver = false;
+    
     /**
      * Default constructor for SoundAction.
      * Initializes the path to an empty string.
@@ -40,10 +41,18 @@ public class SoundAction extends Observable implements Action {
     @Override
     public void execute() {
         
+        addWathcer();
         setChanged();
         notifyObservers(path);
     }
 
+    private void addWathcer(){
+        if(!hasObserver){
+            this.addObserver(new MessageActionController());
+            hasObserver = true;
+        }
+    }    
+    
     /**
      * Gets the current path to the sound file.
      *

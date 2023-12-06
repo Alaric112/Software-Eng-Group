@@ -1,6 +1,7 @@
 package group2;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,6 +91,13 @@ public final class RuleCreator {
                 
     }
 
+    public CompositeAction createCompisteAction(Collection<Action> actions){
+        
+        CompositeAction compAction = new CompositeAction();
+        compAction.addActions(actions);
+        return compAction;
+    } 
+    
     /**
      * Creates a rule with the specified name, trigger, and action.
      *

@@ -14,7 +14,6 @@ public class SoundActionCreator extends ActionCreator {
     public Action createAction() {
         
         SoundAction soundAction = new SoundAction();
-        soundAction.addObserver(new SoundActionController());
         return soundAction;
     }
       

@@ -15,7 +15,6 @@ public class MessageActionCreator extends ActionCreator {
                        
         MessageAction messageAction = new MessageAction();
        
-        messageAction.addObserver(new MessageActionController());
         return messageAction;
     }
     

@@ -39,9 +39,7 @@ public class BaseRule implements Rule {
      */    
     @Override
     public void checkRule() {
-        
         if(active && checkTrigger()){
-            
             fireRule();
         }
         

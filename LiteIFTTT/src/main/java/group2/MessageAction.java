@@ -16,7 +16,8 @@ import java.util.Observable;
 public class MessageAction extends Observable implements Action {
     
     private String messageInfo;
-
+    private boolean hasObserver = false;
+    
     /**
      * Constructs a new instance of the <code>MessageAction</code> class with
      * the default message "Hello world!".
@@ -32,8 +33,16 @@ public class MessageAction extends Observable implements Action {
      */    
     @Override
     public void execute() {
+        addWathcer();
         setChanged(); 
         notifyObservers(messageInfo);         
+    }
+    
+    private void addWathcer(){
+        if(!hasObserver){
+            this.addObserver(new MessageActionController());
+            hasObserver = true;
+        }
     }
     
     /**

@@ -28,7 +28,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.time.DayOfWeek;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListView;
 import javafx.stage.DirectoryChooser;
 
 /**
@@ -65,8 +68,6 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private TreeView<String> triggerTreeView;
     @FXML
-    private TreeView<String> actionTreeView;
-    @FXML
     private VBox timeTriggerBox;
     @FXML
     private VBox messageActionBox;
@@ -82,12 +83,6 @@ public class CreateRuleSubWindowController implements Initializable {
     private Button btnSetTimeTrigger;
     @FXML
     private TextArea textMessageArea;
-
-    private Trigger lastTrigger;
-
-    private Action lastAction;
-
-    private ControlRuleChecker checker = ControlRuleChecker.getInstance();
 
     private RuleCreator ruleCreator = RuleCreator.getInstance();
     @FXML
@@ -163,7 +158,13 @@ public class CreateRuleSubWindowController implements Initializable {
     private TextField sizeField;
     @FXML
     private Button insertSizeButton;
-    
+    @FXML
+    private ListView<String> actionListView;
+
+    private Trigger lastTrigger;
+
+    private Action lastAction;
+    private List<Action> sequenceAction;
     /**
      * Initializes the controller class. This method is automatically called
      * after the FXML file has been loaded.
@@ -177,6 +178,8 @@ public class CreateRuleSubWindowController implements Initializable {
         triggerChoiceBox.getItems().addAll(ruleCreator.getAvailableTriggerTypes());
         actionChoiceBox.getItems().addAll(ruleCreator.getAvailableActionTypes());
 
+        sequenceAction = new ArrayList();
+        
         initActionVisibilityMap();
         initTriggerVisibilityMap();
 
@@ -221,12 +224,7 @@ public class CreateRuleSubWindowController implements Initializable {
         triggerTreeViewHasRoot.bind(Bindings.createBooleanBinding(()
                 -> triggerTreeView.getRoot() != null, triggerTreeView.rootProperty()));
 
-        BooleanProperty actionTreeViewHasRoot = new SimpleBooleanProperty();
-
-        actionTreeViewHasRoot.bind(Bindings.createBooleanBinding(()
-                -> actionTreeView.getRoot() != null, actionTreeView.rootProperty()));
-
-        confirmButton.disableProperty().bind(isTextFieldEmpty.or(triggerTreeViewHasRoot.not()).or(actionTreeViewHasRoot.not()));        
+        confirmButton.disableProperty().bind(isTextFieldEmpty.or(triggerTreeViewHasRoot.not()).or(Bindings.isEmpty(actionListView.getItems())));        
         choiceBoxDayWeek.getItems().addAll(DayOfWeek.values());
         btnSetDayWeek.disableProperty().bind(choiceBoxDayWeek.getSelectionModel().selectedItemProperty().isNull());
         
@@ -248,9 +246,14 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void confirmRuleCreationEvent(ActionEvent event) {
 
+        System.out.println(sequenceAction.size());
+        if(sequenceAction.size() != 1){
+            
+            lastAction = ruleCreator.createCompisteAction(sequenceAction);
+        }        
+        
         String ruleName = ruleNameTF.getText();
         ruleCreator.createRule(ruleName, lastTrigger, lastAction);
-
 
         closeWindowEvent(event);
 
@@ -291,12 +294,13 @@ public class CreateRuleSubWindowController implements Initializable {
      */
     @FXML
     private void addActionEvent(ActionEvent event) {
-
-        TreeItem<String> item = new TreeItem<>(actionChoiceBox.getValue());
-        actionTreeView.setRoot(item);
-        lastAction = ruleCreator.createAction(item.getValue());
-
-        visibilityAction(item.getValue());
+        
+        String item = actionChoiceBox.getValue();
+        actionListView.getItems().add(item);
+        Action action = ruleCreator.createAction(item);
+        sequenceAction.add(action);
+        lastAction = action;
+        visibilityAction(item);
 
     }
 
@@ -338,16 +342,25 @@ public class CreateRuleSubWindowController implements Initializable {
     }
 
     /**
-     * Selects an action item from the actionTreeView and performs specific actions based on the selected item.
+     * Selects an action item from the actionListView and performs specific actions based on the selected item.
      */
-    @FXML
     private void selectActionItem() {
 
-        TreeItem<String> item = actionTreeView.getSelectionModel().getSelectedItem();
-
-        visibilityAction(item.getValue());
+        String item = actionListView.getSelectionModel().getSelectedItem();
+        int selectedIndex = actionListView.getSelectionModel().getSelectedIndex();
+        lastAction = sequenceAction.get(selectedIndex);
+        System.out.println("Ho catturato l'elemento di indice:" + selectedIndex);
+        System.out.println("Provolino" + sequenceAction);
+        
+        visibilityAction(item);
     }
 
+    @FXML
+    private void selectActionItemEvent(MouseEvent event) {
+        
+       selectActionItem();
+    }
+    
     private void selectActionItem(ContextMenuEvent event) {
 
         selectActionItem();
