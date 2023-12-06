@@ -108,12 +108,19 @@ public final class RuleCreator {
     public Rule createRule(String ruleName, Trigger trigger, Action action){
                                     
         Rule rule = new BaseRule(ruleName, trigger, action);
-        RuleSet ruleSet = checker.getRuleSet();
-        ruleSet.addRule(rule);        
+        addRuleTORuleSet(rule);
         return rule;
         
     }
 
+    private void addRuleTORuleSet(Rule rule){
+        
+        RuleSet ruleSet = checker.getRuleSet();
+        if(ruleSet != null)
+            ruleSet.addRule(rule);         
+        
+    }
+    
     /**
      * Creates an action instance based on the provided action type.
      *

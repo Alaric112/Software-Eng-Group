@@ -4,6 +4,8 @@
  */
 package group2;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -82,5 +84,22 @@ public class RuleCreatorTest {
         assertNotNull(triggerTypes);
         assertTrue(triggerTypes.contains("Time"));
     }
-        
+    
+    @Test
+    public void testCreateCompositeAction() {
+        Action action1 = new MockAction();
+        Action action2 = new MockAction();
+        Action action3 = new MockAction();
+
+        Collection<Action> actions = Arrays.asList(action1, action2, action3);
+
+        CompositeAction result = ruleCreator.createCompisteAction(actions);
+
+        assertNotNull(result);
+
+        List<Action> resultActions = result.getActions();
+        assertEquals(actions.size(), resultActions.size());
+        assertTrue(resultActions.containsAll(actions));
+    }
+    
 }
