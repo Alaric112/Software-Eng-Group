@@ -31,16 +31,13 @@ public class RuleSet extends Observable implements Serializable {
     public void addRule(Rule rule){
         
         rules.add(rule);
-        setChanged();
-        notifyObservers();        
+        changed();        
     }
     
     public void removeRule(Rule rule){
         
         rules.remove(rule);
-        System.out.println("OHI");
-        setChanged();
-        notifyObservers();        
+        changed();        
     }
     
     public List<Rule> getRules(){
@@ -82,8 +79,7 @@ public class RuleSet extends Observable implements Serializable {
        
         rule.switchStatus();
        
-        setChanged();
-        notifyObservers();        
+        changed();        
     }
 
     public void setRules(List<Rule> rules) {
@@ -92,8 +88,7 @@ public class RuleSet extends Observable implements Serializable {
     
     // Quando il timer cambia, chiamare questo metodo per notificare gli osservatori
     public void updateTimer() {
-        setChanged();
-        notifyObservers();
+        changed();
     }    
     
     @Override
@@ -104,6 +99,11 @@ public class RuleSet extends Observable implements Serializable {
     @Override
     public void deleteObserver(Observer o) {
         super.deleteObserver(o);
+    }    
+    
+    private void changed(){
+        setChanged();
+        notifyObservers();    
     }    
     
 }

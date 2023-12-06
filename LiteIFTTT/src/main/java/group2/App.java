@@ -82,7 +82,6 @@ public class App extends Application {
     
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        System.out.println("Il file mag" + App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
@@ -122,9 +121,7 @@ public class App extends Application {
                 
         FileChooser chooser = new FileChooser();
         chooser.setTitle(title);
-
-
-
+        
         // Mostra la finestra di dialogo per selezionare il file da caricare
         return chooser;
         

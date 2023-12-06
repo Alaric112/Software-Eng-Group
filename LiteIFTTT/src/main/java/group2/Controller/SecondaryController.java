@@ -7,10 +7,10 @@ package group2.Controller;
 import group2.App;
 import group2.Model.Rule.*;
 import group2.Model.Rule.FileManager.*;
-import group2.Model.Action.*;
-import group2.Model.Trigger.*;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
@@ -31,6 +31,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -109,6 +110,8 @@ public class SecondaryController implements Initializable, Observer {
         ruleSetLabel.setText(ruleSet.getName());
          
         ruleSet= checker.getRuleSet();
+        
+        ruleTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
                 
     }    
 
@@ -149,16 +152,17 @@ public class SecondaryController implements Initializable, Observer {
     @FXML
     private void startCheckerEvent(ActionEvent event) {
         
-        checker.startPeriodicCheck();
-        isThreadRunning.set(true);        
+        isThreadRunning.set(true);
+        checker.startPeriodicCheck();                
         
     }
 
     @FXML
     private void stopCheckerEvent(ActionEvent event) {
         
+        isThreadRunning.set(false); 
         checker.stopPeriodicCheck();
-        isThreadRunning.set(false);
+        
     }
 
     @FXML
@@ -169,10 +173,11 @@ public class SecondaryController implements Initializable, Observer {
 
     @FXML
     private void deleteRuleEvent(ActionEvent event) {
-        // Ottieni la regola selezionata dalla tabella
-        Rule rule = ruleTable.getSelectionModel().getSelectedItem();
 
-        if (rule != null) {
+        List<Rule> rules = new ArrayList();
+        rules.addAll(ruleTable.getSelectionModel().getSelectedItems());
+
+        if (!rules.isEmpty()) {
             String title = "Confirm Deletion";
             String contentText = "Are you sure you want to delete this rule?";
             // Mostra una finestra di dialogo di conferma
@@ -183,16 +188,15 @@ public class SecondaryController implements Initializable, Observer {
             ButtonType buttonTypeNo = new ButtonType("No", ButtonData.NO);
             alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
-            // Mostra la finestra di dialogo e attendi la risposta dell'utente
             Optional<ButtonType> result = alert.showAndWait();
 
             // Se l'utente ha premuto "Yes", procedi con la cancellazione
             if (result.isPresent() && result.get() == buttonTypeYes) {
-                // Esegui l'operazione di cancellazione
-                ruleSet.removeRule(rule);
-
-                // Aggiorna la visualizzazione della tabella
-                ruleTable.getItems().remove(rule);
+                    
+                for(Rule rule : rules){
+                    ruleSet.removeRule(rule);
+                }
+                ruleTable.getSelectionModel().clearSelection();
             }
         }
     }
@@ -200,10 +204,15 @@ public class SecondaryController implements Initializable, Observer {
     @FXML
     private void switchStatusRuleEvent(ActionEvent event) {
         
-        Rule rule = ruleTable.getSelectionModel().getSelectedItem();
+        List<Rule> rules = new ArrayList();
+        rules.addAll(ruleTable.getSelectionModel().getSelectedItems());
         
-        ruleSet.switchRuleStatus(rule);
-        ruleTable.refresh();
+        if (!rules.isEmpty()){
+            for(Rule rule : rules){
+                ruleSet.switchRuleStatus(rule);
+            }
+            ruleTable.refresh();
+        }
     }
 
     @FXML

@@ -4,6 +4,7 @@
  */
 package group2.Model.Action;
 
+import group2.App;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.application.Platform;
@@ -22,7 +23,7 @@ public class MessageActionController implements Observer {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Message Action");
             Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-            //stage.getIcons().add(App.getAppIcon());
+            stage.getIcons().add(App.getAppIcon());
             alert.setHeaderText(null);
             alert.setContentText((String) arg);
             alert.showAndWait();
