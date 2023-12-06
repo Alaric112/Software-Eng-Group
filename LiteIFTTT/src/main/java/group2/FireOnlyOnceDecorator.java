@@ -20,18 +20,16 @@ public class FireOnlyOnceDecorator extends RuleDecorator{
     
        @Override
     public void checkRule() {
-        if (onlyOnce) {
-            super.checkRule();                  
-            super.switchStatus(); 
-            onlyOnce = false;
-        }     
+
+            if(super.isActive())
+                     onlyOnce = false;
+            if(!onlyOnce){  
+                super.checkRule();    
+                super.switchStatus();
+                onlyOnce = true;
+                }
+            }     
     }
 
-    public boolean isOnlyOnce() {
-        return onlyOnce;
-    }
-    
-    public void setOnlyOnce(boolean onlyOnce) {
-        this.onlyOnce = onlyOnce;
-    }
-}
+
+ 
