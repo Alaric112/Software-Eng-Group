@@ -88,8 +88,6 @@ public class CreateRuleSubWindowController implements Initializable {
     private Button btnSetTimeTrigger;
     @FXML
     private TextArea textMessageArea;
-
-    private RuleCreator ruleCreator = RuleCreator.getInstance();
     @FXML
     private Spinner<Integer> spinnerDaySleepingPeriod;
     @FXML
@@ -124,8 +122,6 @@ public class CreateRuleSubWindowController implements Initializable {
     private TextField FileExistNameTF;
     @FXML
     private Button btnFileExist;
-    
-    private File folderPath;
     @FXML
     private CheckBox sleepRuleCheckBox;
     @FXML
@@ -146,9 +142,6 @@ public class CreateRuleSubWindowController implements Initializable {
     private TextField excArgumentsTF;
     @FXML
     private Button setExcArgsBtn;
-        
-    private static Map<String, Runnable> actionVisibilityMap;
-    private static Map<String, Runnable> triggerVisibilityMap;
     @FXML
     private VBox dayMonthBox;
     @FXML
@@ -164,10 +157,13 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private Button insertSizeButton;
     @FXML
-    private ListView<String> actionListView;
-
+    private ListView<String> actionListView;  
+    private RuleCreator ruleCreator = RuleCreator.getInstance();
+    private File folderPath;
     private Trigger lastTrigger;
-
+    private static Map<String, Runnable> actionVisibilityMap;
+    private static Map<String, Runnable> triggerVisibilityMap;
+    private long millisecond;
     private Action lastAction;
     private List<Action> sequenceAction;
     /**
@@ -179,7 +175,7 @@ public class CreateRuleSubWindowController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        millisecond = 0;
         triggerChoiceBox.getItems().addAll(ruleCreator.getAvailableTriggerTypes());
         actionChoiceBox.getItems().addAll(ruleCreator.getAvailableActionTypes());
 
@@ -252,15 +248,23 @@ public class CreateRuleSubWindowController implements Initializable {
     private void confirmRuleCreationEvent(ActionEvent event) {
 
         System.out.println(sequenceAction.size());
-        if(sequenceAction.size() != 1){
-            
-            lastAction = ruleCreator.createCompisteAction(sequenceAction);
+        if(sequenceAction.size() != 1){            
+            lastAction = ruleCreator.createComposteAction(sequenceAction);
         }        
-        
-        String ruleName = ruleNameTF.getText();
-        ruleCreator.createRule(ruleName, lastTrigger, lastAction);
 
-        closeWindowEvent(event);
+        String ruleName = ruleNameTF.getText();
+        String ruleType = "OnlyOnce";      
+        if (sleepRuleCheckBox.isSelected())
+            ruleType = "SleepingTime";
+        
+       
+                    
+        Rule rule = ruleCreator.createRule(ruleName, lastTrigger, lastAction, ruleType);
+        if (rule instanceof SleepingRuleDecorator){
+            SleepingRuleDecorator s = (SleepingRuleDecorator) rule;
+            s.setMinSleepTime(millisecond);
+        }
+                    closeWindowEvent(event);
 
     }
        
@@ -674,4 +678,20 @@ public class CreateRuleSubWindowController implements Initializable {
          folderPath = file;
 }
     
+    private long convertToMilliseconds(int days, int hours, int minutes) {
+    
+    long millisecondsDays = days * 24L * 60 * 60 * 1000;
+    long millisecondsHours = hours * 60 * 60 * 1000;
+    long millisecondsMinutes = minutes * 60 * 1000;
+
+    return millisecondsDays + millisecondsHours + millisecondsMinutes;
+}
+
+    @FXML
+    private void InsertSleepingRuleSettings(ActionEvent event) {       
+       Integer days = spinnerDaySleepingPeriod.getValue();
+       Integer hours = spinnerHourSleepingPeriod.getValue();
+       Integer minutes = spinnerMinuteSleepingPeriod.getValue();         
+       millisecond = convertToMilliseconds(days, hours, minutes);      
+    }
 }

@@ -368,6 +368,7 @@
                                                 <Spinner fx:id="spinnerHourSleepingPeriod" editable="true" />
                                                 <Label text="minutes" />
                                                 <Spinner fx:id="spinnerMinuteSleepingPeriod" editable="true" />
+                                                <Button mnemonicParsing="false" onAction="#InsertSleepingRuleSettings" text="insert " />
                                              </children>
                                           </VBox>
                                        </children>
