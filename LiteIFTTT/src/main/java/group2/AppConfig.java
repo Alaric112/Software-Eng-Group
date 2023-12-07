@@ -28,12 +28,17 @@ import java.util.Properties;
  * 
  * @author patap
  */
-public class AppConfig {
+public final class AppConfig {
     
     /* The name of the configuration file. */
     private static final String CONFIG_FILE = "config.properties";
     /* The key used to store the last modified file path in the configuration file. */
     private static final String LAST_FILE = "lastModifiedFile";
+
+    private static final String ACTION_MACRO_FILE = "actionMacro.properties";
+        
+    private AppConfig() {
+    }            
     
     /**
      * Saves a key-value pair to the configuration file.
@@ -42,13 +47,7 @@ public class AppConfig {
      * @param value The value associated with the key.
      */    
     public static void saveProperty(String key, String value) {
-        try (OutputStream output = new FileOutputStream(CONFIG_FILE)) {
-            Properties prop = new Properties();
-            prop.setProperty(key, value);
-            prop.store(output, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        saveConfing(key, value, CONFIG_FILE);
     }
 
     /**
@@ -58,14 +57,7 @@ public class AppConfig {
      * @return The value associated with the specified key, or null if the key is not found.
      */    
     public static String getProperty(String key) {
-        try (InputStream input = new FileInputStream(CONFIG_FILE)) {
-            Properties prop = new Properties();
-            prop.load(input);
-            return prop.getProperty(key);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return loadConfig(key, CONFIG_FILE);
     }
 
     /**
@@ -100,6 +92,27 @@ public class AppConfig {
     public static File getLastRuleSet(){
         
         return getPropertyAsFile(LAST_FILE);
+    }
+    
+    private static void saveConfing(String key, String value, String filePath){
+        try (OutputStream output = new FileOutputStream(filePath)) {
+            Properties prop = new Properties();
+            prop.setProperty(key, value);
+            prop.store(output, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }                        
+    }
+    
+    private static String loadConfig(String key, String filePath){
+        try (InputStream input = new FileInputStream(filePath)) {
+            Properties prop = new Properties();
+            prop.load(input);
+            return prop.getProperty(key);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }              
     }
     
 }

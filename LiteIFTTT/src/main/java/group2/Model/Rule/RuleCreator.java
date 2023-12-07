@@ -5,8 +5,10 @@ import group2.Model.Action.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * The {@code RuleCreator} class is responsible for creating instances of rules,
@@ -38,7 +40,11 @@ public final class RuleCreator {
     private Map<String, TriggerCreator> triggerFactoryMap;
     private Map<String, BaseRuleCreator> ruleFactoryMap;
     private ControlRuleChecker checker = ControlRuleChecker.getInstance();
-
+    
+    private Map<String, Action> actionMacroMap;
+    private Map<String, Trigger> triggerMacroMap;
+    private Set<String> uniqueActionKey;
+    
     /**
      * Private constructor for the singleton pattern. Initializes the action and
      * trigger factory maps.
@@ -48,7 +54,10 @@ public final class RuleCreator {
         actionFactoryMap = new HashMap<>();
         triggerFactoryMap = new HashMap<>();
         ruleFactoryMap = new HashMap<>();
-
+        actionMacroMap = new HashMap<>();
+        triggerMacroMap = new HashMap<>();
+        uniqueActionKey = new HashSet<>();
+        
         initializeActionMap();
         initializeTriggerMap();
         initializeRuleMap();
@@ -72,7 +81,7 @@ public final class RuleCreator {
             return instance;
         }
     }
-
+    
     private void initializeActionMap() {
         // Associate action types with their respective implementations
         actionFactoryMap.put("Message", new MessageActionCreator());
@@ -104,6 +113,9 @@ public final class RuleCreator {
     /**
      * Creates an rue instance based on the provided name,trigger,action type.
      *
+     * @param ruleName
+     * @param trigger
+     * @param action
      * @param ruleType the type of rule to create
      * @return a new rule instance
      * @throws IllegalArgumentException if the rule type is not supported
@@ -122,9 +134,9 @@ public final class RuleCreator {
         }
 
     }
-
-    public CompositeAction createComposteAction(Collection<Action> actions) {
-
+    
+    public CompositeAction createCompositeAction(Collection<Action> actions){
+        
         CompositeAction compAction = new CompositeAction();
         compAction.addActions(actions);
         return compAction;
@@ -136,9 +148,10 @@ public final class RuleCreator {
      * @param ruleName the name of the rule
      * @param trigger the trigger for the rule
      * @param action the action associated with the rule
-     */
-    public Rule createRule(String ruleName, Trigger trigger, Action action) {
-
+     * @return 
+     */    
+    public Rule createRule(String ruleName, Trigger trigger, Action action){
+                                    
         Rule rule = new BaseRule(ruleName, trigger, action);
         addRuleTORuleSet(rule);
         return rule;
@@ -212,4 +225,38 @@ public final class RuleCreator {
         return new ArrayList<>(triggerFactoryMap.keySet());
     }
 
+    public List<String> getAvailableMacroAction() {
+        return new ArrayList<>(actionMacroMap.keySet());
+    } 
+
+    public List<String> getAvailableMacroTrigger() {
+        return new ArrayList<>(triggerMacroMap.keySet());
+    }
+    
+    public boolean macroActionEmpty(){
+        
+        return actionMacroMap.isEmpty();
+        
+    }
+    
+    public boolean macroTriggerEmpty(){
+        
+       return triggerMacroMap.isEmpty(); 
+    }    
+    
+    public Action getMacroAction(String key){
+        
+        return actionMacroMap.get(key);
+    }
+
+    public void registerActionMacro(String nameKey, Action action){
+        
+        if(uniqueActionKey.add(nameKey)){
+            
+            actionMacroMap.put(nameKey, action);
+            System.out.println(actionMacroMap);
+            //save operation 
+        }
+    }
+    
 }

@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.stage.DirectoryChooser;
 
 /**
@@ -166,6 +167,16 @@ public class CreateRuleSubWindowController implements Initializable {
     private long millisecond;
     private Action lastAction;
     private List<Action> sequenceAction;
+    @FXML
+    private CheckBox checkRegisterAction;
+    @FXML
+    private TextField actionRegisterTF;
+    @FXML
+    private HBox macroActionBox;
+    @FXML
+    private Button addMacroActionBtn;
+    @FXML
+    private ChoiceBox<String> macroActionChoiceBox;
     /**
      * Initializes the controller class. This method is automatically called
      * after the FXML file has been loaded.
@@ -237,8 +248,18 @@ public class CreateRuleSubWindowController implements Initializable {
         choiceBoxMonths.getItems().addAll(Month.values());
         btnSetDayMonthTrigger.disableProperty().bind(choiceBoxMonths.getSelectionModel().selectedItemProperty().isNull());
         
+        addActionButton.disableProperty().bind(actionChoiceBox.valueProperty().isNull());
+        addTriggerButton.disableProperty().bind(triggerChoiceBox.valueProperty().isNull());
+        
+        addMacroActionBtn.disableProperty().bind(macroActionChoiceBox.valueProperty().isNull());
+        
+        // Binding della visibilità del TextField al valore della CheckBox
+        actionRegisterTF.visibleProperty().bind(checkRegisterAction.selectedProperty());        
+        
+        macroActionBox.setVisible(!ruleCreator.macroActionEmpty());
+        setUpActionMacroBox();
     }
-
+    
     /**
      * Handles the event when the user confirms the creation of a rule.
      *
@@ -246,28 +267,41 @@ public class CreateRuleSubWindowController implements Initializable {
      */
     @FXML
     private void confirmRuleCreationEvent(ActionEvent event) {
-
+        
         System.out.println(sequenceAction.size());
         if(sequenceAction.size() != 1){            
-            lastAction = ruleCreator.createComposteAction(sequenceAction);
+            lastAction = ruleCreator.createCompositeAction(sequenceAction);
         }        
 
         String ruleName = ruleNameTF.getText();
         String ruleType = "OnlyOnce";      
         if (sleepRuleCheckBox.isSelected())
-            ruleType = "SleepingTime";
-        
-       
+            ruleType = "SleepingTime";               
                     
         Rule rule = ruleCreator.createRule(ruleName, lastTrigger, lastAction, ruleType);
         if (rule instanceof SleepingRuleDecorator){
             SleepingRuleDecorator s = (SleepingRuleDecorator) rule;
             s.setMinSleepTime(millisecond);
+        
         }
-                    closeWindowEvent(event);
 
+        if(checkRegisterAction.isSelected()){
+            System.out.println("sto registrando");
+            ruleCreator.registerActionMacro(actionRegisterTF.getText(), lastAction);        
+        }
+
+        closeWindowEvent(event);
     }
-       
+
+    private void setUpActionMacroBox(){
+        
+        if(!ruleCreator.macroActionEmpty()){
+        actionChoiceBox.getItems().addAll(ruleCreator.getAvailableActionTypes());            
+            macroActionChoiceBox.getItems().addAll(ruleCreator.getAvailableMacroAction());
+        }        
+        
+    }
+    
     /**
      * Handles the event when the user closes the rule creation window.
      *
@@ -289,10 +323,10 @@ public class CreateRuleSubWindowController implements Initializable {
     private void addTriggerEvent(ActionEvent event) {
 
         TreeItem<String> item = new TreeItem<>(triggerChoiceBox.getValue());
-        triggerTreeView.setRoot(item);
-        lastTrigger = ruleCreator.createTrigger(item.getValue());
+            triggerTreeView.setRoot(item);
+            lastTrigger = ruleCreator.createTrigger(item.getValue());
 
-        visibilityTrigger(item.getValue());
+            visibilityTrigger(item.getValue());
 
     }        
     
@@ -305,11 +339,12 @@ public class CreateRuleSubWindowController implements Initializable {
     private void addActionEvent(ActionEvent event) {
         
         String item = actionChoiceBox.getValue();
+
         actionListView.getItems().add(item);
         Action action = ruleCreator.createAction(item);
         sequenceAction.add(action);
         lastAction = action;
-        visibilityAction(item);
+        visibilityAction(item);                        
 
     }
 
@@ -677,6 +712,18 @@ public class CreateRuleSubWindowController implements Initializable {
          File file = chooser.showOpenDialog(new Stage());
          folderPath = file;
 }
+
+    @FXML
+    private void addMacroActionEvent(ActionEvent event) {
+        
+        String item = macroActionChoiceBox.getValue();
+        actionListView.getItems().add(item);
+        Action action = ruleCreator.getMacroAction(item);
+        sequenceAction.add(action);
+        lastAction = action;
+       //visibilityAction(item);  
+        
+    }
     
     private long convertToMilliseconds(int days, int hours, int minutes) {
     

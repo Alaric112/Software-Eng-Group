@@ -219,14 +219,30 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <ListView fx:id="actionListView" layoutX="14.0" layoutY="40.0" onMouseClicked="#selectActionItemEvent" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0" />
-                                    <ToolBar prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                    <ListView fx:id="actionListView" layoutX="14.0" layoutY="40.0" onMouseClicked="#selectActionItemEvent" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="90.0" />
+                                    <ToolBar prefHeight="90.0" prefWidth="477.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                       <items>
-                                        <Button fx:id="addActionButton" mnemonicParsing="false" onAction="#addActionEvent" text="ADD" />
-                                          <ChoiceBox fx:id="actionChoiceBox" prefWidth="150.0" />
+                                          <VBox alignment="CENTER" prefHeight="81.0" prefWidth="250.0" spacing="20.0">
+                                             <children>
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                                   <children>
+                                                    <Button fx:id="addActionButton" mnemonicParsing="false" onAction="#addActionEvent" text="ADD" />
+                                                      <ChoiceBox fx:id="actionChoiceBox" prefWidth="150.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox fx:id="macroActionBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                                   <children>
+                                                      <Button fx:id="addMacroActionBtn" mnemonicParsing="false" onAction="#addMacroActionEvent" text="ADD" />
+                                                      <ChoiceBox fx:id="macroActionChoiceBox" prefWidth="150.0" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <CheckBox fx:id="checkRegisterAction" mnemonicParsing="false" text="Register Action" />
+                                          <TextField fx:id="actionRegisterTF" prefHeight="25.0" prefWidth="100.0" />
                                       </items>
                                     </ToolBar>
-                                    <VBox fx:id="messageActionBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                    <VBox fx:id="messageActionBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
                                        <children>
                                           <Label text="Insert Message" />
                                           <TextArea fx:id="textMessageArea" prefHeight="182.0" prefWidth="252.0" />
@@ -239,7 +255,7 @@
                                                 </ImageView>
                                              </graphic></Button>
                                        </children></VBox>
-                                    <VBox fx:id="playAudioBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="292.0" prefWidth="249.0" spacing="10.0" visible="false">
+                                    <VBox fx:id="playAudioBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="292.0" prefWidth="249.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
                                        <children>
                                           <Label prefHeight="18.0" prefWidth="134.0" text="Select the path of the file" />
                                           <TextField fx:id="pathSound" />
@@ -253,7 +269,7 @@
                                              </graphic></Button>
                                        </children>
                                     </VBox>
-                                    <VBox fx:id="fileDeleteBox" alignment="TOP_CENTER" layoutX="226.0" layoutY="38.0" prefHeight="293.0" prefWidth="260.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                    <VBox fx:id="fileDeleteBox" alignment="TOP_CENTER" layoutX="226.0" layoutY="38.0" prefHeight="293.0" prefWidth="260.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
                                        <children>
                                           <Label prefHeight="18.0" prefWidth="230.0" text="Select the file you want to delete" />
                                           <TextField fx:id="pathDelete" />
@@ -268,7 +284,7 @@
                                           </Button>
                                        </children>
                                     </VBox>
-                                    <VBox fx:id="appendTextBox" alignment="TOP_CENTER" layoutX="224.0" layoutY="39.0" prefHeight="292.0" prefWidth="252.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                    <VBox fx:id="appendTextBox" alignment="TOP_CENTER" layoutX="224.0" layoutY="39.0" prefHeight="292.0" prefWidth="252.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
                                        <children>
                                           <Label prefHeight="18.0" prefWidth="230.0" text="Insert the text" />
                                           <TextArea fx:id="appendTextArea" prefHeight="94.0" prefWidth="260.0" />
@@ -286,7 +302,7 @@
                                           <Button mnemonicParsing="false" onAction="#confirmAppendTextEvent" text="Confirm" />
                                        </children>
                                     </VBox>
-                                    <VBox fx:id="moveActionBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="292.0" prefWidth="252.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                    <VBox fx:id="moveActionBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="292.0" prefWidth="252.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
                                        <children>
                                           <Label prefHeight="18.0" prefWidth="230.0" text="Set source file" />
                                           <TextField fx:id="sourcePathTF" />
@@ -311,7 +327,7 @@
                                           </Button>
                                        </children>
                                     </VBox>
-                                    <VBox fx:id="excProgrammActionBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="292.0" prefWidth="252.0" spacing="10.0" visible="false">
+                                    <VBox fx:id="excProgrammActionBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="292.0" prefWidth="252.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
                                        <children>
                                           <Label prefHeight="18.0" prefWidth="230.0" text="Select your programm" />
                                           <TextField fx:id="programmPathTF" />

@@ -96,7 +96,7 @@ public class RuleCreatorTest {
 
         Collection<Action> actions = Arrays.asList(action1, action2, action3);
 
-        CompositeAction result = ruleCreator.createComposteAction(actions);
+        CompositeAction result = ruleCreator.createCompositeAction(actions);
 
         assertNotNull(result);
 

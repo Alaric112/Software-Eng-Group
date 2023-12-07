@@ -4,7 +4,6 @@
  */
 package group2.Model.Rule;
 
-import group2.Model.Rule.Rule;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
