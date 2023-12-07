@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package group2.Controller;
 
 import group2.App;
@@ -37,7 +33,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 /**
- * FXML Controller class
+ * Controller class for the secondary view.
+ * This class manages the behavior and interaction of GUI elements in the secondary view.
  *
  * @author patap
  */
@@ -71,37 +68,40 @@ public class SecondaryController implements Initializable, Observer {
     private MenuItem deleteEditMenuBar;
     @FXML
     private Button homeBtn;
-    
-    private BooleanProperty isThreadRunning = new SimpleBooleanProperty(false);
-    private ControlRuleChecker checker =ControlRuleChecker.getInstance();
-    
-    private RuleSet ruleSet = checker.getRuleSet();    
-    
-    private ObservableList<Rule> observableRules;    
     @FXML
     private MenuItem editRule;
+   
+    private BooleanProperty isThreadRunning = new SimpleBooleanProperty(false);
+    private ControlRuleChecker checker = ControlRuleChecker.getInstance();
+    
+    private RuleSet ruleSet;     
+    private ObservableList<Rule> observableRules;    
+
     
     /**
      * Initializes the controller class.
+     * This method is called automatically when the FXML file is loaded.
+     * It sets up the initial state and bindings for GUI elements.
+     * 
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param rb The resources used to localize the root object, or null if the root object was not localized.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        ruleSet = checker.getRuleSet();        
-        observableRules = FXCollections.observableArrayList();
-        observableRules.setAll(ruleSet.getRules());
+        ruleSet = checker.getRuleSet();
+        
+        observableRules = FXCollections.observableArrayList(ruleSet.getRules());
+
         ruleSet.addObserver(this);
         checker.addObserver(this);
+        
         startCheckerBtn.disableProperty().bind(isThreadRunning);
         stopCheckerBtn.disableProperty().bind(isThreadRunning.not());
         checkerImageView.visibleProperty().bind(isThreadRunning);
         
         nameRule.setCellValueFactory(new PropertyValueFactory("name"));
-        stateRule.setCellValueFactory(cellData -> {
-            Rule rule = cellData.getValue();
-            String status = rule.isActive() ? "active" : "disabled";
-            return new SimpleStringProperty(status);
-        });
+        stateRule.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().isActive() ? "active" : "disabled"));
 
         initItemSelecteBinding();
         
@@ -109,17 +109,19 @@ public class SecondaryController implements Initializable, Observer {
         
         ruleSetLabel.setText(ruleSet.getName());
          
-        ruleSet= checker.getRuleSet();
-        
+        ruleSet= checker.getRuleSet();        
         ruleTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
                 
     }    
 
+    /**
+     * Initializes the bindings for disabling/enabling various GUI elements based on the selection in the ruleTable.
+     */    
     private void initItemSelecteBinding(){
            
-        // Disable Delete and Switch status context menu if there is no selecte element in the table
-        BooleanProperty isItemSelected = new SimpleBooleanProperty();
+        BooleanProperty isItemSelected = new SimpleBooleanProperty();        
         isItemSelected.bind(Bindings.isNull(ruleTable.getSelectionModel().selectedItemProperty()));
+        
         deleteRuleItemMenu.disableProperty().bind(isItemSelected);
         editRule.disableProperty().bind(isItemSelected);
         deleteBtn.disableProperty().bind(isItemSelected);
@@ -127,12 +129,21 @@ public class SecondaryController implements Initializable, Observer {
         deleteEditMenuBar.disableProperty().bind(isItemSelected);
         
     } 
-    
+
+    /**
+     * Autosaves the ruleSet to a backup file.
+     */    
     private void AutoSave(){
         File file = new File("backup.dat");
         FileIOManager.saveToFileAsync(file, ruleSet);        
     }
-    
+
+    /**
+     * Handles the action event for creating a new rule.
+     * If the checker is running, it stops it before opening the rule creation window and restarts it afterward.
+     *
+     * @param event The ActionEvent triggered by the user.
+     */    
     @FXML
     private void createRuleAction(ActionEvent event) {
         
@@ -148,7 +159,13 @@ public class SecondaryController implements Initializable, Observer {
             startCheckerEvent(event);
     
     }
-
+    
+    /**
+     * Handles the action event for starting the rule checker.
+     * Sets the isThreadRunning property to true and starts the periodic rule check.
+     *
+     * @param event The ActionEvent triggered by the user.
+     */    
     @FXML
     private void startCheckerEvent(ActionEvent event) {
         
@@ -157,6 +174,12 @@ public class SecondaryController implements Initializable, Observer {
         
     }
 
+    /**
+     * Handles the action event for stopping the rule checker.
+     * Sets the isThreadRunning property to false and stops the periodic rule check.
+     *
+     * @param event The ActionEvent triggered by the user.
+     */    
     @FXML
     private void stopCheckerEvent(ActionEvent event) {
         
@@ -165,12 +188,23 @@ public class SecondaryController implements Initializable, Observer {
         
     }
 
+    /**
+     * Handles the action event for creating a new rule set.
+     *
+     * @param event The ActionEvent triggered by the user.
+     */    
     @FXML
     private void createNewRuleSetEvent(ActionEvent event) {
         
         App.createSubWindow("SubWindowsCreationRuleSet", "New Ruleset");
     }
 
+    /**
+     * Handles the action event for deleting a rule.
+     * Gets the selected rule(s) from the table and prompts the user for confirmation before deleting.
+     *
+     * @param event The ActionEvent triggered by the user.
+     */    
     @FXML
     private void deleteRuleEvent(ActionEvent event) {
 
@@ -201,6 +235,12 @@ public class SecondaryController implements Initializable, Observer {
         }
     }
 
+    /**
+     * Handles the action event for switching the status of selected rules.
+     * Gets the selected rule(s) from the table and switches their status.
+     *
+     * @param event The ActionEvent triggered by the user.
+     */    
     @FXML
     private void switchStatusRuleEvent(ActionEvent event) {
         
@@ -215,12 +255,24 @@ public class SecondaryController implements Initializable, Observer {
         }
     }
 
+    /**
+     * Handles the action event for exiting the application.
+     * Closes the application when the user clicks the exit button.
+     *
+     * @param event The ActionEvent triggered by the user.
+     */    
     @FXML
     private void exitEvent(ActionEvent event) {
         
         Platform.exit();
     }
 
+    /**
+     * Handles the action event for saving the rule set to a file.
+     * Prompts the user to select a location and saves the rule set to a file.
+     *
+     * @param event The ActionEvent triggered by the user.
+     */    
     @FXML
     private void SaveRuleSetEvent(ActionEvent event) {
        
@@ -230,6 +282,12 @@ public class SecondaryController implements Initializable, Observer {
         System.out.println("Save button pressed");
     }
 
+    /**
+     * Handles the action event for loading a rule set from a file.
+     * Prompts the user to select a file and loads the rule set from that file.
+     *
+     * @param event The ActionEvent triggered by the user.
+     */    
     @FXML
     private void loadRuleSetEvent(ActionEvent event) {
         
@@ -239,12 +297,25 @@ public class SecondaryController implements Initializable, Observer {
         
     }
 
+    /**
+     * Handles the action event for returning to the home view.
+     * Switches the view back to the primary view (Home view).
+     *
+     * @param event The ActionEvent triggered by the user.
+     */    
     @FXML
     private void returnToHomeEvent(ActionEvent event) {
         
         App.switchTo("primary");
     }
 
+    /**
+     * Updates the view when the observed objects (ruleSet or checker) change.
+     * Refreshes the rule table and other relevant GUI elements.
+     *
+     * @param o   The observable object.
+     * @param arg An argument passed to the notifyObservers method (not used in this implementation).
+     */    
     @Override
     public void update(Observable o, Object arg) {
         
