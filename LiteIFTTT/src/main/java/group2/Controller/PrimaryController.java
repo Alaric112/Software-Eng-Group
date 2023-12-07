@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package group2.Controller;
 
-import group2.App;
 import group2.App;
 import group2.Model.Rule.FileManager.LoadCommand;
 import java.io.File;
@@ -16,7 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 /**
- * FXML Controller class
+ * FXML Controller class for the primary view of the application. Manages the
+ * actions and interactions related to the primary view, which includes creating
+ * a new rule set and loading an existing rule set.
  *
  * @author patap
  */
@@ -26,26 +23,37 @@ public class PrimaryController implements Initializable {
     private Button openRuleSetButton;
     @FXML
     private Button newRuleSetButton;
-    @FXML
-    private Button sdsdsdsdsdsdsdsdsdd;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
 
+    }
+
+    /**
+     * Handles the action event for creating a new rule set. Opens a sub-window
+     * for creating a new rule set when the "New Rule Set" button is clicked.
+     *
+     * @param event The ActionEvent triggered by the user.
+     */
     @FXML
     private void createRuleSetAction(ActionEvent event) {
-             
+
         App.createSubWindow("SubWindowsCreationRuleSet", "New Ruleset");
     }
 
+    /**
+     * Handles the action event for loading an existing rule set. Prompts the
+     * user to select a file, loads the rule set from that file, and switches to
+     * the secondary view.
+     *
+     * @param event The ActionEvent triggered by the user.
+     */
     @FXML
-    private void loadRuleSetAction(ActionEvent event) {        
-        
+    private void loadRuleSetAction(ActionEvent event) {
+
         Thread myThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -54,12 +62,11 @@ public class PrimaryController implements Initializable {
         });
 
         File file = App.createFCLoad();
-        
+
         LoadCommand loadCommand = new LoadCommand(myThread, file);
-       
-        loadCommand.execute();                
-        
-                
-    }        
-            
+
+        loadCommand.execute();
+
+    }
+
 }
