@@ -18,6 +18,7 @@ public class SaveCommand implements Command {
 
     private RuleSet ruleSet;
     private File file;
+    
     /**
      * Constructs a new SaveCommand with the specified RuleSet.
      *
@@ -33,7 +34,7 @@ public class SaveCommand implements Command {
     /**
      * Executes the SaveCommand by displaying a file save dialog and saving the RuleSet to the selected file.
      * If an IOException occurs during the save operation, it is printed to the standard error stream.
-     */    
+     */   
     @Override
     public void execute() {
 
@@ -41,18 +42,38 @@ public class SaveCommand implements Command {
         FileIOManager.saveToFileAsync(file, ruleSet);
     }
 
+    /**
+     * Gets the RuleSet associated with this SaveCommand.
+     *
+     * @return The RuleSet to be saved.
+     */    
     public RuleSet getRuleSet() {
         return ruleSet;
     }
 
+    /**
+     * Sets the RuleSet for this SaveCommand.
+     *
+     * @param ruleSet The RuleSet to be saved.
+     */    
     public void setRuleSet(RuleSet ruleSet) {
         this.ruleSet = ruleSet;
     }
 
+    /**
+     * Gets the file associated with this SaveCommand.
+     *
+     * @return The file to which the RuleSet will be saved.
+     */    
     public File getFile() {
         return file;
     }
 
+    /**
+     * Sets the file for this SaveCommand.
+     *
+     * @param file The file to which the RuleSet will be saved.
+     */    
     public void setFile(File file) {
         this.file = file;
     }
