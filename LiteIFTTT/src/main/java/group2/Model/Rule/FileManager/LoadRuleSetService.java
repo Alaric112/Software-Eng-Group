@@ -5,7 +5,7 @@
 package group2.Model.Rule.FileManager;
 
 import group2.Model.Rule.ControlRuleChecker;
-import group2.Model.Rule.RuleSet;
+import group2.Model.Rule.RuleList;
 import java.io.File;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -15,7 +15,7 @@ import javafx.concurrent.Task;
  *
  * @author patap
  */
-public class LoadRuleSetService extends Service<RuleSet> {
+public class LoadRuleSetService extends Service<RuleList> {
     
     private File file;
     private ControlRuleChecker checker;
@@ -26,12 +26,12 @@ public class LoadRuleSetService extends Service<RuleSet> {
     }
 
     @Override
-    protected Task<RuleSet> createTask() {
-        return new Task<RuleSet>() {
+    protected Task<RuleList> createTask() {
+        return new Task<RuleList>() {
             @Override
-            protected RuleSet call() throws Exception {               
-                    // Esegui l'operazione di caricamento del RuleSet da file
-               RuleSet ruleSet = FileIOManager.loadRuleSet(file);
+            protected RuleList call() throws Exception {               
+                    // Esegui l'operazione di caricamento del RuleList da file
+               RuleList ruleSet = FileIOManager.loadRuleSet(file);
                 
                 Platform.runLater(() -> {
                     if (ruleSet != null) {

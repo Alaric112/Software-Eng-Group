@@ -16,13 +16,13 @@ import java.util.Observer;
  * 
  * @author patap
  */
-public class RuleSet extends Observable implements Serializable {
+public class RuleList extends Observable implements Serializable {
     
     private int timer;
     private String name;    
     private List<Rule> rules = new ArrayList<>();
     
-    public RuleSet(int timer, String name) {
+    public RuleList(int timer, String name) {
         this.timer = timer;
         this.name = name;     
      
@@ -106,11 +106,6 @@ public class RuleSet extends Observable implements Serializable {
         notifyObservers();    
     }    
 
-//    @Override
-//    public int compareTo(RuleSet o) {
-//        return this.name.compareTo(o.name); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -131,7 +126,7 @@ public class RuleSet extends Observable implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final RuleSet other = (RuleSet) obj;
+        final RuleList other = (RuleList) obj;
         if (this.timer != other.timer) {
             return false;
         }

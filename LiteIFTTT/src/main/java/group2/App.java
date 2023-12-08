@@ -1,7 +1,6 @@
 package group2;
 
 import group2.Model.Rule.FileManager.*;
-import group2.Model.Rule.*;
 import java.io.File;
 import java.io.FileInputStream;
 import javafx.application.Application;

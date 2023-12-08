@@ -160,7 +160,7 @@ public final class RuleCreator {
 
     private void addRuleTORuleSet(Rule rule) {
 
-        RuleSet ruleSet = checker.getRuleSet();
+        RuleList ruleSet = checker.getRuleSet();
         if (ruleSet != null) {
             ruleSet.addRule(rule);
         }

@@ -1,31 +1,31 @@
 package group2.Model.Rule.FileManager;
 
-import group2.Model.Rule.RuleSet;
+import group2.Model.Rule.RuleList;
 import java.io.File;
 
 /**
- * The {@code SaveCommand} class represents a command to save a {@link RuleSet} to a file.
+ * The {@code SaveCommand} class represents a command to save a {@link RuleList} to a file.
  * It implements the {@link Command} interface, allowing it to be used in a command pattern.
  *
  * <p>This class provides functionality to display a file save dialog using JavaFX's {@link FileChooser},
- * allowing the user to specify a location to save the RuleSet. The saved file is in a binary format with
- * the extension ".dat".
+ allowing the user to specify a location to save the RuleList. The saved file is in a binary format with
+ the extension ".dat".
  *
  *
  * @author patap
  */
 public class SaveCommand implements Command {
 
-    private RuleSet ruleSet;
+    private RuleList ruleSet;
     private File file;
     
     /**
-     * Constructs a new SaveCommand with the specified RuleSet.
+     * Constructs a new SaveCommand with the specified RuleList.
      *
-     * @param ruleSet The RuleSet to be saved.
+     * @param ruleSet The RuleList to be saved.
      * @param file
      */    
-    public SaveCommand(RuleSet ruleSet, File file) {
+    public SaveCommand(RuleList ruleSet, File file) {
         this.ruleSet = ruleSet;
         this.file = file;
 
@@ -38,32 +38,32 @@ public class SaveCommand implements Command {
     @Override
     public void execute() {
 
-        // Save the RuleSet to the selected file using FileIOManager
+        // Save the RuleList to the selected file using FileIOManager
         FileIOManager.saveToFileAsync(file, ruleSet);
     }
 
     /**
-     * Gets the RuleSet associated with this SaveCommand.
+     * Gets the RuleList associated with this SaveCommand.
      *
-     * @return The RuleSet to be saved.
+     * @return The RuleList to be saved.
      */    
-    public RuleSet getRuleSet() {
+    public RuleList getRuleSet() {
         return ruleSet;
     }
 
     /**
-     * Sets the RuleSet for this SaveCommand.
+     * Sets the RuleList for this SaveCommand.
      *
-     * @param ruleSet The RuleSet to be saved.
+     * @param ruleSet The RuleList to be saved.
      */    
-    public void setRuleSet(RuleSet ruleSet) {
+    public void setRuleSet(RuleList ruleSet) {
         this.ruleSet = ruleSet;
     }
 
     /**
      * Gets the file associated with this SaveCommand.
      *
-     * @return The file to which the RuleSet will be saved.
+     * @return The file to which the RuleList will be saved.
      */    
     public File getFile() {
         return file;
@@ -72,7 +72,7 @@ public class SaveCommand implements Command {
     /**
      * Sets the file for this SaveCommand.
      *
-     * @param file The file to which the RuleSet will be saved.
+     * @param file The file to which the RuleList will be saved.
      */    
     public void setFile(File file) {
         this.file = file;

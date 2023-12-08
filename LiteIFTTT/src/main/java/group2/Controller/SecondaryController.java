@@ -74,7 +74,7 @@ public class SecondaryController implements Initializable, Observer {
     private BooleanProperty isThreadRunning = new SimpleBooleanProperty(false);
     private ControlRuleChecker checker = ControlRuleChecker.getInstance();
     
-    private RuleSet ruleSet;     
+    private RuleList ruleSet;     
     private ObservableList<Rule> observableRules;    
 
     
@@ -331,8 +331,8 @@ public class SecondaryController implements Initializable, Observer {
                 ruleTable.refresh();
             });
 
-        } else if (o instanceof RuleSet) {
-            RuleSet updatedRuleSet = (RuleSet) o;
+        } else if (o instanceof RuleList) {
+            RuleList updatedRuleSet = (RuleList) o;
                 observableRules.setAll(updatedRuleSet.getRules());
                 ruleTable.refresh();
                 AutoSave();

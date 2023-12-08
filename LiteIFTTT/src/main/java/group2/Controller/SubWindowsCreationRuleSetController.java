@@ -2,7 +2,7 @@ package group2.Controller;
 
 import group2.App;
 import group2.Model.Rule.ControlRuleChecker;
-import group2.Model.Rule.RuleSet;
+import group2.Model.Rule.RuleList;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -77,7 +77,7 @@ public class SubWindowsCreationRuleSetController implements Initializable {
     @FXML
     private void creationRuleSetConfirmationAction(ActionEvent event) {
 
-        RuleSet rules=new RuleSet(spinnerControlTime.getValue(), ruleSetNameTextField.getText());
+        RuleList rules=new RuleList(spinnerControlTime.getValue(), ruleSetNameTextField.getText());
         checker.changeRuleset(rules);
 
         App.switchTo("secondary");

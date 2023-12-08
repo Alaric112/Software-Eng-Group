@@ -5,7 +5,7 @@
 package group2.Model.Rule.FileManager;
 
 import group2.Model.Rule.ControlRuleChecker;
-import group2.Model.Rule.RuleSet;
+import group2.Model.Rule.RuleList;
 import java.io.File;
 import java.util.concurrent.CompletableFuture;
 
@@ -27,7 +27,7 @@ public class LoadCommand implements Command  {
      * Constructs a new LoadCommand with the specified {@link Thread} for execution on completion and the target file to load.
      *
      * @param onLoadCompletion The thread to execute upon completion of the load operation.
-     * @param file             The file from which to load the RuleSet.
+     * @param file             The file from which to load the RuleList.
      */    
     public LoadCommand(CompletableFuture<Void> onLoadCompletion, File file) {
 
@@ -43,7 +43,7 @@ public class LoadCommand implements Command  {
     @Override
     public void execute() {
         
-        CompletableFuture<RuleSet> completableFuture = FileIOManager.loadFromFileAsync(file);
+        CompletableFuture<RuleList> completableFuture = FileIOManager.loadFromFileAsync(file);
 
         completableFuture.thenAcceptAsync(ruleSet -> {
             checker.changeRuleset(ruleSet);
@@ -77,18 +77,18 @@ public class LoadCommand implements Command  {
     } 
 
     /**
-     * Gets the file from which to load the RuleSet.
+     * Gets the file from which to load the RuleList.
      *
-     * @return The file from which to load the RuleSet.
+     * @return The file from which to load the RuleList.
      */    
     public File getFile() {
         return file;
     }
 
     /**
-     * Sets the file from which to load the RuleSet.
+     * Sets the file from which to load the RuleList.
      *
-     * @param file The file to set for loading the RuleSet.
+     * @param file The file to set for loading the RuleList.
      */    
     public void setFile(File file) {
         this.file = file;

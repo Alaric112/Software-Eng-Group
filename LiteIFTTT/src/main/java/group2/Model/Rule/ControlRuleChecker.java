@@ -1,18 +1,14 @@
 
 package group2.Model.Rule;
 
-import group2.Model.Rule.Rule;
 import java.util.Observable;
-import java.util.concurrent.ForkJoinPool;
-//import javafx.beans.property.ObjectProperty;
-//import javafx.beans.property.SimpleObjectProperty;
 
 public final class ControlRuleChecker extends Observable {
     // The field must be declared volatile so that double check lock would work
     // correctly.
     private static volatile ControlRuleChecker instance;
-    //private RuleSet rules;
-    private RuleSet ruleSet;
+    //private RuleList rules;
+    private RuleList ruleSet;
     private Thread periodicCheckThread;
 
     private ControlRuleChecker() {
@@ -91,7 +87,7 @@ public final class ControlRuleChecker extends Observable {
         ruleSet.setTimer(newTimer);
     }
     
-    public void changeRuleset(RuleSet ruleSet) {
+    public void changeRuleset(RuleList ruleSet) {
         
         this.ruleSet = ruleSet;
         setChanged();
@@ -99,7 +95,7 @@ public final class ControlRuleChecker extends Observable {
 
     }
 
-    public RuleSet getRuleSet() {
+    public RuleList getRuleSet() {
         
         return ruleSet;
     }

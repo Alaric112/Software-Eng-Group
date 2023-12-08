@@ -11,11 +11,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * JUnit test class for the {@link RuleSet} class.
+ * JUnit test class for the {@link RuleList} class.
  */
-public class RuleSetTest {
+public class RuleListTest {
 
-    private RuleSet ruleset;
+    private RuleList ruleset;
     private MockAction mockAction;
     private MockTrigger mockTrigger;
     
@@ -24,22 +24,22 @@ public class RuleSetTest {
      */
     
     /**
-     * Sets up a new RuleSet instance before each test.
+     * Sets up a new RuleList instance before each test.
      */
     @Before
     public void setUp() {
-        // Inizializza un nuovo RuleSet prima di ogni test
-        ruleset = new RuleSet(10, "TestRuleset");
+        // Inizializza un nuovo RuleList prima di ogni test
+        ruleset = new RuleList(10, "TestRuleset");
 //        mockAction = new MockAction();
 //        mockTrigger = new MockTrigger();
     }
     
     /**
-     * Tests the addition of a rule to the RuleSet.
+     * Tests the addition of a rule to the RuleList.
      */
     @Test
     public void testAddRule() {
-        // Verifica che la regola sia aggiunta correttamente al RuleSet
+        // Verifica che la regola sia aggiunta correttamente al RuleList
         MockRule rule = new MockRule("TestRule");
         ruleset.addRule(rule);
 
@@ -48,11 +48,11 @@ public class RuleSetTest {
     }
 
     /**
-     * Tests the removal of a rule from the RuleSet.
+     * Tests the removal of a rule from the RuleList.
      */
     @Test
     public void testRemoveRule() {
-        // Verifica che la regola sia rimossa correttamente dal RuleSet
+        // Verifica che la regola sia rimossa correttamente dal RuleList
         MockRule rule = new MockRule("TestRule");
         ruleset.addRule(rule);
 
@@ -63,11 +63,11 @@ public class RuleSetTest {
     }
 
     /**
-     * Tests the calculation of the RuleSet size.
+     * Tests the calculation of the RuleList size.
      */
     @Test
     public void testSizeRuleSet() {
-        // Verifica che la dimensione del RuleSet sia calcolata correttamente
+        // Verifica che la dimensione del RuleList sia calcolata correttamente
         assertEquals(0, ruleset.sizeRuleSet());
 
         MockRule rule1 = new MockRule("TestRule1");
@@ -84,11 +84,11 @@ public class RuleSetTest {
     }
 
     /**
-     * Tests the clearing of the RuleSet.
+     * Tests the clearing of the RuleList.
      */
     @Test
     public void testClearRuleSet() {
-        // Verifica che il RuleSet venga cancellato correttamente
+        // Verifica che il RuleList venga cancellato correttamente
         MockRule rule1 = new MockRule("TestRule1");
         MockRule rule2 = new MockRule("TestRule2");
 
@@ -103,39 +103,39 @@ public class RuleSetTest {
     }
 
     /**
-     * Tests the retrieval of the RuleSet name.
+     * Tests the retrieval of the RuleList name.
      */
     @Test
     public void testGetName() {
-        // Verifica che il nome del RuleSet sia restituito correttamente
+        // Verifica che il nome del RuleList sia restituito correttamente
         assertEquals("TestRuleset", ruleset.getName());
     }
 
     /**
-     * Tests the setting of the RuleSet name.
+     * Tests the setting of the RuleList name.
      */
     @Test
     public void testSetName() {
-        // Verifica che il nome del RuleSet sia impostato correttamente
+        // Verifica che il nome del RuleList sia impostato correttamente
         ruleset.setName("NewTestRuleset");
         assertEquals("NewTestRuleset", ruleset.getName());
     }
 
     /**
-     * Tests the retrieval of the RuleSet timer.
+     * Tests the retrieval of the RuleList timer.
      */
     @Test
     public void testGetTimer() {
-        // Verifica che il timer del RuleSet sia restituito correttamente
+        // Verifica che il timer del RuleList sia restituito correttamente
         assertEquals(10, ruleset.getTimer());
     }
 
     /**
-     * Tests the setting of the RuleSet timer.
+     * Tests the setting of the RuleList timer.
      */
     @Test
     public void testSetTimer() {
-        // Verifica che il timer del RuleSet sia impostato correttamente
+        // Verifica che il timer del RuleList sia impostato correttamente
         ruleset.setTimer(20);
         assertEquals(20, ruleset.getTimer());
     }
