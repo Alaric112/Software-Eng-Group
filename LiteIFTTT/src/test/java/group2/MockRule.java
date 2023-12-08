@@ -10,7 +10,7 @@ import group2.Model.Rule.Rule;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class MockRule implements Rule {
     

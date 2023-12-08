@@ -4,7 +4,6 @@
  */
 package group2.Model.Trigger;
 
-import group2.Model.Trigger.Trigger;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 

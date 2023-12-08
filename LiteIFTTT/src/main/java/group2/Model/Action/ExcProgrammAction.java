@@ -7,8 +7,7 @@ import java.io.IOException;
  * The `ExcProgrammAction` class represents an implementation of the `Action` interface
  * for executing external programs with specified command-line arguments.
  *
- * @author patap
- * @version 1.0
+ * @author Alessandro Accarino
  */
 public class ExcProgrammAction implements Action {
 

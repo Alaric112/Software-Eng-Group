@@ -14,7 +14,10 @@ import java.io.Serializable;
  * Implementing classes should provide specific logic for the methods defined in
  * this interface to define the behavior of the rule.
  *
- * @author patap
+ * <p> This interface follows the decorator pattern, with the {@link BaseRule} class
+ * corresponding to the concrete component. </p>
+ * 
+ * @author Alessandro Accarino
  * @see group2.BaseRule
  * @see group2.Model.Trigger.Trigger
  * @see group2.Model.Action.Action
@@ -52,7 +55,12 @@ public interface Rule extends Serializable {
      * changing the status of the rule.
      */
     void switchStatus();
-    
+ 
+    /**
+     * Retrieves the activation status of the rule.
+     *
+     * @return {@code true} if the rule is active, {@code false} otherwise.
+     */    
     boolean isActive();
    
 }

@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 
 /**
  * JUnit test class for the {@link RuleList} class.
+ * @author Alessandro Accarino
  */
 public class RuleListTest {
 
@@ -139,4 +140,56 @@ public class RuleListTest {
         ruleset.setTimer(20);
         assertEquals(20, ruleset.getTimer());
     }
+    
+    @Test
+    public void testSwitchRuleStatus() {
+        // Verify that the status of a rule is switched correctly in the RuleList
+        MockRule rule = new MockRule("TestRule");
+        ruleset.addRule(rule);
+
+        assertTrue(rule.isOn()); // Rule should start enabled
+
+        ruleset.switchRuleStatus(rule);
+        assertFalse(rule.isOn()); // Rule status should be switched to disabled
+
+        ruleset.switchRuleStatus(rule);
+        assertTrue(rule.isOn()); // Rule status should be switched back to enabled
+    }
+
+
+    /**
+     * Tests updating observers when the RuleList changes.
+     */
+    @Test
+    public void testObserverNotification() {
+        // Verify that observers are notified when the RuleList changes
+        MockObserver observer = new MockObserver();
+        ruleset.addObserver(observer);
+
+        ruleset.addRule(new MockRule("TestRule"));
+
+        assertTrue(observer.isNotified());
+    }
+    
+    @Test
+    public void testRemoveRuleNotification() {
+        // Crea una RuleList e un MockObserver
+        RuleList ruleList = new RuleList(10, "TestRuleList");
+
+        // Aggiungi una regola che verrà successivamente rimossa
+        Rule rule = new MockRule("TestRule");
+        ruleList.addRule(rule);
+
+        MockObserver observer = new MockObserver();
+
+        // Aggiungi l'osservatore alla RuleList
+        ruleList.addObserver(observer);
+        
+        // Cancella la regola e verifica se l'osservatore è stato notificato
+        ruleList.removeRule(rule);
+
+        // Verifica che l'osservatore sia stato notificato
+        assertTrue(observer.isNotified());
+    }    
+    
 }

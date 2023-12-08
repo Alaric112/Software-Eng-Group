@@ -6,7 +6,7 @@ package group2.Model.Action;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class MessageActionCreator extends ActionCreator {
 

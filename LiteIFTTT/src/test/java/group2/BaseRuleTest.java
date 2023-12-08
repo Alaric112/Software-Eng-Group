@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class BaseRuleTest {
     

@@ -9,7 +9,7 @@ package group2.Model.Trigger;
  * instances of the {@link Trigger} interface. Subclasses must implement the
  * {@link #createTrigger()} method to provide specific logic for creating triggers.
  *
- * @author patap
+ * @author Alessandro Accarino
  * @see group2.Model.Trigger.Trigger
  */
 public abstract class TriggerCreator {

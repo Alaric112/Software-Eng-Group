@@ -32,11 +32,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+
 /**
  * Controller class for the secondary view.
  * This class manages the behavior and interaction of GUI elements in the secondary view.
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class SecondaryController implements Initializable, Observer {
 
@@ -135,7 +136,7 @@ public class SecondaryController implements Initializable, Observer {
      */    
     private void AutoSave(){
         File file = new File("backup.dat");
-        FileIOManager.saveToFileAsync(file, ruleSet);        
+        saveRuleSet(ruleSet, file);       
     }
 
     /**
@@ -277,11 +278,16 @@ public class SecondaryController implements Initializable, Observer {
     private void SaveRuleSetEvent(ActionEvent event) {
        
         File file = App.createFCSave(ruleSet.getName());
-        Command saveCommand = new SaveCommand(ruleSet, file);
-        saveCommand.execute();
-        System.out.println("Save button pressed");
+        saveRuleSet(ruleSet, file);
     }
 
+    private void saveRuleSet(RuleList ruleSet, File file){
+        
+        Command saveCommand = new SaveCommand(ruleSet, file);
+        saveCommand.execute();
+        
+    }
+    
     /**
      * Handles the action event for loading a rule set from a file.
      * Prompts the user to select a file and loads the rule set from that file.
@@ -344,6 +350,7 @@ public class SecondaryController implements Initializable, Observer {
         ruleSet.deleteObserver(this);
     }
 
+    // FAUSTO ???
     @FXML
     private void editRuleEvent(ActionEvent event) {
         

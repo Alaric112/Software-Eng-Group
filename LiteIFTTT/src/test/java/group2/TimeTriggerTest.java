@@ -19,8 +19,6 @@ public class TimeTriggerTest {
     /**
      * Constructs a new instance of the TimeTrigger class.
      *
-     * @param hour   The hour of the target time.
-     * @param minute The minute of the target time.
      */
     @Test
     public void testEvaluate_True() {

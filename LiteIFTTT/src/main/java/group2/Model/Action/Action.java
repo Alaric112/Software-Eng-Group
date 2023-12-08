@@ -11,7 +11,7 @@ import java.io.Serializable;
  * Classes implementing this interface should provide specific behavior for the
  * {@link #execute()} method.
  *
- * @author patap
+ * @author Alessandro Accarino
  * @see group2.GenericAction
  */
 public interface Action extends Serializable {

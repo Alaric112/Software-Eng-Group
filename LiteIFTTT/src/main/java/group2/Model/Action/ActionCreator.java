@@ -9,7 +9,7 @@ package group2.Model.Action;
  * instances of the {@link Action} interface. Subclasses must implement the
  * {@link #createAction()} method to provide specific logic for creating triggers.
  *
- * @author patap
+ * @author Alessandro Accarino
  * @see group2.Model.Action.Action
  */
 public abstract class ActionCreator {

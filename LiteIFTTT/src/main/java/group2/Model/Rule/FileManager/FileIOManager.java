@@ -23,7 +23,7 @@ import java.util.concurrent.CompletableFuture;
  * It uses serialization to persist the RuleSet object to a file.
  * It also provides a method to display error messages through dialog windows.
  * 
- * @author patap
+ * @author Alessandro Accarino
  */
 public class FileIOManager {
 

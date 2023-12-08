@@ -21,7 +21,7 @@ import javafx.stage.Stage;
  * Manages the actions and interactions related to the creation of a new rule set,
  * including setting the control time and specifying the rule set name.
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class SubWindowsCreationRuleSetController implements Initializable {
 
@@ -91,7 +91,6 @@ public class SubWindowsCreationRuleSetController implements Initializable {
      *
      * @param event The ActionEvent triggered by the user.
      */    
-    @FXML
     private void openSavePathEvent(ActionEvent event) {
         
         FileChooser fc = new FileChooser();

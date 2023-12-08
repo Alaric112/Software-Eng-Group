@@ -6,7 +6,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +16,7 @@ import javafx.scene.control.Button;
  * actions and interactions related to the primary view, which includes creating
  * a new rule set and loading an existing rule set.
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class PrimaryController implements Initializable {
 

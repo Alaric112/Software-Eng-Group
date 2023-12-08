@@ -4,12 +4,9 @@
  */
 package group2.Model.Trigger;
 
-import group2.Model.Trigger.TriggerCreator;
-import group2.Model.Trigger.Trigger;
-
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class DayOfWeekTriggerCreator extends TriggerCreator {
     

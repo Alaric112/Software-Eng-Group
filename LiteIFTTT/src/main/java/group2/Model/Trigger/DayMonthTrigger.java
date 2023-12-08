@@ -8,7 +8,6 @@ package group2.Model.Trigger;
  *
  * @author Lore
  */
-import group2.Model.Trigger.Trigger;
 import java.time.LocalDate;
 import java.time.MonthDay;
 

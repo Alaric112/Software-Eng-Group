@@ -18,7 +18,7 @@ import java.util.List;
  * The class also provides a method {@code getActions} to retrieve the list of
  * actions contained in the composite action.
  *
- * @author patap
+ * @author Alessandro Accarino
  * @see Action
  * 
  */

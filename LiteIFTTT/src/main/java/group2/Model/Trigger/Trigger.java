@@ -11,7 +11,7 @@ import java.io.Serializable;
  * to determine whether a specific action or event should be triggered.
  * Implementing classes should provide logic for evaluating the condition.
  *
- * @author patap
+ * @author Alessandro Accarino
  * @see group2.GenericTrigger
  */
 public interface Trigger extends Serializable {

@@ -8,7 +8,7 @@ import group2.Model.Action.Action;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class MockAction implements Action {
     

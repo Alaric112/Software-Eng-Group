@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class MessageActionController implements Observer {
 

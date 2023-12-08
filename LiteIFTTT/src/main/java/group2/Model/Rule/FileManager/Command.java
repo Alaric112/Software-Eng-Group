@@ -6,7 +6,7 @@ package group2.Model.Rule.FileManager;
 
 /**
  * Interface used to apply the command pattern
- * @author patap
+ * @author Alessandro Accarino
  */
 public interface Command {
     

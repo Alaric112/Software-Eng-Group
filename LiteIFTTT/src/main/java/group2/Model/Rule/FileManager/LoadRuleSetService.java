@@ -13,7 +13,9 @@ import javafx.concurrent.Task;
 
 /**
  *
- * @author patap
+ * UNUSUED, OLD IMPLEMENTATION
+ * 
+ * @author Alessandro Accarino
  */
 public class LoadRuleSetService extends Service<RuleList> {
     

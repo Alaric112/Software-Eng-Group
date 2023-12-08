@@ -26,7 +26,7 @@ import java.util.Properties;
  * file paths. The properties file is used to store key-value pairs, and it is loaded
  * and saved using the Java Properties API.</p>
  * 
- * @author patap
+ * @author Alessandro Accarino
  */
 public final class AppConfig {
     
@@ -34,8 +34,6 @@ public final class AppConfig {
     private static final String CONFIG_FILE = "config.properties";
     /* The key used to store the last modified file path in the configuration file. */
     private static final String LAST_FILE = "lastModifiedFile";
-
-    private static final String ACTION_MACRO_FILE = "actionMacro.properties";
         
     private AppConfig() {
     }            

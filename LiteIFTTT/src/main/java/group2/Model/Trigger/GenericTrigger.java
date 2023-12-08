@@ -6,7 +6,7 @@ package group2.Model.Trigger;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class GenericTrigger implements Trigger {
 

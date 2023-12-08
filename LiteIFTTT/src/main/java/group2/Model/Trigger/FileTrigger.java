@@ -4,14 +4,13 @@
  */
 package group2.Model.Trigger;
 
-import group2.Model.Trigger.Trigger;
 import java.io.File;
 
 /**
  * Constructs a new instance of the <code>FileTrigger</code> class with the
  * specified directory and file name.
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class FileTrigger implements Trigger {
 

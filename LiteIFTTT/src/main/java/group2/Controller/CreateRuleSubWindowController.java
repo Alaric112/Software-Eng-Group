@@ -1,7 +1,6 @@
 package group2.Controller;
 
 import group2.App;
-import group2.App;
 import group2.Model.Action.*;
 import group2.Model.Trigger.*;
 import group2.Model.Rule.*;
@@ -52,8 +51,7 @@ import javafx.stage.DirectoryChooser;
  * visibility and enable/disable states, and communicates with the {@code RuleCreator}
  * and {@code ControlRuleChecker} to create and validate rules.</p>
  *
- *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class CreateRuleSubWindowController implements Initializable {
 

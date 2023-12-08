@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class FileIOManagerTest {
     
@@ -47,14 +47,7 @@ public class FileIOManagerTest {
         if (testFile != null && testFile.exists()) {
             testFile.delete();
         }
-    }
-
-//    @Test
-//    public void testSaveToFileAsync() throws IOException {
-//        // Save the RuleList asynchronously
-//        FileIOManager.saveToFileAsync(testFile, testRuleSet);
-//        // Add assertions or use some synchronization mechanism to wait for the async operation
-//    }    
+    }    
     
     @Test
     public void testSaveAndLoad() throws IOException  {

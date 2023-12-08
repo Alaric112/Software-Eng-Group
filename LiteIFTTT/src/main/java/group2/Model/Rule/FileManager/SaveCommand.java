@@ -4,15 +4,16 @@ import group2.Model.Rule.RuleList;
 import java.io.File;
 
 /**
+/**
  * The {@code SaveCommand} class represents a command to save a {@link RuleList} to a file.
  * It implements the {@link Command} interface, allowing it to be used in a command pattern.
  *
- * <p>This class provides functionality to display a file save dialog using JavaFX's {@link FileChooser},
- allowing the user to specify a location to save the RuleList. The saved file is in a binary format with
- the extension ".dat".
+ * <p>
+ * This class encapsulates the logic for saving a RuleList to a specified file asynchronously.
+ * It utilizes the {@link FileIOManager} to perform the asynchronous save operation.
+ * </p>
  *
- *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class SaveCommand implements Command {
 
@@ -30,11 +31,7 @@ public class SaveCommand implements Command {
         this.file = file;
 
     }    
-
-    /**
-     * Executes the SaveCommand by displaying a file save dialog and saving the RuleSet to the selected file.
-     * If an IOException occurs during the save operation, it is printed to the standard error stream.
-     */   
+ 
     @Override
     public void execute() {
 

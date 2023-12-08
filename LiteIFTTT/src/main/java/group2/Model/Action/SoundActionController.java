@@ -14,7 +14,7 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class SoundActionController implements Observer {
 

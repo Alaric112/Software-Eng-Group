@@ -20,18 +20,7 @@ import java.util.Set;
  * It also provides methods to create instances of actions and triggers based on
  * their respective types.</p>
  *
- * Example Usage:
- *
- * {@code
- * RuleCreator ruleCreator = RuleCreator.getInstance();
- * List<String> availableActionTypes = ruleCreator.getAvailableActionTypes();
- * List<String> availableTriggerTypes = ruleCreator.getAvailableTriggerTypes();
- * Action myAction = ruleCreator.createAction("Message");
- * Trigger myTrigger = ruleCreator.createTrigger("Time");
- * Rule myRule = ruleCreator.createRule("MyRule", myTrigger, myAction);
- * }
- *
- * @author patap
+ * @author Alessandro Accarino
  */
 public final class RuleCreator {
 

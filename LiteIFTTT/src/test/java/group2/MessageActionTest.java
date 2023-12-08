@@ -5,37 +5,32 @@
 package group2;
 
 import group2.Model.Action.MessageAction;
-import javafx.scene.control.Alert;
-import javafx.application.Platform;
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class MessageActionTest {
+    
+    private MessageAction messageAction;
     
     @Test
     public void testExecute() {
        
-        MessageAction messageAction = new MessageAction();
-        String expectedMessage = "Hello world!";
+        messageAction = new MessageAction();
 
     }
 
     @Test
     public void testGetMessageInfo() {
-        MessageAction messageAction = new MessageAction();
-
         // Use the getter and assert the default value
         assertEquals("Hello world!", messageAction.getMessageInfo());
     }   
     
     @Test
     public void testSetMessageInfo() {
-        MessageAction messageAction = new MessageAction();
 
         // Use the setter to set a new message
         messageAction.setMessageInfo("New message");

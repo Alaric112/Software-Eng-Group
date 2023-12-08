@@ -10,24 +10,25 @@ import java.io.File;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * The {@code LoadCommand} class represents a command to asynchronously load a RuleSet from a specified file.
+ * The {@code LoadCommand} class represents a command to asynchronously load a RuleList from a specified file.
  * It implements the {@link Command} interface, allowing it to be used in a command pattern.
  *
- * <p>This class takes a {@link Thread} as a parameter to execute on the completion of the load operation.
- * The load operation is performed asynchronously using JavaFX's {@link Service}, allowing for non-blocking execution.
+ * <p>This class takes a {@link CompletableFuture} as a parameter to execute on the completion of the load operation.
+ * The load operation is performed asynchronously using Java's {@link CompletableFuture}, allowing for non-blocking execution.</p>
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class LoadCommand implements Command  {
     
     private CompletableFuture<Void> onLoadCompletion; 
     private File file;
     private ControlRuleChecker checker = ControlRuleChecker.getInstance();
+   
     /**
      * Constructs a new LoadCommand with the specified {@link Thread} for execution on completion and the target file to load.
      *
-     * @param onLoadCompletion The thread to execute upon completion of the load operation.
-     * @param file             The file from which to load the RuleList.
+     * @param onLoadCompletion The {@link CompletableFuture} to execute upon completion of the load operation.
+     * @param file, The file from which to load the RuleList.
      */    
     public LoadCommand(CompletableFuture<Void> onLoadCompletion, File file) {
 
@@ -59,18 +60,18 @@ public class LoadCommand implements Command  {
     }                
 
     /**
-     * Gets the thread to execute on completion of the load operation.
+     * Gets the {@link CompletableFuture} to execute on completion of the load operation.
      *
-     * @return The thread to execute on completion.
+     * @return The {@link CompletableFuture} to execute on completion.
      */    
     public CompletableFuture<Void> getOnLoadCompletion() {
         return onLoadCompletion;
     }
 
     /**
-     * Sets the thread to execute on completion of the load operation.
+     * Sets the {@link CompletableFuture} to execute on completion of the load operation.
      *
-     * @param onLoadCompletion The thread to set for execution on completion.
+     * @param onLoadCompletion The {@link CompletableFuture} to set for execution on completion.
      */    
     public void setOnLoadCompletion(CompletableFuture<Void> onLoadCompletion) {
         this.onLoadCompletion = onLoadCompletion;

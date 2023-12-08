@@ -5,14 +5,13 @@
 package group2;
 
 import java.io.File;
-import org.junit.Before;
 import org.junit.After; 
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class AppConfigTest {
     
