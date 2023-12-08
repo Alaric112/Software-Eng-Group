@@ -4,7 +4,6 @@
  */
 package group2.Model.Rule.FileManager;
 
-import group2.Model.Rule.FileManager.FileIOManager;
 import group2.Model.Rule.ControlRuleChecker;
 import group2.Model.Rule.RuleSet;
 import java.io.File;

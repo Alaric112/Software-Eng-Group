@@ -293,8 +293,9 @@ public class SecondaryController implements Initializable, Observer {
         
         File file = App.createFCLoad();
         Command loadCommand = new LoadCommand(null, file);
-        loadCommand.execute();
-        
+        Platform.runLater(() -> {
+            loadCommand.execute();
+        });
     }
 
     /**

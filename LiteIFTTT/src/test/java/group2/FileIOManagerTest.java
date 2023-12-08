@@ -34,7 +34,7 @@ public class FileIOManagerTest {
         testRule = new MockRule("TestRule");
         
     }
-
+    
     @After
     public void cleaner(){
         
@@ -46,6 +46,13 @@ public class FileIOManagerTest {
             testFile.delete();
         }
     }
+
+    @Test
+    public void testSaveToFileAsync() throws IOException {
+        // Save the RuleSet asynchronously
+        FileIOManager.saveToFileAsync(testFile, testRuleSet);
+        // Add assertions or use some synchronization mechanism to wait for the async operation
+    }    
     
     @Test
     public void testSaveAndLoad() throws IOException  {
@@ -71,4 +78,15 @@ public class FileIOManagerTest {
     public void testSaveNullFile() throws IOException {
         FileIOManager.saveToFile(null, testRuleSet);
     }
+
+    @Test
+    public void testLoadFromFileAsync() throws IOException {
+        // Create a RuleSet and save it to the file
+      //  RuleSet ruleSet = new RuleSet(5, "TestRuleSet");
+        FileIOManager.saveToFile(testFile, testRuleSet);
+        // Load the RuleSet asynchronously
+        FileIOManager.loadFromFileAsync(testFile);
+        // Add assertions or use some synchronization mechanism to wait for the async operation
+    }    
+    
 }

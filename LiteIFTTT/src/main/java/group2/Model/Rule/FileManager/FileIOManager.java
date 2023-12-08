@@ -32,6 +32,9 @@ public class FileIOManager {
     // Instance of the RuleChecker control to handle changes in the RuleSet    
     private static ControlRuleChecker checker = ControlRuleChecker.getInstance();
 
+    // Aggiungi un oggetto di blocco per la sincronizzazione
+    private static final Object lock = new Object();
+    
     /**
      * Loads the RuleSet from a specified file.
      * 
@@ -93,15 +96,12 @@ public class FileIOManager {
      * @return 
      */    
     public static Service<RuleSet> loadFromFileAsync(File file) {
-        
-        LoadRuleSetService loadService = new LoadRuleSetService(file);
-        loadService.setOnSucceeded(event -> {            
+        synchronized (lock) {
+            LoadRuleSetService loadService = new LoadRuleSetService(file);
 
-        });
-
-        loadService.start(); 
-        return loadService;
-        
+            loadService.start(); 
+            return loadService;
+        }
     }
 
     /**
@@ -111,15 +111,16 @@ public class FileIOManager {
      * @param ruleSet  The RuleSet to save.
      */    
     public static void saveToFileAsync(File file, RuleSet ruleSet) {
-        Task<Void> task = new Task<>() {
-            @Override
-            protected Void call() throws Exception {
-                saveToFile(file, ruleSet);
-                return null;
+        Thread thread = new Thread(() -> {
+            synchronized (lock) {
+                try {
+                    saveToFile(file, ruleSet);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
-        };
+        });
 
-        Thread thread = new Thread(task);
         thread.setDaemon(true);
         thread.start();
     }   

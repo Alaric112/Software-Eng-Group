@@ -4,7 +4,6 @@
  */
 package group2.Model.Rule.FileManager;
 
-import group2.Model.Rule.FileManager.FileIOManager;
 import java.io.File;
 import javafx.concurrent.Service;
 
@@ -31,7 +30,7 @@ public class LoadCommand implements Command  {
         
         if (onLoadCompletion != null){
             serv.setOnSucceeded(event -> {
-                onLoadCompletion.run();
+                onLoadCompletion.start();
             });
         }
         
