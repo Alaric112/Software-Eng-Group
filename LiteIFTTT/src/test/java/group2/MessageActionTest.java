@@ -6,6 +6,7 @@ package group2;
 
 import group2.Model.Action.MessageAction;
 import org.junit.Test;
+import org.junit.Before;
 import static org.junit.Assert.*;
 
 /**
@@ -16,13 +17,22 @@ public class MessageActionTest {
     
     private MessageAction messageAction;
     
-    @Test
-    public void testExecute() {
+    @Before
+    public void setUp() {
        
         messageAction = new MessageAction();
-
     }
 
+    @Test
+    public void testExecute() {
+        // Verifies that executing the action triggers the controller's update method
+        MockObserver mockObserver = new MockObserver();
+        messageAction.addObserver(mockObserver);
+        messageAction.execute();
+        // Verifica che l'osservatore sia stato notificato
+        assertTrue(mockObserver.isNotified());
+    }    
+    
     @Test
     public void testGetMessageInfo() {
         // Use the getter and assert the default value

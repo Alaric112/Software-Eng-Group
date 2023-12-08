@@ -15,9 +15,7 @@ import java.util.Observable;
  */
 public class MessageAction extends Observable implements Action {
     
-    private String messageInfo;
-    private boolean hasObserver = false;
-    
+    private String messageInfo;    
     /**
      * Constructs a new instance of the <code>MessageAction</code> class with
      * the default message "Hello world!".
@@ -25,7 +23,7 @@ public class MessageAction extends Observable implements Action {
      */    
     public MessageAction() {
         this.messageInfo = "Hello world!";
-    }
+    }  
 
     /**
      * Executes the action by displaying an alert with the specified message.
@@ -39,10 +37,14 @@ public class MessageAction extends Observable implements Action {
     }
     
     private void addWathcer(){
-        if(!hasObserver){
+        if(!hasObservers()){
             this.addObserver(new MessageActionController());
-            hasObserver = true;
+            
         }
+    }
+    
+    public boolean hasObservers() {
+        return countObservers() > 0;
     }
     
     /**
