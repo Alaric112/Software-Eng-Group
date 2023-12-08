@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package group2;
 
 import group2.Model.Action.*;
@@ -103,6 +99,24 @@ public class RuleCreatorTest {
         List<Action> resultActions = result.getActions();
         assertEquals(actions.size(), resultActions.size());
         assertTrue(resultActions.containsAll(actions));
+    }
+
+    // to verify the Singleton pattern implementation is correctly done
+    @Test
+    public void testGetInstance() {
+        
+        RuleCreator instance2 = RuleCreator.getInstance();
+        assertEquals(ruleCreator, instance2);
+    }       
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateRuleWithUnsupportedType() {
+        String ruleName = "TestRule";
+        Trigger mockTrigger = new MockTrigger();
+        Action mockAction = new MockAction();
+        String unsupportedType = "unsupportedType";
+
+        ruleCreator.createRule(ruleName, mockTrigger, mockAction, unsupportedType);
     }
     
 }

@@ -4,10 +4,6 @@
  */
 package group2.Model.Rule;
 
-import group2.Model.Rule.Rule;
-import group2.RuleDecorator;
-import java.util.concurrent.TimeUnit;
-
 /**
  *
  * @author Lore

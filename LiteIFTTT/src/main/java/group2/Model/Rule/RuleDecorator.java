@@ -2,11 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package group2;
+package group2.Model.Rule;
 
 import group2.Model.Action.Action;
 import group2.Model.Trigger.Trigger;
-import group2.Model.Rule.Rule;
 
 /**
  *

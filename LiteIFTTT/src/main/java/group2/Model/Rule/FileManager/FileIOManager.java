@@ -6,7 +6,7 @@ package group2.Model.Rule.FileManager;
 
 import group2.AppConfig;
 import group2.Model.Rule.ControlRuleChecker;
-import group2.Model.Rule.Rule;
+
 import group2.Model.Rule.RuleSet;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -16,8 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.List;
-import javafx.concurrent.Service;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * The `FileIOManager` class manages the saving and loading of the RuleSet.
@@ -94,14 +93,33 @@ public class FileIOManager {
      * @param file The file from which to load the RuleSet.
      * @return 
      */    
-    public static Service<RuleSet> loadFromFileAsync(File file) {
+    public static CompletableFuture<RuleSet> loadFromFileAsync(File file) {
+      
         synchronized (lock) {
-            LoadRuleSetService loadService = new LoadRuleSetService(file);
+            
+            CompletableFuture<RuleSet> completableFuture = new CompletableFuture<>();
 
-            loadService.start(); 
-            return loadService;
+            Thread loadThread = new Thread(() -> {
+                try {
+                    RuleSet ruleSet = loadRuleSet(file);
+
+                    if (ruleSet != null) {
+                        //checker.changeRuleset(ruleSet);
+                        completableFuture.complete(ruleSet);
+                    } else {
+                        completableFuture.completeExceptionally(new IOException("Rule set not loaded"));
+                    }
+                } catch (IOException ex) {
+                    completableFuture.completeExceptionally(ex);
+                }
+            });
+
+            loadThread.start();
+
+            return completableFuture;
         }
     }
+
 
     /**
      * Asynchronously saves the RuleSet to a specified file.
@@ -134,19 +152,16 @@ public class FileIOManager {
     protected static RuleSet loadRuleSet(File file) throws IOException{
         
         RuleSet ruleSet = null;
-        List<Rule> rules = null;
+
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-                        
             ruleSet = (RuleSet) ois.readObject();
-            
         } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("File not found");
+            throw new FileNotFoundException("File not found: " + file.getPath());
         } catch (IOException | ClassNotFoundException ex) {
             throw new IOException("Error during file loading", ex);
         }
-        
-        return ruleSet;
-          
+
+        return ruleSet;          
     }
     
 }

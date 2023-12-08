@@ -5,6 +5,7 @@ import group2.Model.Rule.FileManager.LoadCommand;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,19 +56,16 @@ public class PrimaryController implements Initializable {
     @FXML
     private void loadRuleSetAction(ActionEvent event) {
 
-        Thread myThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
+        CompletableFuture<Void> userActionFuture = new CompletableFuture<>();
+
+        userActionFuture.thenRun(() -> {
                 App.switchTo("secondary");
-            }
         });
 
         File file = App.createFCLoad();
 
-        LoadCommand loadCommand = new LoadCommand(myThread, file);
-        Platform.runLater(() -> {
-            loadCommand.execute();
-        });
+        LoadCommand loadCommand = new LoadCommand(userActionFuture, file);
+        loadCommand.execute();
 
     }
 

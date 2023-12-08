@@ -7,6 +7,7 @@ package group2.Model.Rule;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -104,5 +105,42 @@ public class RuleSet extends Observable implements Serializable {
         setChanged();
         notifyObservers();    
     }    
+
+//    @Override
+//    public int compareTo(RuleSet o) {
+//        return this.name.compareTo(o.name); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + this.timer;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + Objects.hashCode(this.rules);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final RuleSet other = (RuleSet) obj;
+        if (this.timer != other.timer) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return Objects.equals(this.rules, other.rules);
+    }
+
+
     
 }

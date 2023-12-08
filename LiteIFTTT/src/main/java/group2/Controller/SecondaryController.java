@@ -320,21 +320,25 @@ public class SecondaryController implements Initializable, Observer {
     @Override
     public void update(Observable o, Object arg) {
         
-        if (o instanceof ControlRuleChecker){
+        if (o instanceof ControlRuleChecker){        
             
-            // When it change the Ruleset it must execute this code
+            cleanup();
             ruleSet = checker.getRuleSet();
-            observableRules.setAll(ruleSet.getRules());
-            ruleSetLabel.setText(ruleSet.getName());
-            ruleTable.refresh();
+            ruleSet.addObserver(this);
+            Platform.runLater(() -> {            
+                observableRules.setAll(ruleSet.getRules());
+                ruleSetLabel.setText(ruleSet.getName());
+                ruleTable.refresh();
+            });
+
         } else if (o instanceof RuleSet) {
             RuleSet updatedRuleSet = (RuleSet) o;
-            observableRules.setAll(updatedRuleSet.getRules());
-            ruleTable.refresh();
-            AutoSave();
+                observableRules.setAll(updatedRuleSet.getRules());
+                ruleTable.refresh();
+                AutoSave();
         }
     }
-
+    
     public void cleanup() {
         // Rimuovi il controller come osservatore quando non è più necessario
         ruleSet.deleteObserver(this);

@@ -348,6 +348,18 @@ public class CreateRuleSubWindowController implements Initializable {
 
     }
 
+    @FXML
+    private void addMacroActionEvent(ActionEvent event) {
+        
+        String item = macroActionChoiceBox.getValue();
+        actionListView.getItems().add(item);
+        Action action = ruleCreator.getMacroAction(item);
+        sequenceAction.add(action);
+        lastAction = action;
+       //visibilityAction(item);  
+        
+    }    
+    
     /**
      * Selects a trigger item from the triggerTreeView and performs specific actions based on the selected item.
      */
@@ -712,27 +724,15 @@ public class CreateRuleSubWindowController implements Initializable {
          File file = chooser.showOpenDialog(new Stage());
          folderPath = file;
 }
-
-    @FXML
-    private void addMacroActionEvent(ActionEvent event) {
-        
-        String item = macroActionChoiceBox.getValue();
-        actionListView.getItems().add(item);
-        Action action = ruleCreator.getMacroAction(item);
-        sequenceAction.add(action);
-        lastAction = action;
-       //visibilityAction(item);  
-        
-    }
     
     private long convertToMilliseconds(int days, int hours, int minutes) {
     
-    long millisecondsDays = days * 24L * 60 * 60 * 1000;
-    long millisecondsHours = hours * 60 * 60 * 1000;
-    long millisecondsMinutes = minutes * 60 * 1000;
+        long millisecondsDays = days * 24L * 60 * 60 * 1000;
+        long millisecondsHours = hours * 60 * 60 * 1000;
+        long millisecondsMinutes = minutes * 60 * 1000;
 
-    return millisecondsDays + millisecondsHours + millisecondsMinutes;
-}
+        return millisecondsDays + millisecondsHours + millisecondsMinutes;
+    }
 
     @FXML
     private void InsertSleepingRuleSettings(ActionEvent event) {       

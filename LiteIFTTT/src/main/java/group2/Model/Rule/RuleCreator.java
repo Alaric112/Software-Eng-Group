@@ -111,7 +111,7 @@ public final class RuleCreator {
     }
 
     /**
-     * Creates an rue instance based on the provided name,trigger,action type.
+     * Creates a rule instance based on the provided name,trigger,action type.
      *
      * @param ruleName
      * @param trigger

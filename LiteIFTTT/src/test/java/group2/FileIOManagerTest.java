@@ -11,6 +11,8 @@ import group2.Model.Rule.Rule;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
@@ -47,12 +49,12 @@ public class FileIOManagerTest {
         }
     }
 
-    @Test
-    public void testSaveToFileAsync() throws IOException {
-        // Save the RuleSet asynchronously
-        FileIOManager.saveToFileAsync(testFile, testRuleSet);
-        // Add assertions or use some synchronization mechanism to wait for the async operation
-    }    
+//    @Test
+//    public void testSaveToFileAsync() throws IOException {
+//        // Save the RuleSet asynchronously
+//        FileIOManager.saveToFileAsync(testFile, testRuleSet);
+//        // Add assertions or use some synchronization mechanism to wait for the async operation
+//    }    
     
     @Test
     public void testSaveAndLoad() throws IOException  {
@@ -80,13 +82,36 @@ public class FileIOManagerTest {
     }
 
     @Test
-    public void testLoadFromFileAsync() throws IOException {
-        // Create a RuleSet and save it to the file
-      //  RuleSet ruleSet = new RuleSet(5, "TestRuleSet");
+    public void testLoadFromFileAsync() throws IOException, InterruptedException, ExecutionException {
+
+        // Salva il RuleSet nel file di test
         FileIOManager.saveToFile(testFile, testRuleSet);
-        // Load the RuleSet asynchronously
-        FileIOManager.loadFromFileAsync(testFile);
-        // Add assertions or use some synchronization mechanism to wait for the async operation
+
+        // Carica il RuleSet dal file in modo asincrono
+        CompletableFuture<RuleSet> future = FileIOManager.loadFromFileAsync(testFile);
+        RuleSet actualRuleSet = future.get();
+
+        // Confronta il RuleSet caricato con quello atteso
+        assertEquals(testRuleSet, actualRuleSet);
     }    
+
+    @Test
+    public void testSaveAndLoadToFileAsync() throws IOException, InterruptedException, ExecutionException {
+
+        FileIOManager.saveToFileAsync(testFile, testRuleSet);
+
+        // Carica il RuleSet dal file di test in modo asincrono
+        CompletableFuture<RuleSet> loadFuture = FileIOManager.loadFromFileAsync(testFile);
+
+        // Attendi il completamento dell'operazione asincrona di caricamento
+        RuleSet loadedRuleSet = loadFuture.get();
+
+        // Verifica che il RuleSet caricato sia uguale a quello di test
+        assertNotNull(loadedRuleSet);
+        assertEquals(testRuleSet.getName(), loadedRuleSet.getName());
+        assertEquals(testRuleSet.getTimer(), loadedRuleSet.getTimer());
+        assertEquals(testRuleSet.getRules().size(), loadedRuleSet.getRules().size());
+    }
+
     
 }

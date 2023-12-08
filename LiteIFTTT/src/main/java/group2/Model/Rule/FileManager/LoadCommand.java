@@ -4,8 +4,10 @@
  */
 package group2.Model.Rule.FileManager;
 
+import group2.Model.Rule.ControlRuleChecker;
+import group2.Model.Rule.RuleSet;
 import java.io.File;
-import javafx.concurrent.Service;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * The {@code LoadCommand} class represents a command to asynchronously load a RuleSet from a specified file.
@@ -18,16 +20,16 @@ import javafx.concurrent.Service;
  */
 public class LoadCommand implements Command  {
     
-    private Thread onLoadCompletion; 
+    private CompletableFuture<Void> onLoadCompletion; 
     private File file;
-
+    private ControlRuleChecker checker = ControlRuleChecker.getInstance();
     /**
      * Constructs a new LoadCommand with the specified {@link Thread} for execution on completion and the target file to load.
      *
      * @param onLoadCompletion The thread to execute upon completion of the load operation.
      * @param file             The file from which to load the RuleSet.
      */    
-    public LoadCommand(Thread onLoadCompletion, File file) {
+    public LoadCommand(CompletableFuture<Void> onLoadCompletion, File file) {
 
        this.onLoadCompletion = onLoadCompletion;
        this.file = file;
@@ -41,13 +43,18 @@ public class LoadCommand implements Command  {
     @Override
     public void execute() {
         
-        Service serv = FileIOManager.loadFromFileAsync(file);
-        
-        if (onLoadCompletion != null){
-            serv.setOnSucceeded(event -> {
-                onLoadCompletion.start();
-            });
-        }
+        CompletableFuture<RuleSet> completableFuture = FileIOManager.loadFromFileAsync(file);
+
+        completableFuture.thenAcceptAsync(ruleSet -> {
+            checker.changeRuleset(ruleSet);
+            // Esegui l'azione definita dall'utente qui
+            if (onLoadCompletion != null) {
+                onLoadCompletion.complete(null);
+            }
+        }).exceptionally(ex -> {
+            ex.printStackTrace();
+            return null;
+        });
         
     }                
 
@@ -56,7 +63,7 @@ public class LoadCommand implements Command  {
      *
      * @return The thread to execute on completion.
      */    
-    public Runnable getOnLoadCompletion() {
+    public CompletableFuture<Void> getOnLoadCompletion() {
         return onLoadCompletion;
     }
 
@@ -65,7 +72,7 @@ public class LoadCommand implements Command  {
      *
      * @param onLoadCompletion The thread to set for execution on completion.
      */    
-    public void setOnLoadCompletion(Thread onLoadCompletion) {
+    public void setOnLoadCompletion(CompletableFuture<Void> onLoadCompletion) {
         this.onLoadCompletion = onLoadCompletion;
     } 
 
