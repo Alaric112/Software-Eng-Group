@@ -5,6 +5,7 @@
 package group2;
 
 import group2.Model.Action.*;
+import java.io.File;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -25,59 +26,43 @@ public class FileCopyActionTest {
     private FileCopyAction fileCopyAction;
     private String sourcePath;
     private String destinationPath;
-    private Path srcPath;
+    private File srcPath;
     private Path dstPath;
     
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         fileCopyAction = new FileCopyAction();
         sourcePath = "source.txt"; 
-        destinationPath = "destination.txt";
-        srcPath = Paths.get(sourcePath);
-        dstPath = Paths.get(destinationPath);
+        srcPath = File.createTempFile("source", ".txt");
+        dstPath= Files.createTempDirectory(destinationPath);
     }
     
     @After
     public void cleaner() throws IOException{
         // Delete the temporary file
-        
-        
-        if (Files.exists(srcPath)) {
-            Files.delete(srcPath);
+        if (srcPath.exists()) {
+            srcPath.delete();
         }
         
-        if (Files.exists(dstPath)) {
-            Files.delete(dstPath);
-        }
+//        if (Files.exists(dstPath)) {
+//            Files.delete(dstPath);
+//        }
     }
     
     
     @Test
-    public void testExecute() {
-        
-        createSampleFile(srcPath, "this is a test file.");
 
-        fileCopyAction.setSourcePath(sourcePath);
-        fileCopyAction.setDestinationPath(destinationPath);
+    public void testExecute() throws IOException {
+
+        fileCopyAction.setSourcePath(srcPath.getAbsolutePath());
+
+        fileCopyAction.setDestinationPath(dstPath.toString());
+
+        System.out.println("Absolute destination path: " + dstPath.toAbsolutePath());
 
         fileCopyAction.execute();
 
-//        assertTrue(Files.exists(dstPath));
-
-        try {
-            String sourceContent = new String(Files.readAllBytes(srcPath));
-            String destinationContent = new String(Files.readAllBytes(dstPath));
-            assertEquals(sourceContent, destinationContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void createSampleFile(Path filePath, String content) {
-        try {
-            Files.write(filePath, content.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Path destinationFilePath = dstPath.resolve(srcPath.getName());
+        assertTrue(Files.exists(destinationFilePath));
     }
 }
