@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -26,21 +27,27 @@ public class SaveCommandTest {
     
     @Before
     public void setUp() {
-        // Create a RuleList and File for testing
-        ruleList = new RuleList(5, "Test");  // You may need to initialize RuleList based on your implementation
+        ruleList = new RuleList(5, "Test");  
         String nameFile = "testFile";
-        file = new File(nameFile);  // Provide a valid file path
+        file = new File(nameFile);  
         fileDst = new File(nameFile + ".dat");
-        // Create SaveCommand instance with the RuleList and File
         saveCommand = new SaveCommand(ruleList, file);
 
     }
 
+    @After
+    public void cleaner(){
+        
+        if (file.exists()) {
+            file.delete();
+        }
+    }     
+    
     @Test
     public void testExecute() {
         // Call the execute method
-        saveCommand.execute();
         RuleList loadedRuleSet = new RuleList(5, "SecondTest");
+        saveCommand.execute();
         
         try {
             CompletableFuture<RuleList> future = FileIOManager.loadFromFileAsync(fileDst);
