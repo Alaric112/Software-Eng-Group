@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #333f58;" stylesheets="@CSS%20Style/DarkButton.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.Controller.SecondaryController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #333f58;" stylesheets="@CSS%20Style/DarkButton.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.Controller.SecondaryController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #292831;" BorderPane.alignment="CENTER">
          <items>
@@ -88,8 +88,10 @@
                      <children>
                         <TableView fx:id="ruleTable" layoutX="-2.0" layoutY="-1.0" prefHeight="676.0" prefWidth="595.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn fx:id="nameRule" prefWidth="290.4000182747841" text="Name" />
-                            <TableColumn id="stateRule" fx:id="stateRule" prefWidth="308.79998779296875" text="State" />
+                            <TableColumn fx:id="nameRule" prefWidth="150.0" resizable="false" text="Name" />
+                              <TableColumn fx:id="triggerRule" prefWidth="150.0" resizable="false" text="Trigger" />
+                              <TableColumn fx:id="actionRule" prefWidth="150.0" resizable="false" text="Action " />
+                            <TableColumn id="stateRule" fx:id="stateRule" prefWidth="150.0" resizable="false" text="State" />
                           </columns>
                            <contextMenu>
                               <ContextMenu>

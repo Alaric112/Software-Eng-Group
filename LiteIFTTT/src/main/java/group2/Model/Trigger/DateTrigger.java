@@ -37,5 +37,9 @@ public class DateTrigger implements Trigger{
     public void setTargetDate(LocalDate date) {              
         this.targetDate = date;
     }
-       
+
+    @Override
+    public String toString() {
+        return "DateTrigger";
+    }     
 }

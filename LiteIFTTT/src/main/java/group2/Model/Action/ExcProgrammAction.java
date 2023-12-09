@@ -51,5 +51,9 @@ public class ExcProgrammAction implements Action {
     public void setCommandLineArg(String commandLineArg) {
         this.commandLineArg = commandLineArg;
     }
-            
+      
+    @Override
+    public String toString() {
+        return "ExecuteProgrammAction";
+    } 
 }

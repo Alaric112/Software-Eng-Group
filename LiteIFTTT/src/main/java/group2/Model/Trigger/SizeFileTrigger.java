@@ -59,4 +59,9 @@ public class SizeFileTrigger extends FileTrigger{
     public void setTargetFile(File file) {
          fileTarget = file;   
     }    
+    
+        @Override
+    public String toString() {
+        return "SizeTrigger";
+    }
 }

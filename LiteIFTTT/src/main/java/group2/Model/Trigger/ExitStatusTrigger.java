@@ -70,4 +70,10 @@ public class ExitStatusTrigger implements Trigger {
     public void setUserExitStatus(int userExitStatus) {
         this.userExitStatus = userExitStatus;
     }
+    
+        @Override
+    public String toString() {
+        return "ExitStatusTrigger";
+    }
+    
 }

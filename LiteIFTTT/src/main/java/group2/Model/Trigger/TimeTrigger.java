@@ -62,4 +62,8 @@ public class TimeTrigger implements Trigger{
         this.targetTime = LocalTime.of(hour, min);
     }
        
+        @Override
+    public String toString() {
+        return "TimeTrigger";
+    }
 }

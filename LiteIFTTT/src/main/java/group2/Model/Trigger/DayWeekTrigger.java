@@ -41,4 +41,10 @@ public class DayWeekTrigger implements Trigger {
     public void setTargetDay(DayOfWeek targetDay) {
         this.targetDay = targetDay;
     }
+
+    @Override
+    public String toString() {
+        return "DayWeekTrigger";
+    }
+    
 }

@@ -77,6 +77,10 @@ public class SecondaryController implements Initializable, Observer {
     
     private RuleList ruleSet;     
     private ObservableList<Rule> observableRules;    
+    @FXML
+    private TableColumn<Rule, String> triggerRule;
+    @FXML
+    private TableColumn<Rule, String> actionRule;
 
     
     /**
@@ -102,6 +106,8 @@ public class SecondaryController implements Initializable, Observer {
         checkerImageView.visibleProperty().bind(isThreadRunning);
         
         nameRule.setCellValueFactory(new PropertyValueFactory("name"));
+        triggerRule.setCellValueFactory(new PropertyValueFactory("trigger"));
+        actionRule.setCellValueFactory(new PropertyValueFactory("action"));
         stateRule.setCellValueFactory(cellData -> {
             Rule rule = cellData.getValue();
             String status = rule.isActive() ? "active" : "disabled";

@@ -77,6 +77,10 @@ public class SoundAction extends Observable implements Action {
      * Sets the path to the selected file.
      */
 
+        @Override
+    public String toString() {
+        return "SoundAction";
+    } 
 }   
     
 

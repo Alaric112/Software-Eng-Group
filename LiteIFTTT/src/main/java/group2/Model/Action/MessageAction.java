@@ -65,4 +65,8 @@ public class MessageAction extends Observable implements Action {
         this.messageInfo = messageInfo;
     }
         
+        @Override
+    public String toString() {
+        return "MessageAction";
+    } 
 }

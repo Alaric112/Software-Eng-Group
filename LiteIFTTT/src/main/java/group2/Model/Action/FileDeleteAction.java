@@ -51,5 +51,10 @@ public class FileDeleteAction implements Action {
             e.printStackTrace();
         }
     }
+    
+    @Override
+    public String toString() {
+        return "FileDeleteAction";
+    } 
 }
 

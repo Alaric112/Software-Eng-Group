@@ -69,4 +69,8 @@ public class FileCopyAction implements Action {
             System.err.println("Error copying the file: " + e.getMessage());
         }
     }
+        @Override
+    public String toString() {
+        return "FileCopyAction";
+    } 
 }

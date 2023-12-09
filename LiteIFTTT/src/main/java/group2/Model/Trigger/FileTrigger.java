@@ -61,4 +61,9 @@ public class FileTrigger implements Trigger {
         this.targetFile = new File(directory, fileName);
     }    
     
+    @Override
+    public String toString() {
+        return "FileTrigger";
+    }
+    
 }

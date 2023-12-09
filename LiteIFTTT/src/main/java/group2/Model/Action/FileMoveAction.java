@@ -77,4 +77,9 @@ public class FileMoveAction implements Action {
             e.printStackTrace();
         }
     }
+    
+        @Override
+    public String toString() {
+        return "FileMoveAction";
+    } 
 }
