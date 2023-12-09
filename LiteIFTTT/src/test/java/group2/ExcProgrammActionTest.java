@@ -37,7 +37,6 @@ public class ExcProgrammActionTest {
         // Execute the action
         action.execute();
 
-        // Reset System.out
         System.setOut(System.out);
         // Verify the output
         assertNotNull(outContent.toString());

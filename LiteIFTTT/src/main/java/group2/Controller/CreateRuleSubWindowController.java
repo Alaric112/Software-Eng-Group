@@ -284,7 +284,6 @@ public class CreateRuleSubWindowController implements Initializable {
         }
 
         if(checkRegisterAction.isSelected()){
-            System.out.println("sto registrando");
             ruleCreator.registerActionMacro(actionRegisterTF.getText(), lastAction);        
         }
 
@@ -321,10 +320,10 @@ public class CreateRuleSubWindowController implements Initializable {
     private void addTriggerEvent(ActionEvent event) {
 
         TreeItem<String> item = new TreeItem<>(triggerChoiceBox.getValue());
-            triggerTreeView.setRoot(item);
-            lastTrigger = ruleCreator.createTrigger(item.getValue());
+        triggerTreeView.setRoot(item);
+        lastTrigger = ruleCreator.createTrigger(item.getValue());
 
-            visibilityTrigger(item.getValue());
+        visibilityTrigger(item.getValue());
 
     }        
     
@@ -403,8 +402,6 @@ public class CreateRuleSubWindowController implements Initializable {
         String item = actionListView.getSelectionModel().getSelectedItem();
         int selectedIndex = actionListView.getSelectionModel().getSelectedIndex();
         lastAction = sequenceAction.get(selectedIndex);
-        System.out.println("Ho catturato l'elemento di indice:" + selectedIndex);
-        System.out.println("Provolino" + sequenceAction);
         
         visibilityAction(item);
     }
@@ -413,16 +410,6 @@ public class CreateRuleSubWindowController implements Initializable {
     private void selectActionItemEvent(MouseEvent event) {
         
        selectActionItem();
-    }
-    
-    private void selectActionItem(ContextMenuEvent event) {
-
-        selectActionItem();
-    }
-
-    private void selectActionItem(MouseEvent event) {
-
-        selectActionItem();
     }
 
     /**

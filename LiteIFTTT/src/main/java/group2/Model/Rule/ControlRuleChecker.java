@@ -29,10 +29,6 @@ public final class ControlRuleChecker extends Observable {
         }        
     
     }
-
-//    public ObjectProperty<RuleSet> getRuleSetProperty() {
-//        return ruleSetProperty;
-//    }
     
    public void startPeriodicCheck() {
     // Fetch the timer value from the rules using the getTimer() method

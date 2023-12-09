@@ -112,7 +112,8 @@ public class SecondaryController implements Initializable, Observer {
          
         ruleSet= checker.getRuleSet();        
         ruleTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-                
+        
+        startCheckerEvent(new ActionEvent());
     }    
 
     /**
