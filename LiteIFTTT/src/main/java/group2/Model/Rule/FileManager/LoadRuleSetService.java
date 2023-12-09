@@ -33,7 +33,7 @@ public class LoadRuleSetService extends Service<RuleList> {
             @Override
             protected RuleList call() throws Exception {               
                     // Esegui l'operazione di caricamento del RuleList da file
-               RuleList ruleSet = FileIOManager.loadRuleSet(file);
+               RuleList ruleSet = FileIOManager.loadRuleList(file);
                 
                 Platform.runLater(() -> {
                     if (ruleSet != null) {

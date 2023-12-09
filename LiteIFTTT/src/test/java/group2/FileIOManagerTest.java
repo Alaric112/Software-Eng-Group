@@ -25,14 +25,14 @@ import static org.junit.Assert.*;
 public class FileIOManagerTest {
     
     private File testFile;
-    private RuleList testRuleSet;
+    private RuleList testRuleList;
     private Rule testRule;
     
     @Before
     public void setUp() throws IOException {
         // Crea un nuovo file temporaneo per i test
         testFile = File.createTempFile("testRuleset", ".dat");
-        testRuleSet = new RuleList(5, "TestRuleSet");
+        testRuleList = new RuleList(5, "TestRuleSet");
         testRule = new MockRule("TestRule");
         
     }
@@ -41,7 +41,7 @@ public class FileIOManagerTest {
     public void cleaner(){
         
         // Clean up resources if needed
-        testRuleSet = null;
+        testRuleList = null;
 
         // Delete the temporary file
         if (testFile != null && testFile.exists()) {
@@ -52,16 +52,16 @@ public class FileIOManagerTest {
     @Test
     public void testSaveAndLoad() throws IOException  {
         // Crea un oggetto RuleList di test
-        testRuleSet.addRule(testRule);
+        testRuleList.addRule(testRule);
         // Salva il RuleList nel file temporaneo
-        FileIOManager.saveToFile(testFile, testRuleSet);
+        FileIOManager.saveRuleListToFile(testFile, testRuleList);
         // Carica il RuleList dal file temporaneo
         FileIOManager.loadFromFile(testFile);
         // Ottieni il RuleList corrente dal RuleChecker
         RuleList loadedRuleSet = ControlRuleChecker.getInstance().getRuleSet();
         // Verifica che il RuleList caricato sia uguale a quello di test
-        assertEquals(testRuleSet.getName(), loadedRuleSet.getName());
-        assertEquals(testRuleSet.getRules().size(), loadedRuleSet.getRules().size());
+        assertEquals(testRuleList.getName(), loadedRuleSet.getName());
+        assertEquals(testRuleList.getRules().size(), loadedRuleSet.getRules().size());
     }
 
     @Test(expected = IOException.class)
@@ -71,27 +71,27 @@ public class FileIOManagerTest {
 
     @Test(expected = FileNotFoundException.class)
     public void testSaveNullFile() throws IOException {
-        FileIOManager.saveToFile(null, testRuleSet);
+        FileIOManager.saveRuleListToFile(null, testRuleList);
     }
 
     @Test
     public void testLoadFromFileAsync() throws IOException, InterruptedException, ExecutionException {
 
         // Salva il RuleList nel file di test
-        FileIOManager.saveToFile(testFile, testRuleSet);
+        FileIOManager.saveRuleListToFile(testFile, testRuleList);
 
         // Carica il RuleList dal file in modo asincrono
         CompletableFuture<RuleList> future = FileIOManager.loadFromFileAsync(testFile);
         RuleList actualRuleSet = future.get();
 
         // Confronta il RuleList caricato con quello atteso
-        assertEquals(testRuleSet, actualRuleSet);
+        assertEquals(testRuleList, actualRuleSet);
     }    
 
     @Test
     public void testSaveAndLoadToFileAsync() throws IOException, InterruptedException, ExecutionException {
 
-        FileIOManager.saveToFileAsync(testFile, testRuleSet);
+        FileIOManager.saveToFileAsync(testFile, testRuleList);
 
         // Carica il RuleList dal file di test in modo asincrono
         CompletableFuture<RuleList> loadFuture = FileIOManager.loadFromFileAsync(testFile);
@@ -101,9 +101,9 @@ public class FileIOManagerTest {
 
         // Verifica che il RuleList caricato sia uguale a quello di test
         assertNotNull(loadedRuleSet);
-        assertEquals(testRuleSet.getName(), loadedRuleSet.getName());
-        assertEquals(testRuleSet.getTimer(), loadedRuleSet.getTimer());
-        assertEquals(testRuleSet.getRules().size(), loadedRuleSet.getRules().size());
+        assertEquals(testRuleList.getName(), loadedRuleSet.getName());
+        assertEquals(testRuleList.getTimer(), loadedRuleSet.getTimer());
+        assertEquals(testRuleList.getRules().size(), loadedRuleSet.getRules().size());
     }
 
     

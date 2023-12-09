@@ -43,7 +43,7 @@ public class FileIOManager {
         if (file == null)
           throw new IOException("File not found");  
           
-        RuleList ruleSet = loadRuleSet(file);
+        RuleList ruleSet = loadRuleList(file);
         
         if(ruleSet == null)
             throw new IOException("Rule set not loaded");
@@ -59,7 +59,7 @@ public class FileIOManager {
      * @param ruleSet  The RuleList to save.
      * @throws java.io.IOException
      */
-    public static void saveToFile(File file, RuleList ruleSet) throws IOException {
+    public static void saveRuleListToFile(File file, RuleList ruleSet) throws IOException {
         
         if (file != null) {
             // Aggiunge l'estensione .dat se l'utente non l'ha inserita
@@ -70,7 +70,7 @@ public class FileIOManager {
 
             try (ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
                 out.writeObject(ruleSet);
-                //out.writeObject(new ArrayList<>(ruleSet.getRules()));
+                //out.writeObject(new ArrayList<>(ruleList.getRules()));
                 out.close();
 
                 AppConfig.savePathOfLastFile(file.getPath());
@@ -101,10 +101,10 @@ public class FileIOManager {
 
             Thread loadThread = new Thread(() -> {
                 try {
-                    RuleList ruleSet = loadRuleSet(file);
+                    RuleList ruleSet = loadRuleList(file);
 
                     if (ruleSet != null) {
-                        //checker.changeRuleset(ruleSet);
+                        //checker.changeRuleset(ruleList);
                         completableFuture.complete(ruleSet);
                     } else {
                         completableFuture.completeExceptionally(new IOException("Rule set not loaded"));
@@ -131,7 +131,7 @@ public class FileIOManager {
         Thread thread = new Thread(() -> {
             synchronized (lock) {
                 try {
-                    saveToFile(file, ruleSet);
+                    saveRuleListToFile(file, ruleSet);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -149,19 +149,19 @@ public class FileIOManager {
      * @return 
      * @throws java.io.IOException
      */     
-    protected static RuleList loadRuleSet(File file) throws IOException{
+    protected static RuleList loadRuleList(File file) throws IOException{
         
-        RuleList ruleSet = null;
+        RuleList ruleList = null;
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            ruleSet = (RuleList) ois.readObject();
+            ruleList = (RuleList) ois.readObject();
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException("File not found: " + file.getPath());
         } catch (IOException | ClassNotFoundException ex) {
             throw new IOException("Error during file loading", ex);
         }
 
-        return ruleSet;          
+        return ruleList;          
     }
     
 }
