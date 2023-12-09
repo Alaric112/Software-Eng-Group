@@ -102,8 +102,12 @@ public class SecondaryController implements Initializable, Observer {
         checkerImageView.visibleProperty().bind(isThreadRunning);
         
         nameRule.setCellValueFactory(new PropertyValueFactory("name"));
-        stateRule.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().isActive() ? "active" : "disabled"));
-
+        stateRule.setCellValueFactory(cellData -> {
+            Rule rule = cellData.getValue();
+            String status = rule.isActive() ? "active" : "disabled";
+            return new SimpleStringProperty(status);
+        });
+        
         initItemSelecteBinding();
         
         ruleTable.setItems(observableRules);
@@ -339,10 +343,11 @@ public class SecondaryController implements Initializable, Observer {
             });
 
         } else if (o instanceof RuleList) {
+                        
             RuleList updatedRuleSet = (RuleList) o;
-                observableRules.setAll(updatedRuleSet.getRules());
-                ruleTable.refresh();
-                AutoSave();
+            observableRules.setAll(updatedRuleSet.getRules());
+            ruleTable.refresh();
+            AutoSave();
         }
     }
     
