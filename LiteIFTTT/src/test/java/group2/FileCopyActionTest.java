@@ -34,28 +34,33 @@ public class FileCopyActionTest {
         dstPath= Files.createTempDirectory(destinationPath);
     }
     
+    /**
+     * Cleans up resources used during the test, including deleting the temporary source file
+     * and clearing the temporary destination directory.
+     *
+     * @throws IOException if an I/O error occurs during cleanup.
+     */
     @After
     public void cleaner() throws IOException{
-        // Delete the temporary file
         if (srcPath.exists()) {
             srcPath.delete();
         }
         
-        // Delete the destination directory and its contents
         if (Files.exists(dstPath)) {
             Files.walk(dstPath)
-                .sorted((p1, p2) -> -p1.compareTo(p2)) // Reverse order for files first, then directories
+                .sorted((p1, p2) -> -p1.compareTo(p2)) 
                 .forEach(path -> {
                     try {
                         Files.delete(path);
                     } catch (IOException e) {
-                        // Handle the exception if necessary
                     }
                 });
         }
     }
     
-    
+    /**
+     * Tests the {@link FileCopyAction#setSourcePath(String)} method.
+     */
     @Test
     public void testSetSourcePath() {
         String sourcePath = "source.txt";
@@ -63,21 +68,28 @@ public class FileCopyActionTest {
         assertEquals(sourcePath, fileCopyAction.getSourcePath());
     }
 
+    /**
+     * Tests the {@link FileCopyAction#setDestinationPath(String)} method.
+     */
     @Test
     public void testSetDestinationPath() {
-        String destinationPath = "destination.txt";
+        destinationPath = "destination.txt";
         fileCopyAction.setDestinationPath(destinationPath);
         assertEquals(destinationPath, fileCopyAction.getDestinationPath());
     }
     
+    /**
+     * Tests the {@link FileCopyAction#execute()} method by copying a file
+     * from the source path to the destination path and checking if the file exists.
+     *
+     * @throws IOException if an I/O error occurs during the test.
+     */
     @Test
-    public void testExecute() throws IOException {
+    public void testFileCopyActionExecute() throws IOException {
 
         fileCopyAction.setSourcePath(srcPath.getAbsolutePath());
 
         fileCopyAction.setDestinationPath(dstPath.toString());
-
-        System.out.println("Absolute destination path: " + dstPath.toAbsolutePath());
 
         fileCopyAction.execute();
 

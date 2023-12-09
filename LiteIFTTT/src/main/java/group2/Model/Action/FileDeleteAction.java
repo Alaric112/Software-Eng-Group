@@ -14,6 +14,13 @@ import java.nio.file.Paths;
  * @author soniabruno
  */
 
+
+/**
+ * An implementation of the {@link Action} interface that represents
+ * the action of deleting a file specified by its path.
+ * If the file exists, it is deleted, and an exception is thrown if the
+ * deletion fails.
+ */
 public class FileDeleteAction implements Action {
 
     private String path;
@@ -26,6 +33,10 @@ public class FileDeleteAction implements Action {
         this.path = filePath;
     }
 
+    /**
+     * Executes the file delete action by attempting to delete the specified file.
+     * If the file exists, it is deleted, and an exception is thrown if the deletion fails.
+     */
     @Override
     public void execute() {
         

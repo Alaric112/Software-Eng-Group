@@ -14,6 +14,12 @@ import java.nio.file.StandardCopyOption;
  *
  * @author soniabruno
  */
+
+/**
+ * An implementation of the {@link Action} interface that represents
+ * the action of moving a file from a source path to a destination path.
+ * If the source file exists, it is moved to the specified destination path.
+ */
 public class FileMoveAction implements Action {
 
     private String sourcePath; 
@@ -23,15 +29,39 @@ public class FileMoveAction implements Action {
         this.sourcePath = "";
         this.destinationPath = "";
     }  
+
+    public String getSourcePath() {
+        return sourcePath;
+    }
+
+    public String getDestinationPath() {
+        return destinationPath;
+    }
     
+    /**
+     * Sets the source path of the file to be moved.
+     *
+     * @param sourcePath The new source path.
+     */
     public void setSourcePath(String sourcePath) {
         this.sourcePath = sourcePath;
     }
 
+    /**
+     * Sets the destination path where the file will be moved to.
+     *
+     * @param destinationPath The new destination path.
+     */
     public void setDestinationPath(String destinationPath) {
         this.destinationPath = destinationPath;
     }
 
+    
+    /**
+     * Executes the file move action by moving the file from the source
+     * path to the destination path. If the source file exists, it is moved,
+     * replacing any existing file at the destination.
+     */
     @Override
     public void execute() {
         

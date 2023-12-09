@@ -5,12 +5,14 @@
 package group2;
 
 import group2.Model.Action.FileMoveAction;
+import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import static org.junit.Assert.assertTrue;
+import org.junit.After;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -18,42 +20,73 @@ import static org.junit.Assert.assertTrue;
  */
 
 public class FileMoveActionTest {
-
-    private String sourceFile;
+    private FileMoveAction fileMoveAction;
     private String destinationFolder;
-    private String destinationFile;
-    private Path srcPath;
+    private File srcPath;
     private Path dstPath;
-    private Path dstFolderPath;
-    
     
     @Before
     public void setUp() throws IOException {
-                
-        srcPath = Files.createTempFile("sourceFile", ".txt");
+        fileMoveAction = new FileMoveAction();
+        srcPath = File.createTempFile("sourceFile", ".txt");   
+        dstPath = Files.createTempDirectory("destinationFolder");
+    }
+    
+    /**
+     * Cleans up resources used during the test, including deleting the temporary source file
+     * and clearing the temporary destination directory.
+     *
+     * @throws IOException if an I/O error occurs during cleanup.
+     */
+    @After
+    public void cleaner() throws IOException{
+        // Delete the temporary file
+        if (srcPath.exists()) {
+            srcPath.delete();
+        }
         
-        dstFolderPath = Files.createTempDirectory("destinationFolder");
-        
-        dstPath = dstFolderPath.resolve("destinationFile.txt");
-        
-        sourceFile = srcPath.toString();
-        destinationFile = dstPath.toString();
-        destinationFolder = dstFolderPath.toString();
-        
+        // Delete the destination directory and its contents
+        if (Files.exists(dstPath)) {
+            Files.walk(dstPath)
+                .sorted((p1, p2) -> -p1.compareTo(p2)) 
+                .forEach(path -> {
+                    try {
+                        Files.delete(path);
+                    } catch (IOException e) {
+                    }
+                });
+        }
+    }
+    
+    @Test
+    public void testSetSourcePath() {
+        String sourcePath = "source.txt";
+        fileMoveAction.setSourcePath(sourcePath);
+        assertEquals(sourcePath, fileMoveAction.getSourcePath());
     }
 
     @Test
-    public void testFileMoveAction() throws IOException {
-        assertTrue(Files.exists(srcPath));
+    public void testSetDestinationPath() {
+        String destinationPath = "destination.txt";
+        fileMoveAction.setDestinationPath(destinationPath);
+        assertEquals(destinationPath, fileMoveAction.getDestinationPath());
+    }
+   
+    /**
+     * Tests the {@link FileMoveAction#execute()} method by moving a file
+     * from the source path to the destination path and checking if the file exists.
+     *
+     * @throws IOException if an I/O error occurs during the test.
+     */
+    @Test
+    public void testFileMoveActionExecute() throws IOException {
 
-        FileMoveAction fileMoveAction = new FileMoveAction();
-
-        fileMoveAction.setSourcePath(sourceFile);
-        fileMoveAction.setDestinationPath(destinationFile);
+        fileMoveAction.setSourcePath(srcPath.getAbsolutePath());
+        fileMoveAction.setDestinationPath(dstPath.toString());
 
         fileMoveAction.execute();
-
-     //   assertFalse(Files.exists(srcPath));  
-      //  assertTrue(Files.exists(dstPath));
+        
+        Path destinationFilePath = dstPath.resolve(srcPath.getName());
+        assertTrue(Files.exists(destinationFilePath));
     }
 }

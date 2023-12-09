@@ -17,11 +17,20 @@ import static org.junit.Assert.*;
  * @author soniabruno
  */
 
+
+/**
+ * JUnit test class for testing the functionality of the {@link FileDeleteAction} class.
+ */
 public class FileDeleteActionTest {
 
     private Path existingFile;
     private Path nonExistingFile;
 
+    /**
+     * Sets up the test environment by creating paths for an existing and a non-existing file.
+     *
+     * @throws IOException if an I/O error occurs during setup.
+     */
     @Before
     public void setUp() throws IOException {
         existingFile = Files.createTempFile("existingFile", ".txt");
@@ -29,6 +38,9 @@ public class FileDeleteActionTest {
         Files.delete(nonExistingFile);  
     }
 
+    /**
+     * Tests the deletion of an existing file using the {@link FileDeleteAction} class.
+     */
     @Test
     public void testDeleteExistingFile() {
         FileDeleteAction fileDeleteAction = new FileDeleteAction();
@@ -37,7 +49,10 @@ public class FileDeleteActionTest {
         fileDeleteAction.execute();
         assertFalse(Files.exists(existingFile));  
     }
-
+    
+    /**
+     * Tests the deletion of a non-existing file using the {@link FileDeleteAction} class.
+     */
     @Test
     public void testDeleteNonExistingFile() {
         FileDeleteAction fileDeleteAction = new FileDeleteAction();
