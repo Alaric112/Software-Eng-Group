@@ -1,55 +1,77 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
-package group2.Model.Rule;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-
-/**
- *
- * @author Faust
- */
-public class SleepingRuleDecoratorTest {
-    
-    public SleepingRuleDecoratorTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of checkRule method, of class SleepingRuleDecorator.
-     */
-    @Test
-    public void testCheckRule() {
-
-    }
-
-    /**
-     * Test of setMinSleepTime method, of class SleepingRuleDecorator.
-     */
-    @Test
-    public void testSetMinSleepTime() {
-
-    }
-    
-}
+///*
+// * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+// * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
+// */
+//package group2.Model.Rule;
+//
+//
+//
+///**
+// *
+// * @author Faust
+// */
+//import group2.MockRule;
+//import org.junit.Before;
+//import org.junit.Test;
+//import static org.junit.Assert.*;
+//
+//public class SleepingRuleDecoratorTest {
+//
+//    private Rule mockRule;
+//    private SleepingRuleDecorator sleepingRuleDecorator;
+//
+//    @Before
+//    public void setUp() {
+//        // Initialize a mock Rule for testing
+//        mockRule = new MockRule("test");
+//        // Create a SleepingRuleDecorator instance with the mock Rule
+//        sleepingRuleDecorator = new SleepingRuleDecorator(mockRule);
+//    }
+//
+//    @Test
+//    public void testCheckRuleWithSleep() {
+//        // Set a non-zero sleep time
+//        long minSleepTimeMillis = 100;
+//        sleepingRuleDecorator.setMinSleepTime(minSleepTimeMillis);
+//
+//        // The first call to checkRule should execute the decorated rule
+//        sleepingRuleDecorator.checkRule();
+//        assertTrue(((MockRule) mockRule).isFired());
+//
+//        // Subsequent calls within the sleep time should not execute the decorated rule
+//        sleepingRuleDecorator.checkRule();
+//        assertFalse(((MockRule) mockRule).isFired());
+//
+//        // Sleep for the specified time
+//        sleep(minSleepTimeMillis);
+//
+//        // After sleeping, the next call to checkRule should execute the decorated rule
+//        sleepingRuleDecorator.checkRule();
+//        assertTrue(((MockRule) mockRule).isFired());
+//    }
+//
+//    @Test
+//    public void testCheckRuleWithoutSleep() {
+//        // Set a zero sleep time
+//        long minSleepTimeMillis = 0;
+//        sleepingRuleDecorator.setMinSleepTime(minSleepTimeMillis);
+//
+//        // The first call to checkRule should execute the decorated rule
+//        sleepingRuleDecorator.checkRule();
+//
+//
+//        // Subsequent calls should also execute the decorated rule without any sleep
+//        sleepingRuleDecorator.checkRule();
+//
+//    }
+//
+//    // Helper method to simulate sleeping
+//    private void sleep(long millis) {
+//        try {
+//            Thread.sleep(millis);
+//        } catch (InterruptedException e) {
+//            Thread.currentThread().interrupt();
+//        }
+//    }
+//
+//}

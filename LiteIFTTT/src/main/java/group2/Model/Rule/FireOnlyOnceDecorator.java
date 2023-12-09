@@ -8,28 +8,43 @@ package group2.Model.Rule;
  *
  * @author Faust
  */
-public class FireOnlyOnceDecorator extends RuleDecorator{
-    
+
+/*
+ * This class is a decorator for the provided Rule object in the constructor.
+ * It restricts the execution of the decorated rule to only once unless its state is reset
+ * through method calls from the base Rule class.
+ */
+public class FireOnlyOnceDecorator extends RuleDecorator {
+
     private boolean onlyOnce;
 
-    
+    /**
+     * Constructor of the class.
+     *
+     * @param rule Rule to decorate.
+     */
     public FireOnlyOnceDecorator(Rule rule) {
-        super(rule);     
-        onlyOnce = false;
+        super(rule);
+        onlyOnce = true;
     }
-    
-       @Override
+
+    /**
+     * Checks if the rule should be executed, adhering to the "onlyOnce"
+     * condition. If the rule has already been executed and is active, it
+     * deactivates it and sets the "onlyOnce" flag to false. Otherwise, it sets
+     * "onlyOnce" to true.
+     */
+    @Override
     public void checkRule() {
+        if (onlyOnce) {
+            super.checkRule();
+        }
 
-            if(super.isActive())
-                     onlyOnce = false;
-            if(!onlyOnce){  
-                super.checkRule();    
-                super.switchStatus();
-                onlyOnce = true;
-                }
-            }     
+        if (super.isFired() && super.isActive()) {
+            onlyOnce = false;
+            super.switchStatus();
+        } else {
+            onlyOnce = true;
+        }
     }
-
-
- 
+}

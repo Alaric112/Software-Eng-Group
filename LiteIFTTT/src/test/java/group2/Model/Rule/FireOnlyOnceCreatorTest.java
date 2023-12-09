@@ -1,49 +1,45 @@
+package group2.Model.Rule;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
-package group2.Model.Rule;
 
-import group2.Model.Action.Action;
-import group2.Model.Trigger.Trigger;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+
+import group2.MockRule;
+import group2.Model.Rule.FireOnlyOnceCreator;
+import group2.Model.Rule.FireOnlyOnceDecorator;
 import static org.junit.Assert.*;
-
+import group2.Model.Rule.Rule;
+import org.junit.Before;
+import org.junit.Test;
 /**
  *
  * @author Faust
  */
+
+
 public class FireOnlyOnceCreatorTest {
+
+    private FireOnlyOnceCreator fireOnlyOnceCreator;
+    private MockRule mockRule;
     
-    public FireOnlyOnceCreatorTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+
     @Before
     public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+        // Initialize the FireOnlyOnceCreator for testing
+        fireOnlyOnceCreator = new FireOnlyOnceCreator();
+        // Initialize a mock rule for testing
+        mockRule = new MockRule("test");
     }
 
-    /**
-     * Test of createRule method, of class FireOnlyOnceCreator.
-     */
     @Test
     public void testCreateRule() {
-      
+        // Create a rule using FireOnlyOnceCreator
+        Rule decoratedRule = fireOnlyOnceCreator.createRule(mockRule.getName(), mockRule.getTrigger(), mockRule.getAction());
+
+        // Ensure that the created rule is an instance of FireOnlyOnceDecorator
+        assertTrue(decoratedRule instanceof FireOnlyOnceDecorator);
     }
-    
+
 }

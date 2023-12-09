@@ -19,12 +19,14 @@ public class MockRule implements Rule {
     private Action mockAction;
     private boolean active;
     private boolean checked;
+    private boolean fired;
     
     public MockRule(String ruleName) {
         this.ruleName = ruleName;
         this.mockTrigger = new MockTrigger();
         this.mockAction = new MockAction();
         active = true;
+        fired = true;
     }  
     
     @Override
@@ -32,9 +34,10 @@ public class MockRule implements Rule {
 
         if(mockTrigger.evaluate() && active){            
             mockAction.execute();
-            checked = true;           
+            checked = true;   
+            fired = true;
         }
-        
+        fired = false;
     }
 
     @Override
@@ -74,6 +77,10 @@ public class MockRule implements Rule {
     
     public boolean isOn(){
         return active;
+    }
+    
+    public boolean isFired() {
+        return fired;
     }
     
 }

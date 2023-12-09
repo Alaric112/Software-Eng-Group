@@ -62,5 +62,13 @@ public interface Rule extends Serializable {
      * @return {@code true} if the rule is active, {@code false} otherwise.
      */    
     boolean isActive();
+    
+     /**
+     * Retrieves the fire status of the rule.
+     *
+     * @return {@code true} if the rule is active, {@code false} otherwise.
+     */    
+    boolean isFired();
+    
    
 }

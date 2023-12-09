@@ -20,8 +20,7 @@ public abstract class RuleDecorator implements Rule{
         this.rule = rule;
     }
     
-    
-    
+        
     @Override
     public void checkRule() {
         rule.checkRule();
@@ -52,6 +51,10 @@ public abstract class RuleDecorator implements Rule{
         return rule.isActive();
     }
     
+    @Override
+    public boolean isFired() {
+        return rule.isFired();
+    }
     
 }
 

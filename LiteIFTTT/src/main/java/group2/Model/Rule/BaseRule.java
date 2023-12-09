@@ -31,6 +31,7 @@ public class BaseRule implements Rule {
     private Trigger trigger;
     private Action action;
     private boolean active;
+    private boolean fired;
 
     /**
      * Constructs a new instance of the {@code BaseRule} class with the specified
@@ -56,6 +57,7 @@ public class BaseRule implements Rule {
     public void checkRule() {
         if(active && checkTrigger()){
             fireRule();
+            fired = true;
         }
         
     }
@@ -148,6 +150,15 @@ public class BaseRule implements Rule {
     public void switchStatus() {
 
         this.active = !this.active;
+    }
+
+     /**
+     * Retrieves the fire status of a rule.
+     *
+     * @return {@code true} if the rule is fired, {@code false} otherwise.
+     */  
+    public boolean isFired() {
+        return fired;
     }
         
 }
