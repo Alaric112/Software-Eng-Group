@@ -9,36 +9,45 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ExitStatusTriggerTest {
-    
+
+    @Test
+    public void testDefaultConstructor() {
+        ExitStatusTrigger trigger = new ExitStatusTrigger();
+        assertEquals("default", trigger.getExternalProgram());
+        assertEquals(-1, trigger.getUserExitStatus());
+    }
+
     @Test
     public void testEvaluateWithNonMatchingExitStatus() {
-        // Assuming the external program exits with status 1
-        String externalProgram = "false";
-        int userExitStatus = 0;
+        ExitStatusTrigger trigger = new ExitStatusTrigger();
+        // Assuming a valid external program that exits with status 0
+        trigger.setExternalProgram("echo hello");
+        trigger.setUserExitStatus(1);
 
-        ExitStatusTrigger trigger = new ExitStatusTrigger(externalProgram, userExitStatus);
+        assertFalse(trigger.evaluate());
+    }
+
+    @Test
+    public void testEvaluateWithInvalidExternalProgram() {
+        ExitStatusTrigger trigger = new ExitStatusTrigger();
+        // Assuming an invalid external program
+        trigger.setExternalProgram("nonexistent_command");
+        trigger.setUserExitStatus(0);
+
         assertFalse(trigger.evaluate());
     }
 
     @Test
     public void testSetExternalProgram() {
-        ExitStatusTrigger trigger = new ExitStatusTrigger("echo", 0);
-
-        // Set a new external program
-        trigger.setExternalProgram("ls");
-
-        // Check if the external program was set correctly
-        assertEquals("ls", trigger.getExternalProgram());
+        ExitStatusTrigger trigger = new ExitStatusTrigger();
+        trigger.setExternalProgram("new_program");
+        assertEquals("new_program", trigger.getExternalProgram());
     }
 
     @Test
     public void testSetUserExitStatus() {
-        ExitStatusTrigger trigger = new ExitStatusTrigger("echo", 0);
-
-        // Set a new user exit status
-        trigger.setUserExitStatus(1);
-
-        // Check if the user exit status was set correctly
-        assertEquals(1, trigger.getUserExitStatus());
+        ExitStatusTrigger trigger = new ExitStatusTrigger();
+        trigger.setUserExitStatus(2);
+        assertEquals(2, trigger.getUserExitStatus());
     }
 }

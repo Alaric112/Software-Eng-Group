@@ -24,10 +24,13 @@ public class ExitStatusTrigger implements Trigger {
      * @param externalProgram The path or command of the external program to be executed.
      * @param userExitStatus The expected exit status of the external program.
      */
-    public ExitStatusTrigger(String externalProgram, int userExitStatus) {
-        this.externalProgram = externalProgram;
-        this.userExitStatus = userExitStatus;
+    
+    public ExitStatusTrigger() {
+        this.externalProgram = "default";
+        this.userExitStatus = -1;
     }
+    
+    
 
     /**
      * Evaluates whether the exit status of the external program matches the expected exit status.
