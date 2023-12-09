@@ -197,23 +197,14 @@ public class CreateRuleSubWindowController implements Initializable {
         hideAllActionBoxes();
 
         // Set values for Time trigger Spinner
-        SpinnerValueFactory<Integer> hourValues = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0);
-        this.spinnerHourTimeTrigger.setValueFactory(hourValues);
-        SpinnerValueFactory<Integer> minuteValues = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0);
-        this.spinnerMinuteTimeTrigger.setValueFactory(minuteValues);
-        SpinnerValueFactory<Integer> dayValues  = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 30, 0);
-        this.spinnerDaySleepingPeriod.setValueFactory(dayValues);
-        SpinnerValueFactory<Integer> hourValues1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0);
-        this.spinnerHourSleepingPeriod.setValueFactory(hourValues1);
-        SpinnerValueFactory<Integer> minuteValues1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0);
-        this.spinnerMinuteSleepingPeriod.setValueFactory(minuteValues1);
-
-        SpinnerValueFactory<Integer> monthDay = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 31, 1);
-        this.dayMonthSpinner.setValueFactory(monthDay);
+        setupSpinner(spinnerHourTimeTrigger, 0, 23, 0);
+        setupSpinner(spinnerMinuteTimeTrigger, 0, 59, 0);
+        setupSpinner(spinnerDaySleepingPeriod, 0, 30, 0);
+        setupSpinner(spinnerHourSleepingPeriod, 0, 23, 0);
+        setupSpinner(spinnerMinuteSleepingPeriod, 0, 59, 0);
+        setupSpinner(dayMonthSpinner, 1, 31, 1);
         
-        BooleanBinding isfile = Bindings.isEmpty(sizeField.textProperty());
-        insertSizeButton.disableProperty().bind(isfile);
-                
+        bindButtonToTextField(insertSizeButton, sizeField);                
                 
         // Imposta la selezione predefinita (puoi scegliere quale impostare come predefinita)
         fireOnceCheckBox.setSelected(true);
@@ -236,20 +227,17 @@ public class CreateRuleSubWindowController implements Initializable {
 
         confirmButton.disableProperty().bind(isTextFieldEmpty.or(triggerTreeViewHasRoot.not()).or(Bindings.isEmpty(actionListView.getItems())));        
         choiceBoxDayWeek.getItems().addAll(DayOfWeek.values());
-        btnSetDayWeek.disableProperty().bind(choiceBoxDayWeek.getSelectionModel().selectedItemProperty().isNull());
-        
-        btnFileExist.disableProperty().bind(Bindings.isEmpty(FileExistNameTF.textProperty()));
-        btnSetDateTrigger.disableProperty().bind(datePickTrigger.valueProperty().isNull());
-  
-        setExcArgsBtn.disableProperty().bind(Bindings.isEmpty(excArgumentsTF.textProperty()));
-
         choiceBoxMonths.getItems().addAll(Month.values());
-        btnSetDayMonthTrigger.disableProperty().bind(choiceBoxMonths.getSelectionModel().selectedItemProperty().isNull());
         
-        addActionButton.disableProperty().bind(actionChoiceBox.valueProperty().isNull());
-        addTriggerButton.disableProperty().bind(triggerChoiceBox.valueProperty().isNull());
-        
-        addMacroActionBtn.disableProperty().bind(macroActionChoiceBox.valueProperty().isNull());
+        bindButtonToTextField(btnFileExist, FileExistNameTF);
+        bindButtonToChoiceBox(btnSetDayWeek, choiceBoxDayWeek);
+        bindButtonToDatePicker(btnSetDateTrigger, datePickTrigger);
+        bindButtonToTextField(setExcArgsBtn, excArgumentsTF);
+        bindButtonToChoiceBox(btnSetDayMonthTrigger, choiceBoxMonths);
+        bindButtonToChoiceBox(addActionButton, actionChoiceBox);
+        bindButtonToChoiceBox(addTriggerButton, triggerChoiceBox);
+        bindButtonToChoiceBox(addMacroActionBtn, macroActionChoiceBox);
+        bindButtonToCheckBox(addMacroActionBtn, checkRegisterAction);
         
         // Binding della visibilità del TextField al valore della CheckBox
         actionRegisterTF.visibleProperty().bind(checkRegisterAction.selectedProperty());        
@@ -297,6 +285,32 @@ public class CreateRuleSubWindowController implements Initializable {
             macroActionChoiceBox.getItems().addAll(ruleCreator.getAvailableMacroAction());
         }        
         
+    }
+   
+    // Method to set up spinner values
+    private void setupSpinner(Spinner<Integer> spinner, int min, int max, int initialValue) {
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(min, max, initialValue);
+        spinner.setValueFactory(valueFactory);
+    }    
+
+    // Method to set up BooleanBinding for disabling a button based on TextField empty property
+    private void bindButtonToTextField(Button button, TextField textField) {
+        button.disableProperty().bind(Bindings.isEmpty(textField.textProperty()));
+    }
+
+    // Method to set up BooleanBinding for disabling a button based on ChoiceBox selectedItemProperty
+    private <T> void bindButtonToChoiceBox(Button button, ChoiceBox<T> choiceBox) {
+        button.disableProperty().bind(choiceBox.getSelectionModel().selectedItemProperty().isNull());
+    }
+
+    // Method to set up BooleanBinding for disabling a button based on DatePicker valueProperty
+    private void bindButtonToDatePicker(Button button, DatePicker datePicker) {
+        button.disableProperty().bind(datePicker.valueProperty().isNull());
+    }
+
+    // Method to set up BooleanBinding for disabling a button based on CheckBox selectedProperty
+    private void bindButtonToCheckBox(Button button, CheckBox checkBox) {
+        button.disableProperty().bind(checkBox.selectedProperty());
     }
     
     /**
