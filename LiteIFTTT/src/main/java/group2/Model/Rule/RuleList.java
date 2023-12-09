@@ -211,7 +211,5 @@ public class RuleList extends Observable implements Serializable {
         }
         return Objects.equals(this.rules, other.rules);
     }
-
-
     
 }

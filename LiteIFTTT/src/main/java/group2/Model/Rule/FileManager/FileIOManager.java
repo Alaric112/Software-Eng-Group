@@ -94,12 +94,10 @@ public class FileIOManager {
      * @return 
      */    
     public static CompletableFuture<RuleList> loadFromFileAsync(File file) {
-      
-        synchronized (lock) {
-            
-            CompletableFuture<RuleList> completableFuture = new CompletableFuture<>();
-
-            Thread loadThread = new Thread(() -> {
+        
+        CompletableFuture<RuleList> completableFuture = new CompletableFuture<>();
+        Thread loadThread = new Thread(() -> {
+            synchronized (lock) {
                 try {
                     RuleList ruleSet = loadRuleList(file);
 
@@ -109,15 +107,15 @@ public class FileIOManager {
                     } else {
                         completableFuture.completeExceptionally(new IOException("Rule set not loaded"));
                     }
-                } catch (IOException ex) {
-                    completableFuture.completeExceptionally(ex);
+                    } catch (IOException ex) {
+                        completableFuture.completeExceptionally(ex);
                 }
-            });
+            }
+        });
 
-            loadThread.start();
+        loadThread.start();
 
-            return completableFuture;
-        }
+        return completableFuture;       
     }
 
 
@@ -131,15 +129,17 @@ public class FileIOManager {
         Thread thread = new Thread(() -> {
             synchronized (lock) {
                 try {
-                    saveRuleListToFile(file, ruleSet);
+                    saveRuleListToFile(file, ruleSet);  
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             }
         });
-
+        
         thread.setDaemon(true);
         thread.start();
+        
+
     }   
     
     /**
