@@ -6,7 +6,6 @@ package group2.Model.Rule.FileManager;
 
 import group2.Model.Rule.RuleList;
 import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import org.junit.After;
@@ -14,10 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author patap
- */
 public class SaveCommandTest {
     
     private RuleList ruleList;

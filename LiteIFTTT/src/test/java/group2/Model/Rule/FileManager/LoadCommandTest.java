@@ -4,7 +4,6 @@
  */
 package group2.Model.Rule.FileManager;
 
-import group2.App;
 import group2.Model.Rule.ControlRuleChecker;
 import group2.Model.Rule.RuleList;
 import java.io.File;
@@ -14,10 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author patap
- */
 public class LoadCommandTest {
     
     private LoadCommand loadCommand;
@@ -51,7 +46,7 @@ public class LoadCommandTest {
 
     @Test
     public void testSetFile() {
-        File newFileMock = new File("newTestFile"); // Replace with your actual file or use a mock if needed
+        File newFileMock = new File("newTestFile");
         loadCommand.setFile(newFileMock);
         assertEquals(newFileMock, loadCommand.getFile());
     }

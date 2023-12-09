@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
+
 package group2;
 
 import group2.Model.Rule.RuleList;
@@ -30,7 +27,6 @@ public class FileIOManagerTest {
     
     @Before
     public void setUp() throws IOException {
-        // Crea un nuovo file temporaneo per i test
         testFile = File.createTempFile("testRuleset", ".dat");
         testRuleList = new RuleList(5, "TestRuleSet");
         testRule = new MockRule("TestRule");
@@ -40,10 +36,8 @@ public class FileIOManagerTest {
     @After
     public void cleaner(){
         
-        // Clean up resources if needed
         testRuleList = null;
 
-        // Delete the temporary file
         if (testFile != null && testFile.exists()) {
             testFile.delete();
         }
@@ -51,15 +45,10 @@ public class FileIOManagerTest {
     
     @Test
     public void testSaveAndLoad() throws IOException  {
-        // Crea un oggetto RuleList di test
         testRuleList.addRule(testRule);
-        // Salva il RuleList nel file temporaneo
         FileIOManager.saveRuleListToFile(testFile, testRuleList);
-        // Carica il RuleList dal file temporaneo
         FileIOManager.loadFromFile(testFile);
-        // Ottieni il RuleList corrente dal RuleChecker
         RuleList loadedRuleSet = ControlRuleChecker.getInstance().getRuleSet();
-        // Verifica che il RuleList caricato sia uguale a quello di test
         assertEquals(testRuleList.getName(), loadedRuleSet.getName());
         assertEquals(testRuleList.getRules().size(), loadedRuleSet.getRules().size());
     }
@@ -77,14 +66,11 @@ public class FileIOManagerTest {
     @Test
     public void testLoadFromFileAsync() throws IOException, InterruptedException, ExecutionException {
 
-        // Salva il RuleList nel file di test
         FileIOManager.saveRuleListToFile(testFile, testRuleList);
 
-        // Carica il RuleList dal file in modo asincrono
         CompletableFuture<RuleList> future = FileIOManager.loadFromFileAsync(testFile);
         RuleList actualRuleSet = future.get();
 
-        // Confronta il RuleList caricato con quello atteso
         assertEquals(testRuleList, actualRuleSet);
     }    
 
@@ -93,13 +79,10 @@ public class FileIOManagerTest {
 
         FileIOManager.saveToFileAsync(testFile, testRuleList);
 
-        // Carica il RuleList dal file di test in modo asincrono
         CompletableFuture<RuleList> loadFuture = FileIOManager.loadFromFileAsync(testFile);
 
-        // Attendi il completamento dell'operazione asincrona di caricamento
         RuleList loadedRuleSet = loadFuture.get();
 
-        // Verifica che il RuleList caricato sia uguale a quello di test
         assertNotNull(loadedRuleSet);
         assertEquals(testRuleList.getName(), loadedRuleSet.getName());
         assertEquals(testRuleList.getTimer(), loadedRuleSet.getTimer());
