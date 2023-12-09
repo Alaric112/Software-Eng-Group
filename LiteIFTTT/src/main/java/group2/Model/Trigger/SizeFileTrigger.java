@@ -7,6 +7,8 @@ package group2.Model.Trigger;
 import java.io.File;
 
 /**
+ * The {@code SizeFileTrigger} class extends the {@code FileTrigger} class
+ * and represents a trigger based on the size of a specified file.
  *
  * @author Faust
  */
@@ -20,8 +22,14 @@ public class SizeFileTrigger extends FileTrigger{
     public SizeFileTrigger() {
         super();
         this.sizeTarget = 0;
-    }    
-       
+    }   
+    
+    /**
+     * Evaluates whether the size of the target file exceeds the specified size target.
+     * 
+     * @return {@code true} if the size of the target file exceeds the specified size target, 
+     * {@code false} otherwise.
+     */
     @Override
     public boolean evaluate() {
         
@@ -33,11 +41,21 @@ public class SizeFileTrigger extends FileTrigger{
     public long getSizeFile() {
         return sizeTarget;
     }
-
+    
+    /**
+     * Sets the target size for the file trigger.
+     * 
+     * @param sizeFile The target size to set.
+     */
     public void setSizeFile(long sizeFile) {
         this.sizeTarget = sizeFile;
     }
     
+    /**
+     * Sets the target file for the size trigger.
+     * 
+     * @param file The target file to set.
+     */
     public void setTargetFile(File file) {
          fileTarget = file;   
     }    

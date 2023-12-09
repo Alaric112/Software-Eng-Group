@@ -7,7 +7,9 @@ package group2.Model.Trigger;
 import java.time.LocalDate;
 
 /**
- *
+ * The {@code DateTrigger} class implements the {@code Trigger} interface
+ * and represents a trigger based on a specific target date.
+ * 
  * @author Faust
  */
 public class DateTrigger implements Trigger{
@@ -18,7 +20,11 @@ public class DateTrigger implements Trigger{
         
     }
     
-  
+    /**
+     * Evaluates whether the current date is equal to the target date.
+     * 
+     * @return {@code true} if the current date is equal to the target date, {@code false} otherwise.
+     */
     @Override
     public boolean evaluate() {
         return targetDate.equals(LocalDate.now());

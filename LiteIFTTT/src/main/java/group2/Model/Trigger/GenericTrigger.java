@@ -5,7 +5,9 @@
 package group2.Model.Trigger;
 
 /**
- *
+ * The {@code GenericTrigger} class implements the {@code Trigger} interface
+ * and represents a generic trigger with an activation state and an example string.
+ * 
  * @author Alessandro Accarino
  */
 public class GenericTrigger implements Trigger {

@@ -5,7 +5,9 @@
 package group2.Model.Trigger;
 
 /**
- *
+ * The {@code ExitStatusTrigger} class implements the {@code Trigger} interface
+ * and represents a trigger based on the exit status of an external program.
+ * 
  * @author Lore
  */
 import java.io.IOException;
@@ -15,11 +17,23 @@ public class ExitStatusTrigger implements Trigger {
     private String externalProgram;
     private int userExitStatus;
 
+    /**
+     * Constructs a new {@code ExitStatusTrigger} with the specified external program
+     * and user-defined exit status.
+     * 
+     * @param externalProgram The path or command of the external program to be executed.
+     * @param userExitStatus The expected exit status of the external program.
+     */
     public ExitStatusTrigger(String externalProgram, int userExitStatus) {
         this.externalProgram = externalProgram;
         this.userExitStatus = userExitStatus;
     }
 
+    /**
+     * Evaluates whether the exit status of the external program matches the expected exit status.
+     * 
+     * @return {@code true} if the exit status matches the expected exit status, {@code false} otherwise.
+     */
     @Override
     public boolean evaluate() {
         try {
