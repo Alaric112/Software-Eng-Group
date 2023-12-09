@@ -25,6 +25,15 @@ public class FileCopyAction implements Action {
         this.destinationPath= "";
     }
 
+    public String getSourcePath() {
+        return sourcePath;
+    }
+
+    public String getDestinationPath() {
+        return destinationPath;
+    }
+
+    
     public void setSourcePath(String sourcePath) {
         this.sourcePath = sourcePath;
     }

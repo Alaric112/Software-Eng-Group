@@ -12,7 +12,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import static org.junit.Assert.*;
 
 /**
@@ -24,15 +23,13 @@ import static org.junit.Assert.*;
 public class FileCopyActionTest {
 
     private FileCopyAction fileCopyAction;
-    private String sourcePath;
     private String destinationPath;
     private File srcPath;
     private Path dstPath;
     
     @Before
     public void setUp() throws IOException {
-        fileCopyAction = new FileCopyAction();
-        sourcePath = "source.txt"; 
+        fileCopyAction = new FileCopyAction(); 
         srcPath = File.createTempFile("source", ".txt");
         dstPath= Files.createTempDirectory(destinationPath);
     }
@@ -44,14 +41,36 @@ public class FileCopyActionTest {
             srcPath.delete();
         }
         
-//        if (Files.exists(dstPath)) {
-//            Files.delete(dstPath);
-//        }
+        // Delete the destination directory and its contents
+        if (Files.exists(dstPath)) {
+            Files.walk(dstPath)
+                .sorted((p1, p2) -> -p1.compareTo(p2)) // Reverse order for files first, then directories
+                .forEach(path -> {
+                    try {
+                        Files.delete(path);
+                    } catch (IOException e) {
+                        // Handle the exception if necessary
+                    }
+                });
+        }
     }
     
     
     @Test
+    public void testSetSourcePath() {
+        String sourcePath = "source.txt";
+        fileCopyAction.setSourcePath(sourcePath);
+        assertEquals(sourcePath, fileCopyAction.getSourcePath());
+    }
 
+    @Test
+    public void testSetDestinationPath() {
+        String destinationPath = "destination.txt";
+        fileCopyAction.setDestinationPath(destinationPath);
+        assertEquals(destinationPath, fileCopyAction.getDestinationPath());
+    }
+    
+    @Test
     public void testExecute() throws IOException {
 
         fileCopyAction.setSourcePath(srcPath.getAbsolutePath());
