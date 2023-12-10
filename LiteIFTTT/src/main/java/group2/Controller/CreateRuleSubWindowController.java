@@ -259,7 +259,6 @@ public class CreateRuleSubWindowController implements Initializable {
     @FXML
     private void confirmRuleCreationEvent(ActionEvent event) {
         
-        System.out.println(sequenceAction.size());
         if(sequenceAction.size() != 1){            
             lastAction = ruleCreator.createCompositeAction(sequenceAction);
         }        

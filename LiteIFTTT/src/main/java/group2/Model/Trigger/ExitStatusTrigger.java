@@ -19,10 +19,7 @@ public class ExitStatusTrigger implements Trigger {
 
     /**
      * Constructs a new {@code ExitStatusTrigger} with the specified external program
-     * and user-defined exit status.
-     * 
-     * @param externalProgram The path or command of the external program to be executed.
-     * @param userExitStatus The expected exit status of the external program.
+     * and user-defined exit status
      */
     
     public ExitStatusTrigger() {
