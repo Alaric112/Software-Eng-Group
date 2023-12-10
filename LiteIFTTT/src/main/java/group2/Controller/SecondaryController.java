@@ -310,9 +310,8 @@ public class SecondaryController implements Initializable, Observer {
         
         File file = App.createFCLoad();
         Command loadCommand = new LoadCommand(null, file);
-        Platform.runLater(() -> {
-            loadCommand.execute();
-        });
+        loadCommand.execute(); 
+         
     }
 
     /**
@@ -371,6 +370,6 @@ public class SecondaryController implements Initializable, Observer {
         }
         Rule rule = ruleTable.getSelectionModel().getSelectedItem();       
         App.createSubWindow("CreateRuleSubWindow", "Rule Creator");             
-    }
+    }  
     
 }

@@ -7,6 +7,7 @@ package group2.Model.Rule.FileManager;
 import group2.Model.Rule.ControlRuleChecker;
 import group2.Model.Rule.RuleList;
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -42,7 +43,7 @@ public class LoadCommand implements Command  {
      * If the onLoadCompletion thread is set, it is started on successful completion of the load operation.
      */    
     @Override
-    public void execute() {
+    public void execute(){
         
         CompletableFuture<RuleList> completableFuture = FileIOManager.loadFromFileAsync(file);
 
@@ -52,8 +53,14 @@ public class LoadCommand implements Command  {
             if (onLoadCompletion != null) {
                 onLoadCompletion.complete(null);
             }
-        }).exceptionally(ex -> {
-            ex.printStackTrace();
+        }).exceptionally(ex ->{
+            Throwable cause = ex.getCause();
+            if (cause instanceof IOException) {
+                System.err.println("Error during file loading: " + cause.getMessage());
+            } else {
+                // Altri tipi di eccezioni
+                ex.printStackTrace();
+            }
             return null;
         });
         

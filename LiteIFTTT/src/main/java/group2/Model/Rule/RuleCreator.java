@@ -91,7 +91,7 @@ public final class RuleCreator {
         triggerFactoryMap.put("File Exist", new FileTriggerCreator());
         triggerFactoryMap.put("File Size", new SizeFileTriggerFactory());
         triggerFactoryMap.put("Date", new DateTriggerFactory());
-//        triggerFactoryMap.put("Exit Status", new Exit());
+        triggerFactoryMap.put("Exit Status", new ExitStatusTriggerCreator());
 
     }
 

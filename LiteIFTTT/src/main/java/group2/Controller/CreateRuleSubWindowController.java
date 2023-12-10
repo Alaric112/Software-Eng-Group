@@ -175,6 +175,10 @@ public class CreateRuleSubWindowController implements Initializable {
     private Button addMacroActionBtn;
     @FXML
     private ChoiceBox<String> macroActionChoiceBox;
+    @FXML
+    private VBox exitStatusTriggerBox;
+    @FXML
+    private Spinner<Integer> exitStatusPicker;
     /**
      * Initializes the controller class. This method is automatically called
      * after the FXML file has been loaded.
@@ -203,6 +207,7 @@ public class CreateRuleSubWindowController implements Initializable {
         setupSpinner(spinnerHourSleepingPeriod, 0, 23, 0);
         setupSpinner(spinnerMinuteSleepingPeriod, 0, 59, 0);
         setupSpinner(dayMonthSpinner, 1, 31, 1);
+        setupSpinner(exitStatusPicker, -100, 100, 1);        
         
         bindButtonToTextField(insertSizeButton, sizeField);                
                 
@@ -513,7 +518,12 @@ public class CreateRuleSubWindowController implements Initializable {
                     hideAllTriggerBoxes();
                     sizeFileBox.setVisible(true);
                 });
-
+                
+                triggerVisibilityMap.put("Exit Status", () -> {
+                    hideAllTriggerBoxes();
+                    exitStatusTriggerBox.setVisible(true);
+                });
+                
                 
     }
     
@@ -536,6 +546,7 @@ public class CreateRuleSubWindowController implements Initializable {
         dateTriggerBox.setVisible(false);
         dayMonthBox.setVisible(false);
         sizeFileBox.setVisible(false);
+        exitStatusTriggerBox.setVisible(false);
     } 
 
     private void visibilityAction(String value){
@@ -683,9 +694,9 @@ public class CreateRuleSubWindowController implements Initializable {
 
     @FXML
     private void selectExcPathEvent(ActionEvent event) {
-    
+   
+        String path = getProgrammPath();
         ExcProgrammAction excProgrammAction = (ExcProgrammAction) lastAction;
-        String path = getFilePath(programmPathTF, false);
         excProgrammAction.setProgramPath(path);        
         
     }
@@ -740,4 +751,36 @@ public class CreateRuleSubWindowController implements Initializable {
        Integer minutes = spinnerMinuteSleepingPeriod.getValue();         
        millisecond = convertToMilliseconds(days, hours, minutes);      
     }
+
+    @FXML
+    private void selectProgrammEvent(ActionEvent event) {
+        
+        String exePath = getProgrammPath();
+        ExitStatusTrigger trigger = (ExitStatusTrigger) lastTrigger;
+        trigger.setExternalProgram(exePath); 
+    
+    }        
+    
+    @FXML
+    private void setExitStatusTriggerEvent(ActionEvent event) {
+        
+        ExitStatusTrigger trigger = (ExitStatusTrigger) lastTrigger;
+        trigger.setUserExitStatus(exitStatusPicker.getValue());
+    }
+
+    private String getProgrammPath(){
+        
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select an executable file");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Executable Files", "*.exe", "*.jar"),
+                new FileChooser.ExtensionFilter("All Files", "*.*")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+
+        return selectedFile.getAbsolutePath(); 
+        
+    }    
+    
 }

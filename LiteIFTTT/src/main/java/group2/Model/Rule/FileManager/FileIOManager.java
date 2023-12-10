@@ -151,6 +151,10 @@ public class FileIOManager {
      */     
     protected static RuleList loadRuleList(File file) throws IOException{
         
+        if (file == null || !file.exists()) {
+            throw new FileNotFoundException("File not found or does not exist: " + (file != null ? file.getPath() : "null"));
+        }        
+        
         RuleList ruleList = null;
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
