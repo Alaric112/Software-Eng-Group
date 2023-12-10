@@ -244,8 +244,7 @@ public final class RuleCreator {
         if(uniqueActionKey.add(nameKey)){
             
             actionMacroMap.put(nameKey, action);
-            System.out.println(actionMacroMap);
-            //save operation 
+
         }
     }
     

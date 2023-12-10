@@ -7,6 +7,7 @@ package group2.Model.Rule;
 import group2.Model.Action.Action;
 import group2.Model.Trigger.Trigger;
 import java.io.Serializable;
+import java.util.Observable;
 
 /**
  * The <code>Rule</code> interface represents a rule that can be checked,
@@ -22,53 +23,52 @@ import java.io.Serializable;
  * @see group2.Model.Trigger.Trigger
  * @see group2.Model.Action.Action
  */
-public interface Rule extends Serializable {
+public abstract class Rule extends Observable implements Serializable {
     
     /**
      * Checks the rule's condition and triggers the associated action if the condition is met.
      */
-    void checkRule();
+    public abstract void checkRule();
 
     /**
      * Gets the name of the rule.
      *
      * @return The name of the rule.
      */
-    String getName();
+    public abstract String getName();
 
     /**
      * Gets the trigger associated with the rule.
      *
      * @return The trigger associated with the rule.
      */
-    Trigger getTrigger();
+    public abstract Trigger getTrigger();
 
     /**
      * Gets the action associated with the rule.
      *
      * @return The action associated with the rule.
      */
-    Action getAction();
+    public abstract Action getAction();
 
     /**
      * Switches the status of the rule. Implementing classes should define the logic for
      * changing the status of the rule.
      */
-    void switchStatus();
+    public abstract void switchStatus();
  
     /**
      * Retrieves the activation status of the rule.
      *
      * @return {@code true} if the rule is active, {@code false} otherwise.
      */    
-    boolean isActive();
+    public abstract boolean isActive();
     
      /**
      * Retrieves the fire status of the rule.
      *
      * @return {@code true} if the rule is active, {@code false} otherwise.
      */    
-    boolean isFired();
-    
+    public abstract boolean isFired();    
    
 }

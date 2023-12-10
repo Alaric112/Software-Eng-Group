@@ -25,7 +25,7 @@ import group2.Model.Trigger.Trigger;
  * @see group2.Action
  * @see group2.Rule
  */
-public class BaseRule implements Rule {
+public class BaseRule extends Rule {
     
     private String name;
     private Trigger trigger;
@@ -46,6 +46,7 @@ public class BaseRule implements Rule {
         this.trigger = trigger;
         this.action = action;
         this.active = true;
+        this.fired = false;
     }
 
     /**
@@ -147,9 +148,11 @@ public class BaseRule implements Rule {
      * Toggles the activation status between active and inactive for the rule.
      */    
     @Override
-    public void switchStatus() {
-
+    public synchronized void switchStatus() {
         this.active = !this.active;
+        this.fired = false;
+        setChanged();
+        notifyObservers();         
     }
 
      /**
@@ -157,6 +160,7 @@ public class BaseRule implements Rule {
      *
      * @return {@code true} if the rule is fired, {@code false} otherwise.
      */  
+    @Override
     public boolean isFired() {
         return fired;
     }

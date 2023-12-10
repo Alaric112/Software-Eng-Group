@@ -24,7 +24,7 @@ import java.util.Observer;
  *
  * @author Alessandro Accarino
  */
-public class RuleList extends Observable implements Serializable {
+public class RuleList extends Observable implements Serializable, Observer {
     
     private int timer;
     private String name;    
@@ -50,6 +50,7 @@ public class RuleList extends Observable implements Serializable {
     public void addRule(Rule rule){
         
         rules.add(rule);
+        rule.addObserver(this);
         changed();        
     }
  
@@ -210,6 +211,11 @@ public class RuleList extends Observable implements Serializable {
             return false;
         }
         return Objects.equals(this.rules, other.rules);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        changed();
     }
     
 }

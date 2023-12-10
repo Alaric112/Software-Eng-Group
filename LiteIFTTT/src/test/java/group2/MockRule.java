@@ -12,7 +12,7 @@ import group2.Model.Rule.Rule;
  *
  * @author Alessandro Accarino
  */
-public class MockRule implements Rule {
+public class MockRule extends Rule {
     
     private String ruleName;
     private Trigger mockTrigger;

@@ -11,15 +11,13 @@ import group2.Model.Trigger.Trigger;
  *
  * @author Lore
  */
-public abstract class RuleDecorator implements Rule{
-
+public abstract class RuleDecorator extends Rule{
     
     private Rule rule;
 
     public RuleDecorator(Rule rule) {
         this.rule = rule;
-    }
-    
+    }    
         
     @Override
     public void checkRule() {
@@ -42,8 +40,10 @@ public abstract class RuleDecorator implements Rule{
     }
 
     @Override
-    public void switchStatus() {
+    public synchronized void switchStatus() {
         rule.switchStatus();
+        setChanged();
+        notifyObservers();
     }
 
     @Override
@@ -57,5 +57,3 @@ public abstract class RuleDecorator implements Rule{
     }
     
 }
-
-

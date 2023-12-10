@@ -16,8 +16,6 @@ package group2.Model.Rule;
  */
 public class FireOnlyOnceDecorator extends RuleDecorator {
 
-    private boolean onlyOnce;
-
     /**
      * Constructor of the class.
      *
@@ -25,7 +23,6 @@ public class FireOnlyOnceDecorator extends RuleDecorator {
      */
     public FireOnlyOnceDecorator(Rule rule) {
         super(rule);
-        onlyOnce = true;
     }
 
     /**
@@ -36,15 +33,12 @@ public class FireOnlyOnceDecorator extends RuleDecorator {
      */
     @Override
     public void checkRule() {
-        if (onlyOnce) {
+        
             super.checkRule();
+        if (super.isFired() && super.isActive()) {
+            
+            super.switchStatus();
         }
 
-        if (super.isFired() && super.isActive()) {
-            onlyOnce = false;
-            super.switchStatus();
-        } else {
-            onlyOnce = true;
-        }
     }
 }
