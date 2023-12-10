@@ -44,7 +44,7 @@ public class DayWeekTrigger implements Trigger {
 
     @Override
     public String toString() {
-        return "DayWeekTrigger";
+        return "Day of Week selected: "+ targetDay;
     }
     
 }

@@ -63,7 +63,7 @@ public class FileTrigger implements Trigger {
     
     @Override
     public String toString() {
-        return "FileTrigger";
+        return "File Trigger";
     }
     
 }

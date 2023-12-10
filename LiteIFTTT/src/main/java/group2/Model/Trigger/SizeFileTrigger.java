@@ -62,6 +62,6 @@ public class SizeFileTrigger extends FileTrigger{
     
         @Override
     public String toString() {
-        return "SizeTrigger";
+        return "Size selected: "+ fileTarget;
     }
 }

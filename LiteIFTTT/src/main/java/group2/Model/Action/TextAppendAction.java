@@ -56,6 +56,6 @@ public class TextAppendAction implements Action{
 
         @Override
     public String toString() {
-        return "TextAppendAction";
+        return "Text append :" +textAppend;
     } 
 }

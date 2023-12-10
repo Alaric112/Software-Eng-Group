@@ -4,6 +4,7 @@
  */
 package group2.Model.Action;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -80,6 +81,6 @@ public class FileMoveAction implements Action {
     
         @Override
     public String toString() {
-        return "FileMoveAction";
+        return "File moved in: " + destinationPath;
     } 
 }

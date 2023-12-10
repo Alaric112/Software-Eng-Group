@@ -80,18 +80,18 @@
       </ToolBar>
    </top>
    <left>
-      <StackPane prefHeight="680.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <StackPane prefHeight="680.0" prefWidth="867.0" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane prefHeight="200.0" prefWidth="200.0">
+            <ScrollPane prefHeight="680.0" prefWidth="730.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="676.0" prefWidth="595.0">
                      <children>
-                        <TableView fx:id="ruleTable" layoutX="-2.0" layoutY="-1.0" prefHeight="676.0" prefWidth="595.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="ruleTable" layoutX="-2.0" layoutY="-1.0" prefHeight="676.0" prefWidth="867.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-272.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn fx:id="nameRule" prefWidth="150.0" resizable="false" text="Name" />
-                              <TableColumn fx:id="triggerRule" prefWidth="150.0" resizable="false" text="Trigger" />
-                              <TableColumn fx:id="actionRule" prefWidth="150.0" resizable="false" text="Action " />
-                            <TableColumn id="stateRule" fx:id="stateRule" prefWidth="150.0" resizable="false" text="State" />
+                            <TableColumn fx:id="nameRule" prefWidth="150.0" text="Name" />
+                              <TableColumn fx:id="triggerRule" prefWidth="300.0" text="Trigger" />
+                              <TableColumn fx:id="actionRule" prefWidth="300.0" text="Action " />
+                            <TableColumn id="stateRule" fx:id="stateRule" prefWidth="113.70159912109375" resizable="false" text="State" />
                           </columns>
                            <contextMenu>
                               <ContextMenu>
@@ -104,7 +104,8 @@
                               </ContextMenu>
                            </contextMenu>
                         </TableView>
-                     </children></AnchorPane>
+                     </children>
+                  </AnchorPane>
               </content>
             </ScrollPane>
          </children>

@@ -71,6 +71,6 @@ public class FileCopyAction implements Action {
     }
         @Override
     public String toString() {
-        return "FileCopyAction";
+        return "File copied in: "+ destinationPath;
     } 
 }

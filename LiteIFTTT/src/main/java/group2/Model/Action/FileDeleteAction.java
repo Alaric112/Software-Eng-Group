@@ -54,7 +54,7 @@ public class FileDeleteAction implements Action {
     
     @Override
     public String toString() {
-        return "FileDeleteAction";
+        return "File deleted : "+path;
     } 
 }
 

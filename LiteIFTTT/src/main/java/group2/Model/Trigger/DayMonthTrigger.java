@@ -49,7 +49,7 @@ public class DayMonthTrigger implements Trigger {
 
     @Override
     public String toString() {
-        return "DayMonthTrigger";
+        return "Day of Month selected:" + targetMonthDay;
     }
     
 }

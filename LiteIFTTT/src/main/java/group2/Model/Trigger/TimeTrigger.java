@@ -64,6 +64,6 @@ public class TimeTrigger implements Trigger{
        
         @Override
     public String toString() {
-        return "TimeTrigger";
+        return "Time selected: "+targetTime;
     }
 }

@@ -67,6 +67,6 @@ public class MessageAction extends Observable implements Action {
         
         @Override
     public String toString() {
-        return "MessageAction";
+        return "Message shown: "+ messageInfo;
     } 
 }

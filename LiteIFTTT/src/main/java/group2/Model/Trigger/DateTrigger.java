@@ -40,6 +40,6 @@ public class DateTrigger implements Trigger{
 
     @Override
     public String toString() {
-        return "DateTrigger";
+        return "Date selected: "+ targetDate;
     }     
 }
