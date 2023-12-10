@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Observable;
 
 /**
- * The <code>Rule</code> interface represents a rule that can be checked,
+ * The <code>Rule</code> Abstract class represents a rule that can be checked,
  * and when a specified condition is met, an associated action is triggered.
  * Implementing classes should provide specific logic for the methods defined in
  * this interface to define the behavior of the rule.
