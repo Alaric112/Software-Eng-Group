@@ -732,15 +732,6 @@ public class CreateRuleSubWindowController implements Initializable {
          FileChooser chooser = App.createFC("Open File");
          File file = chooser.showOpenDialog(new Stage());
          folderPath = file;
-}
-    
-    private long convertToMilliseconds(int days, int hours, int minutes) {
-    
-        long millisecondsDays = days * 24L * 60 * 60 * 1000;
-        long millisecondsHours = hours * 60 * 60 * 1000;
-        long millisecondsMinutes = minutes * 60 * 1000;
-
-        return millisecondsDays + millisecondsHours + millisecondsMinutes;
     }
 
     @FXML
@@ -748,7 +739,7 @@ public class CreateRuleSubWindowController implements Initializable {
        Integer days = spinnerDaySleepingPeriod.getValue();
        Integer hours = spinnerHourSleepingPeriod.getValue();
        Integer minutes = spinnerMinuteSleepingPeriod.getValue();         
-       millisecond = convertToMilliseconds(days, hours, minutes);      
+       millisecond = TimeConversionUtil.convertToMilliseconds(days, hours, minutes);      
     }
 
     @FXML

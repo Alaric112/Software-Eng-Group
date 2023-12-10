@@ -65,5 +65,10 @@ public class CompositeAction implements Action {
     public List<Action> getActions() {
         return actions;
     }    
+
+    @Override
+    public String toString() {
+        return "Actions:" + actions;
+    }   
     
 }
