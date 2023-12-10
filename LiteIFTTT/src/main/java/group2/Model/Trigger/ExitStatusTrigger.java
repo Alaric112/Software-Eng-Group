@@ -12,26 +12,29 @@ package group2.Model.Trigger;
  */
 import java.io.IOException;
 
+/**
+ * The ExitStatusTrigger class implements the Trigger interface and represents a trigger
+ * that evaluates whether the exit status of an external program matches a user exit status.
+ */
 public class ExitStatusTrigger implements Trigger {
 
+    /** The external program command to be executed. */
     private String externalProgram;
+
+    /** The user-defined exit status to be compared with the external program's exit status. */
     private int userExitStatus;
 
     /**
-     * Constructs a new {@code ExitStatusTrigger} with the specified external program
-     * and user-defined exit status
+     * Constructs a new {@code ExitStatusTrigger} with the default external program and a user exit status
      */
-    
     public ExitStatusTrigger() {
         this.externalProgram = "default";
         this.userExitStatus = -1;
     }
-    
-    
 
     /**
      * Evaluates whether the exit status of the external program matches the expected exit status.
-     * 
+     *
      * @return {@code true} if the exit status matches the expected exit status, {@code false} otherwise.
      */
     @Override
@@ -41,9 +44,9 @@ public class ExitStatusTrigger implements Trigger {
             ProcessBuilder processBuilder = new ProcessBuilder(externalProgram);
             Process process = processBuilder.start();
 
-            //get the exit status
+            // Get the exit status
             int exitStatus = process.waitFor();
-            
+
             // Check if the exit status matches the expected exit status
             return exitStatus == userExitStatus;
 
@@ -54,26 +57,43 @@ public class ExitStatusTrigger implements Trigger {
         }
     }
 
-    // Getter and setter methods for externalProgram
+    /**
+     * Gets the external program command.
+     *
+     * @return The external program command.
+     */
     public String getExternalProgram() {
         return externalProgram;
     }
 
+    /**
+     * Sets the external program command.
+     *
+     * @param externalProgram The new external program command.
+     */
     public void setExternalProgram(String externalProgram) {
         this.externalProgram = externalProgram;
     }
-    
-    // Getter and Setter methods for UserExitStatus
+
+    /**
+     * Gets the user exit status.
+     */
     public int getUserExitStatus() {
         return userExitStatus;
     }
+
+    /**
+     * Sets the user exit status.
+     */
     public void setUserExitStatus(int userExitStatus) {
         this.userExitStatus = userExitStatus;
     }
-    
-        @Override
+
+    /**
+     * Returns a string representation of the ExitStatusTrigger object.
+     */
+    @Override
     public String toString() {
         return "ExitStatusTrigger";
     }
-    
 }
