@@ -47,7 +47,6 @@ public class TextAppendAction implements Action{
         try(PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file, true)))){
             String string = "\n"+textAppend;
             writer.append(string);
-            System.out.println("ho scritto " + string);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
