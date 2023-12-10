@@ -25,7 +25,7 @@ public class ExitStatusTrigger implements Trigger {
     private int userExitStatus;
 
     /**
-     * Constructs a new {@code ExitStatusTrigger} with the default external program and a user exit status
+     * Constructs a new {@code ExitStatusTrigger} with the default external program and a user exit status.
      */
     public ExitStatusTrigger() {
         this.externalProgram = "default";
@@ -77,6 +77,8 @@ public class ExitStatusTrigger implements Trigger {
 
     /**
      * Gets the user exit status.
+     *
+     * @return The user exit status.
      */
     public int getUserExitStatus() {
         return userExitStatus;
@@ -84,6 +86,8 @@ public class ExitStatusTrigger implements Trigger {
 
     /**
      * Sets the user exit status.
+     *
+     * @param userExitStatus The new user exit status.
      */
     public void setUserExitStatus(int userExitStatus) {
         this.userExitStatus = userExitStatus;
@@ -91,6 +95,8 @@ public class ExitStatusTrigger implements Trigger {
 
     /**
      * Returns a string representation of the ExitStatusTrigger object.
+     *
+     * @return A string representation of the ExitStatusTrigger object.
      */
     @Override
     public String toString() {

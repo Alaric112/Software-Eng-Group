@@ -15,8 +15,12 @@ import java.time.MonthDay;
 
 public class DayMonthTrigger implements Trigger {
 
+    /** The target month and day for triggering an event. */
     private MonthDay targetMonthDay;
 
+    /**
+     * Constructs a new {@code DayMonthTrigger} with the default target month and day set to January 1st.
+     */
     public DayMonthTrigger() {
         this.targetMonthDay = MonthDay.of(1, 1);
     }
@@ -33,6 +37,11 @@ public class DayMonthTrigger implements Trigger {
         return currentMonthDay.equals(targetMonthDay);
     }
     
+    /**
+     * Gets the target month and day of the trigger.
+     * 
+     * @return The target month and day.
+     */
     public MonthDay getTargetMonthDay() {
         return targetMonthDay;
     }
@@ -47,6 +56,11 @@ public class DayMonthTrigger implements Trigger {
         this.targetMonthDay = MonthDay.of(month, dayOfMonth);
     }
 
+    /**
+     * Returns a string representation of the DayMonthTrigger object.
+     *
+     * @return A string representation of the DayMonthTrigger object.
+     */
     @Override
     public String toString() {
         return "Day of Month selected:" + targetMonthDay;

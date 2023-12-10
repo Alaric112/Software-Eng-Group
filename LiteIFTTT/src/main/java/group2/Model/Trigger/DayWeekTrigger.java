@@ -28,7 +28,7 @@ public class DayWeekTrigger implements Trigger {
     /**
      * Evaluates whether the current day matches the target day for triggering an event.
      *
-     * returns true if the current day matches the target day, otherwise false.
+     * @return true if the current day matches the target day, otherwise false.
      */
     @Override
     public boolean evaluate() {
@@ -41,6 +41,7 @@ public class DayWeekTrigger implements Trigger {
     /**
      * Gets the target day of the week.
      *
+     * @return the target day of the week
      */
     public DayOfWeek getTargetDay() {
         return targetDay;
@@ -49,6 +50,7 @@ public class DayWeekTrigger implements Trigger {
     /**
      * Sets the target day of the week.
      *
+     * @param targetDay the new target day of the week
      */
     public void setTargetDay(DayOfWeek targetDay) {
         this.targetDay = targetDay;
@@ -57,6 +59,7 @@ public class DayWeekTrigger implements Trigger {
     /**
      * Returns a string representation of the DayWeekTrigger object.
      *
+     * @return a string representation of the DayWeekTrigger object
      */
     @Override
     public String toString() {
