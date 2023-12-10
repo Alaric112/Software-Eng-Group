@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -26,18 +26,16 @@ public class MockRule extends Rule {
         this.mockTrigger = new MockTrigger();
         this.mockAction = new MockAction();
         active = true;
-        fired = true;
+        fired = false;
     }  
     
     @Override
     public void checkRule() {
-
         if(mockTrigger.evaluate() && active){            
             mockAction.execute();
             checked = true;   
             fired = true;
         }
-        fired = false;
     }
 
     @Override
@@ -58,17 +56,16 @@ public class MockRule extends Rule {
     @Override
     public void switchStatus() {
         this.active = !this.active;
+        fired = false;
     }
     
-    public boolean isRuleChecked(){
-        
+    public boolean isRuleChecked(){       
         return checked;
     }
     
     @Override
-    public boolean isActive(){
-        
-        return checked;
+    public boolean isActive(){       
+        return active;
     }
     
     public void setActive(boolean active){

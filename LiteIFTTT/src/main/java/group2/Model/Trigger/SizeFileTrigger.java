@@ -32,8 +32,7 @@ public class SizeFileTrigger extends FileTrigger{
      */
     @Override
     public boolean evaluate() {
-        
-        System.out.println(getTargetFile().length());
+
         return fileTarget.length()>sizeTarget;
         
     }
