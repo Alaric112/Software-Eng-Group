@@ -94,7 +94,7 @@
                                       </items>
                                     </ToolBar>
                                     <TreeView fx:id="triggerTreeView" layoutY="40.0" onContextMenuRequested="#selectTriggerItem" onMouseClicked="#selectTriggerItem" prefHeight="291.0" prefWidth="477.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0" />
-                                    <VBox fx:id="sizeFileBox" layoutX="226.0" layoutY="40.0" prefHeight="291.0" prefWidth="247.0">
+                                    <VBox fx:id="sizeFileBox" alignment="TOP_CENTER" layoutX="226.0" layoutY="40.0" prefHeight="291.0" prefWidth="247.0" visible="false">
                                        <children>
                                           <Label text="select the file to check" />
                                           <Button mnemonicParsing="false" onAction="#selectFileEvent" text="select file">
@@ -376,13 +376,13 @@
                                                 <CheckBox fx:id="sleepRuleCheckBox" mnemonicParsing="false" text="Sleeping Rule" />
                                              </children>
                                           </VBox>
-                                          <VBox fx:id="sleepRuleBox" alignment="CENTER" prefHeight="331.0" prefWidth="191.0">
+                                          <VBox fx:id="sleepRuleBox" alignment="CENTER" prefHeight="331.0" prefWidth="191.0" spacing="5.0">
                                              <children>
-                                                <Label text="Insert days of sleeping period" />
+                                                <Label text="Days:" />
                                                 <Spinner fx:id="spinnerDaySleepingPeriod" editable="true" />
-                                                <Label text="hours" />
+                                                <Label text="Hours:" />
                                                 <Spinner fx:id="spinnerHourSleepingPeriod" editable="true" />
-                                                <Label text="minutes" />
+                                                <Label text="Minutes:" />
                                                 <Spinner fx:id="spinnerMinuteSleepingPeriod" editable="true" />
                                                 <Button mnemonicParsing="false" onAction="#InsertSleepingRuleSettings" text="insert " />
                                              </children>
