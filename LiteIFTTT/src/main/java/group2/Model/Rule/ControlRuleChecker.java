@@ -59,7 +59,7 @@ public final class ControlRuleChecker extends Observable {
         Object threadStarted = new Object();
 
         if (periodicCheckThread != null && periodicCheckThread.isAlive()) {
-            System.out.println("The periodic thread is already running.");
+            System.err.println("The periodic thread is already running.");
             return;
         }
 
@@ -72,11 +72,9 @@ public final class ControlRuleChecker extends Observable {
                 while (active) {
                     checkRuleSet();
                     // Sleep for x milliseconds after checking all rules
-                    System.out.println("Finished scanning");
                     Thread.sleep(timer * 1000);
                 }
             } catch (InterruptedException e) {
-                System.out.println("Thread has been interrupted");
                 active = false;
                 // Handle the interruption if needed
             }
@@ -92,7 +90,7 @@ public final class ControlRuleChecker extends Observable {
             try {
                 threadStarted.wait(); // Wait for the notification that the thread has started
             } catch (InterruptedException e) {
-                System.out.println("Thread start has been interrupted");
+                System.err.println("Thread start has been interrupted");
                 // Handle the interruption if needed
             }
         }
