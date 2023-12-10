@@ -1,9 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package group2;
 
+import group2.Model.Action.*;
+import group2.Model.Trigger.*;
+import group2.Model.Rule.*;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +12,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class RuleCreatorTest {
     
@@ -82,5 +83,40 @@ public class RuleCreatorTest {
         assertNotNull(triggerTypes);
         assertTrue(triggerTypes.contains("Time"));
     }
+    
+    @Test
+    public void testCreateCompositeAction() {
+        Action action1 = new MockAction();
+        Action action2 = new MockAction();
+        Action action3 = new MockAction();
+
+        Collection<Action> actions = Arrays.asList(action1, action2, action3);
+
+        CompositeAction result = ruleCreator.createCompositeAction(actions);
+
+        assertNotNull(result);
+
+        List<Action> resultActions = result.getActions();
+        assertEquals(actions.size(), resultActions.size());
+        assertTrue(resultActions.containsAll(actions));
+    }
+
+    // to verify the Singleton pattern implementation is correctly done
+    @Test
+    public void testGetInstance() {
         
+        RuleCreator instance2 = RuleCreator.getInstance();
+        assertEquals(ruleCreator, instance2);
+    }       
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateRuleWithUnsupportedType() {
+        String ruleName = "TestRule";
+        Trigger mockTrigger = new MockTrigger();
+        Action mockAction = new MockAction();
+        String unsupportedType = "unsupportedType";
+
+        ruleCreator.createRule(ruleName, mockTrigger, mockAction, unsupportedType);
+    }
+    
 }

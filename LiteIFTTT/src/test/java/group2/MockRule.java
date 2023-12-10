@@ -1,36 +1,41 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package group2;
 
+import group2.Model.Action.Action;
+import group2.Model.Trigger.Trigger;
+import group2.Model.Rule.Rule;
+
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
-public class MockRule implements Rule {
+public class MockRule extends Rule {
     
     private String ruleName;
     private Trigger mockTrigger;
     private Action mockAction;
     private boolean active;
     private boolean checked;
+    private boolean fired;
     
-    public MockRule(String ruleName, Trigger mockTrigger, Action mockAction) {
+    public MockRule(String ruleName) {
         this.ruleName = ruleName;
-        this.mockTrigger = mockTrigger;
-        this.mockAction = mockAction;
+        this.mockTrigger = new MockTrigger();
+        this.mockAction = new MockAction();
+        active = true;
+        fired = false;
     }  
     
     @Override
     public void checkRule() {
-
-        if(mockTrigger.evaluate() && active){
-            
+        if(mockTrigger.evaluate() && active){            
             mockAction.execute();
-            checked = true;
+            checked = true;   
+            fired = true;
         }
-        
     }
 
     @Override
@@ -51,17 +56,28 @@ public class MockRule implements Rule {
     @Override
     public void switchStatus() {
         this.active = !this.active;
+        fired = false;
     }
     
-    public boolean isRuleChecked(){
-        
+    public boolean isRuleChecked(){       
         return checked;
     }
     
     @Override
-    public boolean isActive(){
-        
-        return checked;
+    public boolean isActive(){       
+        return active;
+    }
+    
+    public void setActive(boolean active){
+        this.active = active;
+    }
+    
+    public boolean isOn(){
+        return active;
+    }
+    
+    public boolean isFired() {
+        return fired;
     }
     
 }

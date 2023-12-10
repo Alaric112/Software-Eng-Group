@@ -4,13 +4,15 @@
  */
 package group2;
 
-import org.junit.Before;
+import group2.Model.Trigger.Trigger;
+import group2.Model.Trigger.TimeTrigger;
+import group2.Model.Trigger.TimeTriggerFactory;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class TimeTriggerFactoryTest {
     

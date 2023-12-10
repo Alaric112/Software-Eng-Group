@@ -1,6 +1,9 @@
 
 package group2;
 
+import group2.Model.Rule.*;
+import group2.Model.Action.*;
+import group2.Model.Trigger.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -8,7 +11,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class BaseRuleTest {
     

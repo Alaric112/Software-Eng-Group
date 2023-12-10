@@ -2,8 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -17,7 +20,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS%20Style/RoundButtonStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.CreateRuleSubWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS%20Style/RoundButtonStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group2.Controller.CreateRuleSubWindowController">
    <children>
       <ToolBar prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -91,7 +94,24 @@
                                       </items>
                                     </ToolBar>
                                     <TreeView fx:id="triggerTreeView" layoutY="40.0" onContextMenuRequested="#selectTriggerItem" onMouseClicked="#selectTriggerItem" prefHeight="291.0" prefWidth="477.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0" />
-                                    <VBox fx:id="timeTriggerBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                    <VBox fx:id="sizeFileBox" alignment="TOP_CENTER" layoutX="226.0" layoutY="40.0" prefHeight="291.0" prefWidth="247.0" visible="false">
+                                       <children>
+                                          <Label text="select the file to check" />
+                                          <Button mnemonicParsing="false" onAction="#selectFileEvent" text="select file">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/folder.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Label text="Insert size file to check in byte" />
+                                          <TextField fx:id="sizeField" />
+                                          <Button fx:id="insertSizeButton" mnemonicParsing="false" onAction="#checkSizeAction" text="insert " />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="timeTriggerBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                        <children>
                                           <Label text="Hour:" />
                                           <Spinner fx:id="spinnerHourTimeTrigger" editable="true" />
@@ -109,6 +129,109 @@
                                        <padding>
                                           <Insets top="10.0" />
                                        </padding></VBox>
+                                    <VBox fx:id="dayWeekBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <Label text="Select a day!" />
+                                          <ChoiceBox fx:id="choiceBoxDayWeek" prefWidth="150.0" />
+                                          <Button fx:id="btnSetDayWeek" mnemonicParsing="false" onAction="#setDayWeekEvent" text="set your day!">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/bulletin-board.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox fx:id="FileExistBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#selectFolderPathEvent" text="Select a folder!">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/folder.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Label text="Inseet the name of the file!" />
+                                          <TextField fx:id="FileExistNameTF" />
+                                          <Button fx:id="btnFileExist" mnemonicParsing="false" onAction="#confirmFileExistEvent" text="Confirm creation" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox fx:id="dateTriggerBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <Label text="Pick a date!" />
+                                          <DatePicker fx:id="datePickTrigger" />
+                                          <Button fx:id="btnSetDateTrigger" mnemonicParsing="false" onAction="#setDateTriggerEvent" text="Set Date!">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/calendar.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox fx:id="dayMonthBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <Label text="Select a month!" />
+                                          <ChoiceBox fx:id="choiceBoxMonths" prefWidth="150.0" />
+                                          <Label text="Pick your day!" />
+                                          <Spinner fx:id="dayMonthSpinner" />
+                                          <Button fx:id="btnSetDayMonthTrigger" mnemonicParsing="false" onAction="#setDayMonthTriggerEvent" text="set it!">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/calendar.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox fx:id="exitStatusTriggerBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <Label text="Select a programm" />
+                                          <Button mnemonicParsing="false" onAction="#selectProgrammEvent" text="Select a programm">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/program.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Label text="Select an Exit status" />
+                                          <Spinner fx:id="exitStatusPicker" />
+                                          <Button mnemonicParsing="false" onAction="#setExitStatusTriggerEvent" text="set it!">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/nlp.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                    </VBox>
                                  </children>
                               </AnchorPane>
                         </content>
@@ -124,14 +247,30 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <ToolBar prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                    <ListView fx:id="actionListView" layoutX="14.0" layoutY="40.0" onMouseClicked="#selectActionItemEvent" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="90.0" />
+                                    <ToolBar prefHeight="90.0" prefWidth="477.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                       <items>
-                                        <Button fx:id="addActionButton" mnemonicParsing="false" onAction="#addActionEvent" text="CREATE" />
-                                          <ChoiceBox fx:id="actionChoiceBox" prefWidth="150.0" />
+                                          <VBox alignment="CENTER" prefHeight="81.0" prefWidth="250.0" spacing="20.0">
+                                             <children>
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                                   <children>
+                                                    <Button fx:id="addActionButton" mnemonicParsing="false" onAction="#addActionEvent" text="ADD" />
+                                                      <ChoiceBox fx:id="actionChoiceBox" prefWidth="150.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox fx:id="macroActionBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                                   <children>
+                                                      <Button fx:id="addMacroActionBtn" mnemonicParsing="false" onAction="#addMacroActionEvent" text="ADD" />
+                                                      <ChoiceBox fx:id="macroActionChoiceBox" prefWidth="150.0" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <CheckBox fx:id="checkRegisterAction" mnemonicParsing="false" text="Register Action" />
+                                          <TextField fx:id="actionRegisterTF" prefHeight="25.0" prefWidth="100.0" />
                                       </items>
                                     </ToolBar>
-                                    <TreeView fx:id="actionTreeView" layoutX="7.0" layoutY="40.0" onContextMenuRequested="#selectActionItem" onMouseClicked="#selectActionItem" prefHeight="291.0" prefWidth="221.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0" />
-                                    <VBox fx:id="messageActionBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                    <VBox fx:id="messageActionBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
                                        <children>
                                           <Label text="Insert Message" />
                                           <TextArea fx:id="textMessageArea" prefHeight="182.0" prefWidth="252.0" />
@@ -144,11 +283,11 @@
                                                 </ImageView>
                                              </graphic></Button>
                                        </children></VBox>
-                                    <VBox fx:id="playAudioBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="292.0" prefWidth="249.0" spacing="10.0" visible="false">
+                                    <VBox fx:id="playAudioBox" alignment="TOP_CENTER" layoutX="227.0" layoutY="40.0" prefHeight="292.0" prefWidth="249.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
                                        <children>
                                           <Label prefHeight="18.0" prefWidth="134.0" text="Select the path of the file" />
                                           <TextField fx:id="pathSound" />
-                                          <Button mnemonicParsing="false" onAction="#selectPathEvent" text="select path">
+                                          <Button mnemonicParsing="false" onAction="#selectSoundPathEvent" text="select path">
                                              <graphic>
                                                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -156,6 +295,89 @@
                                                    </image>
                                                 </ImageView>
                                              </graphic></Button>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="fileDeleteBox" alignment="TOP_CENTER" layoutX="226.0" layoutY="38.0" prefHeight="293.0" prefWidth="260.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
+                                       <children>
+                                          <Label prefHeight="18.0" prefWidth="230.0" text="Select the file you want to delete" />
+                                          <TextField fx:id="pathDelete" />
+                                          <Button mnemonicParsing="false" onAction="#selectFilePathDelete" text="select path">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/deleteFolder.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="appendTextBox" alignment="TOP_CENTER" layoutX="224.0" layoutY="39.0" prefHeight="292.0" prefWidth="252.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
+                                       <children>
+                                          <Label prefHeight="18.0" prefWidth="230.0" text="Insert the text" />
+                                          <TextArea fx:id="appendTextArea" prefHeight="94.0" prefWidth="260.0" />
+                                          <Label text="Select the file" />
+                                          <TextField fx:id="pathFileToAppend" prefHeight="26.0" prefWidth="229.0" />
+                                          <Button mnemonicParsing="false" onAction="#selectFileToAppendEvent" text="select path">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/writingOnFile.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onAction="#confirmAppendTextEvent" text="Confirm" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="moveActionBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="292.0" prefWidth="252.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
+                                       <children>
+                                          <Label prefHeight="18.0" prefWidth="230.0" text="Set source file" />
+                                          <TextField fx:id="sourcePathTF" />
+                                          <Button mnemonicParsing="false" onAction="#selectSourcePathEvent" text="select source path">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/folder.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
+                                          <Label text="Set destination path" />
+                                          <TextField fx:id="destinationPathTF" prefHeight="26.0" prefWidth="229.0" />
+                                          <Button mnemonicParsing="false" onAction="#selectDestinationPathEvent" text="select destination path">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/folder.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="excProgrammActionBox" alignment="TOP_CENTER" layoutX="235.0" layoutY="50.0" prefHeight="292.0" prefWidth="252.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
+                                       <children>
+                                          <Label prefHeight="18.0" prefWidth="230.0" text="Select your programm" />
+                                          <Button mnemonicParsing="false" onAction="#selectExcPathEvent" text="select source path">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/folder.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Label text="Write your arguments!" />
+                                          <TextField fx:id="excArgumentsTF" prefHeight="26.0" prefWidth="229.0" />
+                                          <Button fx:id="setExcArgsBtn" mnemonicParsing="false" onAction="#setExcArgsEvent" text="Set your arguments!">
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Image/folder.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
                                        </children>
                                     </VBox>
                                  </children>
@@ -171,7 +393,30 @@
                       </Tab>
                         <Tab text="Rule settings">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="331.2" prefWidth="476.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="331.0" prefWidth="164.0" spacing="30.0">
+                                             <children>
+                                                <CheckBox fx:id="fireOnceCheckBox" mnemonicParsing="false" text="One-Shot Rule" />
+                                                <CheckBox fx:id="sleepRuleCheckBox" mnemonicParsing="false" text="Sleeping Rule" />
+                                             </children>
+                                          </VBox>
+                                          <VBox fx:id="sleepRuleBox" alignment="CENTER" prefHeight="331.0" prefWidth="191.0" spacing="5.0">
+                                             <children>
+                                                <Label text="Days:" />
+                                                <Spinner fx:id="spinnerDaySleepingPeriod" editable="true" />
+                                                <Label text="Hours:" />
+                                                <Spinner fx:id="spinnerHourSleepingPeriod" editable="true" />
+                                                <Label text="Minutes:" />
+                                                <Spinner fx:id="spinnerMinuteSleepingPeriod" editable="true" />
+                                                <Button mnemonicParsing="false" onAction="#InsertSleepingRuleSettings" text="insert " />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children></AnchorPane>
                           </content>
                            <graphic>
                               <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">

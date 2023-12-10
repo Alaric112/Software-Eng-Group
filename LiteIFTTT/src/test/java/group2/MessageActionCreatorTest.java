@@ -4,20 +4,18 @@
  */
 package group2;
 
-import org.junit.Before;
+import group2.Model.Action.MessageAction;
+import group2.Model.Action.MessageActionCreator;
+import group2.Model.Action.Action;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
- * @author patap
+ * @author Alessandro Accarino
  */
 public class MessageActionCreatorTest {
-    
-    public MessageActionCreatorTest() {
-    }
-
-
+   
     /**
      * Test of createAction method, of class MessageActionCreator.
      */
