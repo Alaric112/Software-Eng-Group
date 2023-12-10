@@ -362,18 +362,6 @@ public class CreateRuleSubWindowController implements Initializable {
         visibilityAction(item);                        
 
     }
-
-    @FXML
-    private void addMacroActionEvent(ActionEvent event) {
-        
-        String item = macroActionChoiceBox.getValue();
-        actionListView.getItems().add(item);
-        Action action = ruleCreator.getMacroAction(item);
-        sequenceAction.add(action);
-        lastAction = action;
-       //visibilityAction(item);  
-        
-    }    
     
     /**
      * Selects a trigger item from the triggerTreeView and performs specific actions based on the selected item.
@@ -451,7 +439,6 @@ public class CreateRuleSubWindowController implements Initializable {
         actionVisibilityMap.put("Message", () -> {
                     hideAllActionBoxes();
                     messageActionBox.setVisible(true);
-                    // Altre azioni specifiche per "message"
                 });
 
                 actionVisibilityMap.put("Sound", () -> {
@@ -607,6 +594,17 @@ public class CreateRuleSubWindowController implements Initializable {
         }
 
     }
+
+    @FXML
+    private void addMacroActionEvent(ActionEvent event) {
+        
+        String item = macroActionChoiceBox.getValue();
+        actionListView.getItems().add(item);
+        Action action = ruleCreator.getMacroAction(item);
+        sequenceAction.add(action);
+        lastAction = action;
+        
+    }    
     
     @FXML
     private void selectFileToAppendEvent(ActionEvent event) {
