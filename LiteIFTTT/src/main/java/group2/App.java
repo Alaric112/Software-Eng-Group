@@ -30,9 +30,9 @@ public class App extends Application {
         
         File lastModifiedFile = AppConfig.getLastRuleSet();
         if(lastModifiedFile != null && lastModifiedFile.exists()){
-
             try {
-                FileIOManager.loadFromFile(lastModifiedFile);
+                LoadCommand load = new LoadCommand(null, lastModifiedFile);
+                load.execute();
                 scene = new Scene(loadFXML("secondary"));
             } catch (IOException ex) {
                 scene = new Scene(loadFXML("primary"));

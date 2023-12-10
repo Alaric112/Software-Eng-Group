@@ -1,6 +1,5 @@
 package group2.Model.Rule.FileManager;
 
-import group2.Model.Rule.RuleList;
 import java.io.File;
 
 /**

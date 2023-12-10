@@ -4,6 +4,7 @@
  */
 package group2;
 
+import group2.Model.Rule.FileManager.RuleList;
 import group2.Model.Rule.*;
 import java.util.List;
 import org.junit.Before;

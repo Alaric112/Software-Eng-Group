@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package group2.Model.Rule;
+package group2.Model.Rule.FileManager;
 
+import group2.Model.Rule.Rule;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -216,6 +217,15 @@ public class RuleList extends Observable implements Serializable, Observer {
     @Override
     public void update(Observable o, Object arg) {
         changed();
+    }
+    
+    protected void reloadObservable(){
+        
+        for(Rule rule : rules){
+            
+            rule.addObserver(this);
+        }
+        
     }
     
 }

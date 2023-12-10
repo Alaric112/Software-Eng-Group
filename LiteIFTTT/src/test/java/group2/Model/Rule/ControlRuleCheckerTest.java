@@ -4,6 +4,7 @@
  */
 package group2.Model.Rule;
 
+import group2.Model.Rule.FileManager.RuleList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

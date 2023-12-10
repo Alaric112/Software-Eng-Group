@@ -1,7 +1,7 @@
 
 package group2;
 
-import group2.Model.Rule.RuleList;
+import group2.Model.Rule.FileManager.RuleList;
 import group2.Model.Rule.FileManager.FileIOManager;
 import group2.Model.Rule.ControlRuleChecker;
 import group2.Model.Rule.Rule;

@@ -1,5 +1,6 @@
 package group2.Model.Rule;
 
+import group2.Model.Rule.FileManager.RuleList;
 import group2.Model.Trigger.*;
 import group2.Model.Action.*;
 import java.util.ArrayList;

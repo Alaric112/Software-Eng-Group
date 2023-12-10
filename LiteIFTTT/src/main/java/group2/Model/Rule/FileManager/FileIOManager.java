@@ -7,7 +7,6 @@ package group2.Model.Rule.FileManager;
 import group2.AppConfig;
 import group2.Model.Rule.ControlRuleChecker;
 
-import group2.Model.Rule.RuleList;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -159,6 +158,7 @@ public class FileIOManager {
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
             ruleList = (RuleList) ois.readObject();
+            ruleList.reloadObservable();
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException("File not found: " + file.getPath());
         } catch (IOException | ClassNotFoundException ex) {

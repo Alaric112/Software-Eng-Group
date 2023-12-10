@@ -2,7 +2,7 @@ package group2.Controller;
 
 import group2.App;
 import group2.Model.Rule.ControlRuleChecker;
-import group2.Model.Rule.RuleList;
+import group2.Model.Rule.FileManager.RuleList;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;

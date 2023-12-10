@@ -1,5 +1,6 @@
 package group2.Controller;
 
+import group2.Model.Rule.FileManager.RuleList;
 import group2.App;
 import group2.Model.Rule.*;
 import group2.Model.Rule.FileManager.*;

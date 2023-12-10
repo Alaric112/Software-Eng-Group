@@ -1,6 +1,7 @@
 
 package group2.Model.Rule;
 
+import group2.Model.Rule.FileManager.RuleList;
 import java.util.Observable;
 import java.util.concurrent.ForkJoinPool;
 
