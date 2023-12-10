@@ -396,8 +396,6 @@ public class CreateRuleSubWindowController implements Initializable {
 
         t.setTargetTime(spinnerHourTimeTrigger.getValue(), spinnerMinuteTimeTrigger.getValue());
 
-        System.out.println(t.getTargetTime());
-
     }
 
     /**
