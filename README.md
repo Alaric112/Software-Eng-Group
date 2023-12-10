@@ -16,6 +16,8 @@ Inside the first sprint documentation folder there is also a copy of the product
 
 - [Third sprint documentation](https://drive.google.com/drive/folders/18ehxKnx-rlUNxC7Ug2pG5XFynTu65PDa?usp=sharing): it contains Project Burndown chart (There is an image in documentation folder), Sprint review report and Sprint retrospective report
 
+- [Final sprint documentation](https://drive.google.com/drive/folders/1nA24_AuXrFm4P_RfJFvwWBx1P3bqfRoS?usp=sharing): Sprint backlog + Updated prod. backlog + Project Burndown chart + Sprint review report + Sprint retrospective report + Final presentation
+
 - Software Architecture Documentation: [Software architecture documentation](https://docs.google.com/document/d/1GM5WXZTz5QPpytWCMQGrRBXxXg_TDPNhZz9rGOVXo_k/edit?usp=sharing), there is also an image inside 'documentation' folder
 
 - Pre Game Documentation: [Pre game documentation](https://docs.google.com/document/d/18oMaA2f1tlFb552T81erhSqJ2zoVw1Px6gU98_miHT0/edit?usp=sharing)
